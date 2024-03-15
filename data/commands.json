@@ -1,0 +1,121 @@
+[
+  {
+    "name": "dare",
+    "category": "Games",
+    "description": "Gives you a random dare to answer.", 
+    "usage": "/dare"
+  },
+  {
+    "name": "guide",
+    "category": "Utility",
+    "description": "Shows you how to use the bot.", 
+    "usage": "/guide"
+  },
+  {
+    "name": "help",
+    "category": "Utility",
+    "description": "Shows a list of all the 'Would You' commands.", 
+    "usage": "/help"
+  },
+  {
+    "name": "higherlower",
+    "category": "Games",
+    "description": "Starts a game of 'Higher or Lower'.",
+    "usage": "/higherlower"
+  },
+  {
+    "name": "info",
+    "category": "Utility",
+    "description": "Gives you information about the bot.", 
+    "usage": "/info"
+  },
+  {
+    "name": "language",
+    "category": "Settings",
+    "description": "Changes the language for your server.", 
+    "usage": "/language <language>",
+    "options": ["Deutsch", "English", "Espanol", "Français"]
+  },
+  {
+    "name": "leaderboard",
+    "category": "Games",
+    "description": "Shows the top scores for a game.", 
+    "usage": "/leaderboard <game> <for>",
+    "options": ["Higher or Lower", "Global", "Local"]
+  },
+  {
+    "name": "neverhaveiever",
+    "category": "Games",
+    "description": "Gives you a 'Never Have I Ever' question.", 
+    "usage": "/neverhaveiever"
+  },
+  {
+    "name": "ping",
+    "category": "Utility",
+    "description": "Checks how fast the bot responds.", 
+    "usage": "/ping"
+  },
+  {
+    "name": "privacy",
+    "category": "Settings",
+    "description": "Changes your privacy settings.",
+    "usage": "/privacy"
+  },
+  {
+    "name": "random",
+    "category": "Games",
+    "description": "Gives you a random truth or dare question to answer.",
+    "usage": "/random"
+  },
+  {
+    "name": "settings",
+    "category": "Settings",
+    "description": "Lets you change different bot settings.", 
+    "usage": "/settings <category>",
+    "options": ["General Settings", "Daily Messages", "Welcomes"]
+  },
+  {
+    "name": "support",
+    "category": "Utility",
+    "description": "Gives you a link to get help.", 
+    "usage": "/support"
+  },
+  {
+    "name": "truth",
+    "category": "Games",
+    "description": "Gives you a random truth question to answer.",
+    "usage": "/truth"
+  },
+  {
+    "name": "vote",
+    "category": "Utility",
+    "description": "Lets you vote for 'Would You'.", 
+    "usage": "/vote"
+  },
+  {
+    "name": "wouldyourather",
+    "category": "Games",
+    "description": "Gives you a 'Would You Rather' question.", 
+    "usage": "/wouldyourather"
+  },
+  {
+    "name": "whatwouldyoudo",
+    "category": "Games",
+    "description": "Gives you a 'What Would You Do' question.", 
+    "usage": "/whatwouldyoudo"
+  },
+  {
+    "name": "custom",
+    "category": "Settings",
+    "description": "Lets you manage your own questions.", 
+    "usage": "/custom <subcommand>",
+    "subcommands": ["add", "export", "import", "remove", "removeall", "view"]
+  },
+  {
+    "name": "type",
+    "category": "Settings",
+    "description": "Changes the kind of questions you get.", 
+    "usage": "/type <subcommand>",
+    "subcommands": ["regular", "mixed", "custom"]
+  }
+]
