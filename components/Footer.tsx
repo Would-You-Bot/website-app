@@ -1,8 +1,9 @@
+"use server";
+
 import Image from "next/image";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 
-const Footer = () => {
+const Footer = async () => {
   const recommendedLinks = [
     {
       name: "Home",
@@ -61,9 +62,6 @@ const Footer = () => {
       EventTarget: "_self",
     },
   ];
-
-  const search = useSearchParams();
-  const iframe = search.get("iframe") !== null;
 
   return (
     <footer className="mt-8 px-8 py-8 xl:px-[17vw]">
