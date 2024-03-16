@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import Marquee from "react-fast-marquee";
+import { FC } from "react";
 
 interface Server {
   name: string;
@@ -18,7 +19,7 @@ interface MarqueeProps {
   className?: string;
 }
 
-const ServerMarquee: React.FC<MarqueeProps> = ({
+const ServerMarquee: FC<MarqueeProps> = ({
   servers,
   speed,
   direction,
@@ -34,7 +35,7 @@ const ServerMarquee: React.FC<MarqueeProps> = ({
         speed={speed}
         direction={direction ?? "left"}
         gradient={true}
-        gradientColor={[16, 16, 16]}
+        gradientColor="rgb(16, 16, 16)"
       >
         {servers.map((s: any) => (
           <Link

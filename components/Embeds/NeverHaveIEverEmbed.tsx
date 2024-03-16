@@ -10,14 +10,14 @@ import {
   DiscordMessage,
   DiscordMessages,
 } from "@skyra/discord-components-react";
-import profiles from "../../data/profiles.json";
-import dynamic from "next/dynamic";
+import profiles from "@/data/profiles.json";
+import { FC } from "react";
 
 interface MainProps {
   replayedRounds: number;
 }
 
-const NeverHaveIEverEmbed: React.FC<MainProps> = ({ replayedRounds }) => {
+const NeverHaveIEverEmbed: FC<MainProps> = ({ replayedRounds }) => {
   return (
     <DiscordMessages class="overflow-x-hidden rounded-lg text-left shadow">
       <DiscordMessage

@@ -9,13 +9,14 @@ import {
   DiscordThread,
   DiscordThreadMessage,
 } from "@skyra/discord-components-react";
-import profiles from "../../data/profiles.json";
+import profiles from "@/data/profiles.json";
+import { FC } from "react";
 
 interface MainProps {
   threadName: string;
 }
 
-const DailyMessageEmbed: React.FC<MainProps> = ({ threadName }) => {
+const DailyMessageEmbed: FC<MainProps> = ({ threadName }) => {
   return (
     <DiscordMessages className="min-w-fit overflow-x-hidden rounded-lg shadow">
       <DiscordMessage

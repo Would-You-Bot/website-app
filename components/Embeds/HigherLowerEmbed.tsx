@@ -12,13 +12,14 @@ import {
   DiscordMessages,
   DiscordReply,
 } from "@skyra/discord-components-react";
-import profiles from "../../data/profiles.json";
+import profiles from "@/data/profiles.json";
+import { FC } from "react";
 
 interface MainProps {
   currentDate: string;
 }
 
-const HigherLowerEmbed: React.FC<MainProps> = ({ currentDate }) => {
+const HigherLowerEmbed: FC<MainProps> = ({ currentDate }) => {
   return (
     <DiscordMessages class="overflow-x-hidden rounded-lg shadow">
       <DiscordMessage
