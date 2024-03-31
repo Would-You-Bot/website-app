@@ -2,32 +2,65 @@
 @tailwind components;
 @tailwind utilities;
 
-@media screen and (max-width : 500px) {
+@media screen and (max-width: 500px) {
     .discord-message:first-child {
-        @apply w-[95%] !important;
+      @apply w-[95%] !important;
     }
     .smalldevice {
-        @apply w-[100%] my-[0.5rem] mx-auto !important;
+      @apply mx-auto my-[0.5rem] w-[100%] !important;
     }
     .order-last {
-        @apply w-[100%] mx-auto !important;
+      @apply mx-auto w-[100%] !important;
     }
     .maindiv {
-        @apply w-[90vw] !important;
+      @apply w-[90vw] !important;
     }
     .discord-messages {
-        @apply min-w-0 !important;
+      @apply min-w-0 !important;
     }
-}
-@media screen and (max-width: 350px) {
-    
+  }
+  @media screen and (max-width: 350px) {
     .discord-thread-message .discord-thread-message-content {
-        @apply text-xs;
+      @apply text-xs;
     }
     .discord-thread-message .discord-thread-message-timestamp {
-        @apply text-xs !important;
+      @apply text-xs !important;
     }
     .discord-thread {
-        @apply max-w-full !important;
+      @apply max-w-full !important;
     }
-}
+  }
+
+body {
+    background-color: #171717;
+    font-family: "Inter", sans-serif;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+  
+  body::-webkit-scrollbar {
+    width: 0.5rem;
+    border-radius: 20px;
+  }
+  
+  body::-webkit-scrollbar-thumb {
+    width: 0.5rem;
+    background-color: #616161;
+    border-radius: 20px;
+  }
+  body::-webkit-scrollbar-track {
+    width: 0.5rem;
+    background-color: transparent;
+  }
+  
+  @media screen and (min-width: 1280px) {
+    .discord-messages {
+      width: calc(50vw - 80px - 17vw);
+    }
+  }
+
+
+  .discord-button span {
+    display: flex;
+    align-items: center;
+  }

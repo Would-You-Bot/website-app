@@ -1,7 +1,7 @@
 import React from "react";
 
-import { HomeContent } from "@/components/Homepage/HomeContent";
-import { HomeSchemaMetadata } from "@/components/Homepage/HomeSchemaMetadata";
+import { HomeContent } from "@/components/Homepage/Content";
+import { HomeSchemaMetadata } from "@/components/Homepage/SchemaMetadata";
 import { getRandomQuestion } from "@/helpers/getRandomQuestion";
 
 const Home = async () => {
