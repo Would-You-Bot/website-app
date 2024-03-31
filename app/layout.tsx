@@ -5,6 +5,7 @@ import "./index.css";
 import Footer from "@/components/Footer";
 import React from "react";
 import Navbar from "@/components/Navbar";
+import { getIdToken } from "@/helpers/oauth/helpers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,10 +19,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const idToken = getIdToken();
+
   return (
     <html lang="en">
       <body className={inter.className}>
-        <Navbar />
+        <Navbar idToken={idToken} />
         {children}
         <Footer />
       </body>

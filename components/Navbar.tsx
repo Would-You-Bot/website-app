@@ -10,16 +10,21 @@ import Link from "next/link";
 import { useState } from "react";
 import Button from "./Button";
 import { useSearchParams } from "next/navigation";
+import { IdTokenJWT, useIdToken } from "@/helpers/hooks/useIdToken";
 
-const Navbar = () => {
+interface NavbarProps {
+  idToken: IdTokenJWT | null;
+}
+
+const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
   const [mobileMenu, setMobileMenu] = useState(false);
+  const idToken = useIdToken(idToken_);
   const lineOneControls = useAnimationControls();
   const lineTwoControls = useAnimationControls();
   const lineThreeControls = useAnimationControls();
   const menuControls = useAnimationControls();
 
   const search = useSearchParams();
-  const iframe = search.get("iframe") !== null;
 
   const toggleMobileMenu = () => {
     if (mobileMenu) {
@@ -105,6 +110,15 @@ const Navbar = () => {
         <Link href="/invite" target="_blank" className="hidden md:block">
           <Button className="">Invite</Button>
         </Link>
+        {idToken ? (
+          <a href="/logout" className="hidden md:ml-2 md:block">
+            <Button>Logout</Button>
+          </a>
+        ) : (
+          <a href="/login" className="hidden md:ml-2 md:block">
+            <Button>Login with Discord</Button>
+          </a>
+        )}
         <div
           className="relative ml-6 flex h-6 w-8 flex-col items-center justify-between md:hidden"
           onClick={() => toggleMobileMenu()}
@@ -172,6 +186,15 @@ const Navbar = () => {
             >
               <Button>Invite</Button>
             </Link>
+            {idToken ? (
+              <a href="/logout" className="mt-8 text-center text-2xl">
+                <Button>Logout</Button>
+              </a>
+            ) : (
+              <a href="/login" className="mt-8 text-center text-2xl">
+                <Button>Login with Discord</Button>
+              </a>
+            )}
           </div>
         </m.div>
       </LazyMotion>
