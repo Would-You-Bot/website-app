@@ -5,5 +5,5 @@ export async function GET() {
   cookies().delete("OAUTH_TOKEN");
   cookies().delete("ID_TOKEN");
 
-  redirect("/");
+  return redirect("/");
 }

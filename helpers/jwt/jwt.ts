@@ -3,7 +3,7 @@ import { TimeSpan } from "oslo";
 
 const secret = Buffer.from(process.env.JWT_SECRET!);
 
-export function signJwt(payload: Record<any, any>) {
+export function signJwt(payload: Record<string, unknown>) {
   return createJWT("HS256", secret, payload, {
     expiresIn: new TimeSpan(1, "d"),
   });

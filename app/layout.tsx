@@ -4,7 +4,7 @@ import "./globals.css";
 import Footer from "@/components/Footer";
 import React from "react";
 import Navbar from "@/components/Navbar";
-import { getIdToken } from "@/helpers/oauth/helpers";
+import { getIdToken } from "@/helpers/oauth";
 
 const inter = Inter({ subsets: ["latin"] });
 

@@ -12,6 +12,7 @@ const _queryParamsSchema = z.object({
 });
 
 export async function GET(req: NextRequest) {
+  const cookieJar = cookies();
   const {
     code,
     error,
@@ -42,7 +43,7 @@ export async function GET(req: NextRequest) {
   const idToken = await signJwt({ ...user });
 
   setSecureHttpOnlyCookie("OAUTH_TOKEN", accessToken);
-  cookies().set("ID_TOKEN", idToken, {
+  cookieJar.set("ID_TOKEN", idToken, {
     path: "/",
     maxAge: 24 * 60 * 60,
   });
@@ -53,7 +54,7 @@ export async function GET(req: NextRequest) {
       " logged-in on " +
       new Date().toUTCString(),
   );
-  return redirect(cookies().get("OAUTH_REDIRECT")?.value!);
+  return redirect(cookieJar.get("OAUTH_REDIRECT")?.value!);
 }
 
 async function exchangeAuthorizationCode(code: string) {
@@ -72,7 +73,10 @@ async function exchangeAuthorizationCode(code: string) {
       },
     });
 
-    const { id, username, avatar, global_name } = await userResponse.json();
+    const user = await userResponse.json();
+    console.log(user);
+
+    const { id, username, avatar, global_name } = user;
 
     if (scope.includes("guilds") && scope.includes("guilds.join")) {
       const guildsResponse = await fetch(
