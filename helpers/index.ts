@@ -1,0 +1,1 @@
+export { getRandomQuestion } from "./getRandomQuestion";
