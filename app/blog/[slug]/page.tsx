@@ -2,14 +2,14 @@ import { POST_PATH } from "@/utils/mdx";
 import matter from "gray-matter";
 import { MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
-import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
 import path from "node:path";
 import { readFile } from "node:fs/promises";
 import { ProgressBar } from "@/app/blog/[slug]/_components/ProgressBar";
 import { MainContent } from "@/app/blog/[slug]/_components/MainContent";
-import { unstable_cache } from "next/cache";
+import { cache } from "react";
+import { Metadata } from "next";
 
 interface FrontMatter {
   title: string;
@@ -52,34 +52,32 @@ const TableOfContents = ({ toc }: TableOfContentsProps) => {
   );
 };
 
+export async function generateMetadata({
+  params: { slug },
+}: {
+  params: { slug: string };
+}): Promise<Metadata> {
+  const { frontMatter } = await _getPost(slug);
+
+  return {
+    title: frontMatter.title + "- Would You Bot",
+    description: frontMatter.description,
+    openGraph: {
+      publishedTime: frontMatter.seoDate,
+      type: "article",
+      description: frontMatter.description,
+      authors: frontMatter.author.name,
+      tags: frontMatter.tags,
+      images: frontMatter.thumbnail?.large,
+    },
+  };
+}
+
 const BlogPost = async ({ params: { slug } }: { params: { slug: string } }) => {
-  const { source, frontMatter } = await _getPostFromCache(slug);
+  const { source, frontMatter } = await _getPost(slug);
 
   return (
     <>
-      <Head>
-        <title>{frontMatter.title + "- Would You Bot"}</title>
-        <meta name="description" content={frontMatter.description} />
-        <meta
-          property="og:title"
-          content={frontMatter.title + "- Would You Bot"}
-        />
-        <meta property="og:description" content={frontMatter.description} />
-        <meta property="og:type" content="article" />
-        <meta property="article:published_time" content={frontMatter.seoDate} />
-        <meta property="article:author" content={frontMatter.author.name} />
-        <meta property="article:tag" content={frontMatter.tags[0]} />
-        <meta property="article:tag" content={frontMatter.tags[1]} />
-        <meta property="article:tag" content={frontMatter.tags[2]} />
-        <meta property="canonical" />
-        {frontMatter.thumbnail?.large && (
-          <meta
-            key="og:image"
-            property="og:image"
-            content={frontMatter.thumbnail?.large}
-          />
-        )}
-      </Head>
       <ProgressBar />
       <div className="mt-36 px-8 text-neutral-300 xl:px-[17vw]">
         <Link
@@ -134,23 +132,23 @@ const BlogPost = async ({ params: { slug } }: { params: { slug: string } }) => {
 
 export default BlogPost;
 
-async function _getPost(slug: string): Promise<{
-  source: MDXRemoteSerializeResult;
-  frontMatter: FrontMatter;
-}> {
-  const postFilePath = path.join(POST_PATH, `${slug}.mdx`);
-  const source = await readFile(postFilePath);
+const _getPost = cache(
+  async (
+    slug: string,
+  ): Promise<{
+    source: MDXRemoteSerializeResult;
+    frontMatter: FrontMatter;
+  }> => {
+    const postFilePath = path.join(POST_PATH, `${slug}.mdx`);
+    const source = await readFile(postFilePath);
 
-  const { content, data } = matter(source);
+    const { content, data } = matter(source);
 
-  const mdxSource = await serialize(content, { scope: data });
+    const mdxSource = await serialize(content, { scope: data });
 
-  return {
-    source: mdxSource,
-    frontMatter: data as FrontMatter,
-  };
-}
-
-const _getPostFromCache = unstable_cache(_getPost, ["post"], {
-  revalidate: 3600,
-});
+    return {
+      source: mdxSource,
+      frontMatter: data as FrontMatter,
+    };
+  },
+);
