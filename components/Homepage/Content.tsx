@@ -68,8 +68,8 @@ export function HomeContent({
             I Ever, Higher or Lower, and What Would You Do!{" "}
             <span className="hidden">tempus voicus</span>
           </p>
-          <Link href="/invite" target="_blank">
-            <Button className="mx-auto mt-8 gap-2 lg:mx-0">
+          <Link href="/invite" target="_blank" className="flex w-fit mt-8">
+            <Button className="mx-auto gap-2 lg:mx-0">
               Unleash the Fun
               <svg
                 width="13"
