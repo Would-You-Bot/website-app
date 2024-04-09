@@ -1,0 +1,57 @@
+.markdown {
+    @apply leading-relaxed;
+}
+
+.markdown img {
+    max-width: 70%;
+    height: auto;
+}
+
+.markdown img.horizontal {
+    width: 450px;
+}
+
+.markdown img.vertical {
+    height: 250px;
+}
+
+.markdown p,
+.markdown ul,
+.markdown ol,
+.markdown blockquote {
+    @apply my-6;
+}
+
+.markdown h2 {
+    @apply mb-4 mt-8 text-3xl leading-snug text-white;
+}
+
+.markdown h3 {
+    @apply text-xl leading-snug text-neutral-100;
+}
+
+.markdown a {
+    @apply text-white underline;
+}
+
+.markdown pre {
+    @apply rounded-lg bg-neutral-800 px-2 py-1 text-sm;
+}
+
+.markdown ul {
+    @apply list-inside list-disc marker:text-neutral-500;
+}
+
+.markdown ol {
+    @apply list-inside list-decimal marker:text-neutral-500;
+}
+
+.progress-bar {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: #0598f4;
+    transform-origin: 0;
+}

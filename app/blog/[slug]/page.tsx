@@ -1,25 +1,15 @@
-import Button from "@/components/Button";
-import blogStyles from "@/styles/blog.module.css";
-import { POST_PATH, postPaths } from "@/utils/mdx";
-import { readFileSync } from "fs";
+import { POST_PATH } from "@/utils/mdx";
 import matter from "gray-matter";
-import { GetStaticProps, NextPage } from "next";
-import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
+import { MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import path from "path";
-import { motion, useScroll, useSpring } from "framer-motion";
-
-const components = {
-  Button: Button,
-  a: CustomLink,
-};
-
-function CustomLink(props: any) {
-  return <a {...props} target="_blank" />;
-}
+import path from "node:path";
+import { readFile } from "node:fs/promises";
+import { ProgressBar } from "@/app/blog/[slug]/_components/ProgressBar";
+import { MainContent } from "@/app/blog/[slug]/_components/MainContent";
+import { unstable_cache } from "next/cache";
 
 interface FrontMatter {
   title: string;
@@ -62,16 +52,8 @@ const TableOfContents = ({ toc }: TableOfContentsProps) => {
   );
 };
 
-const BlogPost: NextPage<{
-  source: MDXRemoteSerializeResult;
-  frontMatter: FrontMatter;
-}> = ({ source, frontMatter }) => {
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001,
-  });
+const BlogPost = async ({ params: { slug } }: { params: { slug: string } }) => {
+  const { source, frontMatter } = await _getPostFromCache(slug);
 
   return (
     <>
@@ -98,7 +80,7 @@ const BlogPost: NextPage<{
           />
         )}
       </Head>
-      <motion.div className={blogStyles["progress-bar"]} style={{ scaleX }} />
+      <ProgressBar />
       <div className="mt-36 px-8 text-neutral-300 xl:px-[17vw]">
         <Link
           href="/blog"
@@ -145,40 +127,30 @@ const BlogPost: NextPage<{
         </div>
       </div>
 
-      <main
-        className={`markdown px-8 text-neutral-300 xl:px-[17vw] ${blogStyles.markdown}`}
-      >
-        <MDXRemote {...source} components={components} />
-      </main>
+      <MainContent source={source} />
     </>
   );
 };
 
 export default BlogPost;
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const postFilePath = path.join(POST_PATH, `${params?.slug}.mdx`);
-  const source = readFileSync(postFilePath);
+async function _getPost(slug: string): Promise<{
+  source: MDXRemoteSerializeResult;
+  frontMatter: FrontMatter;
+}> {
+  const postFilePath = path.join(POST_PATH, `${slug}.mdx`);
+  const source = await readFile(postFilePath);
 
   const { content, data } = matter(source);
 
   const mdxSource = await serialize(content, { scope: data });
 
   return {
-    props: {
-      source: mdxSource,
-      frontMatter: data,
-    },
+    source: mdxSource,
+    frontMatter: data as FrontMatter,
   };
-};
+}
 
-export const getStaticPaths = async () => {
-  const paths = postPaths
-    .map((path) => path.replace(/\.mdx?$/, ""))
-    .map((slug) => ({ params: { slug } }));
-
-  return {
-    paths,
-    fallback: false,
-  };
-};
+const _getPostFromCache = unstable_cache(_getPost, ["post"], {
+  revalidate: 3600,
+});

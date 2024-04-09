@@ -1,36 +1,35 @@
 import { POST_PATH, postPaths } from "@/utils/mdx";
-import { readFileSync } from "fs";
+import { readFile } from "node:fs/promises";
+import path from "node:path";
 import matter from "gray-matter";
-import { NextPage } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import path from "path";
 
-interface PageProps {
-  posts: {
-    content: string;
-    data: {
-      title: string;
-      description: string;
-      date: string;
-      seoDate: string;
-      thumbnail?: {
-        large?: string;
-        banner?: string;
-        alt?: string;
-      };
-      author: {
-        name: string;
-        avatar: string;
-      };
-      tags: string[];
-      pinned?: boolean;
+type Post = {
+  content: string;
+  data: {
+    title: string;
+    description: string;
+    date: string;
+    seoDate: string;
+    thumbnail?: {
+      large?: string;
+      banner?: string;
+      alt?: string;
     };
-    filePath: string;
-  }[];
-}
+    author: {
+      name: string;
+      avatar: string;
+    };
+    tags: string[];
+    pinned?: boolean;
+  };
+  filePath: string;
+};
 
-const BlogPosts: NextPage<PageProps> = ({ posts }) => {
+const BlogPosts = async () => {
+  const posts = await _getPosts();
+
   return (
     <main className="px-8 xl:px-[17vw]">
       <h1 className="mt-36 text-4xl font-bold text-white">
@@ -115,19 +114,19 @@ const BlogPosts: NextPage<PageProps> = ({ posts }) => {
   );
 };
 
-export default BlogPosts;
-
-export function getStaticProps() {
-  const posts = postPaths.map((filePath) => {
-    const source = readFileSync(path.join(POST_PATH, filePath));
-    const { content, data } = matter(source);
+async function _getPosts(): Promise<Post[]> {
+  const buffers = await Promise.all(
+    postPaths.map((filePath) => readFile(path.join(POST_PATH, filePath))),
+  );
+  return buffers.map((buffer, i) => {
+    const { content, data } = matter(buffer);
 
     return {
       content,
       data,
-      filePath,
+      filePath: postPaths[i],
     };
-  });
-
-  return { props: { posts } };
+  }) as Post[];
 }
+
+export default BlogPosts;

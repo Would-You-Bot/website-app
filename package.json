@@ -15,6 +15,7 @@
     "gray-matter": "^4.0.3",
     "grey-matter": "^0.0.0",
     "next": "14.1.3",
+    "next-mdx-remote": "^4.4.1",
     "oslo": "^1.2.0",
     "react": "^18",
     "react-dom": "^18",
