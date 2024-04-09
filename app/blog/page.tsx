@@ -4,6 +4,7 @@ import path from "node:path";
 import matter from "gray-matter";
 import Image from "next/image";
 import Link from "next/link";
+import { cache } from "react";
 
 type Post = {
   content: string;
@@ -114,7 +115,7 @@ const BlogPosts = async () => {
   );
 };
 
-async function _getPosts(): Promise<Post[]> {
+const _getPosts = cache(async (): Promise<Post[]> => {
   const buffers = await Promise.all(
     postPaths.map((filePath) => readFile(path.join(POST_PATH, filePath))),
   );
@@ -127,6 +128,6 @@ async function _getPosts(): Promise<Post[]> {
       filePath: postPaths[i],
     };
   }) as Post[];
-}
+});
 
 export default BlogPosts;
