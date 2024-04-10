@@ -1,4 +1,4 @@
-import { POST_PATH } from "@/utils/mdx";
+import { POST_PATH, postPaths } from "@/utils/mdx";
 import matter from "gray-matter";
 import { MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
@@ -58,11 +58,13 @@ export async function generateMetadata({
   params: { slug: string };
 }): Promise<Metadata> {
   const { frontMatter } = await _getPost(slug);
+  const title = frontMatter.title + "- Would You Bot";
 
   return {
-    title: frontMatter.title + "- Would You Bot",
+    title,
     description: frontMatter.description,
     openGraph: {
+      title,
       publishedTime: frontMatter.seoDate,
       type: "article",
       description: frontMatter.description,
@@ -152,3 +154,9 @@ const _getPost = cache(
     };
   },
 );
+
+export function generateStaticParams() {
+  return postPaths
+    .map((path) => path.replace(/\.mdx?$/, ""))
+    .map((slug) => ({ slug }));
+}
