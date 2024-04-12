@@ -1,63 +1,20 @@
-import { POST_PATH, postPaths } from "@/utils/mdx";
-import matter from "gray-matter";
-import { MDXRemoteSerializeResult } from "next-mdx-remote";
-import { serialize } from "next-mdx-remote/serialize";
+import { postPaths } from "@/utils/mdx";
 import Image from "next/image";
 import Link from "next/link";
-import path from "node:path";
-import { readFile } from "node:fs/promises";
-import { ProgressBar } from "@/app/blog/[slug]/_components/ProgressBar";
-import { MainContent } from "@/app/blog/[slug]/_components/MainContent";
-import { cache } from "react";
+import {
+  MainContent,
+  ProgressBar,
+  TableOfContents,
+} from "@/app/blog/[slug]/_components";
 import { Metadata } from "next";
-
-interface FrontMatter {
-  title: string;
-  description: string;
-  date: string;
-  seoDate: string;
-  thumbnail?: {
-    large?: string;
-    banner?: string;
-    alt?: string;
-  };
-  author: {
-    name: string;
-    avatar: string;
-  };
-  tags: string[];
-  pinned?: boolean;
-  toc?: string[];
-}
-
-interface TableOfContentsProps {
-  toc: string[];
-}
-
-const TableOfContents = ({ toc }: TableOfContentsProps) => {
-  if (toc.length === 0) return null;
-  return (
-    <div className="flex max-w-full flex-col gap-1 xl:max-w-[200px] 2xl:max-w-[240px]">
-      <p className="mb-1 font-semibold text-white">TABLE OF CONTENTS</p>
-      <ol>
-        {toc.map((x) => {
-          return (
-            <li key={x} className="mt-3">
-              <p className="text-sm text-[#D4D4D4]">{x}</p>
-            </li>
-          );
-        })}
-      </ol>
-    </div>
-  );
-};
+import { getPost } from "@/app/blog/[slug]/_data";
 
 export async function generateMetadata({
   params: { slug },
 }: {
   params: { slug: string };
 }): Promise<Metadata> {
-  const { frontMatter } = await _getPost(slug);
+  const { frontMatter } = await getPost(slug);
   const title = frontMatter.title + "- Would You Bot";
 
   return {
@@ -75,8 +32,14 @@ export async function generateMetadata({
   };
 }
 
+export function generateStaticParams() {
+  return postPaths
+    .map((path) => path.replace(/\.mdx?$/, ""))
+    .map((slug) => ({ slug }));
+}
+
 const BlogPost = async ({ params: { slug } }: { params: { slug: string } }) => {
-  const { source, frontMatter } = await _getPost(slug);
+  const { source, frontMatter } = await getPost(slug);
 
   return (
     <>
@@ -123,7 +86,7 @@ const BlogPost = async ({ params: { slug } }: { params: { slug: string } }) => {
           ))}
         </div>
         <div className="xl: relative left-0 top-0 mb-10 flex border-b border-neutral-500 pb-5 xl:fixed xl:left-4 xl:top-40 xl:border-b-0">
-          <TableOfContents toc={frontMatter.toc || []} />
+          <TableOfContents toc={frontMatter.toc ?? []} />
         </div>
       </div>
 
@@ -133,30 +96,3 @@ const BlogPost = async ({ params: { slug } }: { params: { slug: string } }) => {
 };
 
 export default BlogPost;
-
-const _getPost = cache(
-  async (
-    slug: string,
-  ): Promise<{
-    source: MDXRemoteSerializeResult;
-    frontMatter: FrontMatter;
-  }> => {
-    const postFilePath = path.join(POST_PATH, `${slug}.mdx`);
-    const source = await readFile(postFilePath);
-
-    const { content, data } = matter(source);
-
-    const mdxSource = await serialize(content, { scope: data });
-
-    return {
-      source: mdxSource,
-      frontMatter: data as FrontMatter,
-    };
-  },
-);
-
-export function generateStaticParams() {
-  return postPaths
-    .map((path) => path.replace(/\.mdx?$/, ""))
-    .map((slug) => ({ slug }));
-}
