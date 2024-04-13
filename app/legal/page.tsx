@@ -7,7 +7,7 @@ export default function legalnotice() {
         Legal Notice
       </h1>
       <p>
-        <span className="mr-1.5 text-lg">🇩🇪</span>
+        <span className="mr-1.5 text-lg" aria-label="German flag">🇩🇪</span>
         For the German version please visit{' '}
         <Link href="/legal-de" className="text-white underline">
           this page
