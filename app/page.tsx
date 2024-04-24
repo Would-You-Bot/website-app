@@ -6,7 +6,7 @@ import { getRandomQuestion } from "@/helpers/getRandomQuestion";
 
 const Home = async () => {
   const response = await fetch(
-    "https://japi.rest/discord/v1/application/981649513427111957/",
+    "https://japi.rest/discord/v1/application/981649513427111957/"
   );
 
   const data = await response.json();
@@ -14,7 +14,7 @@ const Home = async () => {
 
   return (
     <>
-      <main className="mt-48 overflow-x-hidden text-neutral-300">
+      <main className="flex flex-col w-full items-center mt-48 overflow-x-hidden text-neutral-300">
         <HomeContent
           initialQuestion={getRandomQuestion()}
           serverCount={serverCount}

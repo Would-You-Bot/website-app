@@ -12,7 +12,7 @@ const CheckArrowIcon = () => (
       width="20"
       height="20"
       viewBox="0 0 20 20"
-      className="text-customPrimary"
+      className="text-brand-customPrimary"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
@@ -75,8 +75,8 @@ export default function Premium() {
       <Head>
         <title>Would You - Commands</title>
       </Head>
-      <main className="relative flex w-screen justify-center bg-customDarkBg2 px-8 xl:px-[17vw]">
-        <div className="bg-customDarkBg2 ">
+      <main className="relative flex w-full justify-center mb-40">
+        <div className="w-full max-w-7xl px-8">
           <LazyMotion features={domAnimation}>
             <m.div
               initial={{ opacity: 0 }}
@@ -88,24 +88,22 @@ export default function Premium() {
                 <h1 className="mt-36 text-4xl font-bold text-yellow-500 drop-shadow-gold-glow">
                   Premium
                 </h1>
-                <p className="mb-6 text-customGrayText">
+                <p className="mb-6 text-customGrayText text-neutral-300 mt-4">
                   Select the plan that suits your needs and benefit from our
                   discord bot.
                 </p>
-                <div className="mx-auto max-w-2xl text-center">
-                  <label className="group relative mx-auto flex h-16 w-52 cursor-pointer items-center justify-between rounded-lg bg-customDarkBg3 pl-2 pr-36 text-xl">
+                <div className="mx-auto max-w-2xl text-center my-4">
+                  <label className="bg-black/40 group relative mx-auto flex h-16 w-fit cursor-pointer items-center justify-between rounded-2xl text-xl pl-6 pr-8">
                     <input
                       type="checkbox"
                       className="peer appearance-none"
                       checked={!isMonthly}
                       onChange={handleChange}
                     />
-                    <span className="flex h-16 w-[6rem] cursor-pointer items-center  duration-300 ease-in-out after:h-12 after:w-[20rem] after:rounded-lg after:bg-customPrimary after:shadow-md after:duration-300 peer-checked:after:translate-x-[6rem]"></span>
-                    <div className="absolute flex text-base font-bold text-white">
+                    <span className="absolute -ml-4 flex h-16 w-[6rem] cursor-pointer items-center duration-300 ease-in-out after:h-12 after:w-[20rem] after:rounded-lg after:bg-customPrimary after:shadow-md after:duration-300 peer-checked:after:translate-x-[6rem] after:bg-brand-customPrimary z-10"></span>
+                    <div className="flex text-base gap-10 font-bold text-white z-20">
                       <div
-                        className={
-                          isMonthly ? "ml-4 mr-10" : "ml-4 mr-10 text-gray-400"
-                        }
+                        className={(!isMonthly && "text-gray-400") as string}
                       >
                         Monthly
                       </div>
@@ -115,44 +113,51 @@ export default function Premium() {
                     </div>
                   </label>
                 </div>
-                <div className="mb-8 w-[350px] rounded-[1.75rem] bg-gradient-premium p-1 sm:w-[380px] lg:mb-0 lg:w-1/3">
-                  <div className="rounded-3xl bg-customDarkBg3 px-8 py-8 ">
-                    <h4 className="font-heading mb-2 text-left text-2xl font-bold text-white 2xl:mb-4">
-                      Premium
-                    </h4>
-                    <div className="flex items-end justify-start">
-                      <div className="mr-2 mt-4 text-left text-4xl font-bold text-white sm:text-5xl">
-                        {isMonthly ? pricingData.price.monthly : pricingData.price.yearly}
+                <div className="flex justify-center">
+                  <div className="mb-8 w-fit rounded-[1.7rem] bg-gradient-premium p-[4px] lg:mb-0">
+                    <div className="rounded-3xl bg-brand-customDarkBg3 px-8 py-8 ">
+                      <h4 className="font-heading mb-2 text-left text-2xl font-bold text-white 2xl:mb-4">
+                        Premium
+                      </h4>
+                      <div className="flex items-end justify-start">
+                        <div className="mr-2 mt-4 text-left text-4xl font-bold text-white sm:text-5xl">
+                          {isMonthly
+                            ? pricingData.price.monthly
+                            : pricingData.price.yearly}
+                        </div>
+                        <div className="text-gray-400">
+                          {isMonthly ? "/ month" : "/ year"}
+                        </div>
                       </div>
-                      <div className="text-gray-500">
-                        {isMonthly ? "/ month" : "/ year"}
-                      </div>
+                      <p className="mb-8 mt-8 text-left leading-loose text-gray-400 2xl:mb-12">
+                        Experience the full power of our Would You bot.
+                      </p>
+                      <ul className="mb-14 text-white">
+                        {Object.keys(pricingData["premium"]).map(
+                          (text, index) => (
+                            <li
+                              className="mb-4 flex items-center"
+                              key={`${text}-${index}`}
+                            >
+                              {pricingData["premium"][
+                                text as keyof (typeof pricingData)["premium"]
+                              ] ? (
+                                <CheckArrowIcon />
+                              ) : (
+                                <XIcon />
+                              )}
+                              <span>{text}</span>
+                            </li>
+                          )
+                        )}
+                      </ul>
+                      <Button
+                        className=" mt-20 w-full justify-center rounded-xl rounded-t-xl py-2 font-bold leading-loose"
+                        onClick={() => setIsPremiumOpen(true)}
+                      >
+                        Get Started
+                      </Button>
                     </div>
-                    <p className="mb-8 mt-8 text-left leading-loose text-gray-500 2xl:mb-12">
-                      Experience the full power of our Would You bot.
-                    </p>
-                    <ul className="mb-14 text-white">
-                      {Object.keys(pricingData["premium"]).map(
-                        (text, index) => (
-                          <li className="mb-4 flex" key={`${text}-${index}`}>
-                            {pricingData["premium"][
-                              text as keyof (typeof pricingData)["premium"]
-                            ] ? (
-                              <CheckArrowIcon />
-                            ) : (
-                              <XIcon />
-                            )}
-                            <span>{text}</span>
-                          </li>
-                        )
-                      )}
-                    </ul>
-                    <Button
-                      className=" mt-20 w-full justify-center rounded-xl rounded-t-xl py-2 font-bold leading-loose"
-                      onClick={() => setIsPremiumOpen(true)}
-                    >
-                      Get Started
-                    </Button>
                   </div>
                 </div>
               </div>

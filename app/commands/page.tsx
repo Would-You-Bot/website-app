@@ -21,7 +21,7 @@ export default function Commands() {
   const [copyText, setCopyText] = useState("");
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [filteredCommands, setFilteredCommands] = useState<Command[]>(
-    commands as object as Command[],
+    commands as object as Command[]
   );
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -43,7 +43,7 @@ export default function Commands() {
       const filtered = commands.filter(
         (command) =>
           command.name.toLowerCase().includes(lowerCaseTerm) ||
-          command.description.toLowerCase().includes(lowerCaseTerm),
+          command.description.toLowerCase().includes(lowerCaseTerm)
       );
 
       setFilteredCommands(filtered as object as Command[]);
@@ -67,7 +67,7 @@ export default function Commands() {
       <Head>
         <title>Would You - Commands</title>
       </Head>
-      <main className="px-8 xl:px-[17vw]">
+      <main className="px-8 max-w-7xl w-full">
         <h1 className="mt-36 text-4xl font-bold text-brand-red-100 drop-shadow-red-glow">
           Commands
         </h1>
@@ -85,7 +85,7 @@ export default function Commands() {
           {categories.map((category) => {
             // Filter commands for the current category
             const categoryCommands = filteredCommands.filter((command) =>
-              command.category.includes(category),
+              command.category.includes(category)
             );
 
             // Render only if there are commands in the category
