@@ -46,7 +46,6 @@ type PricingData = {
     "Customized Webhook Branding": boolean;
     "No More Invite Button Ads": boolean;
     "Auto Pin Daily Messages": boolean;
-    "AI-Generated Questions": boolean;
   };
 };
 
@@ -58,7 +57,6 @@ const pricingData: PricingData = {
     "Customized Webhook Branding": true,
     "No More Invite Button Ads": true,
     "Auto Pin Daily Messages": true,
-    "AI-Generated Questions": false,
   },
 };
 
