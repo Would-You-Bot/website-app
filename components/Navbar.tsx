@@ -24,8 +24,6 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
   const lineThreeControls = useAnimationControls();
   const menuControls = useAnimationControls();
 
-  const search = useSearchParams();
-
   const toggleMobileMenu = () => {
     if (mobileMenu) {
       lineOneControls.start(
@@ -85,6 +83,12 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
           </div>
         </Link>
         <div className="ml-24 hidden items-center md:flex">
+          <Link
+            href="/question-packs"
+            className="mr-6 text-lg text-neutral-300 transition-all hover:text-neutral-100"
+          >
+            Packs
+          </Link>
           <Link
             href="/commands"
             className="mr-6 text-lg text-neutral-300 transition-all hover:text-neutral-100"
