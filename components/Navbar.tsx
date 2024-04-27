@@ -24,8 +24,6 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
   const lineThreeControls = useAnimationControls();
   const menuControls = useAnimationControls();
 
-  const search = useSearchParams();
-
   const toggleMobileMenu = () => {
     if (mobileMenu) {
       lineOneControls.start(
@@ -69,21 +67,33 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
   };
 
   return (
-    <nav className="fixed left-0 top-0 z-50 mb-28 flex h-[80px] w-full items-center justify-center border-b border-b-neutral-800 bg-neutral-900 bg-opacity-90 backdrop-blur-sm">
-      <div className="flex max-w-7xl w-full justify-between items-center px-8">
-        <div className="flex gap-12 items-center">
-          <Link href="/">
-            <div className="flex items-center">
-              <Image
-                src="/Logo.svg"
-                className="rounded-full"
-                alt="Would You Logo"
-                width="50"
-                height="50"
-                priority
-              />
-              <p className="ml-4 text-2xl font-bold text-white">Would You</p>
-            </div>
+    <nav className="fixed left-0 top-0 z-50 mb-28 flex h-[80px] w-full items-center justify-between border-b border-b-neutral-800 bg-neutral-900 bg-opacity-90 backdrop-blur-sm">
+      <div className="ml-8 flex items-center xl:ml-[17vw]">
+        <Link href="/">
+          <div className="flex items-center">
+            <Image
+              src="/Logo.svg"
+              className="rounded-full"
+              alt="Would You Logo"
+              width="50"
+              height="50"
+              priority
+            />
+            <p className="ml-4 text-2xl font-bold text-white">Would You</p>
+          </div>
+        </Link>
+        <div className="ml-24 hidden items-center md:flex">
+          <Link
+            href="/question-packs"
+            className="mr-6 text-lg text-neutral-300 transition-all hover:text-neutral-100"
+          >
+            Packs
+          </Link>
+          <Link
+            href="/commands"
+            className="mr-6 text-lg text-neutral-300 transition-all hover:text-neutral-100"
+          >
+            Commands
           </Link>
           <div className=" hidden items-center md:flex">
             <Link
