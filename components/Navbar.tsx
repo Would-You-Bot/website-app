@@ -24,8 +24,6 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
   const lineThreeControls = useAnimationControls();
   const menuControls = useAnimationControls();
 
-  const search = useSearchParams();
-
   const toggleMobileMenu = () => {
     if (mobileMenu) {
       lineOneControls.start(
