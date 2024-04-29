@@ -13,8 +13,11 @@ export interface IdTokenJWT extends JWT {
 }
 
 export interface OAuthTokenData extends IdTokenData {
-  access_token: string;
-  refresh_token: string;
+  discord: {
+    access_token: string;
+    refresh_token: string;
+    exp?: number | null | undefined;
+  };
 }
 
 export interface OAuthTokenJWT extends JWT {
