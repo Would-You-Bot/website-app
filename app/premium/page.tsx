@@ -155,7 +155,7 @@ export default function Premium() {
                       <Button
                         className=" mt-20 w-full justify-center rounded-xl rounded-t-xl py-2 font-bold leading-loose"
                         //onClick={() => setIsPremiumOpen(true)}
-                        onClick={() => { testServers(getAuthTokenOrNull());}}
+                        onClick={() => { testServers();}}
                       >
                         Get Started
                       </Button>
