@@ -21,6 +21,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { getAuthTokenOrNull } from "@/helpers/oauth/helpers";
+import testServers from "@/helpers/testServers";
 
 const CheckArrowIcon = () => (
   <div className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent">
@@ -184,7 +186,7 @@ export default function Premium() {
                               Monthly/Yearly
                             </DialogTitle>
                             <DialogDescription className="">
-                              <Select className="peer">
+                              <Select>
                                 <SelectTrigger className="mt-2 p-6 text-base">
                                   <SelectValue placeholder="Select a server to proceed" />
                                 </SelectTrigger>
@@ -225,6 +227,15 @@ export default function Premium() {
                           </DialogHeader>
                         </DialogContent>
                       </Dialog>
+                      <Button
+                        className=" mt-20 w-full justify-center rounded-xl rounded-t-xl py-2 font-bold leading-loose"
+                        //onClick={() => setIsPremiumOpen(true)}
+                        onClick={() => {
+                          testServers(getAuthTokenOrNull());
+                        }}
+                      >
+                        Get Started
+                      </Button>
                     </div>
                   </div>
                 </div>
