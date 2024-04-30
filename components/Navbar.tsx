@@ -28,38 +28,38 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
     if (mobileMenu) {
       lineOneControls.start(
         { rotate: "0deg" },
-        { duration: 0.3, type: "spring" }
+        { duration: 0.3, type: "spring" },
       );
       lineTwoControls.start(
         { opacity: 1, transform: "translateX(0)" },
-        { duration: 0.12 }
+        { duration: 0.12 },
       );
       lineThreeControls.start(
         { rotate: "0deg" },
-        { duration: 0.3, type: "spring" }
+        { duration: 0.3, type: "spring" },
       );
       menuControls.start(
         { opacity: 0.5, left: "100vw", pointerEvents: "none" },
-        { duration: 0.21, type: "spring" }
+        { duration: 0.21, type: "spring" },
       );
 
       setMobileMenu(false);
     } else {
       lineOneControls.start(
         { rotate: "45deg" },
-        { duration: 0.3, type: "spring" }
+        { duration: 0.3, type: "spring" },
       );
       lineTwoControls.start(
         { opacity: 0, transform: "translateX(1)" },
-        { duration: 0.12 }
+        { duration: 0.12 },
       );
       lineThreeControls.start(
         { rotate: "-45deg" },
-        { duration: 0.3, type: "spring" }
+        { duration: 0.3, type: "spring" },
       );
       menuControls.start(
         { opacity: 1, left: "0", pointerEvents: "all" },
-        { duration: 0.21, type: "spring" }
+        { duration: 0.21, type: "spring" },
       );
 
       setMobileMenu(true);
@@ -109,99 +109,99 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
             Vote
           </Link>
         </div>
-        <div className="flex items-center">
-          <Link href="/invite" target="_blank" className="hidden md:block">
-            <Button className="">Invite</Button>
-          </Link>
-          {idToken ? (
-            <a href="/logout" className="hidden md:ml-2 md:block">
-              <Button>Logout</Button>
-            </a>
-          ) : (
-            <a href="/login" className="hidden md:ml-2 md:block">
-              <Button>Login with Discord</Button>
-            </a>
-          )}
-          <div
-            className="relative ml-6 flex h-6 w-8 flex-col items-center justify-between md:hidden"
-            onClick={() => toggleMobileMenu()}
-          >
-            <LazyMotion features={domAnimation}>
-              <m.span
-                className="h-[3px] w-[30px] origin-left rounded-full bg-neutral-300"
-                initial={{ rotate: "0deg" }}
-                animate={lineOneControls}
-              />
-              <m.span
-                className="menu-line line-1 h-[3px] w-[30px] rounded-full bg-neutral-300"
-                initial={{ opacity: 1 }}
-                animate={lineTwoControls}
-              />
-              <m.span
-                className="menu-line line-1 h-[3px] w-[30px] origin-left rounded-full bg-neutral-300"
-                initial={{ rotate: "0deg" }}
-                animate={lineThreeControls}
-              />
-            </LazyMotion>
-          </div>
-        </div>
-        <LazyMotion features={domAnimation}>
-          <m.div
-            className="fixed left-0 top-0 z-40 h-[100vh] w-[100vw] bg-neutral-900"
-            transition={{ duration: 0.21, type: "easeInOut" }}
-            initial={{ opacity: 0.5, left: "100vw", pointerEvents: "none" }}
-            animate={menuControls}
-          >
-            <div className="absolute top-36 flex w-full flex-col items-center">
-              <Link
-                href="/"
-                className="mt-8 text-center text-3xl text-white"
-                onClick={() => toggleMobileMenu()}
-              >
-                Home
-              </Link>
-              <Link
-                href="/commands"
-                className="mt-8 text-center text-3xl text-white"
-                onClick={() => toggleMobileMenu()}
-              >
-                Commands
-              </Link>
-              <Link
-                href="/blog"
-                className="mt-8 text-center text-3xl text-white"
-                onClick={() => toggleMobileMenu()}
-              >
-                Blog
-              </Link>
-              <Link
-                href="/vote"
-                target="_blank"
-                className="mt-8 text-center text-3xl text-white"
-                onClick={() => toggleMobileMenu()}
-              >
-                Vote
-              </Link>
-              <Link
-                href="/invite"
-                target="_blank"
-                className="mt-8 text-center text-2xl"
-              >
-                <Button>Invite</Button>
-              </Link>
-              {idToken ? (
-                <a href="/logout" className="mt-8 text-center text-2xl">
-                  <Button>Logout</Button>
-                </a>
-              ) : (
-                <a href="/login" className="mt-8 text-center text-2xl">
-                  <Button>Login with Discord</Button>
-                </a>
-              )}
-            </div>
-          </m.div>
-        </LazyMotion>
       </div>
+      <div className="z-50 mr-8 flex items-center xl:mr-[17vw]">
+        <Link href="/invite" target="_blank" className="hidden md:block">
+          <Button className="">Invite</Button>
+        </Link>
+        {idToken ? (
+          <a href="/logout" className="hidden md:ml-2 md:block">
+            <Button>Logout</Button>
+          </a>
+        ) : (
+          <a href="/login" className="hidden md:ml-2 md:block">
+            <Button>Login with Discord</Button>
+          </a>
+        )}
+        <div
+          className="relative ml-6 flex h-6 w-8 flex-col items-center justify-between md:hidden"
+          onClick={() => toggleMobileMenu()}
+        >
+          <LazyMotion features={domAnimation}>
+            <m.span
+              className="h-[3px] w-[30px] origin-left rounded-full bg-neutral-300"
+              initial={{ rotate: "0deg" }}
+              animate={lineOneControls}
+            />
+            <m.span
+              className="menu-line line-1 h-[3px] w-[30px] rounded-full bg-neutral-300"
+              initial={{ opacity: 1 }}
+              animate={lineTwoControls}
+            />
+            <m.span
+              className="menu-line line-1 h-[3px] w-[30px] origin-left rounded-full bg-neutral-300"
+              initial={{ rotate: "0deg" }}
+              animate={lineThreeControls}
+            />
+          </LazyMotion>
+        </div>
+      </div>
+      <LazyMotion features={domAnimation}>
+        <m.div
+          className="fixed left-0 top-0 z-40 h-[100vh] w-[100vw] bg-neutral-900"
+          transition={{ duration: 0.21, type: "easeInOut" }}
+          initial={{ opacity: 0.5, left: "100vw", pointerEvents: "none" }}
+          animate={menuControls}
+        >
+          <div className="absolute top-36 flex w-full flex-col items-center">
+            <Link
+              href="/"
+              className="mt-8 text-center text-3xl text-white"
+              onClick={() => toggleMobileMenu()}
+            >
+              Home
+            </Link>
+            <Link
+              href="/commands"
+              className="mt-8 text-center text-3xl text-white"
+              onClick={() => toggleMobileMenu()}
+            >
+              Commands
+            </Link>
+            <Link
+              href="/blog"
+              className="mt-8 text-center text-3xl text-white"
+              onClick={() => toggleMobileMenu()}
+            >
+              Blog
+            </Link>
+            <Link
+              href="/vote"
+              target="_blank"
+              className="mt-8 text-center text-3xl text-white"
+              onClick={() => toggleMobileMenu()}
+            >
+              Vote
+            </Link>
+            <Link
+              href="/invite"
+              target="_blank"
+              className="mt-8 text-center text-2xl"
+            >
+              <Button>Invite</Button>
+            </Link>
+            {idToken ? (
+              <a href="/logout" className="mt-8 text-center text-2xl">
+                <Button>Logout</Button>
+              </a>
+            ) : (
+              <a href="/login" className="mt-8 text-center text-2xl">
+                <Button>Login with Discord</Button>
+              </a>
+            )}
+          </div>
+        </m.div>
+      </LazyMotion>
     </nav>
   );
 };
