@@ -1,4 +1,7 @@
 "use server"
+
+import { getAuthTokenOrNull } from "./oauth/helpers";
+
 const testServers = async () => {
     const token = await getAuthTokenOrNull();
     const response = await fetch("https://discord.com/api/v10/users/@me/guilds", {
