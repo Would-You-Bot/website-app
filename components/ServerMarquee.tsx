@@ -51,6 +51,7 @@ const ServerMarquee: FC<MarqueeProps> = ({
               width={60}
               height={60}
               className="rounded-lg"
+              unoptimized
             />
             <div>
               <div className="relative flex items-center">
