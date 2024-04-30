@@ -85,6 +85,12 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
           </Link>
           <div className=" hidden items-center md:flex">
             <Link
+              href="/question-packs"
+              className="mr-6 text-lg text-neutral-300 transition-all hover:text-neutral-100"
+            >
+              Packs
+            </Link>
+            <Link
               href="/commands"
               className="mr-6 text-lg text-neutral-300 transition-all hover:text-neutral-100"
             >

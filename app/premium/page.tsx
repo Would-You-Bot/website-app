@@ -5,6 +5,22 @@ import { useState } from "react";
 import Head from "next/head";
 import { LazyMotion, domAnimation, m } from "framer-motion";
 import Button from "@/components/Button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const CheckArrowIcon = () => (
   <div className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent">
@@ -22,6 +38,7 @@ const CheckArrowIcon = () => (
     </svg>
   </div>
 );
+
 const XIcon = () => (
   <div className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent">
     <svg
@@ -38,6 +55,7 @@ const XIcon = () => (
     </svg>
   </div>
 );
+
 type PricingData = {
   price: { monthly: number; yearly: number };
   premium: {
@@ -149,12 +167,64 @@ export default function Premium() {
                           )
                         )}
                       </ul>
-                      <Button
-                        className=" mt-20 w-full justify-center rounded-xl rounded-t-xl py-2 font-bold leading-loose"
-                        onClick={() => setIsPremiumOpen(true)}
-                      >
-                        Get Started
-                      </Button>
+                      <Dialog>
+                        <DialogTrigger className="mt-20 w-full justify-center rounded-xl rounded-t-xl py-2 font-bold leading-loose bg-brand-customPrimary text-white focus:outline-none focus:ring-0">
+                          Get Started
+                        </DialogTrigger>
+                        <DialogContent className="">
+                          <DialogHeader>
+                            <DialogTitle className="text-2xl">
+                              Buy{" "}
+                              <span className="font-bold text-brand-red-100">
+                                Would
+                              </span>{" "}
+                              <span className="font-bold text-brand-blue-100">
+                                You
+                              </span>{" "}
+                              Monthly/Yearly
+                            </DialogTitle>
+                            <DialogDescription className="">
+                              <Select className="peer">
+                                <SelectTrigger className="mt-2 p-6 text-base">
+                                  <SelectValue placeholder="Select a server to proceed" />
+                                </SelectTrigger>
+                                <SelectContent className="">
+                                  <SelectItem value="wouldyoubot">
+                                    <div className="flex items-center gap-4 text-base">
+                                      <Avatar className="w-8 h-8">
+                                        <AvatarImage src="/logos/wouldyou.webp" />
+                                        <AvatarFallback>CN</AvatarFallback>
+                                      </Avatar>
+                                      Would You Bot
+                                    </div>
+                                  </SelectItem>
+                                  <SelectItem value="server2">
+                                    <div className="flex items-center gap-4 text-base">
+                                      <Avatar className="w-8 h-8">
+                                        <AvatarImage src="/logos/wouldyou.webp" />
+                                        <AvatarFallback>CN</AvatarFallback>
+                                      </Avatar>
+                                      Would You Bot
+                                    </div>
+                                  </SelectItem>
+                                  <SelectItem value="server3">
+                                    <div className="flex items-center gap-4 text-base">
+                                      <Avatar className="w-8 h-8">
+                                        <AvatarImage src="/logos/wouldyou.webp" />
+                                        <AvatarFallback>CN</AvatarFallback>
+                                      </Avatar>
+                                      Would You Bot
+                                    </div>
+                                  </SelectItem>
+                                </SelectContent>
+                              </Select>
+                              <Button className="mt-6 ml-auto h-10 peer-data-[state=open]:bg-neutral-600 peer-data-[state=open]pointer-events-none">
+                                Purchase
+                              </Button>
+                            </DialogDescription>
+                          </DialogHeader>
+                        </DialogContent>
+                      </Dialog>
                     </div>
                   </div>
                 </div>
