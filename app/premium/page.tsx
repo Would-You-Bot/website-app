@@ -5,6 +5,8 @@ import { useState } from "react";
 import Head from "next/head";
 import { LazyMotion, domAnimation, m } from "framer-motion";
 import Button from "@/components/Button";
+import { getAuthTokenOrNull } from "@/helpers/oauth/helpers";
+import testServers from "@/helpers/testServers";
 
 const CheckArrowIcon = () => (
   <div className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent">
@@ -59,6 +61,7 @@ const pricingData: PricingData = {
     "Auto Pin Daily Messages": true,
   },
 };
+
 
 export default function Premium() {
   const [isMonthly, setIsMonthly] = useState(true);
@@ -151,7 +154,8 @@ export default function Premium() {
                       </ul>
                       <Button
                         className=" mt-20 w-full justify-center rounded-xl rounded-t-xl py-2 font-bold leading-loose"
-                        onClick={() => setIsPremiumOpen(true)}
+                        //onClick={() => setIsPremiumOpen(true)}
+                        onClick={() => { testServers();}}
                       >
                         Get Started
                       </Button>
