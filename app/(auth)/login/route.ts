@@ -4,7 +4,6 @@ import { discordOAuthClient } from "@/helpers/oauth";
 import { signJwt } from "@/helpers/jwt";
 import { cookies } from "next/headers";
 import { z } from "zod";
-import { IdTokenData } from "@/helpers/oauth/types";
 
 const _queryParamsSchema = z.object({
   code: z.string().nullable(),
@@ -35,16 +34,13 @@ export async function GET(req: NextRequest) {
   }
 
   // TODO separate the rest of this in its own endpoint ? /callback ?
-  const { success, user, access_token, refresh_token, exp } =
+  const { success, user, access_token, refresh_token } =
     await exchangeAuthorizationCode(code);
 
   if (!success) return;
 
-  const accessToken = await signJwt({
-    ...user,
-    discord: { access_token, refresh_token, exp },
-  });
-  const idToken = await signJwt({ ...user } as IdTokenData);
+  const accessToken = await signJwt({ ...user, access_token, refresh_token });
+  const idToken = await signJwt({ ...user });
 
   setSecureHttpOnlyCookie("OAUTH_TOKEN", accessToken);
   cookieJar.set("ID_TOKEN", idToken, {
@@ -62,11 +58,9 @@ export async function GET(req: NextRequest) {
 }
 
 async function exchangeAuthorizationCode(code: string) {
-  const now = Date.now();
   try {
-    const { access_token, token_type, scope, refresh_token, expires_in } =
+    const { access_token, token_type, scope, refresh_token } =
       await discordOAuthClient.validateAuthorizationCode(code);
-    const exp = expires_in ? now + 1000 * expires_in : null;
 
     if (!scope?.includes("identify"))
       return { success: false, error: "Identify scope is missing" };
@@ -80,6 +74,7 @@ async function exchangeAuthorizationCode(code: string) {
     });
 
     const user = await userResponse.json();
+    console.log(user);
 
     const { id, username, avatar, global_name } = user;
 
@@ -114,7 +109,6 @@ async function exchangeAuthorizationCode(code: string) {
 
     return {
       success: true,
-      exp,
       access_token,
       refresh_token,
       user: { id, avatar, username, global_name },

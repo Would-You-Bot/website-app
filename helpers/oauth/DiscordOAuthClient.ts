@@ -7,8 +7,6 @@ class DiscordOAuthClient {
   private readonly client: OAuth2Client;
   private readonly scopes: string[];
   private readonly clientSecret: string;
-  private readonly revocationUrl =
-    "https://discord.com/api/oauth2/token/revoke";
 
   constructor({
     clientId,
@@ -49,21 +47,6 @@ class DiscordOAuthClient {
       scopes: this.scopes,
       credentials: this.clientSecret,
       authenticateWith: "request_body",
-    });
-  }
-
-  revokeToken(token: string, tokenType: "access_token" | "refresh_token") {
-    return fetch(this.revocationUrl, {
-      method: "POST",
-      body: new URLSearchParams({
-        token,
-        token_type_hint: tokenType,
-        client_id: this.client.clientId,
-        client_secret: this.clientSecret,
-      }),
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
     });
   }
 }

@@ -39,25 +39,27 @@ const HigherLowerEmbed: FC<MainProps> = ({ currentDate }) => {
           command="/higherlower"
         />
         <DiscordEmbed slot="embeds" color="#57f389" image="/higherlower.webp">
-          <DiscordEmbedDescription slot="description">
-            Do you think that{" "}
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://media.gettyimages.com/id/172983250/de/foto/el-bolte.jpg?s=612x612&w=0&k=20&c=k_mRK-vNunI3_-Vj4PuZ1Ego3gritQdXNobiZIlzszU="
-            >
-              <b>Mcdonalds </b>
-            </a>
-            has higher or lower searches than{" "}
-            <a
-              target="_blank"
-              rel="noopener noreferrer"
-              href="https://www.flickr.com/photos/jeepersmedia/14148153870/in/photolist-nydZeq-nQDDp3-pdpSvU-g7LgY-o3o2jd-pcNHiK-o3cCTF-5WPCjg-nQ2NWU-f2zTHH-pcNMyi-nQ2NHY-pcNHte-pfrPLZ-8spnG2-5pW4Z-pfaUUH-2uoaCe-nRMfuF-oXXAPw-nPUyfN-pfpNHs-pfaWDV-pfrMUx-pfrMD2-oXWWcy-5WPCZP-so4g2-5WPBYk-5WTTfu-p5tWUQ-5WTSBW-d39Ks-KHuxQ-oN23na-ayyYGJ-8spkbH-7B9Qwt-z6GPjP-p5vZi6-fJofT-LwbCj-bwPBWn-e9VGDK-8ssDmf-ea2nUm-8spDep-PanEt-8spyZR-z6GNxD"
-            >
-              <b>Wrestling</b>
-            </a>
-            ?
-          </DiscordEmbedDescription>
+          <DiscordEmbedFields slot="fields">
+            <DiscordEmbedDescription>
+              Do you think that{" "}
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://media.gettyimages.com/id/172983250/de/foto/el-bolte.jpg?s=612x612&w=0&k=20&c=k_mRK-vNunI3_-Vj4PuZ1Ego3gritQdXNobiZIlzszU="
+              >
+                <b>Mcdonalds </b>
+              </a>
+              has higher or lower searches than{" "}
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://www.flickr.com/photos/jeepersmedia/14148153870/in/photolist-nydZeq-nQDDp3-pdpSvU-g7LgY-o3o2jd-pcNHiK-o3cCTF-5WPCjg-nQ2NWU-f2zTHH-pcNMyi-nQ2NHY-pcNHte-pfrPLZ-8spnG2-5pW4Z-pfaUUH-2uoaCe-nRMfuF-oXXAPw-nPUyfN-pfpNHs-pfaWDV-pfrMUx-pfrMD2-oXWWcy-5WPCZP-so4g2-5WPBYk-5WTTfu-p5tWUQ-5WTSBW-d39Ks-KHuxQ-oN23na-ayyYGJ-8spkbH-7B9Qwt-z6GPjP-p5vZi6-fJofT-LwbCj-bwPBWn-e9VGDK-8ssDmf-ea2nUm-8spDep-PanEt-8spyZR-z6GNxD"
+              >
+                <b>Wrestling</b>
+              </a>
+              ?
+            </DiscordEmbedDescription>
+          </DiscordEmbedFields>
           <DiscordEmbedFooter
             timestamp={currentDate}
             slot="footer"

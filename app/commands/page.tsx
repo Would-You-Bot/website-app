@@ -82,7 +82,7 @@ export default function Commands() {
             id="search"
             type="text"
           ></input>
-          {categories.map((category, index) => {
+          {categories.map((category) => {
             // Filter commands for the current category
             const categoryCommands = filteredCommands.filter((command) =>
               command.category.includes(category)
@@ -91,7 +91,7 @@ export default function Commands() {
             // Render only if there are commands in the category
             if (categoryCommands.length > 0) {
               return (
-                <div key={index} className="space-y-4">
+                <>
                   <h2 className=" mt-10 select-none font-semibold text-neutral-300">
                     {category}
                   </h2>
@@ -186,7 +186,7 @@ export default function Commands() {
                       </div>
                     );
                   })}
-                </div>
+                </>
               );
             }
             // If no commands in the category, return null

@@ -95,19 +95,27 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
           >
             Commands
           </Link>
-          <Link
-            href="/blog"
-            className="mr-6 text-lg text-neutral-300 transition-all hover:text-neutral-100"
-          >
-            Blog
-          </Link>
-          <Link
-            href="/vote"
-            target="_blank"
-            className="mr-6 text-lg text-neutral-300 transition-all hover:text-neutral-100"
-          >
-            Vote
-          </Link>
+          <div className=" hidden items-center md:flex">
+            <Link
+              href="/commands"
+              className="mr-6 text-lg text-neutral-300 transition-all hover:text-neutral-100"
+            >
+              Commands
+            </Link>
+            <Link
+              href="/blog"
+              className="mr-6 text-lg text-neutral-300 transition-all hover:text-neutral-100"
+            >
+              Blog
+            </Link>
+            <Link
+              href="/vote"
+              target="_blank"
+              className="mr-6 text-lg text-neutral-300 transition-all hover:text-neutral-100"
+            >
+              Vote
+            </Link>
+          </div>
         </div>
         <div className="flex items-center">
           <Link href="/invite" target="_blank" className="hidden md:block">
