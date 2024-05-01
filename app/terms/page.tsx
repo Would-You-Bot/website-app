@@ -1,8 +1,8 @@
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Terms() {
   return (
-    <main className="flex flex-col gap-8 px-8 text-neutral-300 xl:px-[17vw]">
+    <main className="flex flex-col gap-8 px-8 text-neutral-300 max-w-7xl w-full">
       <h1 className="mt-36 text-4xl font-bold text-brand-red-100 drop-shadow-red-glow">
         Terms of Service
       </h1>
@@ -20,19 +20,19 @@ export default function Terms() {
           do not agree to these Terms, you may not use Would You.
           <br />
           Would You is a bot for the chat and social platform
-          &quot;Discord&quot; (accessible at{' '}
+          &quot;Discord&quot; (accessible at{" "}
           <Link
             href="https://discord.com"
-            target={'_blank'}
+            target={"_blank"}
             className="text-white underline"
           >
             https://discord.com
           </Link>
           ), provided by Discord Inc. This service allows you to make use of
-          Discord&apos;s public API (its documentation is accessible at{' '}
+          Discord&apos;s public API (its documentation is accessible at{" "}
           <Link
             href="https://discord.dev"
-            target={'_blank'}
+            target={"_blank"}
             className="text-white underline"
           >
             https://discord.dev
@@ -256,25 +256,25 @@ export default function Terms() {
           execute these Terms of Use.
           <br />
           <br />
-          Thanks to{' '}
+          Thanks to{" "}
           <Link
             href="https://scrumpbot.com"
-            target={'_blank'}
+            target={"_blank"}
             className="text-white underline"
           >
             https://scrumpbot.com
-          </Link>{' '}
-          and{' '}
+          </Link>{" "}
+          and{" "}
           <Link
             href="https://tempvoice.xyz/terms-of-service"
-            target={'_blank'}
+            target={"_blank"}
             className="text-white underline"
           >
             https://tempvoice.xyz
-          </Link>{' '}
+          </Link>{" "}
           for help on this terms of service.
         </p>
       </div>
     </main>
-  )
+  );
 }

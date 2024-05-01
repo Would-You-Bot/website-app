@@ -105,6 +105,10 @@
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  align-items: center;
   background-color: #171717;
   font-family: "Inter", sans-serif;
   overflow-x: hidden;
@@ -124,12 +128,6 @@ body::-webkit-scrollbar-thumb {
 body::-webkit-scrollbar-track {
   width: 0.5rem;
   background-color: transparent;
-}
-
-@media screen and (min-width: 1280px) {
-  .discord-messages {
-    width: calc(50vw - 80px - 17vw);
-  }
 }
 
 .discord-button span {

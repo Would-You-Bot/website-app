@@ -44,13 +44,13 @@ export function HomeContent({
 
   return (
     <LazyMotion features={domAnimation}>
-      <section className="flex flex-col items-center justify-between gap-8 text-center lg:flex-row lg:text-left xl:px-[17vw]">
+      <section className="flex flex-col items-center justify-between gap-8 text-center lg:flex-row lg:text-left mt-28 max-w-7xl w-full">
         <m.div
           initial={{ opacity: 0, transform: "translateY(20px)" }}
           whileInView={{ opacity: 1, transform: "translateY(0)" }}
           transition={{ duration: 0.7, ease: "easeInOut" }}
           viewport={{ once: true }}
-          className="px-8"
+          className="flex flex-col lg:block items-center px-8"
         >
           <h1 className="text-6xl font-bold leading-normal text-white">
             Entertain Your
@@ -68,8 +68,12 @@ export function HomeContent({
             I Ever, Higher or Lower, and What Would You Do!{" "}
             <span className="hidden">tempus voicus</span>
           </p>
-          <Link href="/invite" target="_blank" className="flex w-fit mt-8">
-            <Button className="mx-auto gap-2 lg:mx-0">
+          <Link
+            href="/invite"
+            target="_blank"
+            className="flex justify-center w-fit mt-8"
+          >
+            <Button className="gap-2">
               Unleash the Fun
               <svg
                 width="13"
@@ -101,10 +105,9 @@ export function HomeContent({
           draggable={false}
           width="10000"
           height="10000"
-          className="-z-50 w-screen"
           priority
         />
-        <div className="bg-[#101010] px-8 pb-12 text-center text-5xl text-white md:-mt-20 md:pb-28 xl:px-[17vw]">
+        <div className="bg-[#101010] px-8 pb-12 text-center text-5xl text-white md:-mt-20 md:pb-28 w-full">
           <h2>
             Trusted by{" "}
             <span className="bg-gradient-brand bg-clip-text font-bold text-transparent">
@@ -125,7 +128,7 @@ export function HomeContent({
         </div>
       </section>
 
-      <section className="mt-20 flex flex-col items-center gap-8 px-9 xl:px-[17vw]">
+      <section className="mt-20 flex flex-col items-center gap-20 px-9 max-w-7xl w-full">
         <m.div
           initial={{ opacity: 0, transform: "translateY(15px)" }}
           whileInView={{ opacity: 1, transform: "translateY(0)" }}
@@ -190,7 +193,7 @@ export function HomeContent({
         />
       </section>
 
-      <section className="mt-36 bg-[#101010] px-9 py-12 xl:px-[17vw]">
+      <section className="mt-36 bg-[#101010] px-9 py-12 w-full">
         <m.h2
           initial={{ opacity: 0, transform: "translateY(10px)" }}
           whileInView={{ opacity: 1, transform: "translateY(0)" }}

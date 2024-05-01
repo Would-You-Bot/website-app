@@ -34,7 +34,7 @@ const MainDiscordEmbed: FC<MainProps> = ({
         viewport={{ once: true }}
         style={{ width: "90%", marginLeft: "auto", marginRight: "auto" }}
       >
-        <DiscordMessages class="overflow-x-hidden rounded-lg text-left shadow">
+        <DiscordMessages class="w-auto sm:w-2/3 mx-auto lg:w-auto overflow-x-hidden rounded-lg text-left shadow">
           <DiscordMessage
             profile="wouldyou"
             author={profiles.wouldyou.author}
