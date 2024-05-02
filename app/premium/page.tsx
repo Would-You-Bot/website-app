@@ -1,7 +1,7 @@
 // TODO remove the use client directive in favor of a server component
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Head from "next/head";
 import { LazyMotion, domAnimation, m } from "framer-motion";
 import Button from "@/components/Button";
@@ -23,6 +23,22 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { getAuthTokenOrNull } from "@/helpers/oauth/helpers";
 import testServers from "@/helpers/testServers";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const CheckArrowIcon = () => (
   <div className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent">
@@ -68,7 +84,6 @@ type PricingData = {
     "Auto Pin Daily Messages": boolean;
   };
 };
-
 const pricingData: PricingData = {
   price: { monthly: 2.99, yearly: 29.99 },
   premium: {
@@ -82,11 +97,29 @@ const pricingData: PricingData = {
 
 export default function Premium() {
   const [isMonthly, setIsMonthly] = useState(true);
-  const [isPremiumOpen, setIsPremiumOpen] = useState(false);
+  const [serversData, setServersData] = useState<string[]>([]);
+
+  const fetchData = async () => {
+    if (serversData.length > 0) return;
+    try {
+      const servers = await testServers();
+      setServersData(servers);
+    } catch (error) {
+      console.error('Error fetching server data:', error);
+    }
+  };
+
+  function getInitials(serverName) {
+    const words = serverName.split(' ');
+    const initials = words.map(word => word[0]).join('');
+    return initials.length > 1 ? initials.slice(0, 2) : initials[0];
+  }
 
   const handleChange = () => {
     setIsMonthly(!isMonthly);
   };
+
+  console.log(serversData);
 
   return (
     <>
@@ -121,11 +154,11 @@ export default function Premium() {
                     <span className="absolute -ml-4 flex h-16 w-[6rem] cursor-pointer items-center duration-300 ease-in-out after:h-12 after:w-[20rem] after:rounded-lg after:bg-customPrimary after:shadow-md after:duration-300 peer-checked:after:translate-x-[6rem] after:bg-brand-customPrimary z-10"></span>
                     <div className="flex text-base gap-10 font-bold text-white z-20">
                       <div
-                        className={(!isMonthly && "text-gray-400") as string}
+                        className={`${!isMonthly && 'text-gray-400'}`}
                       >
                         Monthly
                       </div>
-                      <div className={(isMonthly && "text-gray-400") as string}>
+                      <div className={`${!isMonthly && 'text-gray-400'}`}>
                         Yearly
                       </div>
                     </div>
@@ -170,72 +203,43 @@ export default function Premium() {
                         )}
                       </ul>
                       <Dialog>
-                        <DialogTrigger className="mt-20 w-full justify-center rounded-xl rounded-t-xl py-2 font-bold leading-loose bg-brand-customPrimary text-white focus:outline-none focus:ring-0">
+                        <DialogTrigger onClick={() => { fetchData()}}className="mt-20 w-full justify-center rounded-xl rounded-t-xl py-2 font-bold leading-loose bg-brand-blue-100 text-white">
                           Get Started
                         </DialogTrigger>
-                        <DialogContent className="">
+                        <DialogContent className="bg-brand-customDarkBg3 border-none">
                           <DialogHeader>
-                            <DialogTitle className="text-2xl">
-                              Buy{" "}
-                              <span className="font-bold text-brand-red-100">
-                                Would
-                              </span>{" "}
-                              <span className="font-bold text-brand-blue-100">
-                                You
-                              </span>{" "}
-                              Monthly/Yearly
+                            <DialogTitle className="text-white font-bold text-xl">
+                              <div>Buy <span className="text-brand-red-100">Would</span> <span className="text-brand-blue-100">You</span> Monthly/Yearly</div>
                             </DialogTitle>
-                            <DialogDescription className="">
-                              <Select>
-                                <SelectTrigger className="mt-2 p-6 text-base">
-                                  <SelectValue placeholder="Select a server to proceed" />
-                                </SelectTrigger>
-                                <SelectContent className="">
-                                  <SelectItem value="wouldyoubot">
-                                    <div className="flex items-center gap-4 text-base">
-                                      <Avatar className="w-8 h-8">
-                                        <AvatarImage src="/logos/wouldyou.webp" />
-                                        <AvatarFallback>CN</AvatarFallback>
-                                      </Avatar>
-                                      Would You Bot
-                                    </div>
-                                  </SelectItem>
-                                  <SelectItem value="server2">
-                                    <div className="flex items-center gap-4 text-base">
-                                      <Avatar className="w-8 h-8">
-                                        <AvatarImage src="/logos/wouldyou.webp" />
-                                        <AvatarFallback>CN</AvatarFallback>
-                                      </Avatar>
-                                      Would You Bot
-                                    </div>
-                                  </SelectItem>
-                                  <SelectItem value="server3">
-                                    <div className="flex items-center gap-4 text-base">
-                                      <Avatar className="w-8 h-8">
-                                        <AvatarImage src="/logos/wouldyou.webp" />
-                                        <AvatarFallback>CN</AvatarFallback>
-                                      </Avatar>
-                                      Would You Bot
-                                    </div>
-                                  </SelectItem>
-                                </SelectContent>
-                              </Select>
-                              <Button className="mt-6 ml-auto h-10 peer-data-[state=open]:bg-neutral-600 peer-data-[state=open]pointer-events-none">
-                                Purchase
-                              </Button>
-                            </DialogDescription>
                           </DialogHeader>
+                          <DialogDescription className="w-full">
+                            <Select>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Select a server to continue" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                {serversData.map(server => (
+                                  <SelectItem key={server.id} value={server.id}>
+                                    <div className="flex gap-2 items-center">
+                                      <Avatar className="h-6 w-6">
+                                         <AvatarImage src={`https://cdn.discordapp.com/icons/${server.id}/${server.icon}.webp`} /> 
+                                        <AvatarFallback><img src="https://cdn.discordapp.com/embed/avatars/5.png" alt="avatar example" /></AvatarFallback>
+                                      </Avatar>
+                                      <span>{server.name}</span>
+                                    </div>
+                                  </SelectItem>
+                                ))}
+                              </SelectContent>
+                            </Select>
+                            <button
+                              className="flex mt-4 ml-auto w-fit justify-center rounded-lg px-5 py-1 font-bold text-sm leading-loose bg-brand-blue-100 text-white"
+                              // onClick={() => { testServers()}}
+                            >
+                              Purchase
+                            </button>
+                          </DialogDescription>
                         </DialogContent>
                       </Dialog>
-                      <Button
-                        className=" mt-20 w-full justify-center rounded-xl rounded-t-xl py-2 font-bold leading-loose"
-                        //onClick={() => setIsPremiumOpen(true)}
-                        onClick={() => {
-                          testServers(getAuthTokenOrNull());
-                        }}
-                      >
-                        Get Started
-                      </Button>
                     </div>
                   </div>
                 </div>
