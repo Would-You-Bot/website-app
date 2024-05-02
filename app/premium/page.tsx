@@ -4,25 +4,7 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
 import { LazyMotion, domAnimation, m } from "framer-motion";
-import Button from "@/components/Button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { getAuthTokenOrNull } from "@/helpers/oauth/helpers";
-import testServers from "@/helpers/testServers";
+import { getServer } from "@/helpers/cache/redis";
 import {
   Dialog,
   DialogContent,
@@ -100,26 +82,15 @@ export default function Premium() {
   const [serversData, setServersData] = useState<string[]>([]);
 
   const fetchData = async () => {
-    if (serversData.length > 0) return;
-    try {
-      const servers = await testServers();
-      setServersData(servers);
-    } catch (error) {
-      console.error('Error fetching server data:', error);
-    }
+    console.log("fetching data");
+    const servers = await getServer("347077478726238228");
+    console.log(servers, "servers");
+    setServersData(servers);
   };
-
-  function getInitials(serverName) {
-    const words = serverName.split(' ');
-    const initials = words.map(word => word[0]).join('');
-    return initials.length > 1 ? initials.slice(0, 2) : initials[0];
-  }
 
   const handleChange = () => {
     setIsMonthly(!isMonthly);
   };
-
-  console.log(serversData);
 
   return (
     <>
@@ -153,12 +124,10 @@ export default function Premium() {
                     />
                     <span className="absolute -ml-4 flex h-16 w-[6rem] cursor-pointer items-center duration-300 ease-in-out after:h-12 after:w-[20rem] after:rounded-lg after:bg-customPrimary after:shadow-md after:duration-300 peer-checked:after:translate-x-[6rem] after:bg-brand-customPrimary z-10"></span>
                     <div className="flex text-base gap-10 font-bold text-white z-20">
-                      <div
-                        className={`${!isMonthly && 'text-gray-400'}`}
-                      >
+                      <div className={`${!isMonthly && "text-gray-400"}`}>
                         Monthly
                       </div>
-                      <div className={`${!isMonthly && 'text-gray-400'}`}>
+                      <div className={`${!isMonthly && "text-gray-400"}`}>
                         Yearly
                       </div>
                     </div>
@@ -203,13 +172,25 @@ export default function Premium() {
                         )}
                       </ul>
                       <Dialog>
-                        <DialogTrigger onClick={() => { fetchData()}}className="mt-20 w-full justify-center rounded-xl rounded-t-xl py-2 font-bold leading-loose bg-brand-blue-100 text-white">
+                        <DialogTrigger
+                          onClick={() => {
+                            fetchData();
+                          }}
+                          className="mt-20 w-full justify-center rounded-xl rounded-t-xl py-2 font-bold leading-loose bg-brand-blue-100 text-white"
+                        >
                           Get Started
                         </DialogTrigger>
                         <DialogContent className="bg-brand-customDarkBg3 border-none">
                           <DialogHeader>
                             <DialogTitle className="text-white font-bold text-xl">
-                              <div>Buy <span className="text-brand-red-100">Would</span> <span className="text-brand-blue-100">You</span> Monthly/Yearly</div>
+                              <div>
+                                Buy{" "}
+                                <span className="text-brand-red-100">
+                                  Would
+                                </span>{" "}
+                                <span className="text-brand-blue-100">You</span>
+                                {isMonthly ? " Monthly" : " Yearly"}
+                              </div>
                             </DialogTitle>
                           </DialogHeader>
                           <DialogDescription className="w-full">
@@ -218,12 +199,19 @@ export default function Premium() {
                                 <SelectValue placeholder="Select a server to continue" />
                               </SelectTrigger>
                               <SelectContent>
-                                {serversData.map(server => (
+                                {serversData.map((server) => (
                                   <SelectItem key={server.id} value={server.id}>
                                     <div className="flex gap-2 items-center">
                                       <Avatar className="h-6 w-6">
-                                         <AvatarImage src={`https://cdn.discordapp.com/icons/${server.id}/${server.icon}.webp`} /> 
-                                        <AvatarFallback><img src="https://cdn.discordapp.com/embed/avatars/5.png" alt="avatar example" /></AvatarFallback>
+                                        <AvatarImage
+                                          src={`https://cdn.discordapp.com/icons/${server.id}/${server.icon}.webp`}
+                                        />
+                                        <AvatarFallback>
+                                          <img
+                                            src="https://cdn.discordapp.com/embed/avatars/5.png"
+                                            alt="avatar example"
+                                          />
+                                        </AvatarFallback>
                                       </Avatar>
                                       <span>{server.name}</span>
                                     </div>
@@ -231,10 +219,7 @@ export default function Premium() {
                                 ))}
                               </SelectContent>
                             </Select>
-                            <button
-                              className="flex mt-4 ml-auto w-fit justify-center rounded-lg px-5 py-1 font-bold text-sm leading-loose bg-brand-blue-100 text-white"
-                              // onClick={() => { testServers()}}
-                            >
+                            <button className="flex mt-4 ml-auto w-fit justify-center rounded-lg px-5 py-1 font-bold text-sm leading-loose bg-brand-blue-100 text-white">
                               Purchase
                             </button>
                           </DialogDescription>

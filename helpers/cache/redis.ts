@@ -1,46 +1,31 @@
-import { createClient } from "redis";
+"use server";
+import { Redis } from "@upstash/redis"
+import dotenv from "dotenv";
+dotenv.config();
 
-const client = createClient({
-  socket: {
-    reconnectStrategy: (retries) => {
-      if (retries < 10) {
-        return Math.min(retries * 50, 500);
-      } else {
-        return new Error("Max retries reached");
-      }
-    },
-  },
+
+const redis = new Redis({
+  url:  process.env.REDIS_URL!,
+  token: process.env.REDIS_TOKEN!,
 });
 
-client.on("error", (err) => console.log("Redis Client Error:", err));
-
-async function initializeRedis() {
-  if (!client.isOpen) {
-    await client.connect();
-  }
-}
-
-initializeRedis();
-
 const add = async (key: string, value: any) => {
-  await client.set(key, JSON.stringify(value));
+  await redis.set(key, JSON.stringify(value));
 };
 
 const get = async (key: string) => {
-  const value = await client.get(key);
+  const data = await redis.get(key);
 
-  return value ? JSON.parse(value) : null;
+ return data;
 };
 
 const setServer = async (userId: string, servers: object | Array<object>) => {
-  await client.set(userId, JSON.stringify({ servers: [] }));
+  await redis.set(userId, JSON.stringify(servers));
 };
-const getServers = async (userId: string) => {
-  const data: string | null = await client.get(userId);
-    if (!data) {
-        return [];
-    }
-  return JSON.parse(data);
+const getServer = async (userId: string) => {
+  let data = await redis.get(userId);
+
+  return data;
 };
 
-export { add, get, setServer, getServers };
+export { add, get, setServer, getServer };
