@@ -14,9 +14,9 @@ const add = async (key: string, value: any) => {
 };
 
 const get = async (key: string) => {
-  const value = await redis.get(key);
+  const data = await redis.get(key);
 
-  value ? JSON.parse(value) : null;
+ return data;
 };
 
 const setServer = async (userId: string, servers: object | Array<object>) => {
@@ -24,7 +24,7 @@ const setServer = async (userId: string, servers: object | Array<object>) => {
 };
 const getServer = async (userId: string) => {
   let data = await redis.get(userId);
-  console.log(data, "data");
+
   return data;
 };
 
