@@ -4,9 +4,7 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
 import { LazyMotion, domAnimation, m } from "framer-motion";
-import Button from "@/components/Button";
-import { getAuthTokenOrNull } from "@/helpers/oauth/helpers";
-import testServers from "@/helpers/testServers";
+import { getServer } from "@/helpers/cache/redis";
 import {
   Dialog,
   DialogContent,
@@ -82,26 +80,16 @@ export default function Premium() {
   const [serversData, setServersData] = useState<string[]>([]);
 
   const fetchData = async () => {
-    if (serversData.length > 0) return;
-    try {
-      const servers = await testServers();
+    console.log("fetching data");
+      const servers = await getServer("347077478726238228");
+      console.log(servers, "servers");
       setServersData(servers);
-    } catch (error) {
-      console.error('Error fetching server data:', error);
-    }
   };
-
-  function getInitials(serverName) {
-    const words = serverName.split(' ');
-    const initials = words.map(word => word[0]).join('');
-    return initials.length > 1 ? initials.slice(0, 2) : initials[0];
-  }
 
   const handleChange = () => {
     setIsMonthly(!isMonthly);
   };
 
-  console.log(serversData);
 
   return (
     <>
@@ -185,13 +173,13 @@ export default function Premium() {
                         )}
                       </ul>
                       <Dialog>
-                        <DialogTrigger onClick={() => { fetchData()}}className="mt-20 w-full justify-center rounded-xl rounded-t-xl py-2 font-bold leading-loose bg-brand-blue-100 text-white">
+                        <DialogTrigger onClick={() => {fetchData()}} className="mt-20 w-full justify-center rounded-xl rounded-t-xl py-2 font-bold leading-loose bg-brand-blue-100 text-white">
                           Get Started
                         </DialogTrigger>
                         <DialogContent className="bg-brand-customDarkBg3 border-none">
                           <DialogHeader>
                             <DialogTitle className="text-white font-bold text-xl">
-                              <div>Buy <span className="text-brand-red-100">Would</span> <span className="text-brand-blue-100">You</span> Monthly/Yearly</div>
+                              <div>Buy <span className="text-brand-red-100">Would</span> <span className="text-brand-blue-100">You</span>{isMonthly ? " Monthly" : " Yearly"}</div>
                             </DialogTitle>
                           </DialogHeader>
                           <DialogDescription className="w-full">
@@ -215,8 +203,7 @@ export default function Premium() {
                             </Select>
                             <button
                               className="flex mt-4 ml-auto w-fit justify-center rounded-lg px-5 py-1 font-bold text-sm leading-loose bg-brand-blue-100 text-white"
-                              // onClick={() => { testServers()}}
-                            >
+                              >
                               Purchase
                             </button>
                           </DialogDescription>

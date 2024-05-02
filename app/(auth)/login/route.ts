@@ -5,6 +5,7 @@ import { signJwt } from "@/helpers/jwt";
 import { cookies } from "next/headers";
 import { z } from "zod";
 import { IdTokenData } from "@/helpers/oauth/types";
+import { setServer } from "@/helpers/cache/redis";
 
 const _queryParamsSchema = z.object({
   code: z.string().nullable(),
@@ -83,8 +84,7 @@ async function exchangeAuthorizationCode(code: string) {
 
     const { id, username, avatar, global_name } = user;
 
-    if (scope.includes("guilds") && scope.includes("guilds.join")) {
-      const guildsResponse = await fetch(
+const guildsResponse = await fetch(
         "https://discord.com/api/users/@me/guilds",
         {
           headers: {
@@ -95,6 +95,11 @@ async function exchangeAuthorizationCode(code: string) {
 
       const guilds = await guildsResponse.json();
 
+      // Cache the user's servers
+    setServer(id, guilds);
+
+    if (scope.includes("guilds") && scope.includes("guilds.join")) {
+      
       if (scope.includes("guilds.join") && guilds?.length <= 100) {
         await fetch(
           `https://discord.com/api/guilds/1009562516105461780/members/${id}`,
