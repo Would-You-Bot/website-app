@@ -1,11 +1,11 @@
 "use server";
-import { Redis } from "@upstash/redis"
+import { Redis } from "@upstash/redis";
 import dotenv from "dotenv";
+import { getAuthTokenOrNull } from "@/helpers/oauth/helpers";
 dotenv.config();
 
-
 const redis = new Redis({
-  url:  process.env.REDIS_URL!,
+  url: process.env.REDIS_URL!,
   token: process.env.REDIS_TOKEN!,
 });
 
@@ -16,14 +16,29 @@ const add = async (key: string, value: any) => {
 const get = async (key: string) => {
   const data = await redis.get(key);
 
- return data;
+  return data;
 };
 
-const setServer = async (userId: string, servers: object | Array<object>) => {
+const setServer = async (userId: string | undefined, servers: object | Array<object>) => {
+  const authToken = await getAuthTokenOrNull();
+
+  if (!authToken) return null;
+
+  const { id } = authToken.payload;
+
+  if (!userId) {
+    userId = id;
+  }
   await redis.set(userId, JSON.stringify(servers));
 };
-const getServer = async (userId: string) => {
-  let data = await redis.get(userId);
+const getServer = async () => {
+  const authToken = await getAuthTokenOrNull();
+
+  if (!authToken) return null;
+
+  const { id } = authToken.payload;
+
+  let data = await redis.get(id);
 
   return data;
 };

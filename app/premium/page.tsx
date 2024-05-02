@@ -1,7 +1,7 @@
 // TODO remove the use client directive in favor of a server component
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Head from "next/head";
 import { LazyMotion, domAnimation, m } from "framer-motion";
 import { getServer } from "@/helpers/cache/redis";
@@ -75,21 +75,29 @@ const pricingData: PricingData = {
   },
 };
 
+interface DiscordGuild {
+  id: string;
+  name: string;
+  icon: string;
+  owner: boolean;
+  permissions: number;
+  permissions_new: string;
+  features: string[];
+}
+
 export default function Premium() {
   const [isMonthly, setIsMonthly] = useState(true);
-  const [serversData, setServersData] = useState<string[]>([]);
+  const [serversData, setServersData] = useState<DiscordGuild[]>([]);
 
   const fetchData = async () => {
-    console.log("fetching data");
-      const servers = await getServer("347077478726238228");
-      console.log(servers, "servers");
-      setServersData(servers);
+    const servers = await getServer();
+    console.log(servers, "servers");
+    setServersData(servers);
   };
 
   const handleChange = () => {
     setIsMonthly(!isMonthly);
   };
-
 
   return (
     <>
@@ -123,12 +131,10 @@ export default function Premium() {
                     />
                     <span className="absolute -ml-4 flex h-16 w-[6rem] cursor-pointer items-center duration-300 ease-in-out after:h-12 after:w-[20rem] after:rounded-lg after:bg-customPrimary after:shadow-md after:duration-300 peer-checked:after:translate-x-[6rem] after:bg-brand-customPrimary z-10"></span>
                     <div className="flex text-base gap-10 font-bold text-white z-20">
-                      <div
-                        className={`${!isMonthly && 'text-gray-400'}`}
-                      >
+                      <div className={`${!isMonthly && "text-gray-400"}`}>
                         Monthly
                       </div>
-                      <div className={`${!isMonthly && 'text-gray-400'}`}>
+                      <div className={`${!isMonthly && "text-gray-400"}`}>
                         Yearly
                       </div>
                     </div>
@@ -173,13 +179,25 @@ export default function Premium() {
                         )}
                       </ul>
                       <Dialog>
-                        <DialogTrigger onClick={() => {fetchData()}} className="mt-20 w-full justify-center rounded-xl rounded-t-xl py-2 font-bold leading-loose bg-brand-blue-100 text-white">
+                        <DialogTrigger
+                          onClick={() => {
+                            fetchData();
+                          }}
+                          className="mt-20 w-full justify-center rounded-xl rounded-t-xl py-2 font-bold leading-loose bg-brand-blue-100 text-white"
+                        >
                           Get Started
                         </DialogTrigger>
                         <DialogContent className="bg-brand-customDarkBg3 border-none">
                           <DialogHeader>
                             <DialogTitle className="text-white font-bold text-xl">
-                              <div>Buy <span className="text-brand-red-100">Would</span> <span className="text-brand-blue-100">You</span>{isMonthly ? " Monthly" : " Yearly"}</div>
+                              <div>
+                                Buy{" "}
+                                <span className="text-brand-red-100">
+                                  Would
+                                </span>{" "}
+                                <span className="text-brand-blue-100">You</span>
+                                {isMonthly ? " Monthly" : " Yearly"}
+                              </div>
                             </DialogTitle>
                           </DialogHeader>
                           <DialogDescription className="w-full">
@@ -188,12 +206,19 @@ export default function Premium() {
                                 <SelectValue placeholder="Select a server to continue" />
                               </SelectTrigger>
                               <SelectContent>
-                                {serversData.map(server => (
+                                {serversData.map((server: DiscordGuild) => (
                                   <SelectItem key={server.id} value={server.id}>
                                     <div className="flex gap-2 items-center">
                                       <Avatar className="h-6 w-6">
-                                         <AvatarImage src={`https://cdn.discordapp.com/icons/${server.id}/${server.icon}.webp`} /> 
-                                        <AvatarFallback><img src="https://cdn.discordapp.com/embed/avatars/5.png" alt="avatar example" /></AvatarFallback>
+                                        <AvatarImage
+                                          src={`https://cdn.discordapp.com/icons/${server.id}/${server.icon}.webp`}
+                                        />
+                                        <AvatarFallback>
+                                          <img
+                                            src="https://cdn.discordapp.com/embed/avatars/5.png"
+                                            alt="avatar example"
+                                          />
+                                        </AvatarFallback>
                                       </Avatar>
                                       <span>{server.name}</span>
                                     </div>
@@ -201,9 +226,7 @@ export default function Premium() {
                                 ))}
                               </SelectContent>
                             </Select>
-                            <button
-                              className="flex mt-4 ml-auto w-fit justify-center rounded-lg px-5 py-1 font-bold text-sm leading-loose bg-brand-blue-100 text-white"
-                              >
+                            <button className="flex mt-4 ml-auto w-fit justify-center rounded-lg px-5 py-1 font-bold text-sm leading-loose bg-brand-blue-100 text-white">
                               Purchase
                             </button>
                           </DialogDescription>
