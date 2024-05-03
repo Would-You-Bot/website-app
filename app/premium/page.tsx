@@ -1,7 +1,7 @@
 // TODO remove the use client directive in favor of a server component
 "use client";
 
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import Head from "next/head";
 import { LazyMotion, domAnimation, m } from "framer-motion";
 import { getServer } from "@/helpers/cache/redis";
@@ -21,6 +21,11 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import Image from "next/image";
+import { ServersList } from "./_components/ServersList";
+import { ServersListSkeleton } from "./_components/ServersListSkeleton";
+import { Skeleton } from "@/components/ui/skeleton";
+import { PricingData, DiscordGuild } from "./_types";
 
 const CheckArrowIcon = () => (
   <div className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent">
@@ -56,16 +61,6 @@ const XIcon = () => (
   </div>
 );
 
-type PricingData = {
-  price: { monthly: number; yearly: number };
-  premium: {
-    "All Freemium Features": boolean;
-    "Unlimited Custom Questions": boolean;
-    "Customized Webhook Branding": boolean;
-    "No More Invite Button Ads": boolean;
-    "Auto Pin Daily Messages": boolean;
-  };
-};
 const pricingData: PricingData = {
   price: { monthly: 2.99, yearly: 29.99 },
   premium: {
@@ -77,28 +72,18 @@ const pricingData: PricingData = {
   },
 };
 
-interface DiscordGuild {
-  id: string;
-  name: string;
-  icon: string;
-  owner: boolean;
-  permissions: number;
-  permissions_new: string;
-  features: string[];
-}
-
 export default function Premium() {
   const [isMonthly, setIsMonthly] = useState(true);
   const [serversData, setServersData] = useState<DiscordGuild[]>([]);
 
-  const fetchData = async () => {
-    const servers = await getServer();
-    console.log(servers, "servers");
-    setServersData(servers);
-  };
-
   const handleChange = () => {
     setIsMonthly(!isMonthly);
+  };
+
+  const fetchData = async () => {
+    const servers: any = await getServer();
+    console.log(servers, "servers");
+    setServersData(servers);
   };
 
   return (
@@ -136,7 +121,7 @@ export default function Premium() {
                       <div className={`${!isMonthly && "text-gray-400"}`}>
                         Monthly
                       </div>
-                      <div className={`${!isMonthly && "text-gray-400"}`}>
+                      <div className={`${isMonthly && "text-gray-400"}`}>
                         Yearly
                       </div>
                     </div>
@@ -185,7 +170,7 @@ export default function Premium() {
                           onClick={() => {
                             fetchData();
                           }}
-                          className="mt-20 w-full justify-center rounded-xl rounded-t-xl py-2 font-bold leading-loose bg-brand-blue-100 text-white"
+                          className="mt-20 w-full justify-center rounded-xl rounded-t-xl py-2 font-bold leading-loose bg-brand-blue-100 text-white focus:ring-0"
                         >
                           Get Started
                         </DialogTrigger>
@@ -208,6 +193,9 @@ export default function Premium() {
                                 <SelectValue placeholder="Select a server to continue" />
                               </SelectTrigger>
                               <SelectContent>
+                                {/* <Suspense fallback={<ServersListSkeleton />}>
+                                  <ServersList />
+                                </Suspense> */}
                                 {serversData.map((server: DiscordGuild) => (
                                   <SelectItem key={server.id} value={server.id}>
                                     <div className="flex gap-2 items-center">
@@ -216,9 +204,11 @@ export default function Premium() {
                                           src={`https://cdn.discordapp.com/icons/${server.id}/${server.icon}.webp`}
                                         />
                                         <AvatarFallback>
-                                          <img
+                                          <Image
                                             src="https://cdn.discordapp.com/embed/avatars/5.png"
                                             alt="avatar example"
+                                            width={999}
+                                            height={999}
                                           />
                                         </AvatarFallback>
                                       </Avatar>
