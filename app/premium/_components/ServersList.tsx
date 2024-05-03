@@ -8,17 +8,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export async function ServersList() {
-  const [serversData, setServersData] = useState<DiscordGuild[]>([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const servers: any = await getServer();
-      console.log(servers, "servers");
-      setServersData(servers);
-    };
-
-    fetchData();
-  }, []);
+      const serversData = await getServer();
 
   return (
     <>
