@@ -1,7 +1,7 @@
 // TODO remove the use client directive in favor of a server component
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Head from "next/head";
 import { LazyMotion, domAnimation, m } from "framer-motion";
 import { getServer } from "@/helpers/cache/redis";
@@ -77,13 +77,22 @@ const pricingData: PricingData = {
   },
 };
 
+interface DiscordGuild {
+  id: string;
+  name: string;
+  icon: string;
+  owner: boolean;
+  permissions: number;
+  permissions_new: string;
+  features: string[];
+}
+
 export default function Premium() {
   const [isMonthly, setIsMonthly] = useState(true);
-  const [serversData, setServersData] = useState<string[]>([]);
+  const [serversData, setServersData] = useState<DiscordGuild[]>([]);
 
   const fetchData = async () => {
-    console.log("fetching data");
-    const servers = await getServer("347077478726238228");
+    const servers = await getServer();
     console.log(servers, "servers");
     setServersData(servers);
   };
@@ -199,7 +208,7 @@ export default function Premium() {
                                 <SelectValue placeholder="Select a server to continue" />
                               </SelectTrigger>
                               <SelectContent>
-                                {serversData.map((server) => (
+                                {serversData.map((server: DiscordGuild) => (
                                   <SelectItem key={server.id} value={server.id}>
                                     <div className="flex gap-2 items-center">
                                       <Avatar className="h-6 w-6">
