@@ -1,8 +1,6 @@
 "use server";
 import { Redis } from "@upstash/redis";
-import dotenv from "dotenv";
 import { getAuthTokenOrNull } from "@/helpers/oauth/helpers";
-dotenv.config();
 
 const redis = new Redis({
   url: process.env.REDIS_URL!,
