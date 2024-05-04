@@ -79,7 +79,7 @@ export default function Premium() {
   };
 
   const fetchData = async () => {
-    const servers: any = await getServer();
+    const servers = await getServer() as DiscordGuild[];
     console.log(servers, "servers");
     setServersData(servers);
   };
