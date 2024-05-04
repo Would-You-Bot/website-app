@@ -20,12 +20,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import Image from "next/image";
-import { ServersList } from "./_components/ServersList";
-import { ServersListSkeleton } from "./_components/ServersListSkeleton";
-import { Skeleton } from "@/components/ui/skeleton";
+import { ServersListSkeleton } from "./_components";
 import { PricingData, DiscordGuild } from "./_types";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import Image from "next/image";
 
 const CheckArrowIcon = () => (
   <div className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent">
@@ -193,29 +191,31 @@ export default function Premium() {
                                 <SelectValue placeholder="Select a server to continue" />
                               </SelectTrigger>
                               <SelectContent>
-                                {/* <Suspense fallback={<ServersListSkeleton />}>
-                                  <ServersList />
-                                </Suspense> */}
-                                {serversData.map((server: DiscordGuild) => (
-                                  <SelectItem key={server.id} value={server.id}>
-                                    <div className="flex gap-2 items-center">
-                                      <Avatar className="h-6 w-6">
-                                        <AvatarImage
-                                          src={`https://cdn.discordapp.com/icons/${server.id}/${server.icon}.webp`}
-                                        />
-                                        <AvatarFallback>
-                                          <Image
-                                            src="https://cdn.discordapp.com/embed/avatars/5.png"
-                                            alt="avatar example"
-                                            width={999}
-                                            height={999}
+                                <Suspense fallback={<ServersListSkeleton />}>
+                                  {serversData.map((server: DiscordGuild) => (
+                                    <SelectItem
+                                      key={server.id}
+                                      value={server.id}
+                                    >
+                                      <div className="flex gap-2 items-center">
+                                        <Avatar className="h-6 w-6">
+                                          <AvatarImage
+                                            src={`https://cdn.discordapp.com/icons/${server.id}/${server.icon}.webp`}
                                           />
-                                        </AvatarFallback>
-                                      </Avatar>
-                                      <span>{server.name}</span>
-                                    </div>
-                                  </SelectItem>
-                                ))}
+                                          <AvatarFallback>
+                                            <Image
+                                              src="https://cdn.discordapp.com/embed/avatars/5.png"
+                                              alt="avatar example"
+                                              width={999}
+                                              height={999}
+                                            />
+                                          </AvatarFallback>
+                                        </Avatar>
+                                        <span>{server.name}</span>
+                                      </div>
+                                    </SelectItem>
+                                  ))}
+                                </Suspense>
                               </SelectContent>
                             </Select>
                             <button className="flex mt-4 ml-auto w-fit justify-center rounded-lg px-5 py-1 font-bold text-sm leading-loose bg-brand-blue-100 text-white">
