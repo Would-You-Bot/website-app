@@ -73,13 +73,14 @@ const pricingData: PricingData = {
 export default function Premium() {
   const [isMonthly, setIsMonthly] = useState(true);
   const [serversData, setServersData] = useState<DiscordGuild[]>([]);
+  const [serverId, setServerId] = useState<string>();
 
   const handleChange = () => {
     setIsMonthly(!isMonthly);
   };
 
   const fetchData = async () => {
-    const servers = await getServer() as DiscordGuild[];
+    const servers = (await getServer()) as DiscordGuild[];
     console.log(servers, "servers");
     setServersData(servers);
   };
@@ -186,7 +187,7 @@ export default function Premium() {
                             </DialogTitle>
                           </DialogHeader>
                           <DialogDescription className="w-full">
-                            <Select>
+                            <Select onValueChange={setServerId}>
                               <SelectTrigger>
                                 <SelectValue placeholder="Select a server to continue" />
                               </SelectTrigger>
@@ -218,7 +219,10 @@ export default function Premium() {
                                 </Suspense>
                               </SelectContent>
                             </Select>
-                            <button className="flex mt-4 ml-auto w-fit justify-center rounded-lg px-5 py-1 font-bold text-sm leading-loose bg-brand-blue-100 text-white">
+                            <button
+                              disabled={!serverId}
+                              className="flex mt-4 ml-auto w-fit justify-center rounded-lg px-5 py-1 font-bold text-sm leading-loose bg-brand-blue-100 text-white disabled:bg-neutral-500"
+                            >
                               Purchase
                             </button>
                           </DialogDescription>
