@@ -24,6 +24,7 @@ import { ServersListSkeleton } from "./_components";
 import { PricingData, DiscordGuild } from "./_types";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import Image from "next/image";
+import CheckoutButton from "./_components/checkoutButton";
 
 const CheckArrowIcon = () => (
   <div className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent">
@@ -219,12 +220,7 @@ export default function Premium() {
                                 </Suspense>
                               </SelectContent>
                             </Select>
-                            <button
-                              disabled={!serverId}
-                              className="flex mt-4 ml-auto w-fit justify-center rounded-lg px-5 py-1 font-bold text-sm leading-loose bg-brand-blue-100 text-white disabled:bg-neutral-500"
-                            >
-                              Purchase
-                            </button>
+                            <CheckoutButton tier="monthly" userId="347077478726238228" serverId="1009562516105461780" />
                           </DialogDescription>
                         </DialogContent>
                       </Dialog>
