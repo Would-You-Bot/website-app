@@ -208,8 +208,8 @@ export default function Premium() {
                                             <Image
                                               src="https://cdn.discordapp.com/embed/avatars/5.png"
                                               alt="avatar example"
-                                              width={999}
-                                              height={999}
+                                              width={90}
+                                              height={90}
                                             />
                                           </AvatarFallback>
                                         </Avatar>
@@ -220,7 +220,7 @@ export default function Premium() {
                                 </Suspense>
                               </SelectContent>
                             </Select>
-                            <CheckoutButton tier="monthly" userId="347077478726238228" serverId="1009562516105461780" />
+                            <CheckoutButton monthly={String(isMonthly)} userId="347077478726238228" serverId="1009562516105461780" />
                           </DialogDescription>
                         </DialogContent>
                       </Dialog>

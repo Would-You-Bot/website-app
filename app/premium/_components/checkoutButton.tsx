@@ -3,13 +3,11 @@ import { loadStripe } from "@stripe/stripe-js";
 
 // sub button
 export default function CheckoutButton({
-  priceId,
-  tier,
+  monthly,
   userId,
   serverId,
 }: {
-  priceId: string;
-  tier: string;
+  monthly: string;
   userId: string;
   serverId: string;
 }) {
@@ -26,14 +24,14 @@ export default function CheckoutButton({
       },
       body: JSON.stringify({
         // we will use all of these in our webhooks
-        priceId: "priceId",
-        tier: tier,
+        monthly: monthly,
         userId: userId,
         serverId: serverId,
       }),
     });
 
     const stripeSession = (await response.json()) as { id: string };
+    console.log(stripeSession.id);
     await stripe?.redirectToCheckout({ sessionId: stripeSession.id });
   };
 
