@@ -220,7 +220,7 @@ export default function Premium() {
                                 </Suspense>
                               </SelectContent>
                             </Select>
-                            <CheckoutButton monthly={String(isMonthly)} userId="347077478726238228" serverId="1009562516105461780" />
+                            <CheckoutButton monthly={String(isMonthly)}  priceId={isMonthly ? process.env.NEXT_PUBLIC_PREMIUM_MONTHLY_PRICE_ID! : process.env.NEXT_PUBLIC_PREMIUM_YEARLY_PRICE_ID!} userId="347077478726238228" serverId="1009562516105461780" />
                           </DialogDescription>
                         </DialogContent>
                       </Dialog>

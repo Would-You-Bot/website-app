@@ -6,10 +6,12 @@ export default function CheckoutButton({
   monthly,
   userId,
   serverId,
+  priceId,
 }: {
   monthly: string;
   userId: string;
   serverId: string;
+  priceId: string;
 }) {
   const handleCheckout = async () => {
     const stripePromise = loadStripe(
@@ -24,6 +26,7 @@ export default function CheckoutButton({
       },
       body: JSON.stringify({
         // we will use all of these in our webhooks
+        priceId: priceId,
         monthly: monthly,
         userId: userId,
         serverId: serverId,

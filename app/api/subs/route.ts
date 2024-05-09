@@ -5,25 +5,25 @@ interface StripeSubscriptionRequest {
     monthly: string;
     userId: string;
     serverId: string;
+    priceId: string;
 }
 
 export async function POST(req: Request) {
   try {
     // we will receive the priceId, email, and userId from the client
-    const { serverId, userId, monthly } =
+    const { priceId, serverId, userId, monthly } =
       (await req.json()) as StripeSubscriptionRequest;
-    console.log(process.env.STRIPE_MONTHLY_PRICE_ID, process.env.STRIPE_YEARLY_PRICE_ID)
-    const priceId = monthly == "true" ? process.env.STRIPE_MONTHLY_PRICE_ID! : process.env.STRIPE_YEARLY_PRICE_ID!;
-    console.log(priceId);
+
     const session = await stripe.checkout.sessions.create({
       metadata: {
         // we will use this in our webhooks 
-        priceid: priceId,
+        priceId: priceId,
         userId: userId,
         serverId: serverId,
         monthly: monthly,
       },
-      payment_method_types: ["card", "paypal", "revolut_pay"],
+      allow_promotion_codes: true,
+      payment_method_types: ["card", "paypal", "sofort"],
       line_items: [
         {
           price: priceId,
