@@ -26,6 +26,13 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import Image from "next/image";
 import CheckoutButton from "./_components/checkoutButton";
 
+import Stripe from "./_components/icons/Stripe";
+import ApplePay from "./_components/icons/ApplePay";
+import GooglePay from "./_components/icons/GooglePay";
+import MasterCard from "./_components/icons/MasterCard";
+import Visa from "./_components/icons/Visa";
+import PayPal from "./_components/icons/PayPal";
+
 const CheckArrowIcon = () => (
   <div className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent">
     <svg
@@ -220,7 +227,18 @@ export default function Premium() {
                                 </Suspense>
                               </SelectContent>
                             </Select>
-                            <CheckoutButton monthly={String(isMonthly)}  priceId={isMonthly ? process.env.NEXT_PUBLIC_PREMIUM_MONTHLY_PRICE_ID! : process.env.NEXT_PUBLIC_PREMIUM_YEARLY_PRICE_ID!} userId="347077478726238228" serverId="1009562516105461780" />
+                            <CheckoutButton
+                              monthly={String(isMonthly)}
+                              priceId={
+                                isMonthly
+                                  ? process.env
+                                      .NEXT_PUBLIC_PREMIUM_MONTHLY_PRICE_ID!
+                                  : process.env
+                                      .NEXT_PUBLIC_PREMIUM_YEARLY_PRICE_ID!
+                              }
+                              userId="347077478726238228"
+                              serverId="1009562516105461780"
+                            />
                           </DialogDescription>
                         </DialogContent>
                       </Dialog>
@@ -230,6 +248,28 @@ export default function Premium() {
               </div>
             </m.div>
           </LazyMotion>
+          <div className="flex justify-center">
+            <div className="flex gap-2">
+            <a href="" >
+                <Stripe />
+              </a>
+              <a href="" >
+              <ApplePay />
+              </a>
+              <a href="">
+                <GooglePay />
+              </a>
+              <a href="">
+                <MasterCard />
+              </a>
+              <a href="">
+                <Visa />
+              </a>
+              <a href="">
+                <PayPal />
+              </a>
+            </div>
+          </div>
         </div>
       </main>
     </>
