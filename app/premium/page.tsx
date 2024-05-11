@@ -249,7 +249,7 @@ export default function Premium() {
             </m.div>
           </LazyMotion>
           <div className="flex justify-center">
-            <div className="flex gap-2">
+            <div className="flex gap-3 p-3">
             <a href="" >
                 <Stripe />
               </a>
