@@ -32,7 +32,7 @@ import GooglePay from "./_components/icons/GooglePay";
 import MasterCard from "./_components/icons/MasterCard";
 import Visa from "./_components/icons/Visa";
 import PayPal from "./_components/icons/PayPal";
-import Link from "./_components/icons/Link"
+import Link from "./_components/icons/Link";
 
 const CheckArrowIcon = () => (
   <div className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent">
@@ -100,7 +100,7 @@ export default function Premium() {
         <title>Would You - Commands</title>
       </Head>
       <main className="relative flex w-full justify-center mb-40">
-        <div className="w-full max-w-7xl px-8">
+        <div className="w-full max-w-8xl px-8">
           <LazyMotion features={domAnimation}>
             <m.div
               initial={{ opacity: 0 }}
@@ -135,8 +135,8 @@ export default function Premium() {
                     </div>
                   </label>
                 </div>
-                <div className="flex justify-center">
-                  <div className="mb-8 w-fit rounded-[1.7rem] bg-gradient-premium p-[4px] lg:mb-0">
+                <div className="flex flex-col w-fit mx-auto">
+                  <div className="w-auto rounded-[1.7rem] bg-gradient-premium p-[4px] mb-4">
                     <div className="rounded-3xl bg-brand-customDarkBg3 px-8 py-8 ">
                       <h4 className="font-heading mb-2 text-left text-2xl font-bold text-white 2xl:mb-4">
                         Premium
@@ -245,35 +245,21 @@ export default function Premium() {
                       </Dialog>
                     </div>
                   </div>
+                  <a href="" className="">
+                    <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
+                      <Stripe />
+                      <ApplePay />
+                      <GooglePay />
+                      <MasterCard />
+                      <Visa />
+                      <PayPal />
+                      <Link />
+                    </div>
+                  </a>
                 </div>
               </div>
             </m.div>
           </LazyMotion>
-          <div className="flex justify-center">
-            <div className="flex gap-3 p-3">
-            <a href="" >
-                <Stripe />
-              </a>
-              <a href="" >
-              <ApplePay />
-              </a>
-              <a href="">
-                <GooglePay />
-              </a>
-              <a href="">
-                <MasterCard />
-              </a>
-              <a href="">
-                <Visa />
-              </a>
-              <a href="">
-                <PayPal />
-              </a>
-              <a href="">
-                <Link />
-              </a>
-            </div>
-          </div>
         </div>
       </main>
     </>

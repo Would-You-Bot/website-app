@@ -5,7 +5,7 @@ const FeatureItem: React.FC<{
   right: React.ReactNode;
   reverse?: true;
 }> = ({ left, right, reverse }) => (
-  <div className="maindiv flex flex-col justify-between gap-8 md:gap-20 md:flex-row">
+  <div className="w-full flex flex-col justify-between gap-8 md:gap-20 md:flex-row">
     <m.div
       initial={{ opacity: 0, transform: "translateX(-50px)" }}
       whileInView={{ opacity: 1, transform: "translateX(0)" }}

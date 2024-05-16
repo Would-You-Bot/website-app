@@ -2,13 +2,13 @@ import Link from "next/link";
 
 export default function Terms() {
   return (
-    <main className="flex flex-col gap-8 px-8 text-neutral-300 max-w-7xl w-full">
+    <main className="flex flex-col gap-8 px-8 text-neutral-300 max-w-8xl w-full">
       <h1 className="mt-36 text-4xl font-bold text-brand-red-100 drop-shadow-red-glow">
         Terms of Service
       </h1>
       <div>
         <h3 className="my-4 text-lg font-bold text-white">
-          Last updated and effective: March 08, 2024
+          Last updated and effective: May 16, 2024
         </h3>
         <h3 className="my-4 text-lg font-bold text-white">
           Agreement to Terms
@@ -43,7 +43,9 @@ export default function Terms() {
           Discord&apos;s services.
         </p>
 
-        <h3 className="my-4 text-lg font-bold text-white">1. Age Restriction</h3>
+        <h3 className="my-4 text-lg font-bold text-white">
+          1. Age Restriction
+        </h3>
         <p>
           The Would You Bot is not intended for use by individuals under the age
           of 13. By using the Would You Bot, you represent and warrant that you
@@ -64,7 +66,9 @@ export default function Terms() {
           subscription fee on a recurring basis using the payment processing
           services of Stripe, Inc. ("Stripe").
         </p>
-        <h4 className="my-4 text-md font-bold text-white-400">2.1 Payment Processing</h4>
+        <h4 className="my-4 text-md font-bold text-white-400">
+          2.1 Payment Processing
+        </h4>
         <p>
           All payments for the Premium Service are processed securely through
           Stripe. By subscribing to the Premium Model, you authorise the Creator
@@ -72,7 +76,9 @@ export default function Terms() {
           payment method on a recurring basis until you cancel your
           subscription.{" "}
         </p>
-        <h4 className="my-4 text-md font-bold text-white-400">2.2 Cancellation and Refunds</h4>
+        <h4 className="my-4 text-md font-bold text-white-400">
+          2.2 Cancellation and Refunds
+        </h4>
         <p>
           You may cancel your subscription to the Premium Model at any time by
           following the cancellation instructions provided by Stripe or by

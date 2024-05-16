@@ -44,7 +44,7 @@ const BlogPost = async ({ params: { slug } }: { params: { slug: string } }) => {
   return (
     <>
       <ProgressBar />
-      <div className="mt-36 px-8 text-neutral-300 max-w-7xl w-full">
+      <div className="mt-36 px-8 text-neutral-300 max-w-8xl w-full">
         <Link
           href="/blog"
           className="text-neutral-300 transition-all hover:text-white"

@@ -19,7 +19,7 @@ export default function Team() {
         <title>Would You - Team</title>
       </Head>
       <main className="">
-        <div className="flex flex-col px-8 max-w-7xl w-full">
+        <div className="flex flex-col px-8 max-w-8xl w-full">
           <h1 className="mt-36 text-4xl font-bold text-white">
             <span className="text-brand-red-100 drop-shadow-red-glow">
               Meet{" "}

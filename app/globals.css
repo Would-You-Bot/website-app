@@ -85,9 +85,6 @@
   .order-last {
     @apply mx-auto w-[100%] !important;
   }
-  .maindiv {
-    @apply w-[90vw] !important;
-  }
   .discord-messages {
     @apply min-w-0 !important;
   }

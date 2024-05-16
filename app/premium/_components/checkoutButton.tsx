@@ -25,7 +25,6 @@ export default function CheckoutButton({
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        // we will use all of these in our webhooks
         priceId: priceId,
         monthly: monthly,
         userId: userId,

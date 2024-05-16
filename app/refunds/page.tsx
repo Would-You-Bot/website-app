@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Terms() {
   return (
-    <main className="flex flex-col gap-8 px-8 text-neutral-300 max-w-7xl w-full">
+    <main className="flex flex-col flex-1 gap-8 px-8 text-neutral-300 max-w-8xl w-full">
       <h1 className="mt-36 text-4xl font-bold text-brand-red-100 drop-shadow-red-glow">
         Refund Policy
       </h1>
@@ -30,8 +30,8 @@ export default function Terms() {
           How to make use of your right to withdrawal
         </h3>
         <p>
-          In order to make use of your right of withdrawal, you must notify us of
-          your decision to withdraw from this contract by sending us a clear
+          In order to make use of your right of withdrawal, you must notify us
+          of your decision to withdraw from this contract by sending us a clear
           statement by contacting the Discord user <b>@dominikdev</b> via{" "}
           <Link
             target={"_blank"}

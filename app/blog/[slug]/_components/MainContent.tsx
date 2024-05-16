@@ -20,7 +20,7 @@ interface MainContentProps {
 export function MainContent({ source }: MainContentProps) {
   return (
     <main
-      className={`markdown px-8 text-neutral-300 max-w-7xl w-full ${blogStyles.markdown}`}
+      className={`markdown px-8 text-neutral-300 max-w-8xl w-full ${blogStyles.markdown}`}
     >
       <MDXRemote {...source} components={components} />
     </main>

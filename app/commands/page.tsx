@@ -67,7 +67,7 @@ export default function Commands() {
       <Head>
         <title>Would You - Commands</title>
       </Head>
-      <main className="px-8 max-w-7xl w-full">
+      <main className="px-8 max-w-8xl w-full">
         <h1 className="mt-36 text-4xl font-bold text-brand-red-100 drop-shadow-red-glow">
           Commands
         </h1>

@@ -44,13 +44,13 @@ export function HomeContent({
 
   return (
     <LazyMotion features={domAnimation}>
-      <section className="flex flex-col items-center justify-between gap-8 text-center lg:flex-row lg:text-left mt-28 max-w-7xl w-full">
+      <section className="flex flex-col items-center justify-between gap-16 text-center lg:flex-row lg:text-left mt-28 max-w-8xl w-full px-8">
         <m.div
           initial={{ opacity: 0, transform: "translateY(20px)" }}
           whileInView={{ opacity: 1, transform: "translateY(0)" }}
           transition={{ duration: 0.7, ease: "easeInOut" }}
           viewport={{ once: true }}
-          className="flex flex-col lg:block items-center px-8"
+          className="flex flex-col lg:block items-center"
         >
           <h1 className="text-6xl font-bold leading-normal text-white">
             Entertain Your
@@ -107,7 +107,7 @@ export function HomeContent({
           height="10000"
           priority
         />
-        <div className="bg-[#101010] px-8 pb-12 text-center text-5xl text-white md:-mt-20 md:pb-28 w-full">
+        <div className="bg-[#101010] pb-12 text-center text-5xl text-white md:-mt-20 md:pb-28 w-full px-8">
           <h2>
             Trusted by{" "}
             <span className="bg-gradient-brand bg-clip-text font-bold text-transparent">
@@ -128,7 +128,7 @@ export function HomeContent({
         </div>
       </section>
 
-      <section className="mt-20 flex flex-col items-center gap-20 px-9 max-w-7xl w-full">
+      <section className="mt-20 flex flex-col items-center gap-20 px-8 max-w-8xl w-full">
         <m.div
           initial={{ opacity: 0, transform: "translateY(15px)" }}
           whileInView={{ opacity: 1, transform: "translateY(0)" }}

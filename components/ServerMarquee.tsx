@@ -27,7 +27,7 @@ const ServerMarquee: FC<MarqueeProps> = ({
 }) => {
   return (
     <div
-      className={`relative mx-auto my-auto mt-8 max-w-7xl overflow-hidden ${className}`}
+      className={`relative mx-auto my-auto mt-8 max-w-8xl overflow-hidden ${className}`}
     >
       <Marquee
         className="flex w-max items-center overflow-hidden"
