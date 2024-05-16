@@ -32,6 +32,7 @@ import GooglePay from "./_components/icons/GooglePay";
 import MasterCard from "./_components/icons/MasterCard";
 import Visa from "./_components/icons/Visa";
 import PayPal from "./_components/icons/PayPal";
+import Link from "./_components/icons/Link"
 
 const CheckArrowIcon = () => (
   <div className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent">
@@ -267,6 +268,9 @@ export default function Premium() {
               </a>
               <a href="">
                 <PayPal />
+              </a>
+              <a href="">
+                <Link />
               </a>
             </div>
           </div>

@@ -11,7 +11,7 @@ export default function Terms() {
           Last updated and effective: March 08, 2024
         </h3>
         <h3 className="my-4 text-lg font-bold text-white">
-          Agreement to Terms.
+          Agreement to Terms
         </h3>
         <p>
           These terms of service (the &quot;Terms&quot;) apply to the Would You
@@ -43,7 +43,7 @@ export default function Terms() {
           Discord&apos;s services.
         </p>
 
-        <h3 className="my-4 text-lg font-bold text-white">Age Restriction.</h3>
+        <h3 className="my-4 text-lg font-bold text-white">1. Age Restriction</h3>
         <p>
           The Would You Bot is not intended for use by individuals under the age
           of 13. By using the Would You Bot, you represent and warrant that you
@@ -55,7 +55,33 @@ export default function Terms() {
         </p>
 
         <h3 className="my-4 text-lg font-bold text-white">
-          Intellectual property rights.
+          2. Premium Subscription
+        </h3>
+        <p>
+          The Would You discord Bot offers a premium subscription model
+          ("Premium Model") that provides additional features and benefits. By
+          subscribing to the Premium Model, you agree to pay the specified
+          subscription fee on a recurring basis using the payment processing
+          services of Stripe, Inc. ("Stripe").
+        </p>
+        <h4 className="my-4 text-md font-bold text-white-400">2.1 Payment Processing</h4>
+        <p>
+          All payments for the Premium Service are processed securely through
+          Stripe. By subscribing to the Premium Model, you authorise the Creator
+          to automatically charge the applicable subscription fee to your chosen
+          payment method on a recurring basis until you cancel your
+          subscription.{" "}
+        </p>
+        <h4 className="my-4 text-md font-bold text-white-400">2.2 Cancellation and Refunds</h4>
+        <p>
+          You may cancel your subscription to the Premium Model at any time by
+          following the cancellation instructions provided by Stripe or by
+          contacting the Creator directly. No refunds will be given for any
+          unused portion of the subscription period.
+        </p>
+
+        <h3 className="my-4 text-lg font-bold text-white">
+          3. Intellectual property rights
         </h3>
         <p>
           Would You and all content and software associated with the bot,
@@ -75,7 +101,7 @@ export default function Terms() {
         </p>
 
         <h3 className="my-4 text-lg font-bold text-white">
-          User representations.
+          4. User representations
         </h3>
         <p>
           By using the Site, you represent and warrant that: (1) you have the
@@ -94,7 +120,7 @@ export default function Terms() {
         </p>
 
         <h3 className="my-4 text-lg font-bold text-white">
-          Warranty Disclaimer.
+          5. Warranty Disclaimer
         </h3>
         <p>
           1. The bot may experience downtime, errors, or technical issues beyond
@@ -112,7 +138,7 @@ export default function Terms() {
           <br />
         </p>
 
-        <h3 className="my-4 text-lg font-bold text-white">Products.</h3>
+        <h3 className="my-4 text-lg font-bold text-white">6. Products</h3>
         <p>
           All products are subject to availability. We reserve the right to
           discontinue any products at any time for any reason. Prices for all
@@ -120,7 +146,7 @@ export default function Terms() {
         </p>
 
         <h3 className="my-4 text-lg font-bold text-white">
-          Contribution licence.
+          7. Contribution licence
         </h3>
         <p>
           You and Site agree that we may access, store, process, and use any
@@ -144,7 +170,7 @@ export default function Terms() {
         </p>
 
         <h3 className="my-4 text-lg font-bold text-white">
-          Term and Termination.
+          8. Term and Termination
         </h3>
         <p>
           These Terms of Use shall remain in full force and effect while you use
@@ -170,7 +196,7 @@ export default function Terms() {
         </p>
 
         <h3 className="my-4 text-lg font-bold text-white">
-          Modifications and interruptions.
+          9. Modifications and interruptions
         </h3>
         <p>
           The company reserves the right to change, modify, or remove the
@@ -198,7 +224,7 @@ export default function Terms() {
           corrections, updates, or releases in connection therewith.
         </p>
 
-        <h3 className="my-4 text-lg font-bold text-white">Governing Law.</h3>
+        <h3 className="my-4 text-lg font-bold text-white">10. Governing Law</h3>
         <p>
           These Terms and your use of Would You will be governed by and
           construed in accordance with the laws of Germany. Any dispute arising
@@ -210,7 +236,7 @@ export default function Terms() {
           from the Service.
         </p>
 
-        <h3 className="my-4 text-lg font-bold text-white">Disclaimer.</h3>
+        <h3 className="my-4 text-lg font-bold text-white">11. Disclaimer</h3>
         <p>
           Would You is provided &quot;as is&quot; and &quot;as available&quot;,
           and the Company makes no warranties of any kind, express or implied,
@@ -223,7 +249,7 @@ export default function Terms() {
         </p>
 
         <h3 className="my-4 text-lg font-bold text-white">
-          Limitation of Liability.
+          12. Limitation of Liability
         </h3>
         <p>
           The Company will not be liable to you or any third party for any
@@ -232,7 +258,7 @@ export default function Terms() {
           consequential, and punitive damages.
         </p>
 
-        <h3 className="my-4 text-lg font-bold text-white">Miscellaneous.</h3>
+        <h3 className="my-4 text-lg font-bold text-white">13. Miscellaneous</h3>
         <p>
           These Terms of Use and any policies or operating rules posted by us on
           the Site or in respect to the Site constitute the entire agreement and
@@ -255,24 +281,6 @@ export default function Terms() {
           of these Terms of Use and the lack of signing by the parties hereto to
           execute these Terms of Use.
           <br />
-          <br />
-          Thanks to{" "}
-          <Link
-            href="https://scrumpbot.com"
-            target={"_blank"}
-            className="text-white underline"
-          >
-            https://scrumpbot.com
-          </Link>{" "}
-          and{" "}
-          <Link
-            href="https://tempvoice.xyz/terms-of-service"
-            target={"_blank"}
-            className="text-white underline"
-          >
-            https://tempvoice.xyz
-          </Link>{" "}
-          for help on this terms of service.
         </p>
       </div>
     </main>

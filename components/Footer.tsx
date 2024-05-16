@@ -61,6 +61,11 @@ const Footer = async () => {
       link: "/terms",
       EventTarget: "_self",
     },
+    {
+      name: "Refund Policy",
+      link: "/refunds",
+      EventTarget: "_self",
+    },
   ];
 
   return (

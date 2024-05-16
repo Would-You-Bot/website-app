@@ -4,7 +4,7 @@ import Button from "@/components/Button";
 import Head from "next/head";
 import { useSearchParams } from "next/navigation";
 
-// To test the searchParams use http://localhost:3000/premium/success?type=monthly&server=942897714956472401
+// To test the searchParams use https://obscure-umbrella-p9994pv5xr4c7pvw-3000.app.github.dev//premium/success?type=monthly&server=942897714956472401
 
 // TODO: Add confetti animation on page and button click!
 export default function Premium() {
@@ -19,7 +19,7 @@ export default function Premium() {
         <title>Would You - Commands</title>
       </Head>
       <main className="flex flex-col flex-1 items-center justify-center gap-8 px-8 text-neutral-300">
-        <h1 className="mt-36 text-4xl font-bold text-brand-blue-100 text-center drop-shadow-blue-glow">
+        <h1 className="mt-36 text-6xl font-bold text-brand-blue-100 text-center drop-shadow-blue-glow">
           Payment Successful!
         </h1>
         <p className="mb-4 text-lg text-white">

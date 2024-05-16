@@ -23,7 +23,7 @@ export async function POST(req: Request) {
         monthly: monthly,
       },
       allow_promotion_codes: true,
-      payment_method_types: ["card", "paypal", "sofort"],
+      payment_method_types: ["card", "paypal", "sofort", "link"],
       line_items: [
         {
           price: priceId,
@@ -33,7 +33,7 @@ export async function POST(req: Request) {
       mode: "subscription",
 
       // normally you would redirect to a succes page/onboarding page
-      success_url: `${req.headers.get("referer")}`,
+      success_url: `${req.headers.get("referer")}/success?type=${monthly ? "monthly" : "annualy"}&server=${serverId}`,
 
       cancel_url: `${req.headers.get("referer")}`,
     });
