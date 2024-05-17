@@ -11,10 +11,17 @@ import { useState } from "react";
 import Button from "./Button";
 import { useIdToken } from "@/helpers/hooks/useIdToken";
 import { IdTokenJWT } from "@/helpers/oauth/types";
+import DiscordLoginButton from "@/components/DiscordLoginButton";
+import UserDropdown from "./UserDropdown";
+import { LayoutDashboardIcon } from "lucide-react";
 
 interface NavbarProps {
   idToken: IdTokenJWT | null;
 }
+
+const menuItems = [
+  { label: "Dashboard", href: "/dashboard", icon: LayoutDashboardIcon },
+];
 
 const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
   const [mobileMenu, setMobileMenu] = useState(false);
@@ -83,7 +90,7 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
               <p className="ml-4 text-2xl font-bold text-white">Would You</p>
             </div>
           </Link>
-          <div className="ml-24 hidden items-center md:flex">
+          <div className="ml-16 hidden items-center md:flex">
             <Link
               href="/question-packs"
               className="mr-6 text-lg text-neutral-300 transition-all hover:text-neutral-100"
@@ -111,18 +118,16 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
             </Link>
           </div>
         </div>
-        <div className="z-50 flex items-center">
-          <Link href="/invite" target="_blank" className="hidden md:block">
-            <Button className="">Invite</Button>
-          </Link>
+        <div className="z-50 flex gap-2 items-center">
           {idToken ? (
-            <a href="/logout" className="hidden md:ml-2 md:block">
-              <Button>Logout</Button>
-            </a>
+            <UserDropdown idToken={idToken} items={menuItems} />
           ) : (
-            <a href="/login" className="hidden md:ml-2 md:block">
-              <Button>Login with Discord</Button>
-            </a>
+            <>
+              <Link href="/invite" target="_blank" className="hidden md:block">
+                <Button className="">Invite</Button>
+              </Link>
+              <DiscordLoginButton className="rounded-lg" />
+            </>
           )}
           <div
             className="relative ml-6 flex h-6 w-8 flex-col items-center justify-between md:hidden"

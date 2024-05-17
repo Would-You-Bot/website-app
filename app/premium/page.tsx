@@ -26,49 +26,19 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import Image from "next/image";
 import CheckoutButton from "./_components/checkoutButton";
 import { useIdToken } from "@/helpers/hooks";
-import StripeSquare from "./_components/icons/StripeSquare";
-import Discord from "./_components/icons/Discord";
-import Stripe from "./_components/icons/Stripe";
-import ApplePay from "./_components/icons/ApplePay";
-import GooglePay from "./_components/icons/GooglePay";
-import MasterCard from "./_components/icons/MasterCard";
-import Visa from "./_components/icons/Visa";
-import PayPal from "./_components/icons/PayPal";
-import Link from "./_components/icons/Link";
-
-const CheckArrowIcon = () => (
-  <div className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent">
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      className="text-brand-customPrimary"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M18.383 4.117a1.252 1.252 0 0 1 0 1.77l-10 10a1.252 1.252 0 0 1-1.77 0l-5-5a1.252 1.252 0 0 1 1.77-1.77L7.5 13.23l9.117-9.113a1.252 1.252 0 0 1 1.77 0h-.004Z"
-        fill="currentColor"
-      />
-    </svg>
-  </div>
-);
-
-const XIcon = () => (
-  <div className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent">
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      className="text-[#5A5B5E]"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M16.313 1 9.749 7.563 3.187 1 1 3.188 7.562 9.75 1 16.313 3.187 18.5l6.562-6.563 6.564 6.563 2.187-2.188-6.562-6.562L18.5 3.187 16.313 1Z"
-        fill="currentColor"
-      />
-    </svg>
-  </div>
-);
+import {
+  ApplePay,
+  CheckArrowIcon,
+  GooglePay,
+  Link,
+  MasterCard,
+  PayPal,
+  Stripe,
+  StripeSquare,
+  Visa,
+  XIcon,
+} from "./_components/icons";
+import DiscordLoginButton from "@/components/DiscordLoginButton";
 
 const pricingData: PricingData = {
   price: { monthly: 2.99, yearly: 29.99 },
@@ -188,13 +158,7 @@ export default function Premium() {
                             <StripeSquare className="w-5 h-5" />
                           </DialogTrigger>
                         ) : (
-                          <a
-                            href="/login"
-                            className="text-white flex w-full justify-center items-center gap-2 rounded-xl py-2 font-bold leading-loose bg-indigo-500"
-                          >
-                            Login with Discord
-                            <Discord className="w-6 h-6" />
-                          </a>
+                          <DiscordLoginButton className="font-bold rounded-xl" />
                         )}
                         <DialogContent className="bg-brand-customDarkBg3 border-none">
                           <DialogHeader>
