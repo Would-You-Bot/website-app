@@ -8,6 +8,6 @@ export function useIdToken(defaultValue: IdTokenJWT | null): IdTokenJWT | null {
 
   return useMemo(
     () => (token ? (parseJWT(token) as IdTokenJWT) : defaultValue),
-    [defaultValue, token],
+    [defaultValue, token]
   );
 }

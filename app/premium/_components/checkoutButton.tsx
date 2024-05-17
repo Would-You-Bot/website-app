@@ -10,7 +10,7 @@ export default function CheckoutButton({
 }: {
   monthly: string;
   userId: string;
-  serverId: string;
+  serverId: string | undefined;
   priceId: string;
 }) {
   const handleCheckout = async () => {
@@ -41,7 +41,7 @@ export default function CheckoutButton({
     <button
       disabled={!serverId}
       onClick={handleCheckout}
-      className="flex mt-4 ml-auto w-fit justify-center rounded-lg px-5 py-1 font-bold text-sm leading-loose bg-brand-blue-100 text-white disabled:bg-neutral-500"
+      className="flex mt-4 ml-auto w-fit justify-center rounded-lg px-5 py-1 font-bold text-sm leading-loose bg-brand-blue-100 text-white disabled:bg-[#1D1D1D] disabled:text-[#444444] disabled:cursor-not-allowed"
     >
       Checkout
     </button>

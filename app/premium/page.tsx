@@ -25,7 +25,9 @@ import { PricingData, DiscordGuild } from "./_types";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import Image from "next/image";
 import CheckoutButton from "./_components/checkoutButton";
-
+import { useIdToken } from "@/helpers/hooks";
+import StripeSquare from "./_components/icons/StripeSquare";
+import Discord from "./_components/icons/Discord";
 import Stripe from "./_components/icons/Stripe";
 import ApplePay from "./_components/icons/ApplePay";
 import GooglePay from "./_components/icons/GooglePay";
@@ -83,6 +85,7 @@ export default function Premium() {
   const [isMonthly, setIsMonthly] = useState(true);
   const [serversData, setServersData] = useState<DiscordGuild[]>([]);
   const [serverId, setServerId] = useState<string>();
+  const idToken = useIdToken(null);
 
   const handleChange = () => {
     setIsMonthly(!isMonthly);
@@ -174,14 +177,25 @@ export default function Premium() {
                         )}
                       </ul>
                       <Dialog>
-                        <DialogTrigger
-                          onClick={() => {
-                            fetchData();
-                          }}
-                          className="mt-20 w-full justify-center rounded-xl rounded-t-xl py-2 font-bold leading-loose bg-brand-blue-100 text-white focus:ring-0"
-                        >
-                          Get Started
-                        </DialogTrigger>
+                        {idToken ? (
+                          <DialogTrigger
+                            onClick={() => {
+                              fetchData();
+                            }}
+                            className="mt-20 text-white focus:ring-0 flex w-full justify-center items-center gap-2 rounded-xl py-2 font-bold leading-loose bg-green-500"
+                          >
+                            Continue with Stripe
+                            <StripeSquare className="w-5 h-5" />
+                          </DialogTrigger>
+                        ) : (
+                          <a
+                            href="/login"
+                            className="text-white flex w-full justify-center items-center gap-2 rounded-xl py-2 font-bold leading-loose bg-indigo-500"
+                          >
+                            Login with Discord
+                            <Discord className="w-6 h-6" />
+                          </a>
+                        )}
                         <DialogContent className="bg-brand-customDarkBg3 border-none">
                           <DialogHeader>
                             <DialogTitle className="text-white font-bold text-xl">
@@ -238,7 +252,7 @@ export default function Premium() {
                                       .NEXT_PUBLIC_PREMIUM_YEARLY_PRICE_ID!
                               }
                               userId="347077478726238228"
-                              serverId="1009562516105461780"
+                              serverId={serverId}
                             />
                           </DialogDescription>
                         </DialogContent>
