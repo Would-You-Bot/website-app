@@ -1,58 +1,136 @@
 import { stripe } from "@/lib/stripe";
-import { NextResponse, NextRequest } from "next/server";
+import type { NextRequest } from "next/server";
+import { NextResponse } from "next/server";
+import type Stripe from "stripe";
+import guildProfileSchema from "@/models/Guild";
 
-
-export async function POST(req: NextRequest) {
-  const payload = await req.text();
-  const res = JSON.parse(payload);
-
-  const sig = req.headers.get("Stripe-Signature");
-
-  const dateTime = new Date(res?.created * 1000).toLocaleDateString();
-  const timeString = new Date(res?.created * 1000).toLocaleDateString();
-
+export async function POST(request: NextRequest) {
   try {
-    let event = stripe.webhooks.constructEvent(
-      payload,
-      sig!,
-      process.env.STRIPE_WEBHOOK_SECRET!
-    );
+    const payload = await request.text();
+    const signature = request.headers.get("stripe-signature");
 
-        console.log(event)
-    switch (event.type) {
-        case 'charge.refunded':
-          const chargeRefunded = event.data.object;
-          // Then define and call a function to handle the event charge.refunded
-          break;
-        case 'charge.succeeded':
-          const chargeSucceeded = event.data.object;
-          // Then define and call a function to handle the event charge.succeeded
-          break;
-        case 'charge.dispute.created':
-          const chargeDisputeCreated = event.data.object;
-          // Then define and call a function to handle the event charge.dispute.created
-          break;
-        // ... handle other event types
-        default:
-          console.log(`Unhandled event type ${event.type}`);
+    let event;
+    try {
+      event = stripe.webhooks.constructEvent(
+        payload,
+        signature!,
+        process.env.STRIPE_WEBHOOK_SECRET!
+      );
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        console.error(
+          `Webhook signature verification failed: ${error.message}`
+        );
+      } else {
+        console.error(
+          "Webhook signature verification failed with unknown error type."
+        );
       }
-/* 
-    console.log(
-      res?.data?.object?.billing_details?.email, // email
-      res?.data?.object?.amount, // amount
-      JSON.stringify(res), // payment info
-      res?.type, // type
-      String(timeString), // time
-      String(dateTime), // date
-      res?.data?.object?.receipt_email, // email
-      res?.data?.object?.receipt_url, // url
-      JSON.stringify(res?.data?.object?.payment_method_details), // Payment method details
-      JSON.stringify(res?.data?.object?.billing_details), // Billing details
-      res?.data?.object?.currency // Currency
-    ); */
+      return NextResponse.json({ message: "Webhook Error" }, { status: 400 });
+    }
 
-    return NextResponse.json({ status: "sucess", event: event.type, response: res });
+    switch (event.type) {
+      // in the event of a successful checkout
+      case "checkout.session.completed":
+        const session: Stripe.Checkout.Session = event.data.object;
+        console.log(session);
+        const userId = session.metadata?.userId;
+        const serverId = session.metadata?.serverId;
+        const tier =
+          session.metadata?.monthly === "true" ? "monthly" : "yearly";
+
+        if (!userId || !serverId || !tier) {
+          console.error("One or more variables are undefined.");
+          return NextResponse.json(
+            { message: "One or more variables are missing" },
+            { status: 400 }
+          );
+        }
+        const guild = await guildProfileSchema.findOne({ serverId });
+
+        if (guild && guild.premiumExpiration) {
+          guild.premiumExpiration = new Date(
+            new Date(
+              tier === "monthly"
+                ? new Date(guild.premiumExpiration).setMonth(
+                    new Date(guild.premiumExpiration).getMonth() + 1
+                  )
+                : new Date(guild.premiumExpiration).setFullYear(
+                    new Date(guild.premiumExpiration).getFullYear() + 1
+                  )
+            )
+          );
+        } else {
+          await guildProfileSchema.findOneAndUpdate(
+            { serverId },
+            {
+              guildID: serverId,
+              premiumUser: userId,
+              premium: 1,
+              premiumExpiration: new Date(
+                tier === "monthly"
+                  ? new Date().setMonth(new Date().getMonth() + 1)
+                  : new Date().setFullYear(new Date().getFullYear() + 1)
+              ),
+            },
+            { upsert: true }
+          );
+        }
+        break;
+
+      // in the event of a subscription being updated
+      case "customer.subscription.updated":
+        const subscription: Stripe.Subscription = event.data.object;
+        const userIdUpdated = subscription.metadata?.userId;
+        const serverIdUpdated = subscription.metadata?.serverId;
+        const tierUpdated =
+          subscription.metadata?.monthly === "true" ? "monthly" : "yearly";
+
+        if (!userIdUpdated || !serverIdUpdated || !tierUpdated) {
+          console.error("One or more variables are undefined.");
+          return NextResponse.json(
+            { message: "One or more variables are missing" },
+            { status: 400 }
+          );
+        }
+
+        // Db Call
+        break;
+
+      // in the event of a subscription being deleted
+      case "customer.subscription.deleted":
+        const subscriptionDeleted: Stripe.Subscription = event.data.object;
+        const userIdDeleted = subscriptionDeleted.metadata?.userId;
+        const serverIdDeleted = subscriptionDeleted.metadata?.serverId;
+        const tierDeleted =
+          subscriptionDeleted.metadata?.monthly === "true"
+            ? "monthly"
+            : "yearly";
+
+        if (!userIdDeleted || !serverIdDeleted || !tierDeleted) {
+          console.error("One or more variables are undefined.");
+          return NextResponse.json(
+            { message: "One or more variables are missing" },
+            { status: 400 }
+          );
+        }
+
+        // Db Call
+        break;
+
+      default:
+        console.log("Unhandled event type:", event.type);
+    }
+
+    return NextResponse.json({ message: "success", status: "success" });
   } catch (error) {
-    return NextResponse.json({ status: "Failed", error });
+    if (error instanceof Error) {
+      return NextResponse.json({ message: error.message }, { status: 500 });
+    } else {
+      return NextResponse.json(
+        { message: "An unknown error occurred" },
+        { status: 500 }
+      );
+    }
   }
 }

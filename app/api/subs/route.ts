@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { stripe } from "@/lib/stripe";
+import guildProfileSchema from "@/models/Guild";
+import connectDb from "@/lib/mongodb";
 
 interface StripeSubscriptionRequest {
     monthly: string;
@@ -9,10 +11,21 @@ interface StripeSubscriptionRequest {
 }
 
 export async function POST(req: Request) {
+
+  await connectDb();
+
+  const { priceId, serverId, userId, monthly } =
+  (await req.json()) as StripeSubscriptionRequest;
+
+  const server = await guildProfileSchema.findOne({ serverId });
+
+  if (!server || server?.premiumExpiration !== null) {
+    console.log(server?.premiumExpiration)
+    return NextResponse.json({ message: "This server already has an active premium subscription" }, { status: 409 });
+  }
+
   try {
     // we will receive the priceId, email, and userId from the client
-    const { priceId, serverId, userId, monthly } =
-      (await req.json()) as StripeSubscriptionRequest;
 
     const session = await stripe.checkout.sessions.create({
       metadata: {

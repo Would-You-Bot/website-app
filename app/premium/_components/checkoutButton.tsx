@@ -32,6 +32,8 @@ export default function CheckoutButton({
       }),
     });
 
+    // TODO: When this return 409 display an error toast
+
     const stripeSession = (await response.json()) as { id: string };
     console.log(stripeSession.id);
     await stripe?.redirectToCheckout({ sessionId: stripeSession.id });

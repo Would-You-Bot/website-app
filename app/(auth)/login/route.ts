@@ -5,7 +5,7 @@ import { signJwt } from "@/helpers/jwt";
 import { cookies } from "next/headers";
 import { z } from "zod";
 import { IdTokenData } from "@/helpers/oauth/types";
-import { setServer } from "@/helpers/cache/redis";
+import { setServer } from "@/lib/redis";
 
 const _queryParamsSchema = z.object({
   code: z.string().nullable(),

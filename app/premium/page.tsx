@@ -4,7 +4,7 @@
 import { Suspense, useState } from "react";
 import Head from "next/head";
 import { LazyMotion, domAnimation, m } from "framer-motion";
-import { getServer } from "@/helpers/cache/redis";
+import { getServer } from "@/lib/redis";
 import {
   Dialog,
   DialogContent,
@@ -70,7 +70,7 @@ export default function Premium() {
   return (
     <>
       <Head>
-        <title>Would You - Commands</title>
+        <title>Would You - Premium</title>
       </Head>
       <main className="relative flex w-full justify-center mb-40">
         <div className="w-full max-w-8xl px-8">
@@ -158,7 +158,7 @@ export default function Premium() {
                             <StripeSquare className="w-5 h-5" />
                           </DialogTrigger>
                         ) : (
-                          <DiscordLoginButton className="font-bold rounded-xl" />
+                          <DiscordLoginButton className="font-bold rounded-xl" redirect="/premium" />
                         )}
                         <DialogContent className="bg-brand-customDarkBg3 border-none">
                           <DialogHeader>
