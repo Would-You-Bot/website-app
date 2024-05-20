@@ -34,45 +34,14 @@ export async function POST(request: NextRequest) {
 
     switch (event.type) {
       // in the event of a successful checkout
-      case "checkout.session.completed":
-        const session: Stripe.Checkout.Session = event.data.object;
-        const userId = session.metadata?.userId;
-        const serverId = session.metadata?.serverId;
+      case "customer.subscription.created":
+        const subscription: Stripe.Subscription = event.data.object;
+        const userId = subscription.metadata?.userId;
+        const serverId = subscription.metadata?.serverId;
         const tier =
-          session.metadata?.monthly === "true" ? "monthly" : "yearly";
+        subscription.metadata?.monthly === "true" ? "monthly" : "yearly";
 
         if (!userId || !serverId || !tier) {
-          console.error("One or more variables are undefined.");
-          return NextResponse.json(
-            { message: "One or more variables are missing", status: 400 },
-            { status: 400 }
-          );
-        }
-        await guildProfileSchema.findOneAndUpdate(
-          { serverId },
-          {
-            guildID: serverId,
-            premiumUser: userId,
-            premium: 1,
-            premiumExpiration: new Date(
-              tier === "monthly"
-                ? new Date().setMonth(new Date().getMonth() + 1)
-                : new Date().setFullYear(new Date().getFullYear() + 1)
-            ),
-          },
-          { upsert: true }
-        );
-        break;
-
-      // in the event of a subscription being updated
-      case "customer.subscription.updated":
-        const subscription: Stripe.Subscription = event.data.object;
-        const userIdUpdated = subscription.metadata?.userId;
-        const serverIdUpdated = subscription.metadata?.serverId;
-        const tierUpdated =
-          subscription.metadata?.monthly === "true" ? "monthly" : "yearly";
-
-        if (!userIdUpdated || !serverIdUpdated || !tierUpdated) {
           console.error("One or more variables are undefined.");
           return NextResponse.json(
             { message: "One or more variables are missing", status: 400 },
@@ -87,6 +56,32 @@ export async function POST(request: NextRequest) {
             premiumUser: userId,
             premium: 1,
             premiumExpiration: new Date(subscription.current_period_end),
+          },
+          { upsert: true }
+        );
+        break;
+
+      // in the event of a subscription being updated
+      case "customer.subscription.updated":
+        const subscriptionUpdated: Stripe.Subscription = event.data.object;
+        const userIdUpdated = subscriptionUpdated.metadata?.userId;
+        const serverIdUpdated = subscriptionUpdated.metadata?.serverId;
+        const tierUpdated =
+        subscriptionUpdated.metadata?.monthly === "true" ? "monthly" : "yearly";
+
+        if (!userIdUpdated || !serverIdUpdated || !tierUpdated) {
+          console.error("One or more variables are undefined.");
+          return NextResponse.json(
+            { message: "One or more variables are missing", status: 400 },
+            { status: 400 }
+          );
+        }
+
+        await guildProfileSchema.findOneAndUpdate(
+          { serverIdUpdated },
+          {
+            premium: 1,
+            premiumExpiration: new Date(subscriptionUpdated.current_period_end),
           },
           { upsert: true }
         );
@@ -111,9 +106,8 @@ export async function POST(request: NextRequest) {
         }
 
         await guildProfileSchema.findOneAndUpdate(
-          { serverId },
+          { serverIdDeleted },
           {
-            guildID: serverId,
             premiumUser: null,
             premium: 0,
             premiumExpiration: null,
