@@ -147,7 +147,11 @@ export default function Premium() {
                           )
                         )}
                       </ul>
-                      <Dialog>
+                      <Dialog
+                        onOpenChange={() => {
+                          setServerId("");
+                        }}
+                      >
                         {idToken ? (
                           <DialogTrigger
                             onClick={() => {
