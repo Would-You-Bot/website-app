@@ -147,11 +147,7 @@ export default function Premium() {
                           )
                         )}
                       </ul>
-                      <Dialog
-                        onOpenChange={() => {
-                          setServerId("");
-                        }}
-                      >
+                      <Dialog>
                         {idToken ? (
                           <DialogTrigger
                             onClick={() => {
@@ -163,7 +159,10 @@ export default function Premium() {
                             <StripeSquare className="w-5 h-5" />
                           </DialogTrigger>
                         ) : (
-                          <DiscordLoginButton className="font-bold rounded-xl" redirect="/premium" />
+                          <DiscordLoginButton
+                            className="font-bold rounded-xl"
+                            redirect="/premium"
+                          />
                         )}
                         <DialogContent className="bg-brand-customDarkBg3 border-none">
                           <DialogHeader>
@@ -179,7 +178,10 @@ export default function Premium() {
                             </DialogTitle>
                           </DialogHeader>
                           <DialogDescription className="w-full">
-                            <Select onValueChange={setServerId}>
+                            <Select
+                              onValueChange={setServerId}
+                              defaultValue={serverId ? serverId : ""}
+                            >
                               <SelectTrigger>
                                 <SelectValue placeholder="Select a server to continue" />
                               </SelectTrigger>
