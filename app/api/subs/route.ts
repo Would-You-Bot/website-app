@@ -19,9 +19,8 @@ export async function POST(req: Request) {
 
   const server = await guildProfileSchema.findOne({ serverId });
 
-  if (!server || server?.premiumExpiration !== null) {
-    console.log(server?.premiumExpiration)
-    return NextResponse.json({ message: "This server already has an active premium subscription" }, { status: 409 });
+  if (server && server?.premiumExpiration !== null) {
+    return NextResponse.json({ message: "This server already has an active premium subscription", status: 409  }, { status: 409 });
   }
 
   try {

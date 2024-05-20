@@ -39,6 +39,7 @@ import {
   XIcon,
 } from "./_components/icons";
 import DiscordLoginButton from "@/components/DiscordLoginButton";
+import { Toaster } from "@/components/ui/toaster";
 
 const pricingData: PricingData = {
   price: { monthly: 2.99, yearly: 29.99 },
@@ -223,6 +224,7 @@ export default function Premium() {
                       </Dialog>
                     </div>
                   </div>
+                  <Toaster />
                   <a href="" className="">
                     <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
                       <Stripe />

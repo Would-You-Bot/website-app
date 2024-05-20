@@ -1,7 +1,6 @@
 "use client";
 import { loadStripe } from "@stripe/stripe-js";
-import { Bounce, ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { useToast } from "@/components/ui/use-toast"
 
 interface CheckoutButtonProps {
   monthly: string;
@@ -16,8 +15,11 @@ export default function CheckoutButton({
   userId,
   serverId,
   priceId,
-}: CheckoutButtonProps) {
+}: CheckoutButtonProps) { 
+  const { toast } = useToast()
   const handleCheckout = async () => {
+
+
     const stripePromise = loadStripe(
       process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
     );
@@ -36,26 +38,21 @@ export default function CheckoutButton({
       }),
     });
 
+    const data = await response.json();
+    console.log(data);
     // TODO: When this return 409 display an error toast
-
-    if (response.status === 409) {
-      toast.error("Something went wrong! Try again later.", {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: false,
-        progress: undefined,
-        theme: "colored",
-        transition: Bounce,
-      });
+    if (data.status === 409) {
+     toast({
+      variant: "destructive",
+      title: "Uh oh! Something went wrong.",
+      description: "This server already has an active premium subscription.",
+      })
       return;
     }
 
-    const stripeSession = (await response.json()) as { id: string };
-    console.log(stripeSession.id);
-    await stripe?.redirectToCheckout({ sessionId: stripeSession.id });
+   const stripeSession = (data) as { id: string };
+   console.log(stripeSession.id);
+   await stripe?.redirectToCheckout({ sessionId: stripeSession.id });
   };
 
   return (
