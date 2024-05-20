@@ -39,13 +39,12 @@ export default function CheckoutButton({
     });
 
     const data = await response.json();
-    console.log(data);
-    // TODO: When this return 409 display an error toast
-    if (data.status === 409) {
+
+    if (data.status === 409 || data.status === 422 || data.status === 500) {
      toast({
       variant: "destructive",
       title: "Uh oh! Something went wrong.",
-      description: "This server already has an active premium subscription.",
+      description: data.message,
       })
       return;
     }

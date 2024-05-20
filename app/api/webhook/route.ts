@@ -26,14 +26,16 @@ export async function POST(request: NextRequest) {
           "Webhook signature verification failed with unknown error type."
         );
       }
-      return NextResponse.json({ message: "Webhook Error" }, { status: 400 });
+      return NextResponse.json(
+        { message: "Webhook Error", status: 400 },
+        { status: 400 }
+      );
     }
 
     switch (event.type) {
       // in the event of a successful checkout
       case "checkout.session.completed":
         const session: Stripe.Checkout.Session = event.data.object;
-        console.log(session);
         const userId = session.metadata?.userId;
         const serverId = session.metadata?.serverId;
         const tier =
@@ -42,40 +44,24 @@ export async function POST(request: NextRequest) {
         if (!userId || !serverId || !tier) {
           console.error("One or more variables are undefined.");
           return NextResponse.json(
-            { message: "One or more variables are missing" },
+            { message: "One or more variables are missing", status: 400 },
             { status: 400 }
           );
         }
-        const guild = await guildProfileSchema.findOne({ serverId });
-
-        if (guild && guild.premiumExpiration) {
-          guild.premiumExpiration = new Date(
-            new Date(
+        await guildProfileSchema.findOneAndUpdate(
+          { serverId },
+          {
+            guildID: serverId,
+            premiumUser: userId,
+            premium: 1,
+            premiumExpiration: new Date(
               tier === "monthly"
-                ? new Date(guild.premiumExpiration).setMonth(
-                    new Date(guild.premiumExpiration).getMonth() + 1
-                  )
-                : new Date(guild.premiumExpiration).setFullYear(
-                    new Date(guild.premiumExpiration).getFullYear() + 1
-                  )
-            )
-          );
-        } else {
-          await guildProfileSchema.findOneAndUpdate(
-            { serverId },
-            {
-              guildID: serverId,
-              premiumUser: userId,
-              premium: 1,
-              premiumExpiration: new Date(
-                tier === "monthly"
-                  ? new Date().setMonth(new Date().getMonth() + 1)
-                  : new Date().setFullYear(new Date().getFullYear() + 1)
-              ),
-            },
-            { upsert: true }
-          );
-        }
+                ? new Date().setMonth(new Date().getMonth() + 1)
+                : new Date().setFullYear(new Date().getFullYear() + 1)
+            ),
+          },
+          { upsert: true }
+        );
         break;
 
       // in the event of a subscription being updated
@@ -89,12 +75,21 @@ export async function POST(request: NextRequest) {
         if (!userIdUpdated || !serverIdUpdated || !tierUpdated) {
           console.error("One or more variables are undefined.");
           return NextResponse.json(
-            { message: "One or more variables are missing" },
+            { message: "One or more variables are missing", status: 400 },
             { status: 400 }
           );
         }
 
-        // Db Call
+        await guildProfileSchema.findOneAndUpdate(
+          { serverId },
+          {
+            guildID: serverId,
+            premiumUser: userId,
+            premium: 1,
+            premiumExpiration: new Date(subscription.current_period_end),
+          },
+          { upsert: true }
+        );
         break;
 
       // in the event of a subscription being deleted
@@ -110,12 +105,20 @@ export async function POST(request: NextRequest) {
         if (!userIdDeleted || !serverIdDeleted || !tierDeleted) {
           console.error("One or more variables are undefined.");
           return NextResponse.json(
-            { message: "One or more variables are missing" },
+            { message: "One or more variables are missing", status: 400 },
             { status: 400 }
           );
         }
 
-        // Db Call
+        await guildProfileSchema.findOneAndUpdate(
+          { serverId },
+          {
+            guildID: serverId,
+            premiumUser: null,
+            premium: 0,
+            premiumExpiration: null,
+          }
+        );
         break;
 
       default:
@@ -125,10 +128,13 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ message: "success", status: "success" });
   } catch (error) {
     if (error instanceof Error) {
-      return NextResponse.json({ message: error.message }, { status: 500 });
+      return NextResponse.json(
+        { message: error.message, status: 500 },
+        { status: 500 }
+      );
     } else {
       return NextResponse.json(
-        { message: "An unknown error occurred" },
+        { message: "An unknown error occurred", status: 500 },
         { status: 500 }
       );
     }
