@@ -40,7 +40,6 @@ export async function POST(request: NextRequest) {
         const serverId = subscription.metadata?.serverId;
         const tier =
         subscription.metadata?.monthly === "true" ? "monthly" : "yearly";
-
         if (!userId || !serverId || !tier) {
           console.error("One or more variables are undefined.");
           return NextResponse.json(
@@ -50,12 +49,12 @@ export async function POST(request: NextRequest) {
         }
 
         await guildProfileSchema.findOneAndUpdate(
-          { serverId },
+          { guildID: serverId },
           {
             guildID: serverId,
             premiumUser: userId,
             premium: 1,
-            premiumExpiration: new Date(subscription.current_period_end),
+            premiumExpiration: new Date(subscription.current_period_end * 1000),
           },
           { upsert: true }
         );
@@ -78,10 +77,10 @@ export async function POST(request: NextRequest) {
         }
 
         await guildProfileSchema.findOneAndUpdate(
-          { serverIdUpdated },
+          { guildID: serverIdUpdated },
           {
             premium: 1,
-            premiumExpiration: new Date(subscriptionUpdated.current_period_end),
+            premiumExpiration: new Date(subscriptionUpdated.current_period_end * 1000),
           },
           { upsert: true }
         );
@@ -106,7 +105,7 @@ export async function POST(request: NextRequest) {
         }
 
         await guildProfileSchema.findOneAndUpdate(
-          { serverIdDeleted },
+          { guildID: serverIdDeleted },
           {
             premiumUser: null,
             premium: 0,
