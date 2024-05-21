@@ -1,4 +1,4 @@
-import { CheckArrowIcon, CheckIcon, CloseIcon, XIcon } from "./icons";
+import { CheckIcon, CloseIcon } from "./icons";
 
 interface ArrayProps {
   criteria: string;

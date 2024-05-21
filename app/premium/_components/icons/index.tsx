@@ -1,10 +1,6 @@
 import React from "react";
 import type { SVGProps } from "react";
 
-interface classNameProps {
-  className?: string;
-}
-
 export function CheckIcon(props: SVGProps<SVGSVGElement>) {
   return (
     <svg
@@ -42,38 +38,6 @@ export function CloseIcon(props: SVGProps<SVGSVGElement>) {
     </svg>
   );
 }
-
-export const CheckArrowIcon = ({ className }: classNameProps) => (
-  <div className={className}>
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M18.383 4.117a1.252 1.252 0 0 1 0 1.77l-10 10a1.252 1.252 0 0 1-1.77 0l-5-5a1.252 1.252 0 0 1 1.77-1.77L7.5 13.23l9.117-9.113a1.252 1.252 0 0 1 1.77 0h-.004Z"
-        fill="currentColor"
-      />
-    </svg>
-  </div>
-);
-
-export const XIcon = ({ className }: classNameProps) => (
-  <div className={className}>
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M16.313 1 9.749 7.563 3.187 1 1 3.188 7.562 9.75 1 16.313 3.187 18.5l6.562-6.563 6.564 6.563 2.187-2.188-6.562-6.562L18.5 3.187 16.313 1Z"
-        fill="currentColor"
-      />
-    </svg>
-  </div>
-);
 
 export const ApplePay = () => {
   return (

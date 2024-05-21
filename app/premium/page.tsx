@@ -28,14 +28,14 @@ import CheckoutButton from "./_components/checkoutButton";
 import { useIdToken } from "@/helpers/hooks";
 import {
   ApplePay,
-  CheckArrowIcon,
+  CheckIcon,
+  CloseIcon,
   GooglePay,
   Link,
   MasterCard,
   PayPal,
   StripeSquare,
   Visa,
-  XIcon,
 } from "./_components/icons";
 import DiscordLoginButton from "@/components/DiscordLoginButton";
 import { Toaster } from "@/components/ui/toaster";
@@ -193,9 +193,9 @@ export default function Premium() {
                               {pricingData["premium"][
                                 text as keyof (typeof pricingData)["premium"]
                               ] ? (
-                                <CheckArrowIcon className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent text-brand-customPrimary" />
+                                <CheckIcon className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent text-brand-customPrimary" />
                               ) : (
-                                <XIcon className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent text-[#7A7B7E]" />
+                                <CloseIcon className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent text-[#7A7B7E]" />
                               )}
                               <span>{text}</span>
                             </li>
