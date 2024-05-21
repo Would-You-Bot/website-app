@@ -1,13 +1,54 @@
 import React from "react";
 import type { SVGProps } from "react";
 
-export const CheckArrowIcon = () => (
-  <div className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent">
+interface classNameProps {
+  className?: string;
+}
+
+export function CheckIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="1em"
+      height="1em"
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <path
+        fill="none"
+        stroke="currentColor"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M20 6L9 17l-5-5"
+      ></path>
+    </svg>
+  );
+}
+
+export function CloseIcon(props: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="1em"
+      height="1em"
+      viewBox="0 0 24 24"
+      {...props}
+    >
+      <path
+        fill="currentColor"
+        d="M5.293 5.293a1 1 0 0 1 1.414 0L12 10.586l5.293-5.293a1 1 0 1 1 1.414 1.414L13.414 12l5.293 5.293a1 1 0 0 1-1.414 1.414L12 13.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L10.586 12L5.293 6.707a1 1 0 0 1 0-1.414"
+      ></path>
+    </svg>
+  );
+}
+
+export const CheckArrowIcon = ({ className }: classNameProps) => (
+  <div className={className}>
     <svg
       width="20"
       height="20"
       viewBox="0 0 20 20"
-      className="text-brand-customPrimary"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
@@ -18,13 +59,12 @@ export const CheckArrowIcon = () => (
   </div>
 );
 
-export const XIcon = () => (
-  <div className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent">
+export const XIcon = ({ className }: classNameProps) => (
+  <div className={className}>
     <svg
       width="20"
       height="20"
       viewBox="0 0 20 20"
-      className="text-[#5A5B5E]"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path

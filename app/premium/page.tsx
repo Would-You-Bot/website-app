@@ -33,13 +33,13 @@ import {
   Link,
   MasterCard,
   PayPal,
-  Stripe,
   StripeSquare,
   Visa,
   XIcon,
 } from "./_components/icons";
 import DiscordLoginButton from "@/components/DiscordLoginButton";
 import { Toaster } from "@/components/ui/toaster";
+import PlansComparison from "./_components/PlansComparison";
 
 const pricingData: PricingData = {
   price: { monthly: 2.99, yearly: 29.99 },
@@ -51,6 +51,59 @@ const pricingData: PricingData = {
     "Auto Pin Daily Messages": true,
   },
 };
+
+const data = [
+  {
+    criteria: "Client Storage",
+    free: "100GB",
+    premium: "Unlimited",
+  },
+  {
+    criteria: "Customer Support",
+    free: false,
+    premium: true,
+  },
+  {
+    criteria: "Data Transfer",
+    free: "10GB/month",
+    premium: "Unlimited",
+  },
+  {
+    criteria: "Backup Frequency",
+    free: "Weekly",
+    premium: "Daily",
+  },
+  {
+    criteria: "Number of Users",
+    free: 1,
+    premium: 5,
+  },
+  {
+    criteria: "Integration Options",
+    free: "Limited",
+    premium: "Extensive",
+  },
+  {
+    criteria: "Service Uptime",
+    free: "99.9%",
+    premium: "99.99%",
+  },
+  {
+    criteria: "Security Features",
+    free: true,
+    premium: true,
+  },
+  {
+    criteria: "Customization Options",
+    free: "Limited",
+    premium: "Fully Customizable",
+  },
+  {
+    criteria: "Training Resources",
+    free: "Online Documentation",
+    premium: "1-on-1 Training",
+  },
+];
 
 export default function Premium() {
   const [isMonthly, setIsMonthly] = useState(true);
@@ -74,7 +127,7 @@ export default function Premium() {
         <title>Would You - Premium</title>
       </Head>
       <main className="relative flex w-full justify-center mb-40">
-        <div className="w-full max-w-8xl px-8">
+        <div className="flex flex-col w-full max-w-8xl px-8 gap-52">
           <LazyMotion features={domAnimation}>
             <m.div
               initial={{ opacity: 0 }}
@@ -111,7 +164,12 @@ export default function Premium() {
                 </div>
                 <div className="flex flex-col w-fit mx-auto">
                   <div className="w-auto rounded-[1.7rem] bg-gradient-premium p-[4px] mb-4">
-                    <div className="rounded-3xl bg-brand-customDarkBg3 px-8 py-8 ">
+                    <div className="rounded-3xl bg-brand-customDarkBg3 px-8 py-8 relative overflow-hidden">
+                      <span
+                        className={`${!isMonthly ? "top-7" : "-top-10 opacity-0 pointer-events-none"} absolute right-6 px-4 py-2 rounded-xl text-mb text-white bg-white/15 cursor-default transition-all duration-300`}
+                      >
+                        2 months free
+                      </span>
                       <h4 className="font-heading mb-2 text-left text-2xl font-bold text-white 2xl:mb-4">
                         Premium
                       </h4>
@@ -125,22 +183,19 @@ export default function Premium() {
                           {isMonthly ? "/ month" : "/ year"}
                         </div>
                       </div>
-                      <p className="mb-8 mt-8 text-left leading-loose text-gray-400 2xl:mb-12">
+                      <p className="mt-1 text-left leading-loose text-gray-400 mb-8">
                         Experience the full power of our Would You bot.
                       </p>
-                      <ul className="mb-14 text-white">
+                      <ul className="mb-16 text-white">
                         {Object.keys(pricingData["premium"]).map(
                           (text, index) => (
-                            <li
-                              className="mb-4 flex items-center"
-                              key={`${text}-${index}`}
-                            >
+                            <li className="mb-4 flex items-center" key={index}>
                               {pricingData["premium"][
                                 text as keyof (typeof pricingData)["premium"]
                               ] ? (
-                                <CheckArrowIcon />
+                                <CheckArrowIcon className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent text-brand-customPrimary" />
                               ) : (
-                                <XIcon />
+                                <XIcon className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent text-[#7A7B7E]" />
                               )}
                               <span>{text}</span>
                             </li>
@@ -153,7 +208,7 @@ export default function Premium() {
                             onClick={() => {
                               fetchData();
                             }}
-                            className="mt-20 text-white focus:ring-0 flex w-full justify-center items-center gap-2 rounded-xl py-2 font-bold leading-loose bg-green-500"
+                            className="text-white focus:ring-0 flex w-full justify-center items-center gap-2 rounded-xl py-2 font-bold leading-loose bg-green-500 hover:bg-green-600 transition"
                           >
                             Continue with Stripe
                             <StripeSquare className="w-5 h-5" />
@@ -164,7 +219,7 @@ export default function Premium() {
                             redirect="/premium"
                           />
                         )}
-                        <DialogContent className="bg-brand-customDarkBg3 border-none">
+                        <DialogContent className="w-fit bg-brand-customDarkBg3 border-none">
                           <DialogHeader>
                             <DialogTitle className="text-white font-bold text-xl">
                               <div>
@@ -177,15 +232,15 @@ export default function Premium() {
                               </div>
                             </DialogTitle>
                           </DialogHeader>
-                          <DialogDescription className="w-full">
+                          <DialogDescription className="w-full !rounded-2xl">
                             <Select
                               onValueChange={setServerId}
                               defaultValue={serverId ? serverId : ""}
                             >
-                              <SelectTrigger>
+                              <SelectTrigger className="w-[300px] sm:w-[400px]">
                                 <SelectValue placeholder="Select a server to continue" />
                               </SelectTrigger>
-                              <SelectContent>
+                              <SelectContent className="max-w-[300px] max-h-[40vh] sm:max-w-[400px]">
                                 <Suspense fallback={<ServersListSkeleton />}>
                                   {serversData.map((server: DiscordGuild) => (
                                     <SelectItem
@@ -206,7 +261,9 @@ export default function Premium() {
                                             />
                                           </AvatarFallback>
                                         </Avatar>
-                                        <span>{server.name}</span>
+                                        <span className="text-ellipsis line-clamp-1">
+                                          {server.name}
+                                        </span>
                                       </div>
                                     </SelectItem>
                                   ))}
@@ -231,19 +288,29 @@ export default function Premium() {
                     </div>
                   </div>
                   <Toaster />
-                  <a href="" className="">
-                    <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
-                      <Stripe />
-                      <ApplePay />
-                      <GooglePay />
-                      <MasterCard />
-                      <Visa />
-                      <PayPal />
-                      <Link />
-                    </div>
+                  <a
+                    href=""
+                    className="flex flex-wrap justify-center gap-2 sm:gap-3"
+                  >
+                    <ApplePay />
+                    <GooglePay />
+                    <MasterCard />
+                    <Visa />
+                    <PayPal />
+                    <Link />
                   </a>
                 </div>
               </div>
+            </m.div>
+          </LazyMotion>
+          <LazyMotion features={domAnimation}>
+            <m.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <PlansComparison data={data} rowSeparator colSeparator />
             </m.div>
           </LazyMotion>
         </div>
