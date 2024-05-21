@@ -86,6 +86,31 @@ export async function POST(request: NextRequest) {
         );
         break;
 
+        case "invoice.paid":
+        const invoice: Stripe.Invoice = event.data.object;
+        const userIdInvoice = invoice.metadata?.userId;
+        const serverIdInvoice = invoice.metadata?.serverId;
+        const tierInvoice =
+          invoice.metadata?.monthly === "true" ? "monthly" : "yearly";
+
+        if (!userIdInvoice || !serverIdInvoice || !tierInvoice) {
+          console.error("One or more variables are undefined.");
+          return NextResponse.json(
+            { message: "One or more variables are missing", status: 400 },
+            { status: 400 }
+          );
+        }
+
+        await guildProfileSchema.findOneAndUpdate(
+          { guildID: serverIdInvoice },
+          {
+            premium: 1,
+            premiumExpiration: new Date(invoice.period_end * 1000),
+          },
+          { upsert: true }
+        );
+        break;
+
       // in the event of a subscription being deleted
       case "customer.subscription.deleted":
         const subscriptionDeleted: Stripe.Subscription = event.data.object;
