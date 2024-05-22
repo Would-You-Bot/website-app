@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { stripe } from "@/lib/stripe";
 import guildProfileSchema from "@/models/Guild";
 import connectDb from "@/lib/mongodb";
+import { getAuthTokenOrNull } from "@/helpers/oauth/helpers";
 
 interface StripeSubscriptionRequest {
   monthly: string;
@@ -58,10 +59,11 @@ export async function POST(req: Request) {
     );
   }
 
-  try {
-    // we will receive the priceId, email, and userId from the client
+  const jwt = await getAuthTokenOrNull();
 
+  try {
     const session = await stripe.checkout.sessions.create({
+      customer: jwt?.payload?.customerId ? jwt.payload.customerId : undefined,
       subscription_data: {
         metadata: {
           priceId: priceId,
