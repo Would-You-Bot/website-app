@@ -34,6 +34,7 @@ import {
   Link,
   MasterCard,
   PayPal,
+  Stripe,
   StripeSquare,
   Visa,
 } from "./_components/icons";
@@ -289,9 +290,11 @@ export default function Premium() {
                   </div>
                   <Toaster />
                   <a
-                    href=""
+                    href="https://stripe.com/"
+                    target="_blank"
                     className="flex flex-wrap justify-center gap-2 sm:gap-3"
                   >
+                    <Stripe />
                     <ApplePay />
                     <GooglePay />
                     <MasterCard />
