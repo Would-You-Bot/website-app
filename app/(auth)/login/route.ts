@@ -6,6 +6,8 @@ import { cookies } from "next/headers";
 import { z } from "zod";
 import { IdTokenData } from "@/helpers/oauth/types";
 import { setServer } from "@/lib/redis";
+import { stripe } from "@/lib/stripe";
+import Stripe from "stripe";
 
 const _queryParamsSchema = z.object({
   code: z.string().nullable(),
@@ -84,7 +86,7 @@ async function exchangeAuthorizationCode(code: string) {
 
     const { id, username, avatar, global_name } = user;
 
-const guildsResponse = await fetch(
+    const guildsResponse = await fetch(
         "https://discord.com/api/users/@me/guilds",
         {
           headers: {
@@ -96,7 +98,20 @@ const guildsResponse = await fetch(
       const guilds = await guildsResponse.json();
 
       // Cache the user's servers
-    setServer(id, guilds);
+    await setServer(id, guilds);
+
+    let customer:Stripe.ApiSearchResult<Stripe.Customer> | Stripe.Customer = await stripe.customers.search({ query: `metadata["userID"]: "${id}"`, limit: 1});
+        customer = customer?.data[0];
+      if(!customer) {
+        const newCustomer = await stripe.customers.create({
+          name: username,
+          metadata: {
+            userID: id,
+          },
+        });
+        customer = newCustomer;
+      }
+
 
     if (scope.includes("guilds") && scope.includes("guilds.join")) {
       
@@ -122,7 +137,7 @@ const guildsResponse = await fetch(
       exp,
       access_token,
       refresh_token,
-      user: { id, avatar, username, global_name },
+      user: { id, avatar, username, global_name, customerId: customer.id },
     };
   } catch (error: unknown) {
     return { success: false, error: (error as any).message };
