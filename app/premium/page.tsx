@@ -41,7 +41,6 @@ import {
 import DiscordLoginButton from "@/components/DiscordLoginButton";
 import { Toaster } from "@/components/ui/toaster";
 import PlansComparison from "./_components/PlansComparison";
-import { getAuthTokenOrNull } from "@/helpers/oauth/helpers";
 
 const pricingData: PricingData = {
   price: { monthly: 2.99, yearly: 29.99 },

@@ -6,7 +6,6 @@ import { getAuthTokenOrNull } from "@/helpers/oauth/helpers";
 
 interface StripeSubscriptionRequest {
   monthly: string;
-  userId: string;
   serverId: string;
   priceId: string;
 }
@@ -14,7 +13,18 @@ interface StripeSubscriptionRequest {
 export async function POST(req: Request) {
   await connectDb();
 
-  const { priceId, serverId, userId, monthly } =
+  const user = await getAuthTokenOrNull();
+
+  if (!user) {
+    return NextResponse.json(
+      { message: "You must be logged in to subscribe", status: 401 },
+      { status: 401 }
+    );
+  }
+
+  const userId = user?.payload?.id;
+
+  const { priceId, serverId, monthly } =
     (await req.json()) as StripeSubscriptionRequest;
 
   const server = await guildProfileSchema.findOne({ guildID: serverId });
@@ -46,8 +56,6 @@ export async function POST(req: Request) {
       { status: 422 }
     );
   }
-
-  console.log(server)
 
   if (server && server?.premiumExpiration !== null) {
     return NextResponse.json(

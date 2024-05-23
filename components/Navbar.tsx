@@ -20,7 +20,7 @@ interface NavbarProps {
 }
 
 const menuItems = [
-  { label: "Dashboard", href: "/dashboard", icon: LayoutDashboardIcon },
+  { label: "Manage Subscription", href: "/api/subs/manage", icon: LayoutDashboardIcon },
 ];
 
 const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
@@ -92,12 +92,6 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
         <div className="flex items-center justify-center gap-6 backdrop-blur bg-[#202020] bg-opacity-90 border-2 border-white/5 rounded-[10px] h-16 px-10">
           <div className="flex w-max gap-6">
             <Link
-              href="/question-packs"
-              className="text-lg text-neutral-300 transition-all hover:text-neutral-100"
-            >
-              Packs
-            </Link>
-            <Link
               href="/commands"
               className="text-lg text-neutral-300 transition-all hover:text-neutral-100"
             >
@@ -115,6 +109,12 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
               className="text-lg text-neutral-300 transition-all hover:text-neutral-100"
             >
               Vote
+            </Link>
+            <Link
+              href="/premium"
+              className="text-lg text-yellow-300 transition-all hover:text-yellow-200"
+            >
+              Premium
             </Link>
           </div>
         </div>
