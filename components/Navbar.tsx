@@ -74,148 +74,188 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
   };
 
   return (
-    <nav className="fixed left-0 top-0 z-50 mb-28 flex h-[80px] w-full justify-center items-center border-b border-b-neutral-800 bg-neutral-900 bg-opacity-90 backdrop-blur-sm">
-      <div className="flex items-center justify-between w-full h-full max-w-8xl px-8">
-        <div className="flex items-center">
-          <Link href="/">
-            <div className="flex items-center">
-              <Image
-                src="/Logo.svg"
-                className="rounded-full"
-                alt="Would You Logo"
-                width="50"
-                height="50"
-                priority
-              />
-              <p className="ml-4 text-2xl font-bold text-white">Would You</p>
-            </div>
+    <nav className="fixed left-0 top-0 z-50 mb-28 flex h-auto py-6 w-full justify-center items-center">
+      <div className="flex items-center justify-between h-full w-full max-w-8xl px-8">
+        <div className="flex items-center justify-center backdrop-blur bg-[#202020] bg-opacity-90 border-2 border-white/5 rounded-[1.25rem] h-16 px-6">
+          <Link href="/" className="flex items-center gap-6">
+            <Image
+              src="/Logo.svg"
+              className="rounded-full"
+              alt="Would You Logo"
+              width="30"
+              height="30"
+              priority
+            />
+            <p className="text-xl font-bold text-white">Would You</p>
           </Link>
-          <div className="ml-16 hidden items-center md:flex">
+        </div>
+        <div className="flex items-center justify-center gap-6 backdrop-blur bg-[#202020] bg-opacity-90 border-2 border-white/5 rounded-[1.25rem] h-16 px-10">
+          <div className="flex w-max gap-6">
             <Link
               href="/question-packs"
-              className="mr-6 text-lg text-neutral-300 transition-all hover:text-neutral-100"
+              className="text-lg text-neutral-300 transition-all hover:text-neutral-100"
             >
               Packs
             </Link>
             <Link
               href="/commands"
-              className="mr-6 text-lg text-neutral-300 transition-all hover:text-neutral-100"
+              className="text-lg text-neutral-300 transition-all hover:text-neutral-100"
             >
               Commands
             </Link>
             <Link
               href="/blog"
-              className="mr-6 text-lg text-neutral-300 transition-all hover:text-neutral-100"
+              className="text-lg text-neutral-300 transition-all hover:text-neutral-100"
             >
               Blog
             </Link>
             <Link
               href="/vote"
               target="_blank"
-              className="mr-6 text-lg text-neutral-300 transition-all hover:text-neutral-100"
+              className="text-lg text-neutral-300 transition-all hover:text-neutral-100"
             >
               Vote
             </Link>
           </div>
         </div>
-        <div className="z-50 flex gap-2 items-center">
+        <div className="flex items-center justify-center h-16">
           {idToken ? (
             <UserDropdown idToken={idToken} items={menuItems} />
           ) : (
-            <>
-              <Link href="/invite" target="_blank" className="hidden md:block">
-                <Button className="">Invite</Button>
-              </Link>
-              <DiscordLoginButton className="rounded-lg" />
-            </>
+            <DiscordLoginButton className="rounded-[1.25rem] h-16 px-6" />
           )}
-          <div
-            className="relative ml-6 flex h-6 w-8 flex-col items-center justify-between md:hidden"
-            onClick={() => toggleMobileMenu()}
-          >
-            <LazyMotion features={domAnimation}>
-              <m.span
-                className="h-[3px] w-[30px] origin-left rounded-full bg-neutral-300"
-                initial={{ rotate: "0deg" }}
-                animate={lineOneControls}
-              />
-              <m.span
-                className="menu-line line-1 h-[3px] w-[30px] rounded-full bg-neutral-300"
-                initial={{ opacity: 1 }}
-                animate={lineTwoControls}
-              />
-              <m.span
-                className="menu-line line-1 h-[3px] w-[30px] origin-left rounded-full bg-neutral-300"
-                initial={{ rotate: "0deg" }}
-                animate={lineThreeControls}
-              />
-            </LazyMotion>
-          </div>
         </div>
-        <LazyMotion features={domAnimation}>
-          <m.div
-            className="fixed left-0 top-0 z-40 h-[100vh] w-[100vw] bg-neutral-900"
-            transition={{ duration: 0.21, type: "easeInOut" }}
-            initial={{ opacity: 0.5, left: "100vw", pointerEvents: "none" }}
-            animate={menuControls}
-          >
-            <div className="absolute top-36 flex w-full flex-col items-center">
-              <Link
-                href="/"
-                className="mt-8 text-center text-3xl text-white"
-                onClick={() => toggleMobileMenu()}
-              >
-                Home
-              </Link>
-              <Link
-                href="/question-packs"
-                className="mr-6 text-lg text-neutral-300 transition-all hover:text-neutral-100"
-              >
-                Packs
-              </Link>
-              <Link
-                href="/commands"
-                className="mt-8 text-center text-3xl text-white"
-                onClick={() => toggleMobileMenu()}
-              >
-                Commands
-              </Link>
-              <Link
-                href="/blog"
-                className="mt-8 text-center text-3xl text-white"
-                onClick={() => toggleMobileMenu()}
-              >
-                Blog
-              </Link>
-              <Link
-                href="/vote"
-                target="_blank"
-                className="mt-8 text-center text-3xl text-white"
-                onClick={() => toggleMobileMenu()}
-              >
-                Vote
-              </Link>
-              <Link
-                href="/invite"
-                target="_blank"
-                className="mt-8 text-center text-2xl"
-              >
-                <Button>Invite</Button>
-              </Link>
-              {idToken ? (
-                <a href="/logout" className="mt-8 text-center text-2xl">
-                  <Button>Logout</Button>
-                </a>
-              ) : (
-                <a href="/login" className="mt-8 text-center text-2xl">
-                  <Button>Login with Discord</Button>
-                </a>
-              )}
-            </div>
-          </m.div>
-        </LazyMotion>
       </div>
     </nav>
+    // <nav className="fixed left-0 top-0 z-50 mb-28 flex h-[80px] w-full justify-center items-center border-b border-b-neutral-800 bg-neutral-900 bg-opacity-90 backdrop-blur-sm">
+    //   <div className="flex items-center justify-between w-full h-full max-w-8xl px-8">
+    //     <div className="flex items-center">
+    //       <div className="ml-16 hidden items-center md:flex">
+    //         <Link
+    //           href="/question-packs"
+    //           className="mr-6 text-lg text-neutral-300 transition-all hover:text-neutral-100"
+    //         >
+    //           Packs
+    //         </Link>
+    //         <Link
+    //           href="/commands"
+    //           className="mr-6 text-lg text-neutral-300 transition-all hover:text-neutral-100"
+    //         >
+    //           Commands
+    //         </Link>
+    //         <Link
+    //           href="/blog"
+    //           className="mr-6 text-lg text-neutral-300 transition-all hover:text-neutral-100"
+    //         >
+    //           Blog
+    //         </Link>
+    //         <Link
+    //           href="/vote"
+    //           target="_blank"
+    //           className="mr-6 text-lg text-neutral-300 transition-all hover:text-neutral-100"
+    //         >
+    //           Vote
+    //         </Link>
+    //       </div>
+    //     </div>
+    //     <div className="z-50 flex gap-2 items-center">
+    //       {idToken ? (
+    //         <UserDropdown idToken={idToken} items={menuItems} />
+    //       ) : (
+    //         <>
+    //           <Link href="/invite" target="_blank" className="hidden md:block">
+    //             <Button className="">Invite</Button>
+    //           </Link>
+    //           <DiscordLoginButton className="rounded-lg" />
+    //         </>
+    //       )}
+    //       <div
+    //         className="relative ml-6 flex h-6 w-8 flex-col items-center justify-between md:hidden"
+    //         onClick={() => toggleMobileMenu()}
+    //       >
+    //         <LazyMotion features={domAnimation}>
+    //           <m.span
+    //             className="h-[3px] w-[30px] origin-left rounded-full bg-neutral-300"
+    //             initial={{ rotate: "0deg" }}
+    //             animate={lineOneControls}
+    //           />
+    //           <m.span
+    //             className="menu-line line-1 h-[3px] w-[30px] rounded-full bg-neutral-300"
+    //             initial={{ opacity: 1 }}
+    //             animate={lineTwoControls}
+    //           />
+    //           <m.span
+    //             className="menu-line line-1 h-[3px] w-[30px] origin-left rounded-full bg-neutral-300"
+    //             initial={{ rotate: "0deg" }}
+    //             animate={lineThreeControls}
+    //           />
+    //         </LazyMotion>
+    //       </div>
+    //     </div>
+    //     <LazyMotion features={domAnimation}>
+    //       <m.div
+    //         className="fixed left-0 top-0 z-40 h-[100vh] w-[100vw] bg-neutral-900"
+    //         transition={{ duration: 0.21, type: "easeInOut" }}
+    //         initial={{ opacity: 0.5, left: "100vw", pointerEvents: "none" }}
+    //         animate={menuControls}
+    //       >
+    //         <div className="absolute top-36 flex w-full flex-col items-center">
+    //           <Link
+    //             href="/"
+    //             className="mt-8 text-center text-3xl text-white"
+    //             onClick={() => toggleMobileMenu()}
+    //           >
+    //             Home
+    //           </Link>
+    //           <Link
+    //             href="/question-packs"
+    //             className="mr-6 text-lg text-neutral-300 transition-all hover:text-neutral-100"
+    //           >
+    //             Packs
+    //           </Link>
+    //           <Link
+    //             href="/commands"
+    //             className="mt-8 text-center text-3xl text-white"
+    //             onClick={() => toggleMobileMenu()}
+    //           >
+    //             Commands
+    //           </Link>
+    //           <Link
+    //             href="/blog"
+    //             className="mt-8 text-center text-3xl text-white"
+    //             onClick={() => toggleMobileMenu()}
+    //           >
+    //             Blog
+    //           </Link>
+    //           <Link
+    //             href="/vote"
+    //             target="_blank"
+    //             className="mt-8 text-center text-3xl text-white"
+    //             onClick={() => toggleMobileMenu()}
+    //           >
+    //             Vote
+    //           </Link>
+    //           <Link
+    //             href="/invite"
+    //             target="_blank"
+    //             className="mt-8 text-center text-2xl"
+    //           >
+    //             <Button>Invite</Button>
+    //           </Link>
+    //           {idToken ? (
+    //             <a href="/logout" className="mt-8 text-center text-2xl">
+    //               <Button>Logout</Button>
+    //             </a>
+    //           ) : (
+    //             <a href="/login" className="mt-8 text-center text-2xl">
+    //               <Button>Login with Discord</Button>
+    //             </a>
+    //           )}
+    //         </div>
+    //       </m.div>
+    //     </LazyMotion>
+    //   </div>
+    // </nav>
   );
 };
 
