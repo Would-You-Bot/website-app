@@ -76,7 +76,7 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
   return (
     <nav className="fixed left-0 top-0 z-50 mb-28 flex h-auto py-6 w-full justify-center items-center">
       <div className="flex items-center justify-between h-full w-full max-w-8xl px-8">
-        <div className="flex items-center justify-center backdrop-blur bg-[#202020] bg-opacity-90 border-2 border-white/5 rounded-[1.25rem] h-16 px-6">
+        <div className="flex items-center justify-center backdrop-blur bg-[#202020] bg-opacity-90 border-2 border-white/5 rounded-[10px] h-16 px-6">
           <Link href="/" className="flex items-center gap-6">
             <Image
               src="/Logo.svg"
@@ -89,7 +89,7 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
             <p className="text-xl font-bold text-white">Would You</p>
           </Link>
         </div>
-        <div className="flex items-center justify-center gap-6 backdrop-blur bg-[#202020] bg-opacity-90 border-2 border-white/5 rounded-[1.25rem] h-16 px-10">
+        <div className="flex items-center justify-center gap-6 backdrop-blur bg-[#202020] bg-opacity-90 border-2 border-white/5 rounded-[10px] h-16 px-10">
           <div className="flex w-max gap-6">
             <Link
               href="/question-packs"
@@ -122,7 +122,7 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
           {idToken ? (
             <UserDropdown idToken={idToken} items={menuItems} />
           ) : (
-            <DiscordLoginButton className="rounded-[1.25rem] h-16 px-6" />
+            <DiscordLoginButton className="rounded-[10px] h-16 px-6" />
           )}
         </div>
       </div>

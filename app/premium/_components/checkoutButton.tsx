@@ -1,10 +1,10 @@
 "use client";
 import { loadStripe } from "@stripe/stripe-js";
 import { useToast } from "@/components/ui/use-toast"
+import { getAuthTokenOrNull } from "@/helpers/oauth/helpers";
 
 interface CheckoutButtonProps {
   monthly: string;
-  userId: string;
   serverId: string | undefined;
   priceId: string;
 }
@@ -12,7 +12,6 @@ interface CheckoutButtonProps {
 // sub button
 export default function CheckoutButton({
   monthly,
-  userId,
   serverId,
   priceId,
 }: CheckoutButtonProps) { 
@@ -25,6 +24,17 @@ export default function CheckoutButton({
     );
     const stripe = await stripePromise;
 
+    const user = await getAuthTokenOrNull();
+
+    if (!user) {
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "You must be logged in to subscribe.",
+      });
+      return;
+    }
+
     const response = await fetch("/api/subs", {
       method: "POST",
       headers: {
@@ -33,7 +43,7 @@ export default function CheckoutButton({
       body: JSON.stringify({
         priceId: priceId,
         monthly: monthly,
-        userId: userId,
+        userId: user.payload.id,
         serverId: serverId,
       }),
     });

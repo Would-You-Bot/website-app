@@ -41,6 +41,7 @@ import {
 import DiscordLoginButton from "@/components/DiscordLoginButton";
 import { Toaster } from "@/components/ui/toaster";
 import PlansComparison from "./_components/PlansComparison";
+import { getAuthTokenOrNull } from "@/helpers/oauth/helpers";
 
 const pricingData: PricingData = {
   price: { monthly: 2.99, yearly: 29.99 },
@@ -118,7 +119,6 @@ export default function Premium() {
 
   const fetchData = async () => {
     const servers = (await getServer()) as DiscordGuild[];
-    console.log(servers, "servers");
     setServersData(servers);
   };
 
@@ -280,7 +280,6 @@ export default function Premium() {
                                   : process.env
                                       .NEXT_PUBLIC_PREMIUM_YEARLY_PRICE_ID!
                               }
-                              userId="347077478726238228"
                               serverId={serverId}
                             />
                           </DialogDescription>
