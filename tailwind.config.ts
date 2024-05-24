@@ -83,6 +83,7 @@ const config = {
     backgroundImage: {
       ["gradient-brand"]:
         "linear-gradient(92.91deg, #0598F4 -50%,#F00605 150%)",
+      ["gradient-tag"]: "linear-gradient(92.91deg, #4A6DB0 -50%,#725487 150%)",
     },
   },
   plugins: [require("tailwindcss-animate")],

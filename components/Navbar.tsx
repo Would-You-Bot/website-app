@@ -9,8 +9,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import Button from "./Button";
-import { useSearchParams } from "next/navigation";
-import { IdTokenJWT, useIdToken } from "@/helpers/hooks/useIdToken";
+import { useIdToken } from "@/helpers/hooks/useIdToken";
+import { IdTokenJWT } from "@/helpers/oauth/types";
 
 interface NavbarProps {
   idToken: IdTokenJWT | null;
@@ -160,6 +160,13 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
               onClick={() => toggleMobileMenu()}
             >
               Home
+            </Link>
+            <Link
+              href="/question-packs"
+              className="mt-8 text-center text-3xl text-white"
+              onClick={() => toggleMobileMenu()}
+            >
+              Packs
             </Link>
             <Link
               href="/commands"
