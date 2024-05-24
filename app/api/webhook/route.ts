@@ -39,7 +39,8 @@ export async function POST(request: NextRequest) {
         const userId = subscription.metadata?.userId;
         const serverId = subscription.metadata?.serverId;
         const tier =
-        subscription.metadata?.monthly === "true" ? "monthly" : "yearly";
+          subscription.metadata?.monthly === "true" ? "monthly" : "yearly";
+          
         if (!userId || !serverId || !tier) {
           console.error("One or more variables are undefined.");
           return NextResponse.json(
@@ -47,7 +48,7 @@ export async function POST(request: NextRequest) {
             { status: 400 }
           );
         }
-
+        try {
         await guildProfileSchema.findOneAndUpdate(
           { guildID: serverId },
           {
@@ -58,6 +59,16 @@ export async function POST(request: NextRequest) {
           },
           { upsert: true }
         );
+        } catch (error) {
+          console.error(error);
+          return NextResponse.json(
+            {
+              message: "An error occurred while updating the database.",
+              status: 500,
+            },
+            { status: 500 }
+          );
+        }
         break;
 
       // in the event of a subscription being updated
@@ -66,7 +77,9 @@ export async function POST(request: NextRequest) {
         const userIdUpdated = subscriptionUpdated.metadata?.userId;
         const serverIdUpdated = subscriptionUpdated.metadata?.serverId;
         const tierUpdated =
-        subscriptionUpdated.metadata?.monthly === "true" ? "monthly" : "yearly";
+          subscriptionUpdated.metadata?.monthly === "true"
+            ? "monthly"
+            : "yearly";
 
         if (!userIdUpdated || !serverIdUpdated || !tierUpdated) {
           console.error("One or more variables are undefined.");
@@ -80,32 +93,9 @@ export async function POST(request: NextRequest) {
           { guildID: serverIdUpdated },
           {
             premium: 1,
-            premiumExpiration: new Date(subscriptionUpdated.current_period_end * 1000),
-          },
-          { upsert: true }
-        );
-        break;
-
-        case "invoice.paid":
-        const invoice: Stripe.Invoice = event.data.object;
-        const userIdInvoice = invoice.metadata?.userId;
-        const serverIdInvoice = invoice.metadata?.serverId;
-        const tierInvoice =
-          invoice.metadata?.monthly === "true" ? "monthly" : "yearly";
-
-        if (!userIdInvoice || !serverIdInvoice || !tierInvoice) {
-          console.error("One or more variables are undefined.");
-          return NextResponse.json(
-            { message: "One or more variables are missing", status: 400 },
-            { status: 400 }
-          );
-        }
-
-        await guildProfileSchema.findOneAndUpdate(
-          { guildID: serverIdInvoice },
-          {
-            premium: 1,
-            premiumExpiration: new Date(invoice.period_end * 1000),
+            premiumExpiration: new Date(
+              subscriptionUpdated.current_period_end * 1000
+            ),
           },
           { upsert: true }
         );
@@ -128,15 +118,26 @@ export async function POST(request: NextRequest) {
             { status: 400 }
           );
         }
+        try {
+          await guildProfileSchema.findOneAndUpdate(
+            { guildID: serverIdDeleted },
+            {
+              premiumUser: null,
+              premium: 0,
+              premiumExpiration: null,
+            }
+          );
+        } catch (error) {
+          console.error(error);
+          return NextResponse.json(
+            {
+              message: "An error occurred while updating the database.",
+              status: 500,
+            },
+            { status: 500 }
+          );
+        }
 
-        await guildProfileSchema.findOneAndUpdate(
-          { guildID: serverIdDeleted },
-          {
-            premiumUser: null,
-            premium: 0,
-            premiumExpiration: null,
-          }
-        );
         break;
 
       default:
