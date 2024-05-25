@@ -22,8 +22,16 @@ export default function PlansComparison({
   return (
     <section className="max-w-8xl w-full h-auto flex flex-col mx-auto text-white">
       <div className="w-full max-w-7xl mx-auto flex flex-col items-center justify-center">
+        <div className="w-full flex flex-col items-center justify-center">
+          <h2 className="text-3xl sm:text-4xl font-bold text-center">
+            Plan Comparison
+          </h2>
+          <p className="text-center mt-2">
+            Compare the features of our free and premium plans
+          </p>
+          </div>
         <div className="w-full flex bg-neutral-800 h-16 rounded-t-3xl mt-6">
-          <div className="w-full basis-1/3 flex items-center justify-center"></div>
+          <div className="w-full basis-1/3 text-bold flex items-center justify-center"></div>
           <div className="w-full basis-1/3 flex items-center justify-center">
             Free
           </div>
