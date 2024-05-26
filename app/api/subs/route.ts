@@ -57,7 +57,7 @@ export async function POST(req: Request) {
     );
   }
 
-  if (!server && server?.premiumExpiration !== null) {
+  if (server && server?.premiumExpiration !== null) {
     return NextResponse.json(
       {
         message: "This server already has an active premium subscription",

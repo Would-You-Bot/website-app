@@ -21,7 +21,7 @@ export default function PlansComparison({
 }: PlansComparisonProps) {
   return (
     <section className="max-w-8xl w-full h-auto flex flex-col mx-auto text-white">
-      <div className="w-full max-w-7xl mx-auto flex flex-col items-center justify-center">
+      <div className="w-full max-w-8xl mx-auto flex flex-col items-center justify-center">
         <div className="w-full flex flex-col items-center justify-center">
           <h2 className="text-3xl sm:text-4xl font-bold text-center">
             Plan Comparison

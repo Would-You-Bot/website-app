@@ -14,6 +14,7 @@ import { IdTokenJWT } from "@/helpers/oauth/types";
 import DiscordLoginButton from "@/components/DiscordLoginButton";
 import UserDropdown from "./UserDropdown";
 import { LayoutDashboardIcon } from "lucide-react";
+import { Crown } from "@/icons/Crown";
 
 interface NavbarProps {
   idToken: IdTokenJWT | null;
@@ -112,10 +113,11 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
             </Link>
             <Link
               href="/premium"
-              className="text-lg text-yellow-300 transition-all hover:text-yellow-200"
+              className="text-lg text-yellow-500 drop-shadow-gold-glow transition-all hover:text-yellow-300 flex items-center gap-2"
             >
               Premium
-            </Link>
+              <Crown />
+            </Link>      
           </div>
         </div>
         <div className="flex items-center justify-center h-16">
