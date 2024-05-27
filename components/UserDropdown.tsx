@@ -37,7 +37,7 @@ export default function UserDropdown({ idToken, items }: UserDropdownProps) {
         </Avatar>
         <span className="text-white text-lg">{user?.username}</span>
       </DropdownMenuTrigger>
-      <DropdownMenuContent>
+      <DropdownMenuContent> 
         {items.map((item, i) => (
           <Link key={i} href={item.href}>
             <DropdownMenuItem className="flex gap-2">

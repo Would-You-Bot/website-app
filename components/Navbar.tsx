@@ -85,7 +85,7 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
 
   return (
     <nav className="fixed left-0 top-0 z-50 mb-28 flex h-auto py-6 w-full justify-center items-center">
-      <div className="flex items-center justify-between h-full w-full max-w-8xl px-8">
+      <div className="flex items-center justify-between h-full w-full max-w-8xl px-8 transition-all duration-300">
         <div className="flex min-w-fit items-center justify-center backdrop-blur bg-[#202020] bg-opacity-90 border-2 border-white/5 rounded-[10px] h-16 px-6">
           <Link href="/" className="flex items-center gap-6">
             <Image
@@ -100,7 +100,7 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
           </Link>
         </div>
         <div
-          className={`flex items-center justify-center gap-6 backdrop-blur bg-[#202020] bg-opacity-90 border-2 border-white/5 rounded-[10px] absolute md:static ${isOpen ? "w-screen h-screen pt-12 z-10 top-0 right-0 rounded-none" : "w-16 h-16 top-6 right-7"} transition-all duration-300`}
+          className={`flex items-center justify-center gap-6 backdrop-blur bg-[#202020] bg-opacity-90 border-2 border-white/5 rounded-[10px] absolute md:static ${isOpen ? "w-screen h-screen z-10 top-0 right-0 rounded-none" : "w-16 md:w-min h-16 top-6 right-7"} transition-all duration-300`}
         >
           <div className="hidden md:flex w-max gap-6 px-10">
             <Link
@@ -128,7 +128,7 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
             >
               Premium
               <Crown />
-            </Link>      
+            </Link>
           </div>
           <button
             className={`flex md:hidden flex-col gap-[5px] absolute top-5 right-4 z-50`}
@@ -145,13 +145,39 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
             />
           </button>
           <div
-            className={`flex flex-col gap-2 w-full mb-auto items-center text-white p-4 ${isOpen ? "opacity-100 pointer-events-auto transition-all duration-300 delay-150" : "opacity-0 pointer-events-none"}`}
+            className={`flex md:hidden flex-col h-full justify-center gap-8 w-full mb-auto items-center text-white p-4 ${isOpen ? "opacity-100 pointer-events-auto transition-all duration-300 delay-150" : "opacity-0 pointer-events-none"}`}
           >
-            <span className="py-2 px-4 w-fit">Dashboard</span>
-            <span className="py-2 px-4 w-fit">Dashboard</span>
-            <span className="py-2 px-4 w-fit">Dashboard</span>
-            <span className="py-2 px-4 w-fit">Dashboard</span>
-            <span className="py-2 px-4 w-fit">Dashboard</span>
+            <Link
+              href="/commands"
+              className="text-2xl text-neutral-300 transition-all hover:text-neutral-100"
+            >
+              Commands
+            </Link>
+            <Link
+              href="/blog"
+              className="text-2xl text-neutral-300 transition-all hover:text-neutral-100"
+            >
+              Blog
+            </Link>
+            <Link
+              href="/vote"
+              target="_blank"
+              className="text-2xl text-neutral-300 transition-all hover:text-neutral-100"
+            >
+              Vote
+            </Link>
+            <Link
+              href="/premium"
+              className="text-2xl text-yellow-500 drop-shadow-gold-glow transition-all hover:text-yellow-300 flex items-center gap-2"
+            >
+              Premium
+              <Crown />
+            </Link>
+            {idToken ? (
+              <UserDropdown idToken={idToken} items={menuItems} />
+            ) : (
+              <DiscordLoginButton className="rounded-[10px] h-16 px-6" />
+            )}
           </div>
         </div>
         <div className="hidden md:flex min-w-fit items-center justify-center h-16">
