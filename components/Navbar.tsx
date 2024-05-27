@@ -14,6 +14,7 @@ import { IdTokenJWT } from "@/helpers/oauth/types";
 import DiscordLoginButton from "@/components/DiscordLoginButton";
 import UserDropdown from "./UserDropdown";
 import { LayoutDashboardIcon } from "lucide-react";
+import { Crown } from "@/icons/Crown";
 
 interface NavbarProps {
   idToken: IdTokenJWT | null;
@@ -123,10 +124,11 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
             </Link>
             <Link
               href="/premium"
-              className="text-lg text-yellow-300 transition-all hover:text-yellow-200"
+              className="text-lg text-yellow-500 drop-shadow-gold-glow transition-all hover:text-yellow-300 flex items-center gap-2"
             >
               Premium
-            </Link>
+              <Crown />
+            </Link>      
           </div>
           <button
             className={`flex md:hidden flex-col gap-[5px] absolute top-5 right-4 z-50`}
@@ -161,7 +163,7 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
         </div>
       </div>
     </nav>
-    // <nav className="fixed left-0 top-0 z-50 mb-28 flex h-[80px] w-full justify-center items-center border-b border-b-neutral-800 bg-neutral-900 bg-opacity-90 backdrop-blur-sm">
+    // <nav className="fixed left-0 top-0 z-50 mb-28 flex h-[80px] w-full justify-center items-center border-b border-b-neutral-800 bg-neutral-900 bg-opacity-80 backdrop-blur-sm">
     //   <div className="flex items-center justify-between w-full h-full max-w-8xl px-8">
     //     <div className="flex items-center">
     //       <div className="ml-16 hidden items-center md:flex">

@@ -55,54 +55,39 @@ const pricingData: PricingData = {
 
 const data = [
   {
-    criteria: "Client Storage",
-    free: "100GB",
-    premium: "Unlimited",
-  },
-  {
-    criteria: "Customer Support",
-    free: false,
-    premium: true,
-  },
-  {
-    criteria: "Data Transfer",
-    free: "10GB/month",
-    premium: "Unlimited",
-  },
-  {
-    criteria: "Backup Frequency",
-    free: "Weekly",
-    premium: "Daily",
-  },
-  {
-    criteria: "Number of Users",
-    free: 1,
-    premium: 5,
-  },
-  {
-    criteria: "Integration Options",
-    free: "Limited",
-    premium: "Extensive",
-  },
-  {
-    criteria: "Service Uptime",
-    free: "99.9%",
-    premium: "99.99%",
-  },
-  {
-    criteria: "Security Features",
+    criteria: "5 Gamemodes",
     free: true,
     premium: true,
   },
   {
-    criteria: "Customization Options",
-    free: "Limited",
-    premium: "Fully Customizable",
+    criteria: "Question of the Day",
+    free: true,
+    premium: true,
   },
   {
-    criteria: "Training Resources",
-    free: "Online Documentation",
-    premium: "1-on-1 Training",
+    criteria: "Thousands of Questions",
+    free: true,
+    premium: true,
+  },
+  {
+    criteria: "Custom Questions",
+    free: "Limited (100 per category)",
+    premium: "Unlimited",
+  },
+  {
+    criteria: "Custom Webhook Branding",
+    free: false,
+    premium: true,
+  },
+  {
+    criteria: "Invite Button on Questions",
+    free: true,
+    premium: false,
+  },
+  {
+    criteria: "Auto Pin Daily Messages",
+    free: false,
+    premium: true,
   },
 ];
 

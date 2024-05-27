@@ -5,7 +5,6 @@ import Link from "next/link";
 import Button from "@/components/Button";
 import Image from "next/image";
 import ServerMarquee from "@/components/ServerMarquee";
-import servers from "@/data/servers.json";
 import FeatureItem from "@/components/FeatureItem";
 import DailyMessageEmbed from "@/components/Embeds/DailyMessageEmbed";
 import HigherLowerEmbed from "@/components/Embeds/HigherLowerEmbed";
@@ -17,11 +16,13 @@ import MainDiscordEmbed from "@/components/Embeds/MainDiscordEmbed";
 interface HomeContentProps {
   initialQuestion: string;
   serverCount: number;
+  servers: any[];
 }
 
 export function HomeContent({
   initialQuestion,
   serverCount,
+  servers,
 }: HomeContentProps) {
   const currentDate = new Date().toLocaleString();
   const [replayedRounds, setReplayedRounds] = useState(0);
@@ -123,8 +124,15 @@ export function HomeContent({
             users entertained
           </h3>
 
-          <ServerMarquee servers={servers[0]} speed={40} />
-          <ServerMarquee servers={servers[1]} speed={30} direction="right" />
+          <ServerMarquee
+            servers={servers.slice(0, Math.ceil(servers.length / 2))}
+            speed={40}
+          />
+          <ServerMarquee
+            servers={servers.slice(Math.ceil(servers.length / 2))}
+            speed={30}
+            direction="right"
+          />
         </div>
       </section>
 

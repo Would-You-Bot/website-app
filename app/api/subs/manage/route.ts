@@ -20,6 +20,6 @@ export async function GET(req: Request, res: Response) {
     return_url: `${req.headers.get("referer")}/`,
   });
 
-  return redirect(customerSession.url)
+  return redirect(customerSession.url, )
 
 }

@@ -36,4 +36,4 @@ const guildProfileSchema: Schema = new Schema(
 );
 
 
-export default models.Guild ||  model("Guild", guildProfileSchema);
+export default models.Guild ||  model("guildProfile", guildProfileSchema);

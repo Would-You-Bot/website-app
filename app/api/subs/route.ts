@@ -62,6 +62,7 @@ export async function POST(req: Request) {
       {
         message: "This server already has an active premium subscription",
         status: 409,
+        action: true
       },
       { status: 409 }
     );

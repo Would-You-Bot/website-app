@@ -1,6 +1,7 @@
 "use client";
 import { loadStripe } from "@stripe/stripe-js";
 import { useToast } from "@/components/ui/use-toast"
+import { ToastAction } from "@/components/ui/toast";
 
 interface CheckoutButtonProps {
   monthly: string;
@@ -17,12 +18,10 @@ export default function CheckoutButton({
   const { toast } = useToast()
   const handleCheckout = async () => {
 
-
     const stripePromise = loadStripe(
       process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
     );
     const stripe = await stripePromise;
-
 
     const response = await fetch("/api/subs", {
       method: "POST",
@@ -37,6 +36,18 @@ export default function CheckoutButton({
     });
 
     const data = await response.json();
+
+    if(data?.action) {
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: data.message,
+        action: <ToastAction   onClick={() =>
+          window.open("/api/subs/manage", "_blank")
+        } altText="Manage">Manage</ToastAction>,	
+      })
+      return;
+    }
 
     if (data.status === 409 || data.status === 422 || data.status === 500 || data.status === 401) {
      toast({
