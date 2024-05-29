@@ -61,10 +61,10 @@ export default function Terms() {
         </h3>
         <p>
           The Would You discord Bot offers a premium subscription model
-          ("Premium Model") that provides additional features and benefits. By
+          (&quot;Premium Model&quot;) that provides additional features and benefits. By
           subscribing to the Premium Model, you agree to pay the specified
           subscription fee on a recurring basis using the payment processing
-          services of Stripe, Inc. ("Stripe").
+          services of Stripe, Inc. (&quot;Stripe&quot;).
         </p>
         <h4 className="my-4 text-md font-bold text-white-400">
           2.1 Payment Processing
