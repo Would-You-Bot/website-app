@@ -21,16 +21,25 @@ interface NavbarProps {
 }
 
 const menuItems = [
-  { label: "Manage Subscription", href: "/api/subs/manage", icon: LayoutDashboardIcon },
+  {
+    label: "Manage Subscription",
+    href: "/api/subs/manage",
+    icon: LayoutDashboardIcon,
+  },
 ];
 
 const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
   const [mobileMenu, setMobileMenu] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const idToken = useIdToken(idToken_);
   const lineOneControls = useAnimationControls();
   const lineTwoControls = useAnimationControls();
   const lineThreeControls = useAnimationControls();
   const menuControls = useAnimationControls();
+
+  const handleIsOpen = () => {
+    if (window.innerWidth < 768) setIsOpen(!isOpen);
+  };
 
   const toggleMobileMenu = () => {
     if (mobileMenu) {
@@ -54,7 +63,7 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
       setMobileMenu(false);
     } else {
       lineOneControls.start(
-        { rotate: "45deg" },
+        { rotate: "37.5deg" },
         { duration: 0.3, type: "spring" }
       );
       lineTwoControls.start(
@@ -62,7 +71,7 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
         { duration: 0.12 }
       );
       lineThreeControls.start(
-        { rotate: "-45deg" },
+        { rotate: "-37.5deg" },
         { duration: 0.3, type: "spring" }
       );
       menuControls.start(
@@ -76,8 +85,8 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
 
   return (
     <nav className="fixed left-0 top-0 z-50 mb-28 flex h-auto py-6 w-full justify-center items-center">
-      <div className="flex items-center justify-between h-full w-full max-w-8xl px-8">
-        <div className="flex items-center justify-center backdrop-blur bg-[#202020] bg-opacity-80 border-2 border-white/5 rounded-[10px] h-16 px-6">
+      <div className="flex items-center justify-between h-full w-full max-w-8xl px-8 transition-all duration-300">
+        <div className="flex min-w-fit items-center justify-center backdrop-blur bg-[#202020] bg-opacity-90 border-2 border-white/5 rounded-[10px] h-16 px-6">
           <Link href="/" className="flex items-center gap-6">
             <Image
               src="/Logo.svg"
@@ -90,8 +99,10 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
             <p className="text-xl font-bold text-white">Would You</p>
           </Link>
         </div>
-        <div className="flex items-center justify-center gap-6 backdrop-blur bg-[#202020] bg-opacity-80 border-2 border-white/5 rounded-[10px] h-16 px-10">
-          <div className="flex w-max gap-6">
+        <div
+          className={`flex items-center justify-center gap-6 backdrop-blur bg-[#202020] bg-opacity-90 border-2 border-white/5 rounded-[10px] absolute md:static ${isOpen ? "w-screen h-screen z-10 top-0 right-0 rounded-none" : "w-16 md:w-min h-16 top-6 right-7"} transition-all duration-300`}
+        >
+          <div className="hidden md:flex w-max gap-6 px-10">
             <Link
               href="/commands"
               className="text-lg text-neutral-300 transition-all hover:text-neutral-100"
@@ -117,10 +128,59 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
             >
               Premium
               <Crown />
-            </Link>      
+            </Link>
+          </div>
+          <button
+            className={`flex md:hidden flex-col gap-[5px] absolute top-5 right-4 z-50`}
+            onClick={handleIsOpen}
+          >
+            <div
+              className={`w-[25px] h-[2px] rounded-[10px] bg-white ${isOpen ? "translate-y-2 rotate-45" : ""} transition-all duration-300`}
+            />
+            <div
+              className={`w-[25px] h-[2px] rounded-[10px] bg-white ${isOpen ? "opacity-0" : ""} transition-all`}
+            />
+            <div
+              className={`w-[25px] h-[2px] rounded-[10px] bg-white ${isOpen ? "-translate-y-2 -rotate-45" : ""} transition-all duration-300`}
+            />
+          </button>
+          <div
+            className={`flex md:hidden flex-col h-full justify-center gap-8 w-full mb-auto items-center text-white p-4 ${isOpen ? "opacity-100 pointer-events-auto transition-all duration-300 delay-150" : "opacity-0 pointer-events-none"}`}
+          >
+            <Link
+              href="/commands"
+              className="text-2xl text-neutral-300 transition-all hover:text-neutral-100"
+            >
+              Commands
+            </Link>
+            <Link
+              href="/blog"
+              className="text-2xl text-neutral-300 transition-all hover:text-neutral-100"
+            >
+              Blog
+            </Link>
+            <Link
+              href="/vote"
+              target="_blank"
+              className="text-2xl text-neutral-300 transition-all hover:text-neutral-100"
+            >
+              Vote
+            </Link>
+            <Link
+              href="/premium"
+              className="text-2xl text-yellow-500 drop-shadow-gold-glow transition-all hover:text-yellow-300 flex items-center gap-2"
+            >
+              Premium
+              <Crown />
+            </Link>
+            {idToken ? (
+              <UserDropdown idToken={idToken} items={menuItems} />
+            ) : (
+              <DiscordLoginButton className="rounded-[10px] h-16 px-6" />
+            )}
           </div>
         </div>
-        <div className="flex items-center justify-center h-16">
+        <div className="hidden md:flex min-w-fit items-center justify-center h-16">
           {idToken ? (
             <UserDropdown idToken={idToken} items={menuItems} />
           ) : (
