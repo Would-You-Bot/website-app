@@ -32,11 +32,6 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: '/commands',
-        destination: 'https://wouldyoubot.gg/commands',
-        permanent: true,
-      },
-      {
         source: "/discord",
         destination: "/support",
         permanent: true,

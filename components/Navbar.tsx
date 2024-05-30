@@ -149,12 +149,14 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
           >
             <Link
               href="/commands"
+              onClick={handleIsOpen}
               className="text-2xl text-neutral-300 transition-all hover:text-neutral-100"
             >
               Commands
             </Link>
             <Link
               href="/blog"
+              onClick={handleIsOpen}
               className="text-2xl text-neutral-300 transition-all hover:text-neutral-100"
             >
               Blog
@@ -162,12 +164,14 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
             <Link
               href="/vote"
               target="_blank"
+              onClick={handleIsOpen}
               className="text-2xl text-neutral-300 transition-all hover:text-neutral-100"
             >
               Vote
             </Link>
             <Link
               href="/premium"
+              onClick={handleIsOpen}
               className="text-2xl text-yellow-500 drop-shadow-gold-glow transition-all hover:text-yellow-300 flex items-center gap-2"
             >
               Premium
