@@ -131,17 +131,17 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
             </Link>
           </div>
           <button
-            className={`flex md:hidden flex-col gap-[5px] absolute top-5 right-4 z-50`}
+            className={`flex md:hidden flex-col gap-[5px] absolute top-[1.35rem] right-[1.05rem] z-50`}
             onClick={handleIsOpen}
           >
             <div
-              className={`w-[25px] h-[2px] rounded-[10px] bg-white ${isOpen ? "translate-y-2 rotate-45" : ""} transition-all duration-300`}
+              className={`w-[25px] h-[2px] rounded-[10px] bg-white ${isOpen ? "translate-y-[7px] rotate-45" : ""} transition-all duration-300`}
             />
             <div
               className={`w-[25px] h-[2px] rounded-[10px] bg-white ${isOpen ? "opacity-0" : ""} transition-all`}
             />
             <div
-              className={`w-[25px] h-[2px] rounded-[10px] bg-white ${isOpen ? "-translate-y-2 -rotate-45" : ""} transition-all duration-300`}
+              className={`w-[25px] h-[2px] rounded-[10px] bg-white ${isOpen ? "-translate-y-[7px] -rotate-45" : ""} transition-all duration-300`}
             />
           </button>
           <div
