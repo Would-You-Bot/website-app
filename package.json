@@ -6,11 +6,11 @@
     "dev": "next dev --turbo",
     "debug": "next dev",
     "build": "next build",
-    "start": "next start -p 2123",
+    "start": "node .next/standalone/server.js -p 2123",
     "lint": "next lint",
     "postbuild": "node sitemap.js && node rss.js",
-    "docker:build": "docker build -t dominikdoesdev/wy-website .",
-    "docker:start": "docker run -p 2123:2123 dominikdoesdev/wy-website"
+    "docker:build": "docker compose build -t website-wy",
+    "docker:start": "docker compose up -d"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.0.4",
@@ -35,7 +35,8 @@
     "react-dom": "^18",
     "react-fast-marquee": "^1.6.4",
     "rss": "^1.2.2",
-    "stripe": "^15.5.0",
+    "sharp": "^0.33.4",
+    "stripe": "^15.8.0",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.22.4"

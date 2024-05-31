@@ -6,3 +6,5 @@ README.md
 .next
 .git
 .env
+.env.local
+.env-copy.local

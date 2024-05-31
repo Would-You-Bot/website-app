@@ -3,8 +3,14 @@ version: "3"
 services:
   website-app:
     container_name: website-app
+    image: dominikdoesdev/wy-website
+    env_file:
+      - .env
+    restart: always
+    ports:
+      - 2123:2123
     build:
-      dockerfile: Dockerfile
+      context: .
       args:
         JWT_SECRET: ${JWT_SECRET}
         DISCORD_CLIENT_ID: ${DISCORD_CLIENT_ID}
@@ -21,9 +27,3 @@ services:
         NEXT_PUBLIC_PREMIUM_YEARLY_PRICE_ID: ${NEXT_PUBLIC_PREMIUM_YEARLY_PRICE_ID}
         MONGODB_URI: ${MONGODB_URI}
         UPSTASH_API_KEY: ${UPSTASH_API_KEY}
-    restart: always
-    ports:
-      - 2123:2123
-
-
-
