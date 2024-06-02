@@ -1,4 +1,4 @@
-import { Schema, Document, model, models } from "mongoose";
+import { Document, Schema, model, models } from "mongoose";
 
 export interface IGuild extends Document {
   guildID: string;
@@ -35,5 +35,4 @@ const guildProfileSchema: Schema = new Schema(
   { timestamps: true },
 );
 
-
-export default models.Guild ||  model("guildProfile", guildProfileSchema);
+export default models.Guild || model("guildProfile", guildProfileSchema);

@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Terms() {
   return (
-    <main className="flex flex-col gap-8 px-8 text-neutral-300 max-w-8xl w-full">
+    <main className="flex w-full max-w-8xl flex-col gap-8 px-8 text-neutral-300">
       <h1 className="mt-36 text-4xl font-bold text-brand-red-100 drop-shadow-red-glow">
         Terms of Service
       </h1>
@@ -61,12 +61,12 @@ export default function Terms() {
         </h3>
         <p>
           The Would You discord Bot offers a premium subscription model
-          (&quot;Premium Model&quot;) that provides additional features and benefits. By
-          subscribing to the Premium Model, you agree to pay the specified
-          subscription fee on a recurring basis using the payment processing
-          services of Stripe, Inc. (&quot;Stripe&quot;).
+          (&quot;Premium Model&quot;) that provides additional features and
+          benefits. By subscribing to the Premium Model, you agree to pay the
+          specified subscription fee on a recurring basis using the payment
+          processing services of Stripe, Inc. (&quot;Stripe&quot;).
         </p>
-        <h4 className="my-4 text-md font-bold text-white-400">
+        <h4 className="text-md text-white-400 my-4 font-bold">
           2.1 Payment Processing
         </h4>
         <p>
@@ -76,7 +76,7 @@ export default function Terms() {
           payment method on a recurring basis until you cancel your
           subscription.{" "}
         </p>
-        <h4 className="my-4 text-md font-bold text-white-400">
+        <h4 className="text-md text-white-400 my-4 font-bold">
           2.2 Cancellation and Refunds
         </h4>
         <p>

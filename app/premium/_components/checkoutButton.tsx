@@ -1,7 +1,7 @@
 "use client";
-import { loadStripe } from "@stripe/stripe-js";
-import { useToast } from "@/components/ui/use-toast"
 import { ToastAction } from "@/components/ui/toast";
+import { useToast } from "@/components/ui/use-toast";
+import { loadStripe } from "@stripe/stripe-js";
 
 interface CheckoutButtonProps {
   monthly: string;
@@ -14,12 +14,11 @@ export default function CheckoutButton({
   monthly,
   serverId,
   priceId,
-}: CheckoutButtonProps) { 
-  const { toast } = useToast()
+}: CheckoutButtonProps) {
+  const { toast } = useToast();
   const handleCheckout = async () => {
-
     const stripePromise = loadStripe(
-      process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!
+      process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!,
     );
     const stripe = await stripePromise;
 
@@ -37,37 +36,47 @@ export default function CheckoutButton({
 
     const data = await response.json();
 
-    if(data?.action) {
+    if (data?.action) {
       toast({
         variant: "destructive",
         title: "Uh oh! Something went wrong.",
         description: data.message,
-        action: <ToastAction   onClick={() =>
-          window.open("/api/subs/manage", "_blank")
-        } altText="Manage">Manage</ToastAction>,	
-      })
+        action: (
+          <ToastAction
+            onClick={() => window.open("/api/subs/manage", "_blank")}
+            altText="Manage"
+          >
+            Manage
+          </ToastAction>
+        ),
+      });
       return;
     }
 
-    if (data.status === 409 || data.status === 422 || data.status === 500 || data.status === 401) {
-     toast({
-      variant: "destructive",
-      title: "Uh oh! Something went wrong.",
-      description: data.message,
-      })
+    if (
+      data.status === 409 ||
+      data.status === 422 ||
+      data.status === 500 ||
+      data.status === 401
+    ) {
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: data.message,
+      });
       return;
     }
 
-   const stripeSession = (data) as { id: string };
-   console.log(stripeSession.id);
-   await stripe?.redirectToCheckout({ sessionId: stripeSession.id });
+    const stripeSession = data as { id: string };
+    console.log(stripeSession.id);
+    await stripe?.redirectToCheckout({ sessionId: stripeSession.id });
   };
 
   return (
     <button
       disabled={!serverId}
       onClick={handleCheckout}
-      className="flex mt-4 ml-auto w-fit justify-center rounded-lg px-5 py-1 font-bold text-sm leading-loose bg-brand-blue-100 text-white disabled:bg-[#1D1D1D] disabled:text-[#444444] disabled:cursor-not-allowed"
+      className="ml-auto mt-4 flex w-fit justify-center rounded-lg bg-brand-blue-100 px-5 py-1 text-sm font-bold leading-loose text-white disabled:cursor-not-allowed disabled:bg-[#1D1D1D] disabled:text-[#444444]"
     >
       Checkout
     </button>

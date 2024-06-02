@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "node .next/standalone/server.js -p 2123",
     "lint": "next lint",
+    "format": "prettier --write ./**/*.{ts,tsx}",
     "postbuild": "node sitemap.js && node rss.js",
     "docker:build": "docker compose build -t website-wy",
     "docker:start": "docker compose up -d"

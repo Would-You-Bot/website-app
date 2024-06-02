@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import Marquee from "react-fast-marquee";
 import { FC } from "react";
+import Marquee from "react-fast-marquee";
 
 interface Server {
   name: string;
@@ -111,6 +111,5 @@ const ServerMarquee: FC<MarqueeProps> = ({
     </div>
   );
 };
-
 
 export default ServerMarquee;

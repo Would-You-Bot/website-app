@@ -1,7 +1,7 @@
-import { NextResponse } from "next/server";
-import { stripe } from "@/lib/stripe";
 import { getAuthTokenOrNull } from "@/helpers/oauth/helpers";
-import { redirect } from 'next/navigation'
+import { stripe } from "@/lib/stripe";
+import { redirect } from "next/navigation";
+import { NextResponse } from "next/server";
 
 export async function GET(req: Request, res: Response) {
   const user = await getAuthTokenOrNull();
@@ -9,7 +9,7 @@ export async function GET(req: Request, res: Response) {
   if (!user) {
     return NextResponse.json(
       { message: "You must be logged in to subscribe", status: 401 },
-      { status: 401 }
+      { status: 401 },
     );
   }
 
@@ -20,6 +20,5 @@ export async function GET(req: Request, res: Response) {
     return_url: `${req.headers.get("referer")}/`,
   });
 
-  return redirect(customerSession.url, )
-
+  return redirect(customerSession.url);
 }

@@ -1,20 +1,14 @@
 "use client";
-import {
-  m,
-  useAnimationControls,
-  LazyMotion,
-  domAnimation,
-} from "framer-motion";
+import DiscordLoginButton from "@/components/DiscordLoginButton";
+import { useIdToken } from "@/helpers/hooks/useIdToken";
+import { IdTokenJWT } from "@/helpers/oauth/types";
+import { Crown } from "@/icons/Crown";
+import { useAnimationControls } from "framer-motion";
+import { LayoutDashboardIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import Button from "./Button";
-import { useIdToken } from "@/helpers/hooks/useIdToken";
-import { IdTokenJWT } from "@/helpers/oauth/types";
-import DiscordLoginButton from "@/components/DiscordLoginButton";
 import UserDropdown from "./UserDropdown";
-import { LayoutDashboardIcon } from "lucide-react";
-import { Crown } from "@/icons/Crown";
 
 interface NavbarProps {
   idToken: IdTokenJWT | null;
@@ -45,38 +39,38 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
     if (mobileMenu) {
       lineOneControls.start(
         { rotate: "0deg" },
-        { duration: 0.3, type: "spring" }
+        { duration: 0.3, type: "spring" },
       );
       lineTwoControls.start(
         { opacity: 1, transform: "translateX(0)" },
-        { duration: 0.12 }
+        { duration: 0.12 },
       );
       lineThreeControls.start(
         { rotate: "0deg" },
-        { duration: 0.3, type: "spring" }
+        { duration: 0.3, type: "spring" },
       );
       menuControls.start(
         { opacity: 0.5, left: "100vw", pointerEvents: "none" },
-        { duration: 0.21, type: "spring" }
+        { duration: 0.21, type: "spring" },
       );
 
       setMobileMenu(false);
     } else {
       lineOneControls.start(
         { rotate: "37.5deg" },
-        { duration: 0.3, type: "spring" }
+        { duration: 0.3, type: "spring" },
       );
       lineTwoControls.start(
         { opacity: 0, transform: "translateX(1)" },
-        { duration: 0.12 }
+        { duration: 0.12 },
       );
       lineThreeControls.start(
         { rotate: "-37.5deg" },
-        { duration: 0.3, type: "spring" }
+        { duration: 0.3, type: "spring" },
       );
       menuControls.start(
         { opacity: 1, left: "0", pointerEvents: "all" },
-        { duration: 0.21, type: "spring" }
+        { duration: 0.21, type: "spring" },
       );
 
       setMobileMenu(true);
@@ -84,9 +78,9 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
   };
 
   return (
-    <nav className="fixed left-0 top-0 z-50 mb-28 flex h-auto py-6 w-full justify-center items-center">
-      <div className="flex items-center justify-between h-full w-full max-w-8xl px-8 transition-all duration-300">
-        <div className="flex min-w-fit items-center justify-center backdrop-blur bg-[#202020] bg-opacity-90 border-2 border-white/5 rounded-[10px] h-16 px-6">
+    <nav className="fixed left-0 top-0 z-50 mb-28 flex h-auto w-full items-center justify-center py-6">
+      <div className="flex h-full w-full max-w-8xl items-center justify-between px-8 transition-all duration-300">
+        <div className="flex h-16 min-w-fit items-center justify-center rounded-[10px] border-2 border-white/5 bg-[#202020] bg-opacity-90 px-6 backdrop-blur">
           <Link href="/" className="flex items-center gap-6">
             <Image
               src="/Logo.svg"
@@ -100,9 +94,9 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
           </Link>
         </div>
         <div
-          className={`flex items-center justify-center gap-6 backdrop-blur bg-[#202020] bg-opacity-90 border-2 border-white/5 rounded-[10px] absolute md:static ${isOpen ? "w-screen h-screen z-10 top-0 right-0 rounded-none" : "w-16 md:w-min h-16 top-6 right-7"} transition-all duration-300`}
+          className={`absolute flex items-center justify-center gap-6 rounded-[10px] border-2 border-white/5 bg-[#202020] bg-opacity-90 backdrop-blur md:static ${isOpen ? "right-0 top-0 z-10 h-screen w-screen rounded-none" : "right-7 top-6 h-16 w-16 md:w-min"} transition-all duration-300`}
         >
-          <div className="hidden md:flex w-max gap-6 px-10">
+          <div className="hidden w-max gap-6 px-10 md:flex">
             <Link
               href="/commands"
               className="text-lg text-neutral-300 transition-all hover:text-neutral-100"
@@ -124,28 +118,28 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
             </Link>
             <Link
               href="/premium"
-              className="text-lg text-yellow-500 drop-shadow-gold-glow transition-all hover:text-yellow-300 flex items-center gap-2"
+              className="flex items-center gap-2 text-lg text-yellow-500 drop-shadow-gold-glow transition-all hover:text-yellow-300"
             >
               Premium
               <Crown />
             </Link>
           </div>
           <button
-            className={`flex md:hidden flex-col gap-[5px] absolute top-[1.35rem] right-[1.05rem] z-50`}
+            className={`absolute right-[1.05rem] top-[1.35rem] z-50 flex flex-col gap-[5px] md:hidden`}
             onClick={handleIsOpen}
           >
             <div
-              className={`w-[25px] h-[2px] rounded-[10px] bg-white ${isOpen ? "translate-y-[7px] rotate-45" : ""} transition-all duration-300`}
+              className={`h-[2px] w-[25px] rounded-[10px] bg-white ${isOpen ? "translate-y-[7px] rotate-45" : ""} transition-all duration-300`}
             />
             <div
-              className={`w-[25px] h-[2px] rounded-[10px] bg-white ${isOpen ? "opacity-0" : ""} transition-all`}
+              className={`h-[2px] w-[25px] rounded-[10px] bg-white ${isOpen ? "opacity-0" : ""} transition-all`}
             />
             <div
-              className={`w-[25px] h-[2px] rounded-[10px] bg-white ${isOpen ? "-translate-y-[7px] -rotate-45" : ""} transition-all duration-300`}
+              className={`h-[2px] w-[25px] rounded-[10px] bg-white ${isOpen ? "-translate-y-[7px] -rotate-45" : ""} transition-all duration-300`}
             />
           </button>
           <div
-            className={`flex md:hidden flex-col h-full justify-center gap-8 w-full mb-auto items-center text-white p-4 ${isOpen ? "opacity-100 pointer-events-auto transition-all duration-300 delay-150" : "opacity-0 pointer-events-none"}`}
+            className={`mb-auto flex h-full w-full flex-col items-center justify-center gap-8 p-4 text-white md:hidden ${isOpen ? "pointer-events-auto opacity-100 transition-all delay-150 duration-300" : "pointer-events-none opacity-0"}`}
           >
             <Link
               href="/commands"
@@ -172,7 +166,7 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
             <Link
               href="/premium"
               onClick={handleIsOpen}
-              className="text-2xl text-yellow-500 drop-shadow-gold-glow transition-all hover:text-yellow-300 flex items-center gap-2"
+              className="flex items-center gap-2 text-2xl text-yellow-500 drop-shadow-gold-glow transition-all hover:text-yellow-300"
             >
               Premium
               <Crown />
@@ -180,15 +174,15 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
             {idToken ? (
               <UserDropdown idToken={idToken} items={menuItems} />
             ) : (
-              <DiscordLoginButton className="rounded-[10px] h-16 px-6" />
+              <DiscordLoginButton className="h-16 rounded-[10px] px-6" />
             )}
           </div>
         </div>
-        <div className="hidden md:flex min-w-fit items-center justify-center h-16">
+        <div className="hidden h-16 min-w-fit items-center justify-center md:flex">
           {idToken ? (
             <UserDropdown idToken={idToken} items={menuItems} />
           ) : (
-            <DiscordLoginButton className="rounded-[10px] h-16 px-6" />
+            <DiscordLoginButton className="h-16 rounded-[10px] px-6" />
           )}
         </div>
       </div>

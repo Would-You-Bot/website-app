@@ -1,10 +1,8 @@
 // TODO remove the use client directive in favor of a server component
 "use client";
 
-import { Suspense, useState } from "react";
-import Head from "next/head";
-import { LazyMotion, domAnimation, m } from "framer-motion";
-import { getServer } from "@/lib/redis";
+import DiscordLoginButton from "@/components/DiscordLoginButton";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   Dialog,
   DialogContent,
@@ -20,12 +18,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { ServersListSkeleton } from "./_components";
-import { PricingData, DiscordGuild } from "./_types";
-import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import Image from "next/image";
-import CheckoutButton from "./_components/checkoutButton";
+import { Toaster } from "@/components/ui/toaster";
 import { useIdToken } from "@/helpers/hooks";
+import { getServer } from "@/lib/redis";
+import { LazyMotion, domAnimation, m } from "framer-motion";
+import Head from "next/head";
+import Image from "next/image";
+import { Suspense, useState } from "react";
+import { ServersListSkeleton } from "./_components";
+import PlansComparison from "./_components/PlansComparison";
+import CheckoutButton from "./_components/checkoutButton";
 import {
   ApplePay,
   CheckIcon,
@@ -38,9 +40,7 @@ import {
   StripeSquare,
   Visa,
 } from "./_components/icons";
-import DiscordLoginButton from "@/components/DiscordLoginButton";
-import { Toaster } from "@/components/ui/toaster";
-import PlansComparison from "./_components/PlansComparison";
+import { DiscordGuild, PricingData } from "./_types";
 
 const pricingData: PricingData = {
   price: { monthly: 2.99, yearly: 29.99 },
@@ -111,8 +111,8 @@ export default function Premium() {
       <Head>
         <title>Would You - Premium</title>
       </Head>
-      <main className="relative flex w-full justify-center mb-40">
-        <div className="flex flex-col w-full max-w-8xl px-8 gap-52">
+      <main className="relative mb-40 flex w-full justify-center">
+        <div className="flex w-full max-w-8xl flex-col gap-52 px-8">
           <LazyMotion features={domAnimation}>
             <m.div
               initial={{ opacity: 0 }}
@@ -124,20 +124,20 @@ export default function Premium() {
                 <h1 className="mt-36 text-4xl font-bold text-yellow-500 drop-shadow-gold-glow">
                   Premium
                 </h1>
-                <p className="mb-6 text-customGrayText text-neutral-300 mt-4">
+                <p className="text-customGrayText mb-6 mt-4 text-neutral-300">
                   Select the plan that suits your needs and benefit from our
                   discord bot.
                 </p>
-                <div className="mx-auto max-w-2xl text-center my-4">
-                  <label className="bg-black/40 group relative mx-auto flex h-16 w-fit cursor-pointer items-center justify-between rounded-2xl text-xl pl-6 pr-8">
+                <div className="mx-auto my-4 max-w-2xl text-center">
+                  <label className="group relative mx-auto flex h-16 w-fit cursor-pointer items-center justify-between rounded-2xl bg-black/40 pl-6 pr-8 text-xl">
                     <input
                       type="checkbox"
                       className="peer appearance-none"
                       checked={!isMonthly}
                       onChange={handleChange}
                     />
-                    <span className="absolute -ml-4 flex h-16 w-[6rem] cursor-pointer items-center duration-300 ease-in-out after:h-12 after:w-[20rem] after:rounded-lg after:bg-customPrimary after:shadow-md after:duration-300 peer-checked:after:translate-x-[6rem] after:bg-brand-customPrimary z-10"></span>
-                    <div className="flex text-base gap-10 font-bold text-white z-20">
+                    <span className="after:bg-customPrimary absolute z-10 -ml-4 flex h-16 w-[6rem] cursor-pointer items-center duration-300 ease-in-out after:h-12 after:w-[20rem] after:rounded-lg after:bg-brand-customPrimary after:shadow-md after:duration-300 peer-checked:after:translate-x-[6rem]"></span>
+                    <div className="z-20 flex gap-10 text-base font-bold text-white">
                       <div className={`${!isMonthly && "text-gray-400"}`}>
                         Monthly
                       </div>
@@ -147,11 +147,11 @@ export default function Premium() {
                     </div>
                   </label>
                 </div>
-                <div className="flex flex-col w-fit mx-auto">
-                  <div className="w-auto rounded-[1.7rem] bg-gradient-premium p-[4px] mb-4">
-                    <div className="rounded-3xl bg-brand-customDarkBg3 px-8 py-8 relative overflow-hidden">
+                <div className="mx-auto flex w-fit flex-col">
+                  <div className="mb-4 w-auto rounded-[1.7rem] bg-gradient-premium p-[4px]">
+                    <div className="relative overflow-hidden rounded-3xl bg-brand-customDarkBg3 px-8 py-8">
                       <span
-                        className={`${!isMonthly ? "top-7" : "-top-10 opacity-0 pointer-events-none"} absolute right-6 px-4 py-2 rounded-xl text-mb text-white bg-white/15 cursor-default transition-all duration-300`}
+                        className={`${!isMonthly ? "top-7" : "pointer-events-none -top-10 opacity-0"} text-mb absolute right-6 cursor-default rounded-xl bg-white/15 px-4 py-2 text-white transition-all duration-300`}
                       >
                         2 months free
                       </span>
@@ -168,7 +168,7 @@ export default function Premium() {
                           {isMonthly ? "/ month" : "/ year"}
                         </div>
                       </div>
-                      <p className="mt-1 text-left leading-loose text-gray-400 mb-8">
+                      <p className="mb-8 mt-1 text-left leading-loose text-gray-400">
                         Experience the full power of our Would You bot.
                       </p>
                       <ul className="mb-16 text-white">
@@ -184,7 +184,7 @@ export default function Premium() {
                               )}
                               <span>{text}</span>
                             </li>
-                          )
+                          ),
                         )}
                       </ul>
                       <Dialog>
@@ -193,20 +193,20 @@ export default function Premium() {
                             onClick={() => {
                               fetchData();
                             }}
-                            className="text-white focus:ring-0 flex w-full justify-center items-center gap-2 rounded-xl py-2 font-bold leading-loose bg-green-500 hover:bg-green-600 transition"
+                            className="flex w-full items-center justify-center gap-2 rounded-xl bg-green-500 py-2 font-bold leading-loose text-white transition hover:bg-green-600 focus:ring-0"
                           >
                             Continue with Stripe
-                            <StripeSquare className="w-5 h-5" />
+                            <StripeSquare className="h-5 w-5" />
                           </DialogTrigger>
                         ) : (
                           <DiscordLoginButton
-                            className="font-bold rounded-xl"
+                            className="rounded-xl font-bold"
                             redirect="/premium"
                           />
                         )}
-                        <DialogContent className="w-fit bg-brand-customDarkBg3 border-none">
+                        <DialogContent className="w-fit border-none bg-brand-customDarkBg3">
                           <DialogHeader>
-                            <DialogTitle className="text-white font-bold text-xl">
+                            <DialogTitle className="text-xl font-bold text-white">
                               <div>
                                 Buy{" "}
                                 <span className="text-brand-red-100">
@@ -225,14 +225,14 @@ export default function Premium() {
                               <SelectTrigger className="w-[300px] sm:w-[400px]">
                                 <SelectValue placeholder="Select a server to continue" />
                               </SelectTrigger>
-                              <SelectContent className="max-w-[300px] max-h-[40vh] sm:max-w-[400px]">
+                              <SelectContent className="max-h-[40vh] max-w-[300px] sm:max-w-[400px]">
                                 <Suspense fallback={<ServersListSkeleton />}>
                                   {serversData.map((server: DiscordGuild) => (
                                     <SelectItem
                                       key={server.id}
                                       value={server.id}
                                     >
-                                      <div className="flex gap-2 items-center">
+                                      <div className="flex items-center gap-2">
                                         <Avatar className="h-6 w-6">
                                           <AvatarImage
                                             src={`https://cdn.discordapp.com/icons/${server.id}/${server.icon}.webp`}
@@ -246,7 +246,7 @@ export default function Premium() {
                                             />
                                           </AvatarFallback>
                                         </Avatar>
-                                        <span className="text-ellipsis line-clamp-1">
+                                        <span className="line-clamp-1 text-ellipsis">
                                           {server.name}
                                         </span>
                                       </div>

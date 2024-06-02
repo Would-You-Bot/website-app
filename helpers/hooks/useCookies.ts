@@ -1,5 +1,5 @@
-import { useMemo } from "react";
 import { useIsClient } from "@/helpers/hooks/useIsClient";
+import { useMemo } from "react";
 
 export function useCookies() {
   const isClient = useIsClient();

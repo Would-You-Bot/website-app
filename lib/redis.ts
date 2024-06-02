@@ -1,6 +1,6 @@
 "use server";
-import { Redis } from "@upstash/redis";
 import { getAuthTokenOrNull } from "@/helpers/oauth/helpers";
+import { Redis } from "@upstash/redis";
 
 const redis = new Redis({
   url: process.env.REDIS_URL!,
@@ -17,7 +17,10 @@ const get = async (key: string) => {
   return data;
 };
 
-const setServer = async (userId: string | undefined, servers: object | Array<object>) => {
+const setServer = async (
+  userId: string | undefined,
+  servers: object | Array<object>,
+) => {
   const authToken = await getAuthTokenOrNull();
 
   if (!authToken) return null;
@@ -41,4 +44,4 @@ const getServer = async () => {
   return data;
 };
 
-export { add, get, setServer, getServer };
+export { add, get, getServer, setServer };

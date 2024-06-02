@@ -15,11 +15,11 @@ export default function DiscordLoginButton({
     <>
       <a
         href={`/login?redirect=${encodeURIComponent(redirect ? redirect : "/")}`}
-        className={`text-white flex min-w-fit justify-center items-center gap-2 py-2 px-4 leading-loose bg-indigo-500 hover:bg-indigo-500/90 transition-all duration-300 ${className}`}
+        className={`flex min-w-fit items-center justify-center gap-2 bg-indigo-500 px-4 py-2 leading-loose text-white transition-all duration-300 hover:bg-indigo-500/90 ${className}`}
       >
         <span className="hidden lg:flex">Login with Discord</span>
         <span className="flex lg:hidden">Login</span>
-        <Discord className="w-6 h-6" />
+        <Discord className="h-6 w-6" />
       </a>
     </>
   );

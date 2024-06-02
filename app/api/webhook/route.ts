@@ -1,8 +1,8 @@
 import { stripe } from "@/lib/stripe";
+import guildProfileSchema from "@/models/Guild";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
 import type Stripe from "stripe";
-import guildProfileSchema from "@/models/Guild";
 
 export async function POST(request: NextRequest) {
   try {
@@ -14,21 +14,21 @@ export async function POST(request: NextRequest) {
       event = stripe.webhooks.constructEvent(
         payload,
         signature!,
-        process.env.STRIPE_WEBHOOK_SECRET!
+        process.env.STRIPE_WEBHOOK_SECRET!,
       );
     } catch (error: unknown) {
       if (error instanceof Error) {
         console.error(
-          `Webhook signature verification failed: ${error.message}`
+          `Webhook signature verification failed: ${error.message}`,
         );
       } else {
         console.error(
-          "Webhook signature verification failed with unknown error type."
+          "Webhook signature verification failed with unknown error type.",
         );
       }
       return NextResponse.json(
         { message: "Webhook Error", status: 400 },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -40,25 +40,27 @@ export async function POST(request: NextRequest) {
         const serverId = subscription.metadata?.serverId;
         const tier =
           subscription.metadata?.monthly === "true" ? "monthly" : "yearly";
-          
+
         if (!userId || !serverId || !tier) {
           console.error("One or more variables are undefined.");
           return NextResponse.json(
             { message: "One or more variables are missing", status: 400 },
-            { status: 400 }
+            { status: 400 },
           );
         }
         try {
-        await guildProfileSchema.findOneAndUpdate(
-          { guildID: serverId },
-          {
-            guildID: serverId,
-            premiumUser: userId,
-            premium: 1,
-            premiumExpiration: new Date(subscription.current_period_end * 1000),
-          },
-          { upsert: true }
-        );
+          await guildProfileSchema.findOneAndUpdate(
+            { guildID: serverId },
+            {
+              guildID: serverId,
+              premiumUser: userId,
+              premium: 1,
+              premiumExpiration: new Date(
+                subscription.current_period_end * 1000,
+              ),
+            },
+            { upsert: true },
+          );
         } catch (error) {
           console.error(error);
           return NextResponse.json(
@@ -66,7 +68,7 @@ export async function POST(request: NextRequest) {
               message: "An error occurred while updating the database.",
               status: 500,
             },
-            { status: 500 }
+            { status: 500 },
           );
         }
         break;
@@ -85,7 +87,7 @@ export async function POST(request: NextRequest) {
           console.error("One or more variables are undefined.");
           return NextResponse.json(
             { message: "One or more variables are missing", status: 400 },
-            { status: 400 }
+            { status: 400 },
           );
         }
 
@@ -94,10 +96,10 @@ export async function POST(request: NextRequest) {
           {
             premium: 1,
             premiumExpiration: new Date(
-              subscriptionUpdated.current_period_end * 1000
+              subscriptionUpdated.current_period_end * 1000,
             ),
           },
-          { upsert: true }
+          { upsert: true },
         );
         break;
 
@@ -115,7 +117,7 @@ export async function POST(request: NextRequest) {
           console.error("One or more variables are undefined.");
           return NextResponse.json(
             { message: "One or more variables are missing", status: 400 },
-            { status: 400 }
+            { status: 400 },
           );
         }
         try {
@@ -125,7 +127,7 @@ export async function POST(request: NextRequest) {
               premiumUser: null,
               premium: 0,
               premiumExpiration: null,
-            }
+            },
           );
         } catch (error) {
           console.error(error);
@@ -134,7 +136,7 @@ export async function POST(request: NextRequest) {
               message: "An error occurred while updating the database.",
               status: 500,
             },
-            { status: 500 }
+            { status: 500 },
           );
         }
 
@@ -149,12 +151,12 @@ export async function POST(request: NextRequest) {
     if (error instanceof Error) {
       return NextResponse.json(
         { message: error.message, status: 500 },
-        { status: 500 }
+        { status: 500 },
       );
     } else {
       return NextResponse.json(
         { message: "An unknown error occurred", status: 500 },
-        { status: 500 }
+        { status: 500 },
       );
     }
   }

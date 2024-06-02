@@ -1,3 +1,4 @@
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -6,9 +7,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/user-dropdown-menu";
 import { IdTokenJWT } from "@/helpers/oauth/types";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import Image from "next/image";
 import { LogOut } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 interface UserDropdownProps {
@@ -21,7 +21,7 @@ export default function UserDropdown({ idToken, items }: UserDropdownProps) {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="flex px-4 py-2 items-center hover:bg-white/5 gap-2 rounded-lg transition">
+      <DropdownMenuTrigger className="flex items-center gap-2 rounded-lg px-4 py-2 transition hover:bg-white/5">
         <Avatar>
           <AvatarImage
             src={`https://cdn.discordapp.com/avatars/${user?.id}/${user?.avatar}.jpg`}
@@ -35,21 +35,21 @@ export default function UserDropdown({ idToken, items }: UserDropdownProps) {
             />
           </AvatarFallback>
         </Avatar>
-        <span className="text-white text-lg">{user?.username}</span>
+        <span className="text-lg text-white">{user?.username}</span>
       </DropdownMenuTrigger>
-      <DropdownMenuContent> 
+      <DropdownMenuContent>
         {items.map((item, i) => (
           <Link key={i} href={item.href}>
             <DropdownMenuItem className="flex gap-2">
-              <item.icon className="h-4 w-4 mt-0.5" />
+              <item.icon className="mt-0.5 h-4 w-4" />
               <span>{item.label}</span>
             </DropdownMenuItem>
           </Link>
         ))}
         <DropdownMenuSeparator />
         <a href="/logout" className="w-full text-[#F00505]">
-          <DropdownMenuItem className="w-full flex items-center gap-2">
-            <LogOut className="h-4 w-4 mt-0.5" />
+          <DropdownMenuItem className="flex w-full items-center gap-2">
+            <LogOut className="mt-0.5 h-4 w-4" />
             Logout
           </DropdownMenuItem>
         </a>

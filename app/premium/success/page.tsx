@@ -18,8 +18,8 @@ export default function Premium() {
       <Head>
         <title>Would You - Commands</title>
       </Head>
-      <main className="flex flex-col flex-1 items-center justify-center gap-8 px-8 text-neutral-300">
-        <h1 className="mt-36 text-6xl font-bold text-brand-blue-100 text-center drop-shadow-blue-glow">
+      <main className="flex flex-1 flex-col items-center justify-center gap-8 px-8 text-neutral-300">
+        <h1 className="mt-36 text-center text-6xl font-bold text-brand-blue-100 drop-shadow-blue-glow">
           Payment Successful!
         </h1>
         <p className="mb-4 text-lg text-white">

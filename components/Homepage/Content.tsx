@@ -1,17 +1,17 @@
 "use client";
 
-import { domAnimation, LazyMotion, m } from "framer-motion";
-import Link from "next/link";
 import Button from "@/components/Button";
-import Image from "next/image";
-import ServerMarquee from "@/components/ServerMarquee";
-import FeatureItem from "@/components/FeatureItem";
 import DailyMessageEmbed from "@/components/Embeds/DailyMessageEmbed";
 import HigherLowerEmbed from "@/components/Embeds/HigherLowerEmbed";
-import NeverHaveIEverEmbed from "@/components/Embeds/NeverHaveIEverEmbed";
-import React, { useState } from "react";
-import { getRandomQuestion } from "@/helpers/getRandomQuestion";
 import MainDiscordEmbed from "@/components/Embeds/MainDiscordEmbed";
+import NeverHaveIEverEmbed from "@/components/Embeds/NeverHaveIEverEmbed";
+import FeatureItem from "@/components/FeatureItem";
+import ServerMarquee from "@/components/ServerMarquee";
+import { getRandomQuestion } from "@/helpers/getRandomQuestion";
+import { domAnimation, LazyMotion, m } from "framer-motion";
+import Image from "next/image";
+import Link from "next/link";
+import { useState } from "react";
 
 interface HomeContentProps {
   initialQuestion: string;
@@ -45,13 +45,13 @@ export function HomeContent({
 
   return (
     <LazyMotion features={domAnimation}>
-      <section className="flex flex-col items-center justify-between gap-16 text-center lg:flex-row lg:text-left mt-28 max-w-8xl w-full px-8">
+      <section className="mt-28 flex w-full max-w-8xl flex-col items-center justify-between gap-16 px-8 text-center lg:flex-row lg:text-left">
         <m.div
           initial={{ opacity: 0, transform: "translateY(20px)" }}
           whileInView={{ opacity: 1, transform: "translateY(0)" }}
           transition={{ duration: 0.7, ease: "easeInOut" }}
           viewport={{ once: true }}
-          className="flex flex-col lg:block items-center"
+          className="flex flex-col items-center lg:block"
         >
           <h1 className="text-6xl font-bold leading-normal text-white">
             Entertain Your
@@ -72,7 +72,7 @@ export function HomeContent({
           <Link
             href="/invite"
             target="_blank"
-            className="flex justify-center w-fit mt-8"
+            className="mt-8 flex w-fit justify-center"
           >
             <Button className="gap-2">
               Unleash the Fun
@@ -108,7 +108,7 @@ export function HomeContent({
           height="10000"
           priority
         />
-        <div className="bg-[#101010] pb-12 text-center text-5xl text-white md:-mt-20 md:pb-28 w-full px-8">
+        <div className="w-full bg-[#101010] px-8 pb-12 text-center text-5xl text-white md:-mt-20 md:pb-28">
           <h2>
             Trusted by{" "}
             <span className="bg-gradient-brand bg-clip-text font-bold text-transparent">
@@ -136,7 +136,7 @@ export function HomeContent({
         </div>
       </section>
 
-      <section className="mt-20 flex flex-col items-center gap-20 px-8 max-w-8xl w-full">
+      <section className="mt-20 flex w-full max-w-8xl flex-col items-center gap-20 px-8">
         <m.div
           initial={{ opacity: 0, transform: "translateY(15px)" }}
           whileInView={{ opacity: 1, transform: "translateY(0)" }}
@@ -201,7 +201,7 @@ export function HomeContent({
         />
       </section>
 
-      <section className="mt-36 bg-[#101010] px-9 py-12 w-full">
+      <section className="mt-36 w-full bg-[#101010] px-9 py-12">
         <m.h2
           initial={{ opacity: 0, transform: "translateY(10px)" }}
           whileInView={{ opacity: 1, transform: "translateY(0)" }}

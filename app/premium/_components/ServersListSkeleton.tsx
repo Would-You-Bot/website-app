@@ -31,7 +31,7 @@ export async function ServersListSkeleton() {
 
 function ServersListItem() {
   return (
-    <div className="flex gap-2 items-center h-10 hover:bg-white/5 px-2 rounded-sm transition">
+    <div className="flex h-10 items-center gap-2 rounded-sm px-2 transition hover:bg-white/5">
       <Skeleton className="h-8 w-8 rounded-full" />
       <Skeleton className="h-6 w-1/2 rounded-md" />
     </div>

@@ -1,10 +1,10 @@
 // TODO remove the use client directive in favor of a server component
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import commands from "../../data/commands.json";
 import Head from "next/head";
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+import commands from "../../data/commands.json";
 
 export default function Commands() {
   interface Command {
@@ -21,7 +21,7 @@ export default function Commands() {
   const [copyText, setCopyText] = useState("");
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [filteredCommands, setFilteredCommands] = useState<Command[]>(
-    commands as object as Command[]
+    commands as object as Command[],
   );
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -43,7 +43,7 @@ export default function Commands() {
       const filtered = commands.filter(
         (command) =>
           command.name.toLowerCase().includes(lowerCaseTerm) ||
-          command.description.toLowerCase().includes(lowerCaseTerm)
+          command.description.toLowerCase().includes(lowerCaseTerm),
       );
 
       setFilteredCommands(filtered as object as Command[]);
@@ -67,7 +67,7 @@ export default function Commands() {
       <Head>
         <title>Would You - Commands</title>
       </Head>
-      <main className="px-8 max-w-8xl w-full">
+      <main className="w-full max-w-8xl px-8">
         <h1 className="mt-36 text-4xl font-bold text-brand-red-100 drop-shadow-red-glow">
           Commands
         </h1>
@@ -85,14 +85,14 @@ export default function Commands() {
           {categories.map((category, index) => {
             // Filter commands for the current category
             const categoryCommands = filteredCommands.filter((command) =>
-              command.category.includes(category)
+              command.category.includes(category),
             );
 
             // Render only if there are commands in the category
             if (categoryCommands.length > 0) {
               return (
                 <div key={index} className="space-y-4">
-                  <h2 className=" mt-10 select-none font-semibold text-neutral-300">
+                  <h2 className="mt-10 select-none font-semibold text-neutral-300">
                     {category}
                   </h2>
                   {categoryCommands.map((command) => {

@@ -1,4 +1,5 @@
 "use client";
+import profiles from "@/data/profiles.json";
 import {
   DiscordActionRow,
   DiscordAttachments,
@@ -10,8 +11,7 @@ import {
   DiscordMessage,
   DiscordMessages,
 } from "@skyra/discord-components-react";
-import { m, LazyMotion, domAnimation } from "framer-motion";
-import profiles from "@/data/profiles.json";
+import { LazyMotion, domAnimation, m } from "framer-motion";
 import { FC } from "react";
 
 interface MainProps {
@@ -34,7 +34,7 @@ const MainDiscordEmbed: FC<MainProps> = ({
         viewport={{ once: true }}
         style={{ width: "90%", marginLeft: "auto", marginRight: "auto" }}
       >
-        <DiscordMessages class="w-auto sm:w-2/3 mx-auto lg:w-auto overflow-x-hidden rounded-lg text-left shadow">
+        <DiscordMessages class="mx-auto w-auto overflow-x-hidden rounded-lg text-left shadow sm:w-2/3 lg:w-auto">
           <DiscordMessage
             profile="wouldyou"
             author={profiles.wouldyou.author}
