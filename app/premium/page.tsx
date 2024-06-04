@@ -41,6 +41,7 @@ import {
   Visa,
 } from "./_components/icons";
 import { DiscordGuild, PricingData } from "./_types";
+import { Metadata } from "next";
 
 const pricingData: PricingData = {
   price: { monthly: 2.99, yearly: 29.99 },

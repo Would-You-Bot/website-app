@@ -20,6 +20,7 @@ export async function generateMetadata({
   return {
     title,
     description: frontMatter.description,
+    metadataBase: new URL("https://wouldyoubot.gg/blog/"),
     openGraph: {
       title,
       publishedTime: frontMatter.seoDate,
