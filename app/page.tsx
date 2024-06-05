@@ -1,6 +1,39 @@
 import { HomeContent } from "@/components/Homepage/Content";
 import { HomeSchemaMetadata } from "@/components/Homepage/SchemaMetadata";
 import { getRandomQuestion } from "@/helpers/getRandomQuestion";
+import type { Metadata, Viewport } from "next";
+
+export const metadata: Metadata = {
+  title: "Would You - The Discord Bot",
+  description: "Would you lets you play Would You Rather, Never Have I Ever, Higher or Lower, Truth or Dare and What Would You Do on Discord!",
+  robots: "index, follow",
+  publisher: "Rivo",
+  metadataBase: new URL("https://wouldyoubot.gg"),
+  openGraph: {
+    title: "Would You - The Discord Bot",
+    description: "Would you lets you play Would You Rather, Never Have I Ever, Higher or Lower, Truth or Dare and What Would You Do on Discord!",
+    type: "website",
+    url: "https://wouldyoubot.gg",
+    images: "https://i.imgur.com/BsWSxze.png",
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: "https://i.imgur.com/BsWSxze.png",
+    title: "Would You - The Discord Bot",
+    description: "Would you lets you play Would You Rather, Never Have I Ever, Higher or Lower, Truth or Dare and What Would You Do on Discord!",
+    site: "@WouldYouBot",    
+  },
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/apple-icon.png",
+    shortcut: "/favicon-16x16.png",
+
+  }
+};
+
+export const viewport: Viewport = {
+  themeColor: "#0598F6",
+}
 
 const Home = async () => {
   const response = await fetch(
