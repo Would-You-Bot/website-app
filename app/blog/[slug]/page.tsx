@@ -1,6 +1,5 @@
 import {
   MainContent,
-  ProgressBar,
   TableOfContents,
 } from "@/app/blog/[slug]/_components";
 import { getPost } from "@/app/blog/[slug]/_data";
@@ -44,7 +43,6 @@ const BlogPost = async ({ params: { slug } }: { params: { slug: string } }) => {
 
   return (
     <>
-      <ProgressBar />
       <div className="mt-36 w-full max-w-8xl px-8 text-neutral-300">
         <Link
           href="/blog"
