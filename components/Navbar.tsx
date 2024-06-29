@@ -35,48 +35,6 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
     if (window.innerWidth < 768) setIsOpen(!isOpen);
   };
 
-  const toggleMobileMenu = () => {
-    if (mobileMenu) {
-      lineOneControls.start(
-        { rotate: "0deg" },
-        { duration: 0.3, type: "spring" },
-      );
-      lineTwoControls.start(
-        { opacity: 1, transform: "translateX(0)" },
-        { duration: 0.12 },
-      );
-      lineThreeControls.start(
-        { rotate: "0deg" },
-        { duration: 0.3, type: "spring" },
-      );
-      menuControls.start(
-        { opacity: 0.5, left: "100vw", pointerEvents: "none" },
-        { duration: 0.21, type: "spring" },
-      );
-
-      setMobileMenu(false);
-    } else {
-      lineOneControls.start(
-        { rotate: "37.5deg" },
-        { duration: 0.3, type: "spring" },
-      );
-      lineTwoControls.start(
-        { opacity: 0, transform: "translateX(1)" },
-        { duration: 0.12 },
-      );
-      lineThreeControls.start(
-        { rotate: "-37.5deg" },
-        { duration: 0.3, type: "spring" },
-      );
-      menuControls.start(
-        { opacity: 1, left: "0", pointerEvents: "all" },
-        { duration: 0.21, type: "spring" },
-      );
-
-      setMobileMenu(true);
-    }
-  };
-
   return (
     <nav className="fixed left-0 top-0 z-50 mb-28 flex h-auto w-full items-center justify-center py-6">
       <div className="flex h-full w-full max-w-8xl items-center justify-between px-8 transition-all duration-300">
