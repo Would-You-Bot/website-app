@@ -1,7 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import { FC } from "react";
 import Marquee from "react-fast-marquee";
+import Avatar from "./Avatar";
 
 interface Server {
   name: string;
@@ -44,10 +44,10 @@ const ServerMarquee: FC<MarqueeProps> = ({
             href={`https://discord.gg/${s.vanityURLCode}`}
             target="_blank"
           >
-            <Image
+            <Avatar
               src={s.iconURL}
-              alt={s.name}
-              draggable={false}
+              alt={s.name + "'s server icon"}
+              fallbackSrc="/logo.svg"
               width={60}
               height={60}
               className="rounded-lg"

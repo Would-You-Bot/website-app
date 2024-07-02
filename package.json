@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbo",
-    "debug": "next dev",
+    "debug": "next dev -p 2123",
     "build": "next build",
     "start": "node .next/standalone/server.js -p 2123",
     "lint": "next lint",
