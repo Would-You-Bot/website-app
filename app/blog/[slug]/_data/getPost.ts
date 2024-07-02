@@ -1,10 +1,10 @@
-import { cache } from "react";
-import { MDXRemoteSerializeResult } from "next-mdx-remote";
-import path from "node:path";
 import { POST_PATH } from "@/utils/mdx";
-import { readFile } from "node:fs/promises";
 import matter from "gray-matter";
+import { MDXRemoteSerializeResult } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
+import { readFile } from "node:fs/promises";
+import path from "node:path";
+import { cache } from "react";
 
 export interface FrontMatter {
   title: string;

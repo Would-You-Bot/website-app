@@ -1,5 +1,5 @@
-import { createJWT, validateJWT } from "oslo/jwt";
 import { TimeSpan } from "oslo";
+import { createJWT, validateJWT } from "oslo/jwt";
 
 const secret = Buffer.from(process.env.JWT_SECRET!);
 

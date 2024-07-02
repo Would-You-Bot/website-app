@@ -1,8 +1,8 @@
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Privacy() {
   return (
-    <main className="flex flex-col gap-8 px-8 text-neutral-300 xl:px-[17vw]">
+    <main className="flex w-full max-w-8xl flex-col gap-8 px-8 text-neutral-300">
       <h1 className="mt-36 text-4xl font-bold text-brand-red-100 drop-shadow-red-glow">
         Privacy Policy
       </h1>
@@ -24,18 +24,18 @@ export default function Privacy() {
         </p>
         <ul>
           <li>
-            - Visit our website at{' '}
+            - Visit our website at{" "}
             <Link
               href="https://wouldyoubot.gg"
-              target={'_blank'}
+              target={"_blank"}
               className="text-white underline"
             >
               https://wouldyoubot.gg
-            </Link>{' '}
-            or{' '}
+            </Link>{" "}
+            or{" "}
             <Link
               href="https://wouldyoubot.com"
-              target={'_blank'}
+              target={"_blank"}
               className="text-white underline"
             >
               https://wouldyoubot.com
@@ -134,7 +134,7 @@ export default function Privacy() {
           a while for updates.
         </p>
         <h3 className="my-4 text-lg font-bold text-white">
-          {' '}
+          {" "}
           What are your Privacy rights?
         </h3>
         <p>
@@ -156,19 +156,19 @@ export default function Privacy() {
           the EEA or UK and you believe we are unlawfully processing your
           personal Information, you also have the right to complain to your
           local data protection supervisory authority. You can find their
-          contact details here:{' '}
+          contact details here:{" "}
           <Link
             href="https://ec.europa.eugustice/data-protectun/bodies/authontlesfindex_en.htm"
-            target={'_blank'}
+            target={"_blank"}
             className="text-white underline"
           >
             https://ec.europa.eugustice/data-protectun/bodies/authontlesfindex_en.htm
           </Link>
           . If you are a resident in Switzerland, the contact details for the
-          data protection authorities are available here:{' '}
+          data protection authorities are available here:{" "}
           <Link
             href="https://www.edoeb.admin.ch/edoebtenfhome.html"
-            target={'_blank'}
+            target={"_blank"}
             className="text-white underline"
           >
             https://www.edoeb.admin.ch/edoebtenfhome.html
@@ -178,7 +178,7 @@ export default function Privacy() {
 
         <h3 className="my-4 text-lg font-bold text-white"> Age Limit</h3>
         <p>
-          {' '}
+          {" "}
           The Bot is not intended for use by individuals under the age of 13.
           The Creator does not knowingly collect personal information from
           children under 13 years of age. If you are a parent or guardian and
@@ -197,10 +197,10 @@ export default function Privacy() {
           anonymous aggregate data. We do not use Plausible Analytics to track
           or collect any personally identifiable information about you.
           Plausible is self-hosted and does not use cookies nor store any
-          personal information.{' '}
+          personal information.{" "}
           <Link
             href="https://plausible.io/data-policy"
-            target={'_blank'}
+            target={"_blank"}
             className="text-white underline"
           >
             See the Plausible Analytics Data Policy.
@@ -226,7 +226,7 @@ export default function Privacy() {
           <li>
             <Link
               href="https://en.wikipedia.org/wiki/HTTP_cookie"
-              target={'_blank'}
+              target={"_blank"}
               className="text-white underline"
             >
               Cookies (or browser cookies)
@@ -312,10 +312,10 @@ export default function Privacy() {
         <p>
           <br />
           We may also use or disclose information to resolve disputes,
-          investigate problems or enforce our{' '}
+          investigate problems or enforce our{" "}
           <Link
             href="/terms"
-            target={'_blank'}
+            target={"_blank"}
             className="text-white underline"
           >
             Terms of Service
@@ -350,7 +350,7 @@ export default function Privacy() {
           or comprehensively removed from all our systems (e.g. backups etc.).
         </p>
         <h3 className="my-4 text-lg font-bold text-white">
-          {' '}
+          {" "}
           Do we make updates to this notice?
         </h3>
         <p>
@@ -364,7 +364,7 @@ export default function Privacy() {
           information.
         </p>
         <h3 className="my-4 text-lg font-bold text-white">
-          {' '}
+          {" "}
           How can you contact us about this notice?
         </h3>
         <p>
@@ -379,10 +379,10 @@ export default function Privacy() {
           to request access to the personal information we collect from you,
           change that information, or delete it in some circumstances. To
           request to review, update, or delete your personal Information, please
-          visit:{' '}
+          visit:{" "}
           <Link
             href="/discord"
-            target={'_blank'}
+            target={"_blank"}
             className="text-white underline"
           >
             https://wouldyoubot.gg/discord
@@ -391,5 +391,5 @@ export default function Privacy() {
         </p>
       </div>
     </main>
-  )
+  );
 }

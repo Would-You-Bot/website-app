@@ -1,8 +1,8 @@
 import { IdTokenJWT } from "@/helpers/hooks";
+import { verifyJwt } from "@/helpers/jwt";
+import { OAuthTokenJWT } from "@/helpers/oauth/types";
 import { cookies } from "next/headers";
 import { parseJWT } from "oslo/jwt";
-import { OAuthTokenJWT } from "@/helpers/oauth/types";
-import { verifyJwt } from "@/helpers/jwt";
 import { cache } from "react";
 
 export function getIdToken(): IdTokenJWT | null {

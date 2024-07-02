@@ -1,13 +1,12 @@
-import { postPaths } from "@/utils/mdx";
-import Image from "next/image";
-import Link from "next/link";
 import {
   MainContent,
-  ProgressBar,
   TableOfContents,
 } from "@/app/blog/[slug]/_components";
-import { Metadata } from "next";
 import { getPost } from "@/app/blog/[slug]/_data";
+import { postPaths } from "@/utils/mdx";
+import { Metadata } from "next";
+import Image from "next/image";
+import Link from "next/link";
 
 export async function generateMetadata({
   params: { slug },
@@ -20,6 +19,7 @@ export async function generateMetadata({
   return {
     title,
     description: frontMatter.description,
+    metadataBase: new URL("https://wouldyoubot.gg/blog/"),
     openGraph: {
       title,
       publishedTime: frontMatter.seoDate,
@@ -43,8 +43,7 @@ const BlogPost = async ({ params: { slug } }: { params: { slug: string } }) => {
 
   return (
     <>
-      <ProgressBar />
-      <div className="mt-36 px-8 text-neutral-300 xl:px-[17vw]">
+      <div className="mt-36 w-full max-w-8xl px-8 text-neutral-300">
         <Link
           href="/blog"
           className="text-neutral-300 transition-all hover:text-white"

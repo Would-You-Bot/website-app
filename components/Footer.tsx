@@ -61,10 +61,15 @@ const Footer = async () => {
       link: "/terms",
       EventTarget: "_self",
     },
+    {
+      name: "Refund Policy",
+      link: "/refunds",
+      EventTarget: "_self",
+    },
   ];
 
   return (
-    <footer className="mt-8 px-8 py-8 xl:px-[17vw]">
+    <footer className="mt-8 w-full max-w-8xl px-8 py-8">
       <div className="mb-8 flex flex-col justify-between gap-4 text-neutral-300 md:flex-row">
         <div className="flex w-full flex-col items-center md:mr-4 md:items-start">
           <div className="flex items-center text-xl font-bold text-white">

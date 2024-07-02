@@ -1,8 +1,8 @@
-import { cache } from "react";
 import { POST_PATH, postPaths } from "@/utils/mdx";
+import matter from "gray-matter";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
-import matter from "gray-matter";
+import { cache } from "react";
 
 export type Post = {
   content: string;

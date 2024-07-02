@@ -1,8 +1,8 @@
 "use server";
 
-import Link from "next/link";
-import Image from "next/image";
 import { getPosts } from "@/app/blog/_data";
+import Image from "next/image";
+import Link from "next/link";
 
 export async function BlogList() {
   const posts = await getPosts();
