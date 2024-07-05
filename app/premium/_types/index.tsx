@@ -14,7 +14,7 @@ export type PricingData = {
     "All Freemium Features": boolean;
     "Unlimited Custom Questions": boolean;
     "Customized Webhook Branding": boolean;
-    "No More Invite Button Ads": boolean;
+    //"No More Invite Button Ads": boolean;
     "Auto Pin Daily Messages": boolean;
   };
 };

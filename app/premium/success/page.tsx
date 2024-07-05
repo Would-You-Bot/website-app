@@ -4,9 +4,6 @@ import Button from "@/components/Button";
 import Head from "next/head";
 import { useSearchParams } from "next/navigation";
 
-// To test the searchParams use https://obscure-umbrella-p9994pv5xr4c7pvw-3000.app.github.dev//premium/success?type=monthly&server=942897714956472401
-
-// TODO: Add confetti animation on page and button click!
 export default function Premium() {
   const searchParams = useSearchParams();
 

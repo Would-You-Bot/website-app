@@ -41,7 +41,6 @@ import {
   Visa,
 } from "./_components/icons";
 import { DiscordGuild, PricingData } from "./_types";
-import { Metadata } from "next";
 
 const pricingData: PricingData = {
   price: { monthly: 2.99, yearly: 29.99 },
@@ -49,7 +48,7 @@ const pricingData: PricingData = {
     "All Freemium Features": true,
     "Unlimited Custom Questions": true,
     "Customized Webhook Branding": true,
-    "No More Invite Button Ads": true,
+    //"No More Invite Button Ads": true,
     "Auto Pin Daily Messages": true,
   },
 };
@@ -79,11 +78,6 @@ const data = [
     criteria: "Custom Webhook Branding",
     free: false,
     premium: true,
-  },
-  {
-    criteria: "Invite Button on Questions",
-    free: true,
-    premium: false,
   },
   {
     criteria: "Auto Pin Daily Messages",
