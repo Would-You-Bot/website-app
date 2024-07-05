@@ -1,10 +1,10 @@
 // TODO remove the use client directive in favor of a server component
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import commands from "../../data/commands.json";
 import Head from "next/head";
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+import commands from "../../data/commands.json";
 
 export default function Commands() {
   interface Command {
@@ -67,7 +67,7 @@ export default function Commands() {
       <Head>
         <title>Would You - Commands</title>
       </Head>
-      <main className="px-8 xl:px-[17vw]">
+      <main className="w-full max-w-8xl px-8">
         <h1 className="mt-36 text-4xl font-bold text-brand-red-100 drop-shadow-red-glow">
           Commands
         </h1>
@@ -92,7 +92,7 @@ export default function Commands() {
             if (categoryCommands.length > 0) {
               return (
                 <div key={index} className="space-y-4">
-                  <h2 className=" mt-10 select-none font-semibold text-neutral-300">
+                  <h2 className="mt-10 select-none font-semibold text-neutral-300">
                     {category}
                   </h2>
                   {categoryCommands.map((command) => {

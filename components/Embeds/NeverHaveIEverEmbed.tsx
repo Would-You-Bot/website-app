@@ -1,4 +1,5 @@
 "use client";
+import profiles from "@/data/profiles.json";
 import {
   DiscordActionRow,
   DiscordAttachments,
@@ -10,7 +11,6 @@ import {
   DiscordMessage,
   DiscordMessages,
 } from "@skyra/discord-components-react";
-import profiles from "@/data/profiles.json";
 import { FC } from "react";
 
 interface MainProps {

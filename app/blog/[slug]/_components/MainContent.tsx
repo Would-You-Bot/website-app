@@ -1,8 +1,8 @@
 "use client";
 
+import Button from "@/components/Button";
 import blogStyles from "@/styles/blog.module.css";
 import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
-import Button from "@/components/Button";
 
 const components = {
   Button: Button,
@@ -20,7 +20,7 @@ interface MainContentProps {
 export function MainContent({ source }: MainContentProps) {
   return (
     <main
-      className={`markdown px-8 text-neutral-300 xl:px-[17vw] ${blogStyles.markdown}`}
+      className={`markdown w-full max-w-8xl px-8 text-neutral-300 ${blogStyles.markdown}`}
     >
       <MDXRemote {...source} components={components} />
     </main>

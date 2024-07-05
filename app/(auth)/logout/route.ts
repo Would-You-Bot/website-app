@@ -1,7 +1,7 @@
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
 import { discordOAuthClient } from "@/helpers/oauth";
 import { getAuthTokenOrNull } from "@/helpers/oauth/helpers";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
 export async function GET() {
   const token = await getAuthTokenOrNull();

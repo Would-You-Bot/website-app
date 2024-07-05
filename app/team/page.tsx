@@ -1,17 +1,17 @@
-import Head from 'next/head'
+import Head from "next/head";
 
-import Image from 'next/image' // Import the 'Image' component
+import Image from "next/image"; // Import the 'Image' component
 
-import staffs from '@/data/staffs.json' // Import the JSON data
+import staffs from "@/data/staffs.json"; // Import the JSON data
 
 export default function Team() {
   const roles = [
-    'Developers',
-    'Admins',
-    'Translators',
-    'Contributors',
-    'Beta Testers'
-  ]
+    "Developers",
+    "Admins",
+    "Translators",
+    "Contributors",
+    "Beta Testers",
+  ];
 
   return (
     <>
@@ -19,14 +19,14 @@ export default function Team() {
         <title>Would You - Team</title>
       </Head>
       <main className="">
-        <div className="flex flex-col px-8 xl:px-[17vw]">
+        <div className="flex w-full max-w-8xl flex-col px-8">
           <h1 className="mt-36 text-4xl font-bold text-white">
             <span className="text-brand-red-100 drop-shadow-red-glow">
-              Meet{' '}
-            </span>{' '}
+              Meet{" "}
+            </span>{" "}
             <span className="text-brand-blue-100 drop-shadow-blue-glow">
-              {' '}
-              the{' '}
+              {" "}
+              the{" "}
             </span>
             Team
           </h1>
@@ -46,7 +46,7 @@ export default function Team() {
               <ul
                 key={i}
                 role="list"
-                className="text-pretty mx-auto mt-10 flex max-w-2xl flex-wrap justify-center gap-6 px-6 lg:mx-0 lg:max-w-none lg:gap-8 lg:px-8"
+                className="mx-auto mt-10 flex max-w-2xl flex-wrap justify-center gap-6 text-pretty px-6 lg:mx-0 lg:max-w-none lg:gap-8 lg:px-8"
               >
                 {staffs
                   .filter((staff) => staff.categories.includes(role))
@@ -54,7 +54,7 @@ export default function Team() {
                     // eslint-disable-next-line react/jsx-key
                     <li
                       key={staff.id} // Add a unique key prop
-                      className="flex basis-full transform flex-col content-center rounded-2xl bg-neutral-800 px-4 py-8 shadow-lg transition duration-300 ease-in-out hover:shadow-2xl sm:basis-[calc(50%-1.5rem)] sm:px-6 lg:basis-[calc(25%-2rem)] lg:px-8 lg:hover:-translate-y-2 xl:px-10 cursor-default"
+                      className="flex basis-full transform cursor-default flex-col content-center rounded-2xl bg-neutral-800 px-4 py-8 shadow-lg transition duration-300 ease-in-out hover:shadow-2xl sm:basis-[calc(50%-1.5rem)] sm:px-6 lg:basis-[calc(25%-2rem)] lg:px-8 lg:hover:-translate-y-2 xl:px-10"
                     >
                       <Image
                         className="mx-auto h-28 w-28 rounded-full md:h-24 md:w-24"
@@ -104,12 +104,12 @@ export default function Team() {
                         </ul>
                       ) : null}
                     </li>
-                  ))}{' '}
+                  ))}{" "}
               </ul>
             </>
-          ))}{' '}
+          ))}{" "}
         </div>
       </main>
     </>
-  )
+  );
 }

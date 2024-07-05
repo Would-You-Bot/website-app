@@ -1,4 +1,5 @@
 "use client";
+import profiles from "@/data/profiles.json";
 import {
   DiscordEmbed,
   DiscordEmbedDescription,
@@ -9,7 +10,6 @@ import {
   DiscordThread,
   DiscordThreadMessage,
 } from "@skyra/discord-components-react";
-import profiles from "@/data/profiles.json";
 import { FC } from "react";
 
 interface MainProps {

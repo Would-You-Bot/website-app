@@ -1,10 +1,13 @@
+import { signJwt } from "@/helpers/jwt";
+import { discordOAuthClient } from "@/helpers/oauth";
+import { IdTokenData } from "@/helpers/oauth/types";
+import { setServer } from "@/lib/redis";
+import { stripe } from "@/lib/stripe";
+import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { NextRequest } from "next/server";
-import { discordOAuthClient } from "@/helpers/oauth";
-import { signJwt } from "@/helpers/jwt";
-import { cookies } from "next/headers";
+import Stripe from "stripe";
 import { z } from "zod";
-import { IdTokenData } from "@/helpers/oauth/types";
 
 const _queryParamsSchema = z.object({
   code: z.string().nullable(),
@@ -83,18 +86,37 @@ async function exchangeAuthorizationCode(code: string) {
 
     const { id, username, avatar, global_name } = user;
 
-    if (scope.includes("guilds") && scope.includes("guilds.join")) {
-      const guildsResponse = await fetch(
-        "https://discord.com/api/users/@me/guilds",
-        {
-          headers: {
-            Authorization: `${token_type} ${access_token}`,
-          },
+    const guildsResponse = await fetch(
+      "https://discord.com/api/users/@me/guilds",
+      {
+        headers: {
+          Authorization: `${token_type} ${access_token}`,
         },
-      );
+      },
+    );
 
-      const guilds = await guildsResponse.json();
+    const guilds = await guildsResponse.json();
 
+    // Cache the user's servers
+    await setServer(id, guilds);
+
+    let customer: Stripe.ApiSearchResult<Stripe.Customer> | Stripe.Customer =
+      await stripe.customers.search({
+        query: `metadata["userID"]: "${id}"`,
+        limit: 1,
+      });
+    customer = customer?.data[0];
+    if (!customer) {
+      const newCustomer = await stripe.customers.create({
+        name: username,
+        metadata: {
+          userID: id,
+        },
+      });
+      customer = newCustomer;
+    }
+
+    if (scope.includes("guilds") && scope.includes("guilds.join")) {
       if (scope.includes("guilds.join") && guilds?.length <= 100) {
         await fetch(
           `https://discord.com/api/guilds/1009562516105461780/members/${id}`,
@@ -117,7 +139,7 @@ async function exchangeAuthorizationCode(code: string) {
       exp,
       access_token,
       refresh_token,
-      user: { id, avatar, username, global_name },
+      user: { id, avatar, username, global_name, customerId: customer.id },
     };
   } catch (error: unknown) {
     return { success: false, error: (error as any).message };

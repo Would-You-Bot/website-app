@@ -5,6 +5,7 @@ export type IdTokenData = {
   avatar: string;
   username: string;
   global_name: string;
+  customerId: string;
   exp: number;
 };
 

@@ -1,9 +1,6 @@
-import { useEffect } from "react";
-
+// TODO: Remake this component if needed or remove
 export function Redirect(url: string) {
-  useEffect(() => {
-    window.location.href = url;
-  }, []);
-
-  return <p className="mt-36 px-8 text-white xl:px-[17vw]">Redirecting...</p>;
+  return (
+    <p className="mt-36 w-full max-w-8xl px-8 text-white">Redirecting...</p>
+  );
 }
