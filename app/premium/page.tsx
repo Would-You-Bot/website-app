@@ -48,7 +48,7 @@ const pricingData: PricingData = {
     "All Freemium Features": true,
     "Unlimited Custom Questions": true,
     "Customized Webhook Branding": true,
-    //"No More Invite Button Ads": true,
+    "Get Rid of Button Ads": true,
     "Auto Pin Daily Messages": true,
     "Support the Development": true,
   },
