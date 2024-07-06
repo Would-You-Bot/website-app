@@ -50,6 +50,7 @@ const pricingData: PricingData = {
     "Customized Webhook Branding": true,
     //"No More Invite Button Ads": true,
     "Auto Pin Daily Messages": true,
+    "Support the Development": true,
   },
 };
 
@@ -263,6 +264,9 @@ export default function Premium() {
                             />
                           </DialogDescription>
                         </DialogContent>
+                        {idToken ? <p className="text-gray-400 text-center pt-3 mb-[-15] text-wrap">
+                        Or click <a href="/api/subs/manage" className="underline font-bold text-gray-300">here</a> to manage your subscriptions
+                          </p> : null }
                       </Dialog>
                     </div>
                   </div>
