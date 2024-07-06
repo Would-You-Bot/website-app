@@ -97,8 +97,16 @@ async function exchangeAuthorizationCode(code: string) {
 
     const guilds = await guildsResponse.json();
 
+    const finalGuilds = guilds.map((guild: any) => {
+      return {
+        id: guild.id,
+        name: guild.name,
+        icon: guild.icon,
+      };
+    });
+
     // Cache the user's servers
-    await setServer(id, guilds);
+    await setServer(id, finalGuilds);
 
     let customer: Stripe.ApiSearchResult<Stripe.Customer> | Stripe.Customer =
       await stripe.customers.search({
