@@ -21,15 +21,8 @@ const setServer = async (
   userId: string | undefined,
   servers: object | Array<object>,
 ) => {
-  const authToken = await getAuthTokenOrNull();
+  if(!userId) return console.log("No user id");
 
-  if (!authToken) return null;
-
-  const { id } = authToken.payload;
-
-  if (!userId) {
-    userId = id;
-  }
   await redis.set(userId, JSON.stringify(servers));
 };
 const getServer = async () => {
