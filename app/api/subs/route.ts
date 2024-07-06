@@ -82,7 +82,7 @@ export async function POST(req: Request) {
         },
       },
       allow_promotion_codes: true,
-      payment_method_types: ["card", "paypal", "sofort", "link"],
+      payment_method_types: ["card", "paypal", "link"],
       line_items: [
         {
           price: priceId,
