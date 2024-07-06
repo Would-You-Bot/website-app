@@ -5,6 +5,12 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
+experimental: {
+    serverActions: {
+      allowedForwardedHosts: ['wouldyoubot.gg'],
+      allowedOrigins: ["wouldyoubot.gg"]
+    },
+  },
   async redirects() {
     return [
       {
