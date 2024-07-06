@@ -34,7 +34,7 @@
     "category": "Settings",
     "description": "Changes the language for your server.", 
     "usage": "/language <language>",
-    "options": ["Deutsch", "English", "Espanol", "Français"]
+    "options": ["Deutsch", "English", "Espanol", "Français", "Italiano"]
   },
   {
     "name": "leaderboard",
@@ -72,7 +72,7 @@
     "category": "Settings",
     "description": "Lets you change different bot settings.", 
     "usage": "/settings <category>",
-    "options": ["General Settings", "Daily Messages", "Welcomes"]
+    "options": ["QOTD", "Utility", "Cooldowns", "Welcome"]
   },
   {
     "name": "support",
