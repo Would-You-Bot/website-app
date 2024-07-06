@@ -11,12 +11,13 @@ const config = {
   theme: {
     container: {
       center: true,
-      padding: "2rem",
-      screens: {
-        "2xl": "1400px",
-      },
+      padding: "2rem"
     },
     extend: {
+      screens: {
+        xs: "480px",
+        "2xl": "1400px",
+      },
       maxWidth: {
         "8xl": "90rem",
         "9xl": "100rem",

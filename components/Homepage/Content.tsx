@@ -45,7 +45,7 @@ export function HomeContent({
 
   return (
     <LazyMotion features={domAnimation}>
-      <section className="mt-28 flex w-full max-w-8xl flex-col items-center justify-between gap-16 px-8 text-center lg:flex-row lg:text-left">
+      <section className="mt-0 sm:mt-16 lg:mt-28 flex w-full max-w-8xl flex-col items-center justify-between gap-16 px-8 text-center lg:flex-row lg:text-left">
         <m.div
           initial={{ opacity: 0, transform: "translateY(20px)" }}
           whileInView={{ opacity: 1, transform: "translateY(0)" }}
@@ -53,7 +53,7 @@ export function HomeContent({
           viewport={{ once: true }}
           className="flex flex-col items-center lg:block"
         >
-          <h1 className="text-6xl font-bold leading-normal text-white">
+          <h1 className="text-[2rem] sm:text-5xl md:text-6xl font-bold leading-normal text-white mb-8">
             Entertain Your
             <br />
             <span className="text-brand-red-100 drop-shadow-red-glow">
@@ -108,7 +108,7 @@ export function HomeContent({
           height="10000"
           priority
         />
-        <div className="w-full bg-[#101010] px-8 pb-12 text-center text-5xl text-white md:-mt-20 md:pb-28">
+        <div className="w-full bg-[#101010] px-8 pb-12 text-center text-xl sm:text-3xl md:text-4xl text-white md:-mt-20 md:pb-28">
           <h2>
             Trusted by{" "}
             <span className="bg-gradient-brand bg-clip-text font-bold text-transparent">
@@ -116,7 +116,7 @@ export function HomeContent({
             </span>{" "}
             communities
           </h2>
-          <h3 className="mt-4 text-2xl">
+          <h3 className="mt-4 text-sm sm:text-xl md:text-2xl">
             keeping{" "}
             <span className="bg-gradient-brand bg-clip-text font-bold text-transparent">
               4,000,000+
