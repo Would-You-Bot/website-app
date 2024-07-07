@@ -117,7 +117,7 @@ export default function Premium() {
               transition={{ duration: 0.5, delay: 0.2 }}
             >
               <div className="container mx-auto px-4">
-                <h1 className="mt-36 text-4xl font-bold text-yellow-500 drop-shadow-gold-glow">
+                <h1 className="text-4xl font-bold text-yellow-500 drop-shadow-gold-glow">
                   Premium
                 </h1>
                 <p className="text-customGrayText mb-6 mt-4 text-neutral-300">

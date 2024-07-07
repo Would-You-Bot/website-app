@@ -19,8 +19,8 @@ export default function Team() {
         <title>Would You - Team</title>
       </Head>
       <main className="">
-        <div className="flex w-full max-w-8xl flex-col px-8">
-          <h1 className="mt-36 text-4xl font-bold text-white">
+        <div className="flex mt-auto w-full max-w-8xl flex-col px-8">
+          <h1 className="text-4xl font-bold text-white">
             <span className="text-brand-red-100 drop-shadow-red-glow">
               Meet{" "}
             </span>{" "}

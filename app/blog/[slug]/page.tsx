@@ -43,7 +43,7 @@ const BlogPost = async ({ params: { slug } }: { params: { slug: string } }) => {
 
   return (
     <>
-      <div className="mt-36 w-full max-w-8xl px-8 text-neutral-300">
+      <div className="w-full max-w-8xl mx-auto px-8 text-neutral-300">
         <Link
           href="/blog"
           className="text-neutral-300 transition-all hover:text-white"

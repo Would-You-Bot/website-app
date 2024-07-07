@@ -57,7 +57,7 @@ const Home = async () => {
 
   return (
     <>
-      <main className="mt-48 flex w-full flex-col items-center overflow-x-hidden text-neutral-300">
+      <main className="flex w-full flex-col items-center overflow-x-hidden text-neutral-300">
         <HomeContent
           initialQuestion={getRandomQuestion()}
           serverCount={serverCount}

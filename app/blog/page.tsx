@@ -3,8 +3,8 @@ import { Suspense } from "react";
 
 const BlogPosts = async () => {
   return (
-    <main className="w-full max-w-8xl px-8">
-      <h1 className="mt-36 text-4xl font-bold text-white">
+    <main className="w-full mx-auto max-w-8xl px-8">
+      <h1 className="text-4xl font-bold text-white">
         <span className="text-brand-red-100 drop-shadow-red-glow">Would</span>{" "}
         <span className="text-brand-blue-100 drop-shadow-blue-glow">You</span>{" "}
         Blog
