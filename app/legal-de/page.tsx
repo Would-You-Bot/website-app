@@ -76,10 +76,10 @@ export default function legalnoticede() {
         </Link>
       </div>
       <p>
-        Der Discord Bot mit dem id{" "}
+        Der Discord Bot mit der id{" "}
         <span className="font-mono text-white">981649513427111957</span>
         <br />
-        Der Discord server with the id{" "}
+        Der Discord server mit der id{" "}
         <span className="font-mono text-white">1009562516105461780</span>
       </p>
     </main>
