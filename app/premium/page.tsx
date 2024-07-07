@@ -155,7 +155,7 @@ export default function Premium() {
                         Premium
                       </h4>
                       <span
-                        className={`${isMonthly && "absolute -top-10 pointer-events-none opacity-0"} text-mb cursor-default rounded-xl bg-white/15 px-4 py-2 text-white transition-all duration-300`}
+                        className={`${isMonthly && "absolute -top-10 pointer-events-none opacity-0"} flex xs:hidden w-fit text-mb cursor-default rounded-xl bg-white/15 px-4 py-2 text-white transition-all duration-300`}
                       >
                         2 months free
                       </span>
