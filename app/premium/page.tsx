@@ -65,6 +65,11 @@ const data = [
     free: true,
     premium: true,
   },
+    {
+    criteria: "Question Repeat Prevention",
+    free: true,
+    premium: true,
+  },
   {
     criteria: "Thousands of Questions",
     free: true,
