@@ -2,8 +2,8 @@ import Link from "next/link";
 
 export default function legalnoticede() {
   return (
-    <main className="flex w-full max-w-8xl flex-col gap-8 px-8 text-neutral-300">
-      <h1 className="mt-36 text-4xl font-bold text-brand-red-100 drop-shadow-red-glow">
+    <main className="flex mx-auto w-full max-w-8xl flex-col gap-8 px-8 text-neutral-300">
+      <h1 className="text-4xl font-bold text-brand-red-100 drop-shadow-red-glow">
         Impressum
       </h1>
       <p>Informationen gemäß § 5 TMG.</p>
