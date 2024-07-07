@@ -146,7 +146,7 @@ export default function Commands() {
                         >
                           <h5 className="mb-1">Usage</h5>
                           <h6
-                            className="mb-2 w-fit rounded-md bg-neutral-900 px-2 py-1 font-mono text-xs"
+                            className="mb-2 w-fit rounded-md bg-neutral-900 px-2 py-1 font-mono text-xs relative group"
                             onMouseEnter={() => {
                               setCopyText("--Click To Copy--");
                               setIsHovered(true);
@@ -161,7 +161,10 @@ export default function Commands() {
                             }}
                           >
                             {isHovered ? (
-                              <div className="text-gray-400">{copyText}</div>
+                              <>
+                                <div className={`${copyText.length > command.usage.length ? "hidden" : "absolute top-0 left-0" } z-10 text-gray-400 bg-neutral-900 px-2 py-1 rounded-md !w-full text-center whitespace-nowrap`}>{copyText}</div>
+                                <div className="text-gray-400">{copyText.length > command.usage.length ? copyText : command.usage}</div>
+                              </>
                             ) : (
                               <div>{command.usage}</div>
                             )}
