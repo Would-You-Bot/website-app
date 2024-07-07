@@ -125,14 +125,14 @@ export default function Premium() {
                   discord bot.
                 </p>
                 <div className="mx-auto my-4 max-w-2xl text-center">
-                  <label className="group relative mx-auto flex h-16 w-fit cursor-pointer items-center justify-between rounded-2xl bg-black/40 pl-6 pr-8 text-xl">
+                  <label className="group relative mx-auto flex h-16 w-full max-w-[13rem] cursor-pointer items-center justify-center pl-6 pr-8 rounded-2xl bg-black/40 text-xl select-none">
                     <input
                       type="checkbox"
                       className="peer appearance-none"
                       checked={!isMonthly}
                       onChange={handleChange}
                     />
-                    <span className="after:bg-customPrimary absolute z-10 -ml-4 flex h-16 w-[6rem] cursor-pointer items-center duration-300 ease-in-out after:h-12 after:w-[20rem] after:rounded-lg after:bg-brand-customPrimary after:shadow-md after:duration-300 peer-checked:after:translate-x-[6rem]"></span>
+                    <span className="after:bg-customPrimary absolute top-0 left-2 z-10 flex h-16 w-[6rem] cursor-pointer items-center duration-300 ease-in-out after:h-12 after:w-[10rem] sm:after:w-[20rem] after:rounded-lg after:bg-brand-customPrimary after:shadow-md after:duration-300 peer-checked:after:translate-x-[6rem]"></span>
                     <div className="z-20 flex gap-10 text-base font-bold text-white">
                       <div className={`${!isMonthly && "text-gray-400"}`}>
                         Monthly
@@ -147,13 +147,18 @@ export default function Premium() {
                   <div className="mb-4 w-auto rounded-[1.7rem] bg-gradient-premium p-[4px]">
                     <div className="relative overflow-hidden rounded-3xl bg-brand-customDarkBg3 px-8 py-8">
                       <span
-                        className={`${!isMonthly ? "top-7" : "pointer-events-none -top-10 opacity-0"} text-mb absolute right-6 cursor-default rounded-xl bg-white/15 px-4 py-2 text-white transition-all duration-300`}
+                        className={`${!isMonthly ? "top-7" : "pointer-events-none -top-10 opacity-0"} hidden xs:flex text-mb absolute right-6 cursor-default rounded-xl bg-white/15 px-4 py-2 text-white transition-all duration-300`}
                       >
                         2 months free
                       </span>
                       <h4 className="font-heading mb-2 text-left text-2xl font-bold text-white 2xl:mb-4">
                         Premium
                       </h4>
+                      <span
+                        className={`${isMonthly && "absolute -top-10 pointer-events-none opacity-0"} text-mb cursor-default rounded-xl bg-white/15 px-4 py-2 text-white transition-all duration-300`}
+                      >
+                        2 months free
+                      </span>
                       <div className="flex items-end justify-start">
                         <div className="mr-2 mt-4 text-left text-4xl font-bold text-white sm:text-5xl">
                           {isMonthly
