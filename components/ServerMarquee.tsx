@@ -1,29 +1,29 @@
-import Link from "next/link";
-import { FC } from "react";
-import Marquee from "react-fast-marquee";
-import Avatar from "./Avatar";
+import Link from "next/link"
+import { FC } from "react"
+import Marquee from "react-fast-marquee"
+import Avatar from "./Avatar"
 
 interface Server {
-  name: string;
-  members: string;
-  avatar: string;
-  verified: boolean;
-  partnered: boolean;
-  invite: string;
+  name: string
+  members: string
+  avatar: string
+  verified: boolean
+  partnered: boolean
+  invite: string
 }
 
 interface MarqueeProps {
-  servers: Server[];
-  speed: number;
-  direction?: "left" | "right";
-  className?: string;
+  servers: Server[]
+  speed: number
+  direction?: "left" | "right"
+  className?: string
 }
 
 const ServerMarquee: FC<MarqueeProps> = ({
   servers,
   speed,
   direction,
-  className,
+  className
 }) => {
   return (
     <div
@@ -109,7 +109,7 @@ const ServerMarquee: FC<MarqueeProps> = ({
         ))}
       </Marquee>
     </div>
-  );
-};
+  )
+}
 
-export default ServerMarquee;
+export default ServerMarquee

@@ -1,2 +1,2 @@
-export { BlogList } from "./BlogList";
-export { BlogListSkeleton } from "./BlogListSkeleton";
+export { BlogList } from "./BlogList"
+export { BlogListSkeleton } from "./BlogListSkeleton"

@@ -1,15 +1,15 @@
-import Discord from "@/icons/Discord";
+import Discord from "@/icons/Discord"
 
 interface DiscordLoginButtonProps {
-  className?: string;
-  redirect?: string;
+  className?: string
+  redirect?: string
 }
 
 // TODO: Make params be respected into this bitch
 
 export default function DiscordLoginButton({
   className,
-  redirect,
+  redirect
 }: DiscordLoginButtonProps) {
   return (
     <>
@@ -22,5 +22,5 @@ export default function DiscordLoginButton({
         <Discord className="h-6 w-6" />
       </a>
     </>
-  );
+  )
 }

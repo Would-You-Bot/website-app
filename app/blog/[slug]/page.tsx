@@ -1,20 +1,17 @@
-import {
-  MainContent,
-  TableOfContents,
-} from "@/app/blog/[slug]/_components";
-import { getPost } from "@/app/blog/[slug]/_data";
-import { postPaths } from "@/utils/mdx";
-import { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
+import { MainContent, TableOfContents } from "@/app/blog/[slug]/_components"
+import { getPost } from "@/app/blog/[slug]/_data"
+import { postPaths } from "@/utils/mdx"
+import { Metadata } from "next"
+import Image from "next/image"
+import Link from "next/link"
 
 export async function generateMetadata({
-  params: { slug },
+  params: { slug }
 }: {
-  params: { slug: string };
+  params: { slug: string }
 }): Promise<Metadata> {
-  const { frontMatter } = await getPost(slug);
-  const title = frontMatter.title + "- Would You Bot";
+  const { frontMatter } = await getPost(slug)
+  const title = frontMatter.title + "- Would You Bot"
 
   return {
     title,
@@ -27,19 +24,19 @@ export async function generateMetadata({
       description: frontMatter.description,
       authors: frontMatter.author.name,
       tags: frontMatter.tags,
-      images: frontMatter.thumbnail?.large,
-    },
-  };
+      images: frontMatter.thumbnail?.large
+    }
+  }
 }
 
 export function generateStaticParams() {
   return postPaths
     .map((path) => path.replace(/\.mdx?$/, ""))
-    .map((slug) => ({ slug }));
+    .map((slug) => ({ slug }))
 }
 
 const BlogPost = async ({ params: { slug } }: { params: { slug: string } }) => {
-  const { source, frontMatter } = await getPost(slug);
+  const { source, frontMatter } = await getPost(slug)
 
   return (
     <>
@@ -91,7 +88,7 @@ const BlogPost = async ({ params: { slug } }: { params: { slug: string } }) => {
 
       <MainContent source={source} />
     </>
-  );
-};
+  )
+}
 
-export default BlogPost;
+export default BlogPost

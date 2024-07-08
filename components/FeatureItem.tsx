@@ -1,9 +1,9 @@
-import { m } from "framer-motion";
+import { m } from "framer-motion"
 
 const FeatureItem: React.FC<{
-  left: React.ReactNode;
-  right: React.ReactNode;
-  reverse?: true;
+  left: React.ReactNode
+  right: React.ReactNode
+  reverse?: true
 }> = ({ left, right, reverse }) => (
   <div className="flex w-full flex-col justify-between gap-8 md:flex-row md:gap-20">
     <m.div
@@ -27,6 +27,6 @@ const FeatureItem: React.FC<{
       {right}
     </m.div>
   </div>
-);
+)
 
-export default FeatureItem;
+export default FeatureItem

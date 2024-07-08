@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "next/link"
 
 export default function Terms() {
   return (
@@ -290,5 +290,5 @@ export default function Terms() {
         </p>
       </div>
     </main>
-  );
+  )
 }

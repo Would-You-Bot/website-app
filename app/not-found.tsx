@@ -1,6 +1,6 @@
-import Button from "@/components/Button";
-import { NextPage } from "next";
-import Link from "next/link";
+import Button from "@/components/Button"
+import { NextPage } from "next"
+import Link from "next/link"
 
 const NotFound: NextPage = () => {
   return (
@@ -13,11 +13,14 @@ const NotFound: NextPage = () => {
         The page you requested does not exist.
       </p>
 
-      <Button variant="red" className="mt-8">
+      <Button
+        variant="red"
+        className="mt-8"
+      >
         <Link href="/">Home</Link>
       </Button>
     </div>
-  );
-};
+  )
+}
 
-export default NotFound;
+export default NotFound

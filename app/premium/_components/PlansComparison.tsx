@@ -1,23 +1,23 @@
-import { CheckIcon, CloseIcon } from "./icons";
+import { CheckIcon, CloseIcon } from "./icons"
 
 interface ArrayProps {
-  criteria: string;
-  free: string | number | boolean;
-  premium: string | number | boolean;
+  criteria: string
+  free: string | number | boolean
+  premium: string | number | boolean
 }
 
 interface PlansComparisonProps {
-  className?: string;
-  data: Array<ArrayProps>;
-  colSeparator?: boolean;
-  rowSeparator?: boolean;
+  className?: string
+  data: Array<ArrayProps>
+  colSeparator?: boolean
+  rowSeparator?: boolean
 }
 
 export default function PlansComparison({
   className,
   data,
   colSeparator,
-  rowSeparator,
+  rowSeparator
 }: PlansComparisonProps) {
   return (
     <section className="mx-auto flex h-auto w-full max-w-8xl flex-col text-white">
@@ -51,35 +51,31 @@ export default function PlansComparison({
               <div
                 className={`text-md flex w-full basis-1/3 items-center justify-center font-bold text-[#7A7B7E] ${colSeparator ? "border-x-2 border-neutral-800" : ""}`}
               >
-                {typeof item.free === "boolean" ? (
-                  item.free ? (
+                {typeof item.free === "boolean" ?
+                  item.free ?
                     <CheckIcon className="h-5 w-5 text-[#7A7B7E] sm:h-7 sm:w-7" />
-                  ) : (
-                    <CloseIcon className="h-5 w-5 text-[#7A7B7E] sm:h-7 sm:w-7" />
-                  )
-                ) : (
-                  <span className="px-2 text-center text-sm sm:text-base">
+                  : <CloseIcon className="h-5 w-5 text-[#7A7B7E] sm:h-7 sm:w-7" />
+
+                : <span className="px-2 text-center text-sm sm:text-base">
                     {item.free}
                   </span>
-                )}
+                }
               </div>
               <div className="text-md flex w-full basis-1/3 items-center justify-center font-bold text-brand-customPrimary">
-                {typeof item.premium === "boolean" ? (
-                  item.premium ? (
+                {typeof item.premium === "boolean" ?
+                  item.premium ?
                     <CheckIcon className="h-5 w-5 text-brand-customPrimary sm:h-7 sm:w-7" />
-                  ) : (
-                    <CloseIcon className="h-5 w-5 text-brand-customPrimary sm:h-7 sm:w-7" />
-                  )
-                ) : (
-                  <span className="px-2 text-center text-sm sm:text-base">
+                  : <CloseIcon className="h-5 w-5 text-brand-customPrimary sm:h-7 sm:w-7" />
+
+                : <span className="px-2 text-center text-sm sm:text-base">
                     {item.premium}
                   </span>
-                )}
+                }
               </div>
             </div>
-          );
+          )
         })}
       </div>
     </section>
-  );
+  )
 }

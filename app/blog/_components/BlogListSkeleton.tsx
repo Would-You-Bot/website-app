@@ -1,4 +1,4 @@
-"use server";
+"use server"
 
 export async function BlogListSkeleton() {
   return (
@@ -7,7 +7,7 @@ export async function BlogListSkeleton() {
       <ListItemSkeleton />
       <ListItemSkeleton />
     </>
-  );
+  )
 }
 
 /**
@@ -27,5 +27,5 @@ function ListItemSkeleton() {
         </div>
       </div>
     </div>
-  );
+  )
 }

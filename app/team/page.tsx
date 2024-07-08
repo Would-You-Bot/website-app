@@ -1,8 +1,8 @@
-import Head from "next/head";
+import Head from "next/head"
 
-import Image from "next/image"; // Import the 'Image' component
+import Image from "next/image" // Import the 'Image' component
 
-import staffs from "@/data/staffs.json"; // Import the JSON data
+import staffs from "@/data/staffs.json" // Import the JSON data
 
 export default function Team() {
   const roles = [
@@ -10,8 +10,8 @@ export default function Team() {
     "Admins",
     "Translators",
     "Contributors",
-    "Beta Testers",
-  ];
+    "Beta Testers"
+  ]
 
   return (
     <>
@@ -69,7 +69,7 @@ export default function Team() {
                       <p className="text-sm leading-6 text-gray-400">
                         {staff.description}
                       </p>
-                      {staff.websiteUrl !== null ? (
+                      {staff.websiteUrl !== null ?
                         <ul
                           role="list"
                           className="mt-6 flex justify-center align-bottom"
@@ -102,7 +102,7 @@ export default function Team() {
                             </a>
                           </li>
                         </ul>
-                      ) : null}
+                      : null}
                     </li>
                   ))}{" "}
               </ul>
@@ -111,5 +111,5 @@ export default function Team() {
         </div>
       </main>
     </>
-  );
+  )
 }

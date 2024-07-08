@@ -1,45 +1,48 @@
-"use client";
-import DiscordLoginButton from "@/components/DiscordLoginButton";
-import { useIdToken } from "@/helpers/hooks/useIdToken";
-import { IdTokenJWT } from "@/helpers/oauth/types";
-import { Crown } from "@/icons/Crown";
-import { useAnimationControls } from "framer-motion";
-import { LayoutDashboardIcon } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
-import UserDropdown from "./UserDropdown";
+"use client"
+import DiscordLoginButton from "@/components/DiscordLoginButton"
+import { useIdToken } from "@/helpers/hooks/useIdToken"
+import { IdTokenJWT } from "@/helpers/oauth/types"
+import { Crown } from "@/icons/Crown"
+import { useAnimationControls } from "framer-motion"
+import { LayoutDashboardIcon } from "lucide-react"
+import Image from "next/image"
+import Link from "next/link"
+import { useState } from "react"
+import UserDropdown from "./UserDropdown"
 
 interface NavbarProps {
-  idToken: IdTokenJWT | null;
+  idToken: IdTokenJWT | null
 }
 
 const menuItems = [
   {
     label: "Manage Subscription",
     href: "/api/subs/manage",
-    icon: LayoutDashboardIcon,
-  },
-];
+    icon: LayoutDashboardIcon
+  }
+]
 
 const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
-  const [mobileMenu, setMobileMenu] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-  const idToken = useIdToken(idToken_);
-  const lineOneControls = useAnimationControls();
-  const lineTwoControls = useAnimationControls();
-  const lineThreeControls = useAnimationControls();
-  const menuControls = useAnimationControls();
+  const [mobileMenu, setMobileMenu] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
+  const idToken = useIdToken(idToken_)
+  const lineOneControls = useAnimationControls()
+  const lineTwoControls = useAnimationControls()
+  const lineThreeControls = useAnimationControls()
+  const menuControls = useAnimationControls()
 
   const handleIsOpen = () => {
-    if (window.innerWidth < 768) setIsOpen(!isOpen);
-  };
+    if (window.innerWidth < 768) setIsOpen(!isOpen)
+  }
 
   return (
     <nav className="sticky left-0 top-[1px] z-50 mb-8 flex h-auto w-full items-center justify-center py-6">
       <div className="flex h-full w-full max-w-8xl items-center justify-between px-8 transition-all duration-300">
         <div className="flex h-16 min-w-fit items-center justify-center rounded-[10px] border-2 border-white/5 bg-[#202020] bg-opacity-90 px-6 backdrop-blur">
-          <Link href="/" className="flex items-center gap-6">
+          <Link
+            href="/"
+            className="flex items-center gap-6"
+          >
             <Image
               src="/Logo.svg"
               className="rounded-full"
@@ -129,19 +132,21 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
               Premium
               <Crown />
             </Link>
-            {idToken ? (
-              <UserDropdown idToken={idToken} items={menuItems} />
-            ) : (
-              <DiscordLoginButton className="h-16 rounded-[10px] px-6" />
-            )}
+            {idToken ?
+              <UserDropdown
+                idToken={idToken}
+                items={menuItems}
+              />
+            : <DiscordLoginButton className="h-16 rounded-[10px] px-6" />}
           </div>
         </div>
         <div className="hidden h-16 min-w-fit items-center justify-center md:flex">
-          {idToken ? (
-            <UserDropdown idToken={idToken} items={menuItems} />
-          ) : (
-            <DiscordLoginButton className="h-16 rounded-[10px] px-6" />
-          )}
+          {idToken ?
+            <UserDropdown
+              idToken={idToken}
+              items={menuItems}
+            />
+          : <DiscordLoginButton className="h-16 rounded-[10px] px-6" />}
         </div>
       </div>
     </nav>
@@ -274,7 +279,7 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
     //     </LazyMotion>
     //   </div>
     // </nav>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar

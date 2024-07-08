@@ -1,14 +1,14 @@
 // TODO remove the use client directive in favor of a server component
-"use client";
-import Button from "@/components/Button";
-import Head from "next/head";
-import { useSearchParams } from "next/navigation";
+"use client"
+import Button from "@/components/Button"
+import Head from "next/head"
+import { useSearchParams } from "next/navigation"
 
 export default function Premium() {
-  const searchParams = useSearchParams();
+  const searchParams = useSearchParams()
 
-  const type = searchParams.get("type");
-  const serverId = searchParams.get("server");
+  const type = searchParams.get("type")
+  const serverId = searchParams.get("server")
 
   return (
     <>
@@ -38,5 +38,5 @@ export default function Premium() {
         </Button>
       </main>
     </>
-  );
+  )
 }

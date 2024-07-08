@@ -3,55 +3,56 @@ const nextConfig = {
   reactStrictMode: true,
   output: "standalone",
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: true
   },
-experimental: {
+  experimental: {
     serverActions: {
-      allowedForwardedHosts: ['wouldyoubot.gg'],
+      allowedForwardedHosts: ["wouldyoubot.gg"],
       allowedOrigins: ["wouldyoubot.gg"]
-    },
+    }
   },
   async redirects() {
     return [
       {
-        source: '/vote',
-        destination: 'https://wumpus.store/bot/981649513427111957/vote',
-        permanent: true,
+        source: "/vote",
+        destination: "https://wumpus.store/bot/981649513427111957/vote",
+        permanent: true
       },
       {
-        source: '/support',
-        destination: 'https://discord.com/invite/vMyXAxEznS',
-        permanent: true,
+        source: "/support",
+        destination: "https://discord.com/invite/vMyXAxEznS",
+        permanent: true
       },
       {
-        source: '/rivo',
-        destination: 'https://rivo.gg',
-        permanent: true,
+        source: "/rivo",
+        destination: "https://rivo.gg",
+        permanent: true
       },
       {
-        source: '/invite',
-        destination: 'https://discord.com/oauth2/authorize?client_id=981649513427111957&permissions=275415247936&scope=bot%20applications.commands',
-        permanent: true,
+        source: "/invite",
+        destination:
+          "https://discord.com/oauth2/authorize?client_id=981649513427111957&permissions=275415247936&scope=bot%20applications.commands",
+        permanent: true
       },
       {
-        source: '/reddit',
-        destination: 'https://www.reddit.com/r/WouldYou/',
-        permanent: true,
+        source: "/reddit",
+        destination: "https://www.reddit.com/r/WouldYou/",
+        permanent: true
       },
       {
         source: "/discord",
         destination: "/support",
-        permanent: true,
+        permanent: true
       },
       {
         source: "/imprint",
         destination: "/legal",
-        permanent: true,
+        permanent: true
       },
       {
         source: "/impressum",
         destination: "/legal-de",
-        permanent: true,
+        permanent: true
       }
     ]
   },
@@ -61,16 +62,16 @@ experimental: {
         protocol: "https",
         hostname: "cdn.discordapp.com",
         port: "",
-        pathname: "/**",
+        pathname: "/**"
       },
       {
         protocol: "https",
         hostname: "cdn.wouldyoubot.gg",
         port: "",
-        pathname: "/**",
-      },
-    ],
-  },
-};
+        pathname: "/**"
+      }
+    ]
+  }
+}
 
-export default nextConfig;
+export default nextConfig
