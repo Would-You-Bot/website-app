@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "next/link"
 
 export default function legalnotice() {
   return (
@@ -7,11 +7,17 @@ export default function legalnotice() {
         Legal Notice
       </h1>
       <p>
-        <span className="mr-1.5 text-lg" aria-label="German flag">
+        <span
+          className="mr-1.5 text-lg"
+          aria-label="German flag"
+        >
           🇩🇪
         </span>
         For the German version please visit{" "}
-        <Link href="/legal-de" className="text-white underline">
+        <Link
+          href="/legal-de"
+          className="text-white underline"
+        >
           this page
         </Link>
         .
@@ -66,20 +72,32 @@ export default function legalnotice() {
         </p>
       </div>
       <div className="text-white">
-        <Link href="https://wouldyoubot.com/" className="underline">
+        <Link
+          href="https://wouldyoubot.com/"
+          className="underline"
+        >
           https://wouldyoubot.com/
         </Link>
         <br />
-        <Link href="https://wouldyoubot.gg/" className="underline">
+        <Link
+          href="https://wouldyoubot.gg/"
+          className="underline"
+        >
           https://wouldyoubot.gg/
         </Link>
         <br />
 
-        <Link href="https://rivo.gg/" className="underline">
+        <Link
+          href="https://rivo.gg/"
+          className="underline"
+        >
           https://rivo.gg/
         </Link>
         <br />
-        <Link href="https://twitter.com/WouldYouBot/" className="underline">
+        <Link
+          href="https://twitter.com/WouldYouBot/"
+          className="underline"
+        >
           https://twitter.com/WouldYouBot/
         </Link>
       </div>
@@ -91,5 +109,5 @@ export default function legalnotice() {
         <span className="font-mono text-white">1009562516105461780</span>
       </p>
     </main>
-  );
+  )
 }

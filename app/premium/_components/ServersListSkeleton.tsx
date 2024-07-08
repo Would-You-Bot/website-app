@@ -1,6 +1,6 @@
-"use server";
+"use server"
 
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from "@/components/ui/skeleton"
 
 export async function ServersListSkeleton() {
   return (
@@ -26,7 +26,7 @@ export async function ServersListSkeleton() {
       <ServersListItem />
       <ServersListItem />
     </>
-  );
+  )
 }
 
 function ServersListItem() {
@@ -35,5 +35,5 @@ function ServersListItem() {
       <Skeleton className="h-8 w-8 rounded-full" />
       <Skeleton className="h-6 w-1/2 rounded-md" />
     </div>
-  );
+  )
 }

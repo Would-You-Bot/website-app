@@ -1,4 +1,4 @@
-import type { SVGProps } from "react";
+import type { SVGProps } from "react"
 
 export const Crown = (props: SVGProps<SVGSVGElement>) => {
   return (
@@ -19,5 +19,5 @@ export const Crown = (props: SVGProps<SVGSVGElement>) => {
         fill="#FFC700"
       />
     </svg>
-  );
-};
+  )
+}

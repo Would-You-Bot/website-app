@@ -1,72 +1,72 @@
-"use server";
+"use server"
 
-import Image from "next/image";
-import Link from "next/link";
+import Image from "next/image"
+import Link from "next/link"
 
 const Footer = async () => {
   const recommendedLinks = [
     {
       name: "Home",
       link: "/",
-      EventTarget: "_self",
+      EventTarget: "_self"
     },
     {
       name: "Commands",
       link: "/commands",
-      EventTarget: "_self",
+      EventTarget: "_self"
     },
     {
       name: "Team",
       link: "/team",
-      EventTarget: "_self",
+      EventTarget: "_self"
     },
     {
       name: "Reddit",
       link: "/reddit",
-      EventTarget: "_blank",
-    },
-  ];
+      EventTarget: "_blank"
+    }
+  ]
 
   const Links = [
     {
       name: "Support Server",
       link: "/discord",
-      EventTarget: "_blank",
+      EventTarget: "_blank"
     },
     {
       name: "Invite",
       link: "/invite",
-      EventTarget: "_blank",
+      EventTarget: "_blank"
     },
     {
       name: "Vote",
       link: "/vote",
-      EventTarget: "_blank",
-    },
-  ];
+      EventTarget: "_blank"
+    }
+  ]
 
   const LegalLinks = [
     {
       name: "Legal Notice",
       link: "/legal",
-      EventTarget: "_self",
+      EventTarget: "_self"
     },
     {
       name: "Privacy Policy",
       link: "/privacy",
-      EventTarget: "_self",
+      EventTarget: "_self"
     },
     {
       name: "Terms of Service",
       link: "/terms",
-      EventTarget: "_self",
+      EventTarget: "_self"
     },
     {
       name: "Refund Policy",
       link: "/refunds",
-      EventTarget: "_self",
-    },
-  ];
+      EventTarget: "_self"
+    }
+  ]
 
   return (
     <footer className="mt-20 mx-auto w-full max-w-8xl px-8 py-8">
@@ -145,7 +145,10 @@ const Footer = async () => {
         <hr className="border border-neutral-800" />
         <p className="mt-8 text-center text-sm text-neutral-300">
           Made with <span className="text-brand-red-100">♥</span> by{" "}
-          <Link href="/team" className="text-white underline">
+          <Link
+            href="/team"
+            className="text-white underline"
+          >
             Would You Team
           </Link>{" "}
           &{" "}
@@ -159,7 +162,7 @@ const Footer = async () => {
         </p>
       </div>
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

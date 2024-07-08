@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from "next/link"
 
 export default function legalnoticede() {
   return (
@@ -58,20 +58,32 @@ export default function legalnoticede() {
         </p>
       </div>
       <div className="text-white">
-        <Link href="https://wouldyoubot.com/" className="underline">
+        <Link
+          href="https://wouldyoubot.com/"
+          className="underline"
+        >
           https://wouldyoubot.com/
         </Link>
         <br />
-        <Link href="https://wouldyoubot.gg/" className="underline">
+        <Link
+          href="https://wouldyoubot.gg/"
+          className="underline"
+        >
           https://wouldyoubot.gg/
         </Link>
         <br />
 
-        <Link href="https://rivo.gg/" className="underline">
+        <Link
+          href="https://rivo.gg/"
+          className="underline"
+        >
           https://rivo.gg/
         </Link>
         <br />
-        <Link href="https://twitter.com/WouldYouBot/" className="underline">
+        <Link
+          href="https://twitter.com/WouldYouBot/"
+          className="underline"
+        >
           https://twitter.com/WouldYouBot/
         </Link>
       </div>
@@ -83,5 +95,5 @@ export default function legalnoticede() {
         <span className="font-mono text-white">1009562516105461780</span>
       </p>
     </main>
-  );
+  )
 }

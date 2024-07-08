@@ -1,4 +1,4 @@
-import type { SVGProps } from "react";
+import type { SVGProps } from "react"
 
 export function CheckIcon(props: SVGProps<SVGSVGElement>) {
   return (
@@ -18,7 +18,7 @@ export function CheckIcon(props: SVGProps<SVGSVGElement>) {
         d="M20 6L9 17l-5-5"
       ></path>
     </svg>
-  );
+  )
 }
 
 export function CloseIcon(props: SVGProps<SVGSVGElement>) {
@@ -35,7 +35,7 @@ export function CloseIcon(props: SVGProps<SVGSVGElement>) {
         d="M5.293 5.293a1 1 0 0 1 1.414 0L12 10.586l5.293-5.293a1 1 0 1 1 1.414 1.414L13.414 12l5.293 5.293a1 1 0 0 1-1.414 1.414L12 13.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L10.586 12L5.293 6.707a1 1 0 0 1 0-1.414"
       ></path>
     </svg>
-  );
+  )
 }
 
 export const ApplePay = () => {
@@ -59,8 +59,8 @@ export const ApplePay = () => {
         fill="black"
       />
     </svg>
-  );
-};
+  )
+}
 
 export const GooglePay = () => {
   return (
@@ -97,8 +97,8 @@ export const GooglePay = () => {
         fill="#EA4335"
       />
     </svg>
-  );
-};
+  )
+}
 
 export const Link = () => {
   return (
@@ -151,8 +151,8 @@ export const Link = () => {
         </clipPath>
       </defs>
     </svg>
-  );
-};
+  )
+}
 
 export const MasterCard = () => {
   return (
@@ -181,8 +181,8 @@ export const MasterCard = () => {
         fill="#FF5E00"
       />
     </svg>
-  );
-};
+  )
+}
 
 export const PayPal = () => {
   return (
@@ -223,8 +223,8 @@ export const PayPal = () => {
         fill="#253B80"
       />
     </svg>
-  );
-};
+  )
+}
 
 export const Stripe = () => {
   return (
@@ -307,12 +307,16 @@ export const Stripe = () => {
       </g>
       <defs>
         <clipPath id="clip0_437_604">
-          <rect width="138.088" height="31.3" fill="white" />
+          <rect
+            width="138.088"
+            height="31.3"
+            fill="white"
+          />
         </clipPath>
       </defs>
     </svg>
-  );
-};
+  )
+}
 
 export function StripeSquare(props: SVGProps<SVGSVGElement>) {
   return (
@@ -328,7 +332,7 @@ export function StripeSquare(props: SVGProps<SVGSVGElement>) {
         d="M2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm6.226 5.385c-.584 0-.937.164-.937.593c0 .468.607.674 1.36.93c1.228.415 2.844.963 2.851 2.993C11.5 11.868 9.924 13 7.63 13a7.7 7.7 0 0 1-3.009-.626V9.758c.926.506 2.095.88 3.01.88c.617 0 1.058-.165 1.058-.671c0-.518-.658-.755-1.453-1.041C6.026 8.49 4.5 7.94 4.5 6.11C4.5 4.165 5.988 3 8.226 3a7.3 7.3 0 0 1 2.734.505v2.583c-.838-.45-1.896-.703-2.734-.703"
       ></path>
     </svg>
-  );
+  )
 }
 
 export const Visa = () => {
@@ -350,5 +354,5 @@ export const Visa = () => {
         fill="#172B85"
       />
     </svg>
-  );
-};
+  )
+}

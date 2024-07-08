@@ -1,33 +1,33 @@
 // TODO remove the use client directive in favor of a server component
-"use client";
+"use client"
 
-import DiscordLoginButton from "@/components/DiscordLoginButton";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import DiscordLoginButton from "@/components/DiscordLoginButton"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+  DialogTrigger
+} from "@/components/ui/dialog"
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Toaster } from "@/components/ui/toaster";
-import { useIdToken } from "@/helpers/hooks";
-import { getServer } from "@/lib/redis";
-import { LazyMotion, domAnimation, m } from "framer-motion";
-import Head from "next/head";
-import Image from "next/image";
-import { Suspense, useState } from "react";
-import { ServersListSkeleton } from "./_components";
-import PlansComparison from "./_components/PlansComparison";
-import CheckoutButton from "./_components/checkoutButton";
+  SelectValue
+} from "@/components/ui/select"
+import { Toaster } from "@/components/ui/toaster"
+import { useIdToken } from "@/helpers/hooks"
+import { getServer } from "@/lib/redis"
+import { LazyMotion, domAnimation, m } from "framer-motion"
+import Head from "next/head"
+import Image from "next/image"
+import { Suspense, useState } from "react"
+import { ServersListSkeleton } from "./_components"
+import PlansComparison from "./_components/PlansComparison"
+import CheckoutButton from "./_components/checkoutButton"
 import {
   ApplePay,
   CheckIcon,
@@ -38,9 +38,9 @@ import {
   PayPal,
   Stripe,
   StripeSquare,
-  Visa,
-} from "./_components/icons";
-import { DiscordGuild, PricingData } from "./_types";
+  Visa
+} from "./_components/icons"
+import { DiscordGuild, PricingData } from "./_types"
 
 const pricingData: PricingData = {
   price: { monthly: 2.99, yearly: 29.99 },
@@ -50,57 +50,57 @@ const pricingData: PricingData = {
     "Customized Webhook Branding": true,
     "Get Rid of Button Ads": true,
     "Auto Pin Daily Messages": true,
-    "Support the Development": true,
-  },
-};
+    "Support the Development": true
+  }
+}
 
 const data = [
   {
     criteria: "5 Gamemodes",
     free: true,
-    premium: true,
+    premium: true
   },
   {
     criteria: "Question of the Day",
     free: true,
-    premium: true,
+    premium: true
   },
   {
     criteria: "Thousands of Questions",
     free: true,
-    premium: true,
+    premium: true
   },
   {
     criteria: "Custom Questions",
     free: "Limited (100 per category)",
-    premium: "Unlimited",
+    premium: "Unlimited"
   },
   {
     criteria: "Custom Webhook Branding",
     free: false,
-    premium: true,
+    premium: true
   },
   {
     criteria: "Auto Pin Daily Messages",
     free: false,
-    premium: true,
-  },
-];
+    premium: true
+  }
+]
 
 export default function Premium() {
-  const [isMonthly, setIsMonthly] = useState(true);
-  const [serversData, setServersData] = useState<DiscordGuild[]>([]);
-  const [serverId, setServerId] = useState<string>();
-  const idToken = useIdToken(null);
+  const [isMonthly, setIsMonthly] = useState(true)
+  const [serversData, setServersData] = useState<DiscordGuild[]>([])
+  const [serverId, setServerId] = useState<string>()
+  const idToken = useIdToken(null)
 
   const handleChange = () => {
-    setIsMonthly(!isMonthly);
-  };
+    setIsMonthly(!isMonthly)
+  }
 
   const fetchData = async () => {
-    const servers = (await getServer()) as DiscordGuild[];
-    setServersData(servers);
-  };
+    const servers = (await getServer()) as DiscordGuild[]
+    setServersData(servers)
+  }
 
   return (
     <>
@@ -161,9 +161,9 @@ export default function Premium() {
                       </span>
                       <div className="flex items-end justify-start">
                         <div className="mr-2 mt-4 text-left text-4xl font-bold text-white sm:text-5xl">
-                          {isMonthly
-                            ? pricingData.price.monthly
-                            : pricingData.price.yearly}
+                          {isMonthly ?
+                            pricingData.price.monthly
+                          : pricingData.price.yearly}
                         </div>
                         <div className="text-gray-400">
                           {isMonthly ? "/ month" : "/ year"}
@@ -175,36 +175,39 @@ export default function Premium() {
                       <ul className="mb-16 text-white">
                         {Object.keys(pricingData["premium"]).map(
                           (text, index) => (
-                            <li className="mb-4 flex items-center" key={index}>
-                              {pricingData["premium"][
-                                text as keyof (typeof pricingData)["premium"]
-                              ] ? (
+                            <li
+                              className="mb-4 flex items-center"
+                              key={index}
+                            >
+                              {(
+                                pricingData["premium"][
+                                  text as keyof (typeof pricingData)["premium"]
+                                ]
+                              ) ?
                                 <CheckIcon className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent text-brand-customPrimary" />
-                              ) : (
-                                <CloseIcon className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent text-[#7A7B7E]" />
-                              )}
+                              : <CloseIcon className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent text-[#7A7B7E]" />
+                              }
                               <span>{text}</span>
                             </li>
-                          ),
+                          )
                         )}
                       </ul>
                       <Dialog>
-                        {idToken ? (
+                        {idToken ?
                           <DialogTrigger
                             onClick={() => {
-                              fetchData();
+                              fetchData()
                             }}
                             className="flex w-full items-center justify-center gap-2 rounded-xl bg-green-500 py-2 font-bold leading-loose text-white transition hover:bg-green-600 focus:ring-0"
                           >
                             Continue with Stripe
                             <StripeSquare className="h-5 w-5" />
                           </DialogTrigger>
-                        ) : (
-                          <DiscordLoginButton
+                        : <DiscordLoginButton
                             className="rounded-xl font-bold"
                             redirect="/premium"
                           />
-                        )}
+                        }
                         <DialogContent className="w-fit border-none bg-brand-customDarkBg3">
                           <DialogHeader>
                             <DialogTitle className="text-xl font-bold text-white">
@@ -259,19 +262,28 @@ export default function Premium() {
                             <CheckoutButton
                               monthly={String(isMonthly)}
                               priceId={
-                                isMonthly
-                                  ? process.env
-                                      .NEXT_PUBLIC_PREMIUM_MONTHLY_PRICE_ID!
-                                  : process.env
-                                      .NEXT_PUBLIC_PREMIUM_YEARLY_PRICE_ID!
+                                isMonthly ?
+                                  process.env
+                                    .NEXT_PUBLIC_PREMIUM_MONTHLY_PRICE_ID!
+                                : process.env
+                                    .NEXT_PUBLIC_PREMIUM_YEARLY_PRICE_ID!
                               }
                               serverId={serverId}
                             />
                           </DialogDescription>
                         </DialogContent>
-                        {idToken ? <p className="text-gray-400 text-center pt-3 mb-[-15] text-wrap">
-                        Or click <a href="/api/subs/manage" className="underline font-bold text-gray-300">here</a> to manage your subscriptions
-                          </p> : null }
+                        {idToken ?
+                          <p className="text-gray-400 text-center pt-3 mb-[-15] text-wrap">
+                            Or click{" "}
+                            <a
+                              href="/api/subs/manage"
+                              className="underline font-bold text-gray-300"
+                            >
+                              here
+                            </a>{" "}
+                            to manage your subscriptions
+                          </p>
+                        : null}
                       </Dialog>
                     </div>
                   </div>
@@ -300,11 +312,15 @@ export default function Premium() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              <PlansComparison data={data} rowSeparator colSeparator />
+              <PlansComparison
+                data={data}
+                rowSeparator
+                colSeparator
+              />
             </m.div>
           </LazyMotion>
         </div>
       </main>
     </>
-  );
+  )
 }

@@ -1,13 +1,13 @@
-import { IdTokenJWT } from "@/helpers/hooks";
-import { verifyJwt } from "@/helpers/jwt";
-import { OAuthTokenJWT } from "@/helpers/oauth/types";
-import { cookies } from "next/headers";
-import { parseJWT } from "oslo/jwt";
-import { cache } from "react";
+import { IdTokenJWT } from "@/helpers/hooks"
+import { verifyJwt } from "@/helpers/jwt"
+import { OAuthTokenJWT } from "@/helpers/oauth/types"
+import { cookies } from "next/headers"
+import { parseJWT } from "oslo/jwt"
+import { cache } from "react"
 
 export function getIdToken(): IdTokenJWT | null {
-  const tokenString = cookies().get("ID_TOKEN")?.value;
-  return tokenString ? (parseJWT(tokenString) as IdTokenJWT) : null;
+  const tokenString = cookies().get("ID_TOKEN")?.value
+  return tokenString ? (parseJWT(tokenString) as IdTokenJWT) : null
 }
 
 /**
@@ -16,13 +16,13 @@ export function getIdToken(): IdTokenJWT | null {
  * Throws if the JWT is invalid or expired.
  */
 export function getAuthToken(): Promise<OAuthTokenJWT> {
-  const token = cookies().get("OAUTH_TOKEN")?.value;
+  const token = cookies().get("OAUTH_TOKEN")?.value
 
   if (!token) {
-    throw new MissingTokenException();
+    throw new MissingTokenException()
   }
 
-  return verifyJwt(token) as Promise<OAuthTokenJWT>;
+  return verifyJwt(token) as Promise<OAuthTokenJWT>
 }
 
 /**
@@ -30,11 +30,11 @@ export function getAuthToken(): Promise<OAuthTokenJWT> {
  */
 export const getAuthTokenOrNull = cache((): Promise<OAuthTokenJWT | null> => {
   try {
-    return getAuthToken();
+    return getAuthToken()
   } catch (e: unknown) {
-    return Promise.resolve(null);
+    return Promise.resolve(null)
   }
-});
+})
 
 export abstract class OAuthException extends Error {}
 

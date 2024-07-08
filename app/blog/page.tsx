@@ -1,5 +1,5 @@
-import { BlogList, BlogListSkeleton } from "@/app/blog/_components";
-import { Suspense } from "react";
+import { BlogList, BlogListSkeleton } from "@/app/blog/_components"
+import { Suspense } from "react"
 
 const BlogPosts = async () => {
   return (
@@ -15,7 +15,7 @@ const BlogPosts = async () => {
         </Suspense>
       </div>
     </main>
-  );
-};
+  )
+}
 
-export default BlogPosts;
+export default BlogPosts

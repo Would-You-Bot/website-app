@@ -1,47 +1,47 @@
-"use client";
+"use client"
 
-import Button from "@/components/Button";
-import DailyMessageEmbed from "@/components/Embeds/DailyMessageEmbed";
-import HigherLowerEmbed from "@/components/Embeds/HigherLowerEmbed";
-import MainDiscordEmbed from "@/components/Embeds/MainDiscordEmbed";
-import NeverHaveIEverEmbed from "@/components/Embeds/NeverHaveIEverEmbed";
-import FeatureItem from "@/components/FeatureItem";
-import ServerMarquee from "@/components/ServerMarquee";
-import { getRandomQuestion } from "@/helpers/getRandomQuestion";
-import { domAnimation, LazyMotion, m } from "framer-motion";
-import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
+import Button from "@/components/Button"
+import DailyMessageEmbed from "@/components/Embeds/DailyMessageEmbed"
+import HigherLowerEmbed from "@/components/Embeds/HigherLowerEmbed"
+import MainDiscordEmbed from "@/components/Embeds/MainDiscordEmbed"
+import NeverHaveIEverEmbed from "@/components/Embeds/NeverHaveIEverEmbed"
+import FeatureItem from "@/components/FeatureItem"
+import ServerMarquee from "@/components/ServerMarquee"
+import { getRandomQuestion } from "@/helpers/getRandomQuestion"
+import { domAnimation, LazyMotion, m } from "framer-motion"
+import Image from "next/image"
+import Link from "next/link"
+import { useState } from "react"
 
 interface HomeContentProps {
-  initialQuestion: string;
-  serverCount: number;
-  servers: any[];
+  initialQuestion: string
+  serverCount: number
+  servers: any[]
 }
 
 export function HomeContent({
   initialQuestion,
   serverCount,
-  servers,
+  servers
 }: HomeContentProps) {
-  const currentDate = new Date().toLocaleString();
-  const [replayedRounds, setReplayedRounds] = useState(0);
-  const [currentQuestion, setCurrentQuestion] = useState(initialQuestion);
+  const currentDate = new Date().toLocaleString()
+  const [replayedRounds, setReplayedRounds] = useState(0)
+  const [currentQuestion, setCurrentQuestion] = useState(initialQuestion)
 
-  const date = new Date();
+  const date = new Date()
 
   const threadName = `${[
     date.getFullYear(),
     date.getMonth() + 1,
-    date.getDate(),
-  ].join("/")} - Daily Message`;
+    date.getDate()
+  ].join("/")} - Daily Message`
 
   const replay = () => {
     if (replayedRounds < 3) {
-      setCurrentQuestion(getRandomQuestion());
-      setReplayedRounds(replayedRounds + 1);
+      setCurrentQuestion(getRandomQuestion())
+      setReplayedRounds(replayedRounds + 1)
     }
-  };
+  }
 
   return (
     <LazyMotion features={domAnimation}>
@@ -230,11 +230,14 @@ export function HomeContent({
           transition={{ duration: 0.65, ease: "easeInOut" }}
           className="mt-8 flex justify-center"
         >
-          <Link href="/invite" target="_blank">
+          <Link
+            href="/invite"
+            target="_blank"
+          >
             <Button>Invite</Button>
           </Link>
         </m.div>
       </section>
     </LazyMotion>
-  );
+  )
 }

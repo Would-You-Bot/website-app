@@ -1,11 +1,11 @@
-"use server";
+"use server"
 
-import { getPosts } from "@/app/blog/_data";
-import Image from "next/image";
-import Link from "next/link";
+import { getPosts } from "@/app/blog/_data"
+import Image from "next/image"
+import Link from "next/link"
 
 export async function BlogList() {
-  const posts = await getPosts();
+  const posts = await getPosts()
 
   return (
     <>
@@ -14,7 +14,9 @@ export async function BlogList() {
       )}
       {posts
         .sort((a, b) =>
-          a.data.pinned === b.data.pinned ? 0 : a.data.pinned ? -1 : 1,
+          a.data.pinned === b.data.pinned ? 0
+          : a.data.pinned ? -1
+          : 1
         )
         .map((post) => (
           <Link
@@ -78,5 +80,5 @@ export async function BlogList() {
           </Link>
         ))}
     </>
-  );
+  )
 }

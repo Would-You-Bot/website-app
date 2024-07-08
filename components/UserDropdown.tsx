@@ -1,23 +1,23 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/user-dropdown-menu";
-import { IdTokenJWT } from "@/helpers/oauth/types";
-import { LogOut } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
+  DropdownMenuTrigger
+} from "@/components/ui/user-dropdown-menu"
+import { IdTokenJWT } from "@/helpers/oauth/types"
+import { LogOut } from "lucide-react"
+import Image from "next/image"
+import Link from "next/link"
 
 interface UserDropdownProps {
-  idToken: IdTokenJWT | null;
-  items: { label: string; href: string; icon: any }[];
+  idToken: IdTokenJWT | null
+  items: { label: string; href: string; icon: any }[]
 }
 
 export default function UserDropdown({ idToken, items }: UserDropdownProps) {
-  const user = idToken?.payload;
+  const user = idToken?.payload
 
   return (
     <DropdownMenu>
@@ -39,7 +39,10 @@ export default function UserDropdown({ idToken, items }: UserDropdownProps) {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         {items.map((item, i) => (
-          <Link key={i} href={item.href}>
+          <Link
+            key={i}
+            href={item.href}
+          >
             <DropdownMenuItem className="flex gap-2">
               <item.icon className="mt-0.5 h-4 w-4" />
               <span>{item.label}</span>
@@ -47,7 +50,10 @@ export default function UserDropdown({ idToken, items }: UserDropdownProps) {
           </Link>
         ))}
         <DropdownMenuSeparator />
-        <a href="/logout" className="w-full text-[#F00505]">
+        <a
+          href="/logout"
+          className="w-full text-[#F00505]"
+        >
           <DropdownMenuItem className="flex w-full items-center gap-2">
             <LogOut className="mt-0.5 h-4 w-4" />
             Logout
@@ -55,5 +61,5 @@ export default function UserDropdown({ idToken, items }: UserDropdownProps) {
         </a>
       </DropdownMenuContent>
     </DropdownMenu>
-  );
+  )
 }
