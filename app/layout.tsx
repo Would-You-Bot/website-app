@@ -28,11 +28,7 @@ export default function RootLayout({
           className="bg-brand-customPrimary text-white"
           active
         >
-          <b>Would You Bot</b> • Use code{" "}
-          <code className="bg-foreground/15 px-1 rounded border border-foreground/5">
-            release15
-          </code>{" "}
-          to get a 15% discount on your premium subscription
+          <b>Would You Bot</b> • Upgrade your server with Premium
         </Alert>
         <div className="w-full relative">
           <Navbar idToken={idToken} />
