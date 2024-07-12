@@ -85,9 +85,11 @@ const BlogPost = async ({ params: { slug } }: { params: { slug: string } }) => {
             </p>
           ))}
         </div>
-        <div className="xl: relative left-0 top-0 mb-10 flex border-b border-neutral-500 pb-5 xl:fixed xl:left-4 xl:top-40 xl:border-b-0">
-          <TableOfContents toc={frontMatter.toc ?? []} />
-        </div>
+        {frontMatter.toc ?
+          <div className="relative left-0 top-0 mb-10 flex border-b border-neutral-500 pb-5 xl:fixed xl:left-4 xl:top-40 xl:border-b-0">
+            <TableOfContents toc={frontMatter.toc} />
+          </div>
+        : null}
       </div>
 
       <MainContent source={source} />

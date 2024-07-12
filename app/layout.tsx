@@ -22,6 +22,11 @@ export default function RootLayout({
 
   return (
     <html lang="en">
+      <script
+        async
+        data-domain="wouldyoubot.gg"
+        src="https://stats.wouldyoubot.gg/js/script.js"
+      ></script>
       <body className={inter.className}>
         <Navbar idToken={idToken} />
         {children}
