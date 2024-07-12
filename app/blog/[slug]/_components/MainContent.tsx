@@ -1,36 +1,22 @@
-"use client"
+"use server"
 
-import Button from "@/components/Button"
 import blogStyles from "@/styles/blog.module.css"
-import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote"
-
-const components = {
-  Button: Button,
-  a: CustomLink
-}
-
-function CustomLink(props: any) {
-  return (
-    <a
-      {...props}
-      target="_blank"
-    />
-  )
-}
+import { CompileMDXResult } from "next-mdx-remote/rsc"
+import { FrontMatter } from "@/app/blog/[slug]/_data"
 
 interface MainContentProps {
-  source: MDXRemoteSerializeResult
+  source: CompileMDXResult<FrontMatter>
 }
 
-export function MainContent({ source }: MainContentProps) {
+export async function MainContent({ source }: MainContentProps) {
+  if (source.content) {
+    source.content
+  }
   return (
     <main
       className={`markdown mx-auto w-full max-w-8xl px-8 text-neutral-300 ${blogStyles.markdown}`}
     >
-      <MDXRemote
-        {...source}
-        components={components}
-      />
+      {source.content}
     </main>
   )
 }
