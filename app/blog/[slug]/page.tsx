@@ -10,21 +10,21 @@ export async function generateMetadata({
 }: {
   params: { slug: string }
 }): Promise<Metadata> {
-  const { frontMatter } = await getPost(slug)
-  const title = frontMatter.title + "- Would You Bot"
+  const { frontmatter } = await getPost(slug)
+  const title = frontmatter.title + "- Would You Bot"
 
   return {
     title,
-    description: frontMatter.description,
+    description: frontmatter.description,
     metadataBase: new URL("https://wouldyoubot.gg/blog/"),
     openGraph: {
       title,
-      publishedTime: frontMatter.seoDate,
+      publishedTime: frontmatter.seoDate,
       type: "article",
-      description: frontMatter.description,
-      authors: frontMatter.author.name,
-      tags: frontMatter.tags,
-      images: frontMatter.thumbnail?.large
+      description: frontmatter.description,
+      authors: frontmatter.author.name,
+      tags: frontmatter.tags,
+      images: frontmatter.thumbnail?.large
     }
   }
 }
@@ -36,7 +36,8 @@ export function generateStaticParams() {
 }
 
 const BlogPost = async ({ params: { slug } }: { params: { slug: string } }) => {
-  const { source, frontMatter } = await getPost(slug)
+  const result = await getPost(slug)
+  const { frontmatter: frontMatter } = result
 
   return (
     <>
@@ -86,7 +87,7 @@ const BlogPost = async ({ params: { slug } }: { params: { slug: string } }) => {
         </div>
       </div>
 
-      <MainContent source={source} />
+      <MainContent source={result} />
     </>
   )
 }

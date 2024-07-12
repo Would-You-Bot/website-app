@@ -1,10 +1,9 @@
 import { POST_PATH } from "@/utils/mdx"
-import matter from "gray-matter"
-import { MDXRemoteSerializeResult } from "next-mdx-remote"
-import { serialize } from "next-mdx-remote/serialize"
+import { compileMDX, CompileMDXResult } from "next-mdx-remote/rsc"
 import { readFile } from "node:fs/promises"
 import path from "node:path"
 import { cache } from "react"
+import { mdxComponents } from "@/app/blog/[slug]/_data/mdxComponents"
 
 export interface FrontMatter {
   title: string
@@ -26,22 +25,16 @@ export interface FrontMatter {
 }
 
 export const getPost = cache(
-  async (
-    slug: string
-  ): Promise<{
-    source: MDXRemoteSerializeResult
-    frontMatter: FrontMatter
-  }> => {
+  async (slug: string): Promise<CompileMDXResult<FrontMatter>> => {
     const postFilePath = path.join(POST_PATH, `${slug}.mdx`)
     const source = await readFile(postFilePath)
 
-    const { content, data } = matter(source)
-
-    const mdxSource = await serialize(content, { scope: data })
-
-    return {
-      source: mdxSource,
-      frontMatter: data as FrontMatter
-    }
+    return await compileMDX({
+      source: source,
+      components: mdxComponents,
+      options: {
+        parseFrontmatter: true
+      }
+    })
   }
 )
