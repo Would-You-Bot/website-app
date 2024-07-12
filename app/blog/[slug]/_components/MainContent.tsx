@@ -1,28 +1,36 @@
-"use client";
+"use client"
 
-import blogStyles from "@/styles/blog.module.css";
-import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote";
-import Button from "@/components/Button";
+import Button from "@/components/Button"
+import blogStyles from "@/styles/blog.module.css"
+import { MDXRemote, MDXRemoteSerializeResult } from "next-mdx-remote"
 
 const components = {
   Button: Button,
-  a: CustomLink,
-};
+  a: CustomLink
+}
 
 function CustomLink(props: any) {
-  return <a {...props} target="_blank" />;
+  return (
+    <a
+      {...props}
+      target="_blank"
+    />
+  )
 }
 
 interface MainContentProps {
-  source: MDXRemoteSerializeResult;
+  source: MDXRemoteSerializeResult
 }
 
 export function MainContent({ source }: MainContentProps) {
   return (
     <main
-      className={`markdown px-8 text-neutral-300 xl:px-[17vw] ${blogStyles.markdown}`}
+      className={`markdown mx-auto w-full max-w-8xl px-8 text-neutral-300 ${blogStyles.markdown}`}
     >
-      <MDXRemote {...source} components={components} />
+      <MDXRemote
+        {...source}
+        components={components}
+      />
     </main>
-  );
+  )
 }

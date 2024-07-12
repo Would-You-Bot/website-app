@@ -1,4 +1,5 @@
-"use client";
+"use client"
+import profiles from "@/data/profiles.json"
 import {
   DiscordActionRow,
   DiscordAttachments,
@@ -8,13 +9,12 @@ import {
   DiscordEmbedDescription,
   DiscordEmbedFooter,
   DiscordMessage,
-  DiscordMessages,
-} from "@skyra/discord-components-react";
-import profiles from "@/data/profiles.json";
-import { FC } from "react";
+  DiscordMessages
+} from "@skyra/discord-components-react"
+import { FC } from "react"
 
 interface MainProps {
-  replayedRounds: number;
+  replayedRounds: number
 }
 
 const NeverHaveIEverEmbed: FC<MainProps> = ({ replayedRounds }) => {
@@ -37,11 +37,17 @@ const NeverHaveIEverEmbed: FC<MainProps> = ({ replayedRounds }) => {
           roleColor={profiles.pod.roleColor}
           command="/neverhaveiever"
         />
-        <DiscordEmbed slot="embeds" color="#1e88e5">
+        <DiscordEmbed
+          slot="embeds"
+          color="#1e88e5"
+        >
           <DiscordEmbedDescription slot="description">
             Never have I ever dreamed about stopping time in class.
           </DiscordEmbedDescription>
-          <DiscordEmbedFooter slot="footer" footerImage="./staff/Pod.webp">
+          <DiscordEmbedFooter
+            slot="footer"
+            footerImage="./staff/Pod.webp"
+          >
             Requested by podskio | Type: NHIE | ID: 124
           </DiscordEmbedFooter>
         </DiscordEmbed>
@@ -100,6 +106,6 @@ const NeverHaveIEverEmbed: FC<MainProps> = ({ replayedRounds }) => {
         </DiscordAttachments>
       </DiscordMessage>
     </DiscordMessages>
-  );
-};
-export default NeverHaveIEverEmbed;
+  )
+}
+export default NeverHaveIEverEmbed

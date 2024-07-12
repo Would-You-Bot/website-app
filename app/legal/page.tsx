@@ -1,15 +1,23 @@
-import Link from 'next/link'
+import Link from "next/link"
 
 export default function legalnotice() {
   return (
-    <main className="flex flex-col gap-8 px-8 text-neutral-300 xl:px-[17vw]">
-      <h1 className="mt-36 text-4xl font-bold text-brand-red-100 drop-shadow-red-glow">
+    <main className="flex mx-auto w-full max-w-8xl flex-col gap-8 px-8 text-neutral-300">
+      <h1 className="text-4xl font-bold text-brand-red-100 drop-shadow-red-glow">
         Legal Notice
       </h1>
       <p>
-        <span className="mr-1.5 text-lg" aria-label="German flag">🇩🇪</span>
-        For the German version please visit{' '}
-        <Link href="/legal-de" className="text-white underline">
+        <span
+          className="mr-1.5 text-lg"
+          aria-label="German flag"
+        >
+          🇩🇪
+        </span>
+        For the German version please visit{" "}
+        <Link
+          href="/legal-de"
+          className="text-white underline"
+        >
           this page
         </Link>
         .
@@ -34,7 +42,7 @@ export default function legalnotice() {
         </h3>
         <p>
           The European Comission provides a platform for online dispute
-          resolution, available at{' '}
+          resolution, available at{" "}
           <Link
             href="https://ec.europa.eu/consumers/odr/"
             className="text-white underline"
@@ -64,28 +72,40 @@ export default function legalnotice() {
         </p>
       </div>
       <div className="text-white">
-        <Link href="https://wouldyoubot.com/" className="underline">
+        <Link
+          href="https://wouldyoubot.com/"
+          className="underline"
+        >
           https://wouldyoubot.com/
         </Link>
         <br />
-        <Link href="https://wouldyoubot.gg/" className="underline">
+        <Link
+          href="https://wouldyoubot.gg/"
+          className="underline"
+        >
           https://wouldyoubot.gg/
         </Link>
         <br />
 
-        <Link href="https://rivo.gg/" className="underline">
+        <Link
+          href="https://rivo.gg/"
+          className="underline"
+        >
           https://rivo.gg/
         </Link>
         <br />
-        <Link href="https://twitter.com/WouldYouBot/" className="underline">
+        <Link
+          href="https://twitter.com/WouldYouBot/"
+          className="underline"
+        >
           https://twitter.com/WouldYouBot/
         </Link>
       </div>
       <p>
-        The Discord bot with the id{' '}
+        The Discord bot with the id{" "}
         <span className="font-mono text-white">981649513427111957</span>
         <br />
-        The Discord server with the id{' '}
+        The Discord server with the id{" "}
         <span className="font-mono text-white">1009562516105461780</span>
       </p>
     </main>

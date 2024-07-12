@@ -1,10 +1,10 @@
-import Button from "@/components/Button";
-import { NextPage } from "next";
-import Link from "next/link";
+import Button from "@/components/Button"
+import { NextPage } from "next"
+import Link from "next/link"
 
 const NotFound: NextPage = () => {
   return (
-    <div className="my-56 flex flex-col items-center justify-center px-8 text-white xl:px-[17vw]">
+    <div className="mx-auto my-56 flex w-full max-w-8xl flex-1 flex-col items-center justify-center px-8 text-white">
       <h1 className="text-5xl font-bold">
         Error{" "}
         <span className="text-brand-red-100 drop-shadow-red-glow">404</span>
@@ -13,11 +13,14 @@ const NotFound: NextPage = () => {
         The page you requested does not exist.
       </p>
 
-      <Button variant="red" className="mt-8">
+      <Button
+        variant="red"
+        className="mt-8"
+      >
         <Link href="/">Home</Link>
       </Button>
     </div>
-  );
-};
+  )
+}
 
-export default NotFound;
+export default NotFound

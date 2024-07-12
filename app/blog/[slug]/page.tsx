@@ -1,25 +1,22 @@
-import { postPaths } from "@/utils/mdx";
-import Image from "next/image";
-import Link from "next/link";
-import {
-  MainContent,
-  ProgressBar,
-  TableOfContents,
-} from "@/app/blog/[slug]/_components";
-import { Metadata } from "next";
-import { getPost } from "@/app/blog/[slug]/_data";
+import { MainContent, TableOfContents } from "@/app/blog/[slug]/_components"
+import { getPost } from "@/app/blog/[slug]/_data"
+import { postPaths } from "@/utils/mdx"
+import { Metadata } from "next"
+import Image from "next/image"
+import Link from "next/link"
 
 export async function generateMetadata({
-  params: { slug },
+  params: { slug }
 }: {
-  params: { slug: string };
+  params: { slug: string }
 }): Promise<Metadata> {
-  const { frontMatter } = await getPost(slug);
-  const title = frontMatter.title + "- Would You Bot";
+  const { frontMatter } = await getPost(slug)
+  const title = frontMatter.title + "- Would You Bot"
 
   return {
     title,
     description: frontMatter.description,
+    metadataBase: new URL("https://wouldyoubot.gg/blog/"),
     openGraph: {
       title,
       publishedTime: frontMatter.seoDate,
@@ -27,24 +24,23 @@ export async function generateMetadata({
       description: frontMatter.description,
       authors: frontMatter.author.name,
       tags: frontMatter.tags,
-      images: frontMatter.thumbnail?.large,
-    },
-  };
+      images: frontMatter.thumbnail?.large
+    }
+  }
 }
 
 export function generateStaticParams() {
   return postPaths
     .map((path) => path.replace(/\.mdx?$/, ""))
-    .map((slug) => ({ slug }));
+    .map((slug) => ({ slug }))
 }
 
 const BlogPost = async ({ params: { slug } }: { params: { slug: string } }) => {
-  const { source, frontMatter } = await getPost(slug);
+  const { source, frontMatter } = await getPost(slug)
 
   return (
     <>
-      <ProgressBar />
-      <div className="mt-36 px-8 text-neutral-300 xl:px-[17vw]">
+      <div className="w-full max-w-8xl mx-auto px-8 text-neutral-300">
         <Link
           href="/blog"
           className="text-neutral-300 transition-all hover:text-white"
@@ -94,7 +90,7 @@ const BlogPost = async ({ params: { slug } }: { params: { slug: string } }) => {
 
       <MainContent source={source} />
     </>
-  );
-};
+  )
+}
 
-export default BlogPost;
+export default BlogPost

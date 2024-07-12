@@ -1,4 +1,5 @@
-"use client";
+"use client"
+import profiles from "@/data/profiles.json"
 import {
   DiscordEmbed,
   DiscordEmbedDescription,
@@ -7,13 +8,12 @@ import {
   DiscordMessage,
   DiscordMessages,
   DiscordThread,
-  DiscordThreadMessage,
-} from "@skyra/discord-components-react";
-import profiles from "@/data/profiles.json";
-import { FC } from "react";
+  DiscordThreadMessage
+} from "@skyra/discord-components-react"
+import { FC } from "react"
 
 interface MainProps {
-  threadName: string;
+  threadName: string
 }
 
 const DailyMessageEmbed: FC<MainProps> = ({ threadName }) => {
@@ -27,10 +27,16 @@ const DailyMessageEmbed: FC<MainProps> = ({ threadName }) => {
         bot={profiles.wouldyou.bot}
         verified={profiles.wouldyou.verified}
       >
-        <DiscordMention type="role" color="#1e99">
+        <DiscordMention
+          type="role"
+          color="#1e99"
+        >
           QOTD
         </DiscordMention>
-        <DiscordEmbed slot="embeds" color="#1e88e5">
+        <DiscordEmbed
+          slot="embeds"
+          color="#1e88e5"
+        >
           <DiscordEmbedDescription slot="description">
             Would you rather be able to control fire 🔥 or water 💧?
           </DiscordEmbedDescription>
@@ -38,7 +44,10 @@ const DailyMessageEmbed: FC<MainProps> = ({ threadName }) => {
             Daily Message | Type: Mixed | ID: 34
           </DiscordEmbedFooter>
         </DiscordEmbed>
-        <DiscordThread slot="thread" name={threadName}>
+        <DiscordThread
+          slot="thread"
+          name={threadName}
+        >
           <DiscordThreadMessage
             profile="Nightkiller"
             author={profiles.nightkiller.author}
@@ -50,6 +59,6 @@ const DailyMessageEmbed: FC<MainProps> = ({ threadName }) => {
         </DiscordThread>
       </DiscordMessage>
     </DiscordMessages>
-  );
-};
-export default DailyMessageEmbed;
+  )
+}
+export default DailyMessageEmbed

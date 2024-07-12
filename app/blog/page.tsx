@@ -1,10 +1,10 @@
-import { Suspense } from "react";
-import { BlogList, BlogListSkeleton } from "@/app/blog/_components";
+import { BlogList, BlogListSkeleton } from "@/app/blog/_components"
+import { Suspense } from "react"
 
 const BlogPosts = async () => {
   return (
-    <main className="px-8 xl:px-[17vw]">
-      <h1 className="mt-36 text-4xl font-bold text-white">
+    <main className="w-full mx-auto max-w-8xl px-8">
+      <h1 className="text-4xl font-bold text-white">
         <span className="text-brand-red-100 drop-shadow-red-glow">Would</span>{" "}
         <span className="text-brand-blue-100 drop-shadow-blue-glow">You</span>{" "}
         Blog
@@ -15,7 +15,7 @@ const BlogPosts = async () => {
         </Suspense>
       </div>
     </main>
-  );
-};
+  )
+}
 
-export default BlogPosts;
+export default BlogPosts

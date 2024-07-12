@@ -1,4 +1,5 @@
-"use client";
+"use client"
+import profiles from "@/data/profiles.json"
 import {
   DiscordActionRow,
   DiscordAttachments,
@@ -8,22 +9,21 @@ import {
   DiscordEmbedDescription,
   DiscordEmbedFooter,
   DiscordMessage,
-  DiscordMessages,
-} from "@skyra/discord-components-react";
-import { m, LazyMotion, domAnimation } from "framer-motion";
-import profiles from "@/data/profiles.json";
-import { FC } from "react";
+  DiscordMessages
+} from "@skyra/discord-components-react"
+import { LazyMotion, domAnimation, m } from "framer-motion"
+import { FC } from "react"
 
 interface MainProps {
-  replayedRounds: number;
-  currentQuestion: string;
-  replay: Function;
+  replayedRounds: number
+  currentQuestion: string
+  replay: Function
 }
 
 const MainDiscordEmbed: FC<MainProps> = ({
   replayedRounds,
   currentQuestion,
-  replay,
+  replay
 }) => {
   return (
     <LazyMotion features={domAnimation}>
@@ -34,7 +34,7 @@ const MainDiscordEmbed: FC<MainProps> = ({
         viewport={{ once: true }}
         style={{ width: "90%", marginLeft: "auto", marginRight: "auto" }}
       >
-        <DiscordMessages class="overflow-x-hidden rounded-lg text-left shadow">
+        <DiscordMessages class="mx-auto w-auto overflow-x-hidden rounded-lg text-left shadow sm:w-2/3 lg:w-auto">
           <DiscordMessage
             profile="wouldyou"
             author={profiles.wouldyou.author}
@@ -52,7 +52,10 @@ const MainDiscordEmbed: FC<MainProps> = ({
               roleColor={profiles.dominik.roleColor}
               command="/wouldyourather"
             />
-            <DiscordEmbed slot="embeds" color="#1e88e5">
+            <DiscordEmbed
+              slot="embeds"
+              color="#1e88e5"
+            >
               <DiscordEmbedDescription slot="description">
                 {currentQuestion}
               </DiscordEmbedDescription>
@@ -110,8 +113,11 @@ const MainDiscordEmbed: FC<MainProps> = ({
                 </DiscordButton>
               </DiscordActionRow>
               <DiscordActionRow>
-                {replayedRounds < 3 ? (
-                  <DiscordButton type="primary" onClick={() => replay()}>
+                {replayedRounds < 3 ?
+                  <DiscordButton
+                    type="primary"
+                    onClick={() => replay()}
+                  >
                     <svg
                       viewBox="0 0 36 36"
                       width="36"
@@ -125,8 +131,7 @@ const MainDiscordEmbed: FC<MainProps> = ({
                     </svg>
                     New Question
                   </DiscordButton>
-                ) : (
-                  <DiscordButton
+                : <DiscordButton
                     type="secondary"
                     onClick={() =>
                       window.open("https://wouldyoubot.gg/invite", "_blank")
@@ -149,13 +154,13 @@ const MainDiscordEmbed: FC<MainProps> = ({
                     </svg>
                     Invite Would You
                   </DiscordButton>
-                )}
+                }
               </DiscordActionRow>
             </DiscordAttachments>
           </DiscordMessage>
         </DiscordMessages>
       </m.div>
     </LazyMotion>
-  );
-};
-export default MainDiscordEmbed;
+  )
+}
+export default MainDiscordEmbed

@@ -1,58 +1,59 @@
-"use client";
+"use client"
 
-import { domAnimation, LazyMotion, m } from "framer-motion";
-import Link from "next/link";
-import Button from "@/components/Button";
-import Image from "next/image";
-import ServerMarquee from "@/components/ServerMarquee";
-import servers from "@/data/servers.json";
-import FeatureItem from "@/components/FeatureItem";
-import DailyMessageEmbed from "@/components/Embeds/DailyMessageEmbed";
-import HigherLowerEmbed from "@/components/Embeds/HigherLowerEmbed";
-import NeverHaveIEverEmbed from "@/components/Embeds/NeverHaveIEverEmbed";
-import React, { useState } from "react";
-import { getRandomQuestion } from "@/helpers/getRandomQuestion";
-import MainDiscordEmbed from "@/components/Embeds/MainDiscordEmbed";
+import Button from "@/components/Button"
+import DailyMessageEmbed from "@/components/Embeds/DailyMessageEmbed"
+import HigherLowerEmbed from "@/components/Embeds/HigherLowerEmbed"
+import MainDiscordEmbed from "@/components/Embeds/MainDiscordEmbed"
+import NeverHaveIEverEmbed from "@/components/Embeds/NeverHaveIEverEmbed"
+import FeatureItem from "@/components/FeatureItem"
+import ServerMarquee from "@/components/ServerMarquee"
+import { getRandomQuestion } from "@/helpers/getRandomQuestion"
+import { domAnimation, LazyMotion, m } from "framer-motion"
+import Image from "next/image"
+import Link from "next/link"
+import { useState } from "react"
 
 interface HomeContentProps {
-  initialQuestion: string;
-  serverCount: number;
+  initialQuestion: string
+  serverCount: number
+  servers: any[]
 }
 
 export function HomeContent({
   initialQuestion,
   serverCount,
+  servers
 }: HomeContentProps) {
-  const currentDate = new Date().toLocaleString();
-  const [replayedRounds, setReplayedRounds] = useState(0);
-  const [currentQuestion, setCurrentQuestion] = useState(initialQuestion);
+  const currentDate = new Date().toLocaleString()
+  const [replayedRounds, setReplayedRounds] = useState(0)
+  const [currentQuestion, setCurrentQuestion] = useState(initialQuestion)
 
-  const date = new Date();
+  const date = new Date()
 
   const threadName = `${[
     date.getFullYear(),
     date.getMonth() + 1,
-    date.getDate(),
-  ].join("/")} - Daily Message`;
+    date.getDate()
+  ].join("/")} - Daily Message`
 
   const replay = () => {
     if (replayedRounds < 3) {
-      setCurrentQuestion(getRandomQuestion());
-      setReplayedRounds(replayedRounds + 1);
+      setCurrentQuestion(getRandomQuestion())
+      setReplayedRounds(replayedRounds + 1)
     }
-  };
+  }
 
   return (
     <LazyMotion features={domAnimation}>
-      <section className="flex flex-col items-center justify-between gap-8 text-center lg:flex-row lg:text-left xl:px-[17vw]">
+      <section className="mt-0 sm:mt-16 lg:mt-28 flex w-full max-w-8xl flex-col items-center justify-between gap-16 px-8 text-center lg:flex-row lg:text-left">
         <m.div
           initial={{ opacity: 0, transform: "translateY(20px)" }}
           whileInView={{ opacity: 1, transform: "translateY(0)" }}
           transition={{ duration: 0.7, ease: "easeInOut" }}
           viewport={{ once: true }}
-          className="px-8"
+          className="flex flex-col items-center lg:block"
         >
-          <h1 className="text-6xl font-bold leading-normal text-white">
+          <h1 className="text-[2rem] sm:text-5xl md:text-6xl font-bold leading-normal text-white mb-8">
             Entertain Your
             <br />
             <span className="text-brand-red-100 drop-shadow-red-glow">
@@ -68,8 +69,12 @@ export function HomeContent({
             I Ever, Higher or Lower, and What Would You Do!{" "}
             <span className="hidden">tempus voicus</span>
           </p>
-          <Link href="/invite" target="_blank" className="flex w-fit mt-8">
-            <Button className="mx-auto gap-2 lg:mx-0">
+          <Link
+            href="/invite"
+            target="_blank"
+            className="mt-8 flex w-fit justify-center"
+          >
+            <Button className="gap-2">
               Unleash the Fun
               <svg
                 width="13"
@@ -101,10 +106,9 @@ export function HomeContent({
           draggable={false}
           width="10000"
           height="10000"
-          className="-z-50 w-screen"
           priority
         />
-        <div className="bg-[#101010] px-8 pb-12 text-center text-5xl text-white md:-mt-20 md:pb-28 xl:px-[17vw]">
+        <div className="w-full bg-[#101010] px-8 pb-12 text-center text-xl sm:text-3xl md:text-4xl text-white md:-mt-20 md:pb-28">
           <h2>
             Trusted by{" "}
             <span className="bg-gradient-brand bg-clip-text font-bold text-transparent">
@@ -112,7 +116,7 @@ export function HomeContent({
             </span>{" "}
             communities
           </h2>
-          <h3 className="mt-4 text-2xl">
+          <h3 className="mt-4 text-sm sm:text-xl md:text-2xl">
             keeping{" "}
             <span className="bg-gradient-brand bg-clip-text font-bold text-transparent">
               4,000,000+
@@ -120,12 +124,19 @@ export function HomeContent({
             users entertained
           </h3>
 
-          <ServerMarquee servers={servers[0]} speed={40} />
-          <ServerMarquee servers={servers[1]} speed={30} direction="right" />
+          <ServerMarquee
+            servers={servers.slice(0, Math.ceil(servers.length / 2))}
+            speed={40}
+          />
+          <ServerMarquee
+            servers={servers.slice(Math.ceil(servers.length / 2))}
+            speed={30}
+            direction="right"
+          />
         </div>
       </section>
 
-      <section className="mt-20 flex flex-col items-center gap-8 px-9 xl:px-[17vw]">
+      <section className="mt-20 flex w-full max-w-8xl flex-col items-center gap-20 px-8">
         <m.div
           initial={{ opacity: 0, transform: "translateY(15px)" }}
           whileInView={{ opacity: 1, transform: "translateY(0)" }}
@@ -190,7 +201,7 @@ export function HomeContent({
         />
       </section>
 
-      <section className="mt-36 bg-[#101010] px-9 py-12 xl:px-[17vw]">
+      <section className="mt-36 w-full bg-[#101010] px-9 py-12">
         <m.h2
           initial={{ opacity: 0, transform: "translateY(10px)" }}
           whileInView={{ opacity: 1, transform: "translateY(0)" }}
@@ -219,11 +230,14 @@ export function HomeContent({
           transition={{ duration: 0.65, ease: "easeInOut" }}
           className="mt-8 flex justify-center"
         >
-          <Link href="/invite" target="_blank">
+          <Link
+            href="/invite"
+            target="_blank"
+          >
             <Button>Invite</Button>
           </Link>
         </m.div>
       </section>
     </LazyMotion>
-  );
+  )
 }

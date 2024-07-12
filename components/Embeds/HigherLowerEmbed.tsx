@@ -1,4 +1,5 @@
-"use client";
+"use client"
+import profiles from "@/data/profiles.json"
 import {
   DiscordActionRow,
   DiscordAttachments,
@@ -6,17 +7,15 @@ import {
   DiscordCommand,
   DiscordEmbed,
   DiscordEmbedDescription,
-  DiscordEmbedFields,
   DiscordEmbedFooter,
   DiscordMessage,
   DiscordMessages,
-  DiscordReply,
-} from "@skyra/discord-components-react";
-import profiles from "@/data/profiles.json";
-import { FC } from "react";
+  DiscordReply
+} from "@skyra/discord-components-react"
+import { FC } from "react"
 
 interface MainProps {
-  currentDate: string;
+  currentDate: string
 }
 
 const HigherLowerEmbed: FC<MainProps> = ({ currentDate }) => {
@@ -38,7 +37,11 @@ const HigherLowerEmbed: FC<MainProps> = ({ currentDate }) => {
           roleColor={profiles.finn.roleColor}
           command="/higherlower"
         />
-        <DiscordEmbed slot="embeds" color="#57f389" image="/higherlower.webp">
+        <DiscordEmbed
+          slot="embeds"
+          color="#57f389"
+          image="/higherlower.webp"
+        >
           <DiscordEmbedDescription slot="description">
             Do you think that{" "}
             <a
@@ -132,6 +135,6 @@ const HigherLowerEmbed: FC<MainProps> = ({ currentDate }) => {
         Yep!
       </DiscordMessage>
     </DiscordMessages>
-  );
-};
-export default HigherLowerEmbed;
+  )
+}
+export default HigherLowerEmbed

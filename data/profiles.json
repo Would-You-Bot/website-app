@@ -1,74 +1,72 @@
-
 {
-
-    "wouldyou": {
-      "author": "Would You",
-      "avatar": "./Logo.svg",
-      "roleColor": "#1e88e5",
-      "bot": true,
-      "verified": true
-    },
-    "sky": {
-      "author": "ForGetFulSkyBro",
-      "avatar": "./staff/Sky.webp",
-      "roleColor": "#f1c40f",
-      "bot": false,
-      "verified": false
-    },
-    "dominik": {
-      "author": "Dominik",
-      "avatar": "./staff/Dominik.webp",
-      "roleColor": "#F47FFF",
-      "bot": false,
-      "verified": false
-    },
-    "nightkiller": {
-      "author": "NightKiller_2",
-      "avatar": "./staff/Nightkiller.webp",
-      "roleColor": "#00fff5",
-      "bot": false,
-      "verified": false
-    },
-    "pod": {
-      "author": "Pod",
-      "avatar": "./staff/Pod.webp",
-      "roleColor": "#F1327F",
-      "bot": false,
-      "verified": false
-    },
-    "finn": {
-      "author": "Finn",
-      "avatar": "./staff/Finn.webp",
-      "roleColor": "#23CE6B",
-      "bot": false,
-      "verified": false
-    },
-    "smokey": {
-      "author": "Smokey",
-      "avatar": "./staff/Smokey.webp",
-      "roleColor": "#EC7C26",
-      "bot": false,
-      "verified": false
-    },
-    "emilia": {
-      "author": "Emilia",
-      "avatar": "./staff/Emilia.webp",
-      "roleColor": "#5ADBFF",
-      "bot": false,
-      "verified": false
-    },
-    "invalid": {
-      "author": "InvalidKiller",
-      "avatar": "./staff/Invalid.webp",
-      "roleColor": "#f8dd3f",
-      "bot": false,
-      "verified": false
-    },
-    "gersti": {
-      "author": "Gersti",
-      "avatar": "./staff/Gersti.webp",
-      "roleColor": "#ff69eb",
-      "bot": false,
-      "verified": false
-    }
+  "wouldyou": {
+    "author": "Would You",
+    "avatar": "./Logo.svg",
+    "roleColor": "#1e88e5",
+    "bot": true,
+    "verified": true
+  },
+  "sky": {
+    "author": "ForGetFulSkyBro",
+    "avatar": "./staff/Sky.webp",
+    "roleColor": "#f1c40f",
+    "bot": false,
+    "verified": false
+  },
+  "dominik": {
+    "author": "Dominik",
+    "avatar": "./staff/Dominik.webp",
+    "roleColor": "#F47FFF",
+    "bot": false,
+    "verified": false
+  },
+  "nightkiller": {
+    "author": "NightKiller_2",
+    "avatar": "./staff/Nightkiller.webp",
+    "roleColor": "#00fff5",
+    "bot": false,
+    "verified": false
+  },
+  "pod": {
+    "author": "Pod",
+    "avatar": "./staff/Pod.webp",
+    "roleColor": "#F1327F",
+    "bot": false,
+    "verified": false
+  },
+  "finn": {
+    "author": "Finn",
+    "avatar": "./staff/Finn.webp",
+    "roleColor": "#23CE6B",
+    "bot": false,
+    "verified": false
+  },
+  "smokey": {
+    "author": "Smokey",
+    "avatar": "./staff/Smokey.webp",
+    "roleColor": "#EC7C26",
+    "bot": false,
+    "verified": false
+  },
+  "emilia": {
+    "author": "Emilia",
+    "avatar": "./staff/Emilia.webp",
+    "roleColor": "#5ADBFF",
+    "bot": false,
+    "verified": false
+  },
+  "invalid": {
+    "author": "InvalidKiller",
+    "avatar": "./staff/Invalid.webp",
+    "roleColor": "#f8dd3f",
+    "bot": false,
+    "verified": false
+  },
+  "gersti": {
+    "author": "Gersti",
+    "avatar": "./staff/Gersti.webp",
+    "roleColor": "#ff69eb",
+    "bot": false,
+    "verified": false
+  }
 }
