@@ -1,9 +1,9 @@
-import Link from "next/link";
+import Link from "next/link"
 
 export default function legalnoticede() {
   return (
-    <main className="flex w-full max-w-8xl flex-col gap-8 px-8 text-neutral-300">
-      <h1 className="mt-36 text-4xl font-bold text-brand-red-100 drop-shadow-red-glow">
+    <main className="flex mx-auto w-full max-w-8xl flex-col gap-8 px-8 text-neutral-300">
+      <h1 className="text-4xl font-bold text-brand-red-100 drop-shadow-red-glow">
         Impressum
       </h1>
       <p>Informationen gemäß § 5 TMG.</p>
@@ -60,30 +60,42 @@ export default function legalnoticede() {
         </p>
       </div>
       <div className="text-white">
-        <Link href="https://wouldyoubot.com/" className="underline">
+        <Link
+          href="https://wouldyoubot.com/"
+          className="underline"
+        >
           https://wouldyoubot.com/
         </Link>
         <br />
-        <Link href="https://wouldyoubot.gg/" className="underline">
+        <Link
+          href="https://wouldyoubot.gg/"
+          className="underline"
+        >
           https://wouldyoubot.gg/
         </Link>
         <br />
 
-        <Link href="https://rivo.gg/" className="underline">
+        <Link
+          href="https://rivo.gg/"
+          className="underline"
+        >
           https://rivo.gg/
         </Link>
         <br />
-        <Link href="https://twitter.com/WouldYouBot/" className="underline">
+        <Link
+          href="https://twitter.com/WouldYouBot/"
+          className="underline"
+        >
           https://twitter.com/WouldYouBot/
         </Link>
       </div>
       <p>
-        Der Discord Bot mit dem id
+        Der Discord Bot mit der id{" "}
         <span className="font-mono text-white">981649513427111957</span>
         <br />
-        Der Discord server with the id{" "}
+        Der Discord server mit der id{" "}
         <span className="font-mono text-white">1009562516105461780</span>
       </p>
     </main>
-  );
+  )
 }
