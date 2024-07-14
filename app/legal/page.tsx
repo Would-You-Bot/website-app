@@ -1,23 +1,17 @@
-import Link from "next/link"
+import Link from "next/link";
 
 export default function legalnotice() {
   return (
-    <main className="flex mx-auto w-full max-w-8xl flex-col gap-8 px-8 text-neutral-300">
-      <h1 className="text-4xl font-bold text-brand-red-100 drop-shadow-red-glow">
+    <main className="flex w-full max-w-8xl flex-col gap-8 px-8 text-neutral-300">
+      <h1 className="mt-36 text-4xl font-bold text-brand-red-100 drop-shadow-red-glow">
         Legal Notice
       </h1>
       <p>
-        <span
-          className="mr-1.5 text-lg"
-          aria-label="German flag"
-        >
+        <span className="mr-1.5 text-lg" aria-label="German flag">
           🇩🇪
         </span>
         For the German version please visit{" "}
-        <Link
-          href="/legal-de"
-          className="text-white underline"
-        >
+        <Link href="/legal-de" className="text-white underline">
           this page
         </Link>
         .
@@ -28,14 +22,16 @@ export default function legalnotice() {
         <p className="select-none">
           Dominik Koch
           <br />
-          Parkstrasse 5<br />
-          88499 Riedlingen
+          c/o IP-Management #38305<br />
+          Ludwig-Erhard-Str. 18<br />
+          20459 Hamburg
           <br />
           Germany
         </p>
       </div>
       <p>No acceptance of parcels or packages.</p>
-      <p>Email: dominik@wouldyoubot.com</p>
+      <p className="select-none">Email: dominik@wouldyoubot.com</p>
+      <p className="select-none"> Phone: +49 151 23793107</p>
       <div>
         <h3 className="text-lg font-bold text-white">
           Online dispute resolution
@@ -72,32 +68,20 @@ export default function legalnotice() {
         </p>
       </div>
       <div className="text-white">
-        <Link
-          href="https://wouldyoubot.com/"
-          className="underline"
-        >
+        <Link href="https://wouldyoubot.com/" className="underline">
           https://wouldyoubot.com/
         </Link>
         <br />
-        <Link
-          href="https://wouldyoubot.gg/"
-          className="underline"
-        >
+        <Link href="https://wouldyoubot.gg/" className="underline">
           https://wouldyoubot.gg/
         </Link>
         <br />
 
-        <Link
-          href="https://rivo.gg/"
-          className="underline"
-        >
+        <Link href="https://rivo.gg/" className="underline">
           https://rivo.gg/
         </Link>
         <br />
-        <Link
-          href="https://twitter.com/WouldYouBot/"
-          className="underline"
-        >
+        <Link href="https://twitter.com/WouldYouBot/" className="underline">
           https://twitter.com/WouldYouBot/
         </Link>
       </div>
@@ -109,5 +93,5 @@ export default function legalnotice() {
         <span className="font-mono text-white">1009562516105461780</span>
       </p>
     </main>
-  )
+  );
 }
