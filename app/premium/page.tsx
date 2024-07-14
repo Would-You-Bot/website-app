@@ -125,12 +125,12 @@ export default function Premium() {
                 <h1 className="text-4xl font-bold text-yellow-500 drop-shadow-gold-glow">
                   Premium
                 </h1>
-                <p className="text-customGrayText mb-6 mt-4 text-neutral-300">
+                <p className="text-customGrayText mb-6 mt-4 text-foreground/70">
                   Select the plan that suits your needs and benefit from our
                   discord bot.
                 </p>
                 <div className="mx-auto my-4 max-w-2xl text-center">
-                  <label className="group relative mx-auto flex h-16 w-full max-w-[13rem] cursor-pointer items-center justify-center pl-6 pr-8 rounded-2xl bg-black/40 text-xl select-none">
+                  <label className="group relative mx-auto flex h-16 w-full max-w-[13rem] cursor-pointer items-center justify-center pl-6 pr-8 rounded-2xl bg-foreground/10 text-xl select-none">
                     <input
                       type="checkbox"
                       className="peer appearance-none"
@@ -138,11 +138,11 @@ export default function Premium() {
                       onChange={handleChange}
                     />
                     <span className="after:bg-customPrimary absolute top-0 left-2 z-10 flex h-16 w-[6rem] cursor-pointer items-center duration-300 ease-in-out after:h-12 after:w-[10rem] sm:after:w-[20rem] after:rounded-lg after:bg-brand-customPrimary after:shadow-md after:duration-300 peer-checked:after:translate-x-[6rem]"></span>
-                    <div className="z-20 flex gap-10 text-base font-bold text-white">
-                      <div className={`${!isMonthly && "text-gray-400"}`}>
+                    <div className="z-20 flex gap-10 text-base font-bold text-foreground">
+                      <div className={`${!isMonthly && "text-foreground/50"}`}>
                         Monthly
                       </div>
-                      <div className={`${isMonthly && "text-gray-400"}`}>
+                      <div className={`${isMonthly && "text-foreground/50"}`}>
                         Yearly
                       </div>
                     </div>
@@ -150,34 +150,34 @@ export default function Premium() {
                 </div>
                 <div className="mx-auto flex w-fit flex-col">
                   <div className="mb-4 w-auto rounded-[1.7rem] bg-gradient-premium p-[4px]">
-                    <div className="relative overflow-hidden rounded-3xl bg-brand-customDarkBg3 px-8 py-8">
+                    <div className="relative overflow-hidden rounded-3xl bg-background-dark px-8 py-8">
                       <span
-                        className={`${!isMonthly ? "top-7" : "pointer-events-none -top-10 opacity-0"} hidden xs:flex text-mb absolute right-6 cursor-default rounded-xl bg-white/15 px-4 py-2 text-white transition-all duration-300`}
+                        className={`${!isMonthly ? "top-7" : "pointer-events-none -top-10 opacity-0"} hidden xs:flex text-mb absolute right-6 cursor-default rounded-xl bg-foreground/15 px-4 py-2 text-foreground transition-all duration-300`}
                       >
                         2 months free
                       </span>
-                      <h4 className="font-heading mb-2 text-left text-2xl font-bold text-white 2xl:mb-4">
+                      <h4 className="font-heading mb-2 text-left text-2xl font-bold text-foreground 2xl:mb-4">
                         Premium
                       </h4>
                       <span
-                        className={`${isMonthly && "absolute -top-10 pointer-events-none opacity-0"} flex xs:hidden w-fit text-mb cursor-default rounded-xl bg-white/15 px-4 py-2 text-white transition-all duration-300`}
+                        className={`${isMonthly && "absolute -top-10 pointer-events-none opacity-0"} flex xs:hidden w-fit text-mb cursor-default rounded-xl bg-foreground/15 px-4 py-2 text-foreground transition-all duration-300`}
                       >
                         2 months free
                       </span>
                       <div className="flex items-end justify-start">
-                        <div className="mr-2 mt-4 text-left text-4xl font-bold text-white sm:text-5xl">
+                        <div className="mr-2 mt-4 text-left text-4xl font-bold text-foreground sm:text-5xl">
                           {isMonthly ?
                             pricingData.price.monthly
                           : pricingData.price.yearly}
                         </div>
-                        <div className="text-gray-400">
+                        <div className="text-foreground/60">
                           {isMonthly ? "/ month" : "/ year"}
                         </div>
                       </div>
-                      <p className="mb-8 mt-1 text-left leading-loose text-gray-400">
+                      <p className="mb-8 mt-1 text-left leading-loose text-foreground/60">
                         Experience the full power of our Would You bot.
                       </p>
-                      <ul className="mb-16 text-white">
+                      <ul className="mb-16 text-foreground">
                         {Object.keys(pricingData["premium"]).map(
                           (text, index) => (
                             <li
@@ -203,7 +203,7 @@ export default function Premium() {
                             onClick={() => {
                               fetchData()
                             }}
-                            className="flex w-full items-center justify-center gap-2 rounded-xl bg-green-500 py-2 font-bold leading-loose text-white transition hover:bg-green-600 focus:ring-0"
+                            className="flex w-full items-center justify-center gap-2 rounded-xl bg-green-500 py-2 font-bold leading-loose text-foreground transition hover:bg-green-600 focus:ring-0"
                           >
                             Continue with Stripe
                             <StripeSquare className="h-5 w-5" />
@@ -213,9 +213,9 @@ export default function Premium() {
                             redirect="/premium"
                           />
                         }
-                        <DialogContent className="w-fit border-none bg-brand-customDarkBg3">
+                        <DialogContent className="w-fit border-none bg-background-dark">
                           <DialogHeader>
-                            <DialogTitle className="text-xl font-bold text-white">
+                            <DialogTitle className="text-xl font-bold text-foreground">
                               <div>
                                 Buy{" "}
                                 <span className="text-brand-red-100">
@@ -278,11 +278,11 @@ export default function Premium() {
                           </DialogDescription>
                         </DialogContent>
                         {idToken ?
-                          <p className="text-gray-400 text-center pt-3 mb-[-15] text-wrap">
+                          <p className="text-foreground/60 text-center pt-3 mb-[-15] text-wrap">
                             Or click{" "}
                             <a
                               href="/api/subs/manage"
-                              className="underline font-bold text-gray-300"
+                              className="underline font-bold text-foreground/70"
                             >
                               here
                             </a>{" "}

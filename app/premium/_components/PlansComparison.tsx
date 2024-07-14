@@ -20,7 +20,7 @@ export default function PlansComparison({
   rowSeparator
 }: PlansComparisonProps) {
   return (
-    <section className="mx-auto flex h-auto w-full max-w-8xl flex-col text-white">
+    <section className="mx-auto flex h-auto w-full max-w-8xl flex-col text-foreground">
       <div className="mx-auto flex w-full max-w-8xl flex-col items-center justify-center">
         <div className="flex w-full flex-col items-center justify-center">
           <h2 className="text-center text-3xl font-bold sm:text-4xl">
@@ -30,7 +30,7 @@ export default function PlansComparison({
             Compare the features of our free and premium plans
           </p>
         </div>
-        <div className="mt-6 flex h-16 w-full rounded-t-3xl bg-neutral-800">
+        <div className="mt-6 flex h-16 w-full rounded-t-3xl bg-background-light">
           <div className="text-bold flex w-full basis-1/3 items-center justify-center"></div>
           <div className="flex w-full basis-1/3 items-center justify-center">
             Free
@@ -43,13 +43,13 @@ export default function PlansComparison({
           return (
             <div
               key={index}
-              className={`flex h-16 w-full ${rowSeparator && index != 0 ? "border-t-2 border-neutral-800" : ""}`}
+              className={`flex h-16 w-full ${rowSeparator && index != 0 ? "border-t-2 border-background-light" : ""}`}
             >
               <div className="flex w-full basis-1/3 items-center justify-center px-2 text-center text-sm sm:text-base">
                 {item.criteria}
               </div>
               <div
-                className={`text-md flex w-full basis-1/3 items-center justify-center font-bold text-[#7A7B7E] ${colSeparator ? "border-x-2 border-neutral-800" : ""}`}
+                className={`text-md flex w-full basis-1/3 items-center justify-center font-bold text-[#7A7B7E] ${colSeparator ? "border-x-2 border-background-light" : ""}`}
               >
                 {typeof item.free === "boolean" ?
                   item.free ?
