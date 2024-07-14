@@ -41,10 +41,10 @@ const BlogPost = async ({ params: { slug } }: { params: { slug: string } }) => {
 
   return (
     <>
-      <div className="w-full max-w-8xl mx-auto px-8 text-neutral-300">
+      <div className="w-full max-w-8xl mx-auto px-8 text-foreground/70">
         <Link
           href="/blog"
-          className="text-neutral-300 transition-all hover:text-white"
+          className="text-foreground/70 transition-all hover:text-foreground"
         >
           <p className="mb-4">&larr; Back</p>
         </Link>
@@ -57,7 +57,7 @@ const BlogPost = async ({ params: { slug } }: { params: { slug: string } }) => {
             className="mb-4 h-auto w-full rounded-lg"
           />
         )}
-        <h1 className="text-4xl font-bold text-white">{frontMatter.title}</h1>
+        <h1 className="text-4xl font-bold text-foreground">{frontMatter.title}</h1>
         <p className="mt-4">{frontMatter.description}</p>
         <div className="mt-4 flex items-center">
           <Image
@@ -68,21 +68,21 @@ const BlogPost = async ({ params: { slug } }: { params: { slug: string } }) => {
             className="h-10 w-10 rounded-full"
           />
           <div className="ml-4">
-            <p className="text-neutral-300">{frontMatter.author.name}</p>
-            <p className="text-sm text-neutral-400">{frontMatter.date}</p>
+            <p className="text-foreground/70">{frontMatter.author.name}</p>
+            <p className="text-sm text-foreground/40">{frontMatter.date}</p>
           </div>
         </div>
-        <div className="my-4 flex flex-wrap gap-1 border-b border-b-neutral-500 pb-4">
+        <div className="my-4 flex flex-wrap gap-1 border-b border-b-foreground/50 pb-4">
           {frontMatter.tags.map((tag) => (
             <p
               key={tag}
-              className="min-w-fit rounded-full border border-neutral-500 px-2 py-1 text-xs text-neutral-300"
+              className="min-w-fit rounded-full border border-foreground/50 px-2 py-1 text-xs text-foreground/70"
             >
               {tag}
             </p>
           ))}
         </div>
-        <div className="xl: relative left-0 top-0 mb-10 flex border-b border-neutral-500 pb-5 xl:fixed xl:left-4 xl:top-40 xl:border-b-0">
+        <div className="xl: relative left-0 top-0 mb-10 flex border-b border-foreground/50 pb-5 xl:fixed xl:left-4 xl:top-40 xl:border-b-0">
           <TableOfContents toc={frontMatter.toc ?? []} />
         </div>
       </div>

@@ -12,6 +12,7 @@ import {
   DiscordMessages,
   DiscordReply
 } from "@skyra/discord-components-react"
+import { useTheme } from "next-themes"
 import { FC } from "react"
 
 interface MainProps {
@@ -19,8 +20,9 @@ interface MainProps {
 }
 
 const HigherLowerEmbed: FC<MainProps> = ({ currentDate }) => {
+  const { theme } = useTheme()
   return (
-    <DiscordMessages class="overflow-x-hidden rounded-lg shadow">
+    <DiscordMessages lightTheme={theme === 'light' ? true : false} class="overflow-x-hidden rounded-lg shadow">
       <DiscordMessage
         profile="wouldyou"
         author={profiles.wouldyou.author}

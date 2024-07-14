@@ -2,12 +2,12 @@ import Link from "next/link"
 
 export default function Privacy() {
   return (
-    <main className="flex mx-auto w-full max-w-8xl flex-col gap-8 px-8 text-neutral-300">
+    <main className="flex mx-auto w-full max-w-8xl flex-col gap-8 px-8 text-foreground/70">
       <h1 className="text-4xl font-bold text-brand-red-100 drop-shadow-red-glow">
         Privacy Policy
       </h1>
       <div>
-        <h3 className="mb-4 text-lg font-bold text-white">
+        <h3 className="mb-4 text-lg font-bold text-foreground">
           Last updated and effective March 08, 2024
         </h3>
         <p>
@@ -28,7 +28,7 @@ export default function Privacy() {
             <Link
               href="https://wouldyoubot.gg"
               target={"_blank"}
-              className="text-white underline"
+              className="text-foreground underline"
             >
               https://wouldyoubot.gg
             </Link>{" "}
@@ -36,7 +36,7 @@ export default function Privacy() {
             <Link
               href="https://wouldyoubot.com"
               target={"_blank"}
-              className="text-white underline"
+              className="text-foreground underline"
             >
               https://wouldyoubot.com
             </Link>
@@ -69,7 +69,7 @@ export default function Privacy() {
           our Services immediately.
         </p>
 
-        <h3 className="my-4 text-lg font-bold text-white">Privacy Statement</h3>
+        <h3 className="my-4 text-lg font-bold text-foreground">Privacy Statement</h3>
         <p>
           We respect the privacy of your information. We provide this
           explanation about our information practices as a show of our
@@ -133,7 +133,7 @@ export default function Privacy() {
           acceptance of those changes, so please check the policy every once in
           a while for updates.
         </p>
-        <h3 className="my-4 text-lg font-bold text-white">
+        <h3 className="my-4 text-lg font-bold text-foreground">
           {" "}
           What are your Privacy rights?
         </h3>
@@ -160,7 +160,7 @@ export default function Privacy() {
           <Link
             href="https://ec.europa.eugustice/data-protectun/bodies/authontlesfindex_en.htm"
             target={"_blank"}
-            className="text-white underline"
+            className="text-foreground underline"
           >
             https://ec.europa.eugustice/data-protectun/bodies/authontlesfindex_en.htm
           </Link>
@@ -169,14 +169,14 @@ export default function Privacy() {
           <Link
             href="https://www.edoeb.admin.ch/edoebtenfhome.html"
             target={"_blank"}
-            className="text-white underline"
+            className="text-foreground underline"
           >
             https://www.edoeb.admin.ch/edoebtenfhome.html
           </Link>
           .
         </p>
 
-        <h3 className="my-4 text-lg font-bold text-white"> Age Limit</h3>
+        <h3 className="my-4 text-lg font-bold text-foreground"> Age Limit</h3>
         <p>
           {" "}
           The Bot is not intended for use by individuals under the age of 13.
@@ -186,7 +186,7 @@ export default function Privacy() {
           please contact the Creator to request deletion of that information.
         </p>
 
-        <h3 className="my-4 text-lg font-bold text-white">
+        <h3 className="my-4 text-lg font-bold text-foreground">
           Analytics Provided by Others
         </h3>
         <p>
@@ -201,13 +201,13 @@ export default function Privacy() {
           <Link
             href="https://plausible.io/data-policy"
             target={"_blank"}
-            className="text-white underline"
+            className="text-foreground underline"
           >
             See the Plausible Analytics Data Policy.
           </Link>
         </p>
 
-        <h3 className="my-4 text-lg font-bold text-white">
+        <h3 className="my-4 text-lg font-bold text-foreground">
           Information We Collect and How We Collect It
         </h3>
         <p>
@@ -227,7 +227,7 @@ export default function Privacy() {
             <Link
               href="https://en.wikipedia.org/wiki/HTTP_cookie"
               target={"_blank"}
-              className="text-white underline"
+              className="text-foreground underline"
             >
               Cookies (or browser cookies)
             </Link>
@@ -239,7 +239,7 @@ export default function Privacy() {
             to our website.
           </li>
         </ul>
-        <h3 className="font-lg my-4 font-bold text-white">
+        <h3 className="font-lg my-4 font-bold text-foreground">
           Third-Party Websites
         </h3>
         <p>
@@ -259,7 +259,7 @@ export default function Privacy() {
           practices of any third party website or tool.
         </p>
 
-        <h3 className="my-4 text-lg font-bold text-white">
+        <h3 className="my-4 text-lg font-bold text-foreground">
           The Way We Use Information
         </h3>
         <p>
@@ -316,7 +316,7 @@ export default function Privacy() {
           <Link
             href="/terms"
             target={"_blank"}
-            className="text-white underline"
+            className="text-foreground underline"
           >
             Terms of Service
           </Link>
@@ -349,7 +349,7 @@ export default function Privacy() {
           the Website, but please be aware that the data may not be completely
           or comprehensively removed from all our systems (e.g. backups etc.).
         </p>
-        <h3 className="my-4 text-lg font-bold text-white">
+        <h3 className="my-4 text-lg font-bold text-foreground">
           {" "}
           Do we make updates to this notice?
         </h3>
@@ -363,7 +363,7 @@ export default function Privacy() {
           notice frequently to be informed of how we are protecting your
           information.
         </p>
-        <h3 className="my-4 text-lg font-bold text-white">
+        <h3 className="my-4 text-lg font-bold text-foreground">
           {" "}
           How can you contact us about this notice?
         </h3>
@@ -371,7 +371,7 @@ export default function Privacy() {
           If you have any questions or comments about this notice, you may email
           us at dominik@wouldyoubot.com.
         </p>
-        <h3 className="my-4 text-lg font-bold text-white">
+        <h3 className="my-4 text-lg font-bold text-foreground">
           How can you review, update, or delete the data we collect from you?
         </h3>
         <p>
@@ -383,7 +383,7 @@ export default function Privacy() {
           <Link
             href="/discord"
             target={"_blank"}
-            className="text-white underline"
+            className="text-foreground underline"
           >
             https://wouldyoubot.gg/discord
           </Link>

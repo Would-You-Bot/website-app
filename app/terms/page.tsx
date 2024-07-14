@@ -2,15 +2,15 @@ import Link from "next/link"
 
 export default function Terms() {
   return (
-    <main className="flex mx-auto w-full max-w-8xl flex-col gap-8 px-8 text-neutral-300">
+    <main className="flex mx-auto w-full max-w-8xl flex-col gap-8 px-8 text-foreground/70">
       <h1 className="text-4xl font-bold text-brand-red-100 drop-shadow-red-glow">
         Terms of Service
       </h1>
       <div>
-        <h3 className="my-4 text-lg font-bold text-white">
+        <h3 className="my-4 text-lg font-bold text-foreground">
           Last updated and effective: May 16, 2024
         </h3>
-        <h3 className="my-4 text-lg font-bold text-white">
+        <h3 className="my-4 text-lg font-bold text-foreground">
           Agreement to Terms
         </h3>
         <p>
@@ -24,7 +24,7 @@ export default function Terms() {
           <Link
             href="https://discord.com"
             target={"_blank"}
-            className="text-white underline"
+            className="text-foreground underline"
           >
             https://discord.com
           </Link>
@@ -33,7 +33,7 @@ export default function Terms() {
           <Link
             href="https://discord.dev"
             target={"_blank"}
-            className="text-white underline"
+            className="text-foreground underline"
           >
             https://discord.dev
           </Link>
@@ -43,7 +43,7 @@ export default function Terms() {
           Discord&apos;s services.
         </p>
 
-        <h3 className="my-4 text-lg font-bold text-white">
+        <h3 className="my-4 text-lg font-bold text-foreground">
           1. Age Restriction
         </h3>
         <p>
@@ -56,7 +56,7 @@ export default function Terms() {
           collected from them, if applicable.
         </p>
 
-        <h3 className="my-4 text-lg font-bold text-white">
+        <h3 className="my-4 text-lg font-bold text-foreground">
           2. Premium Subscription
         </h3>
         <p>
@@ -66,7 +66,7 @@ export default function Terms() {
           specified subscription fee on a recurring basis using the payment
           processing services of Stripe, Inc. (&quot;Stripe&quot;).
         </p>
-        <h4 className="text-md text-white-400 my-4 font-bold">
+        <h4 className="text-md text-foreground-400 my-4 font-bold">
           2.1 Payment Processing
         </h4>
         <p>
@@ -76,7 +76,7 @@ export default function Terms() {
           payment method on a recurring basis until you cancel your
           subscription.{" "}
         </p>
-        <h4 className="text-md text-white-400 my-4 font-bold">
+        <h4 className="text-md text-foreground-400 my-4 font-bold">
           2.2 Cancellation and Refunds
         </h4>
         <p>
@@ -86,7 +86,7 @@ export default function Terms() {
           unused portion of the subscription period.
         </p>
 
-        <h3 className="my-4 text-lg font-bold text-white">
+        <h3 className="my-4 text-lg font-bold text-foreground">
           3. Intellectual property rights
         </h3>
         <p>
@@ -106,7 +106,7 @@ export default function Terms() {
           and the Marks.
         </p>
 
-        <h3 className="my-4 text-lg font-bold text-white">
+        <h3 className="my-4 text-lg font-bold text-foreground">
           4. User representations
         </h3>
         <p>
@@ -125,7 +125,7 @@ export default function Terms() {
           any portion thereof).
         </p>
 
-        <h3 className="my-4 text-lg font-bold text-white">
+        <h3 className="my-4 text-lg font-bold text-foreground">
           5. Warranty Disclaimer
         </h3>
         <p>
@@ -144,14 +144,14 @@ export default function Terms() {
           <br />
         </p>
 
-        <h3 className="my-4 text-lg font-bold text-white">6. Products</h3>
+        <h3 className="my-4 text-lg font-bold text-foreground">6. Products</h3>
         <p>
           All products are subject to availability. We reserve the right to
           discontinue any products at any time for any reason. Prices for all
           products are subject to change.
         </p>
 
-        <h3 className="my-4 text-lg font-bold text-white">
+        <h3 className="my-4 text-lg font-bold text-foreground">
           7. Contribution licence
         </h3>
         <p>
@@ -175,7 +175,7 @@ export default function Terms() {
           refrain from any legal action against us regarding your Contributions.
         </p>
 
-        <h3 className="my-4 text-lg font-bold text-white">
+        <h3 className="my-4 text-lg font-bold text-foreground">
           8. Term and Termination
         </h3>
         <p>
@@ -201,7 +201,7 @@ export default function Terms() {
           criminal, and injunctive redress.
         </p>
 
-        <h3 className="my-4 text-lg font-bold text-white">
+        <h3 className="my-4 text-lg font-bold text-foreground">
           9. Modifications and interruptions
         </h3>
         <p>
@@ -230,7 +230,7 @@ export default function Terms() {
           corrections, updates, or releases in connection therewith.
         </p>
 
-        <h3 className="my-4 text-lg font-bold text-white">10. Governing Law</h3>
+        <h3 className="my-4 text-lg font-bold text-foreground">10. Governing Law</h3>
         <p>
           These Terms and your use of Would You will be governed by and
           construed in accordance with the laws of Germany. Any dispute arising
@@ -242,7 +242,7 @@ export default function Terms() {
           from the Service.
         </p>
 
-        <h3 className="my-4 text-lg font-bold text-white">11. Disclaimer</h3>
+        <h3 className="my-4 text-lg font-bold text-foreground">11. Disclaimer</h3>
         <p>
           Would You is provided &quot;as is&quot; and &quot;as available&quot;,
           and the Company makes no warranties of any kind, express or implied,
@@ -254,7 +254,7 @@ export default function Terms() {
           to use it only with the required permissions.
         </p>
 
-        <h3 className="my-4 text-lg font-bold text-white">
+        <h3 className="my-4 text-lg font-bold text-foreground">
           12. Limitation of Liability
         </h3>
         <p>
@@ -264,7 +264,7 @@ export default function Terms() {
           consequential, and punitive damages.
         </p>
 
-        <h3 className="my-4 text-lg font-bold text-white">13. Miscellaneous</h3>
+        <h3 className="my-4 text-lg font-bold text-foreground">13. Miscellaneous</h3>
         <p>
           These Terms of Use and any policies or operating rules posted by us on
           the Site or in respect to the Site constitute the entire agreement and

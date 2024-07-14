@@ -2,6 +2,7 @@ import Link from "next/link"
 import { FC } from "react"
 import Marquee from "react-fast-marquee"
 import Avatar from "./Avatar"
+import { useTheme } from "next-themes"
 
 interface Server {
   name: string
@@ -25,6 +26,7 @@ const ServerMarquee: FC<MarqueeProps> = ({
   direction,
   className
 }) => {
+  const { theme } = useTheme()
   return (
     <div
       className={`relative mx-auto my-auto mt-8 max-w-7xl overflow-hidden ${className}`}
@@ -35,11 +37,11 @@ const ServerMarquee: FC<MarqueeProps> = ({
         speed={speed}
         direction={direction ?? "left"}
         gradient={true}
-        gradientColor="#101010"
+        gradientColor="hsl(var(--background-dark))"
       >
         {servers.map((s: any) => (
           <Link
-            className="mr-4 flex w-72 cursor-pointer items-center gap-4 rounded-lg bg-neutral-900 p-4 transition-all hover:bg-neutral-800"
+            className="mr-4 flex w-72 cursor-pointer items-center gap-4 rounded-lg bg-background p-4 transition-all hover:bg-hover-light"
             key={s.id}
             href={`https://discord.gg/${s.vanityURLCode}`}
             target="_blank"
@@ -54,7 +56,7 @@ const ServerMarquee: FC<MarqueeProps> = ({
             />
             <div>
               <div className="relative flex items-center">
-                <h4 className="mr-2 max-w-[160px] overflow-hidden text-ellipsis whitespace-nowrap text-lg text-white">
+                <h4 className="mr-2 max-w-[160px] overflow-hidden text-ellipsis whitespace-nowrap text-lg text-foreground">
                   {s.name}
                 </h4>
                 {s.features.includes("VERIFIED") && (
@@ -101,7 +103,7 @@ const ServerMarquee: FC<MarqueeProps> = ({
                     </svg>
                   )}
               </div>
-              <p className="text-left text-sm text-neutral-300">
+              <p className="text-left text-sm text-foreground/60">
                 {s.memberCount.toLocaleString()} Members
               </p>
             </div>

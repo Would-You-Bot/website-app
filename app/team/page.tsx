@@ -20,7 +20,7 @@ export default function Team() {
       </Head>
       <main className="">
         <div className="flex mt-auto w-full max-w-8xl flex-col px-8">
-          <h1 className="text-4xl font-bold text-white">
+          <h1 className="text-4xl font-bold text-foreground">
             <span className="text-brand-red-100 drop-shadow-red-glow">
               Meet{" "}
             </span>{" "}
@@ -30,7 +30,7 @@ export default function Team() {
             </span>
             Team
           </h1>
-          <p className="text-neutral-500">
+          <p className="text-foreground/50">
             Meet the amazing team and contributors behind Would You.
           </p>
         </div>
@@ -39,7 +39,7 @@ export default function Team() {
             <>
               <h2
                 key={role}
-                className="mt-10 select-none font-semibold text-neutral-300"
+                className="mt-10 select-none font-semibold text-foreground/70"
               >
                 {role}
               </h2>
@@ -54,7 +54,7 @@ export default function Team() {
                     // eslint-disable-next-line react/jsx-key
                     <li
                       key={staff.id} // Add a unique key prop
-                      className="flex basis-full transform cursor-default flex-col content-center rounded-2xl bg-neutral-800 px-4 py-8 shadow-lg transition duration-300 ease-in-out hover:shadow-2xl sm:basis-[calc(50%-1.5rem)] sm:px-6 lg:basis-[calc(25%-2rem)] lg:px-8 lg:hover:-translate-y-2 xl:px-10"
+                      className="flex basis-full transform cursor-default flex-col content-center rounded-2xl bg-background-light px-4 py-8 shadow-lg transition duration-300 ease-in-out hover:shadow-2xl sm:basis-[calc(50%-1.5rem)] sm:px-6 lg:basis-[calc(25%-2rem)] lg:px-8 lg:hover:-translate-y-2 xl:px-10"
                     >
                       <Image
                         className="mx-auto h-28 w-28 rounded-full md:h-24 md:w-24"
@@ -63,10 +63,10 @@ export default function Team() {
                         height={128}
                         alt=""
                       />
-                      <h3 className="mt-6 text-base font-semibold leading-7 tracking-tight text-white">
+                      <h3 className="mt-6 text-base font-semibold leading-7 tracking-tight text-foreground">
                         {staff.name}
                       </h3>
-                      <p className="text-sm leading-6 text-gray-400">
+                      <p className="text-sm leading-6 text-foreground/60">
                         {staff.description}
                       </p>
                       {staff.websiteUrl !== null ?
@@ -81,7 +81,7 @@ export default function Team() {
                             <a
                               href={staff.websiteUrl} // Use the correct variable name
                               target="_blank"
-                              className="text-gray-400 hover:text-gray-300"
+                              className="text-foreground/60 hover:text-foreground/80"
                             >
                               <span className="sr-only">website link</span>
                               <svg

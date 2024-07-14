@@ -70,9 +70,9 @@ const Footer = async () => {
 
   return (
     <footer className="mt-20 mx-auto w-full max-w-8xl px-8 py-8">
-      <div className="mb-8 flex flex-col justify-between gap-4 text-neutral-300 md:flex-row">
+      <div className="mb-8 flex flex-col justify-between gap-4 text-foreground/70 md:flex-row">
         <div className="flex w-full flex-col items-center md:mr-4 md:items-start">
-          <div className="flex items-center text-xl font-bold text-white">
+          <div className="flex items-center text-xl font-bold text-foreground">
             <Image
               src="/Logo.svg"
               alt="Logo"
@@ -88,7 +88,7 @@ const Footer = async () => {
             <Link
               href="https://rivo.gg/"
               target="_blank"
-              className="transition-all hover:text-white"
+              className="transition-all hover:text-foreground"
             >
               <b>Rivo</b>
             </Link>
@@ -96,14 +96,14 @@ const Footer = async () => {
           </p>
         </div>
         <div className="flex w-full flex-col items-center md:items-start">
-          <h4 className="mb-2 text-lg font-bold text-white">Recommended</h4>
+          <h4 className="mb-2 text-lg font-bold text-foreground">Recommended</h4>
           <div className="flex flex-col items-center gap-2 md:items-start">
             {recommendedLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.link}
                 target={link.EventTarget}
-                className="transition-all hover:text-white"
+                className="transition-all hover:text-foreground"
               >
                 {link.name}
               </Link>
@@ -111,14 +111,14 @@ const Footer = async () => {
           </div>
         </div>
         <div className="flex w-full flex-col items-center md:items-start">
-          <h4 className="mb-2 text-lg font-bold text-white">Links</h4>
+          <h4 className="mb-2 text-lg font-bold text-foreground">Links</h4>
           <div className="flex flex-col items-center gap-2 md:items-start">
             {Links.map((link) => (
               <Link
                 key={link.name}
                 href={link.link}
                 target={link.EventTarget}
-                className="transition-all hover:text-white"
+                className="transition-all hover:text-foreground"
               >
                 {link.name}
               </Link>
@@ -126,14 +126,14 @@ const Footer = async () => {
           </div>
         </div>
         <div className="flex w-full flex-col items-center md:items-start">
-          <h4 className="mb-2 text-lg font-bold text-white">Legal</h4>
+          <h4 className="mb-2 text-lg font-bold text-foreground">Legal</h4>
           <div className="flex flex-col items-center gap-2 md:items-start">
             {LegalLinks.map((link) => (
               <Link
                 key={link.name}
                 href={link.link}
                 target={link.EventTarget}
-                className="transition-all hover:text-white"
+                className="transition-all hover:text-foreground"
               >
                 {link.name}
               </Link>
@@ -142,12 +142,12 @@ const Footer = async () => {
         </div>
       </div>
       <div>
-        <hr className="border border-neutral-800" />
-        <p className="mt-8 text-center text-sm text-neutral-300">
+        <hr className="border border-background-dark" />
+        <p className="mt-8 text-center text-sm text-foreground/70">
           Made with <span className="text-brand-red-100">♥</span> by{" "}
           <Link
             href="/team"
-            className="text-white underline"
+            className="text-foreground underline"
           >
             Would You Team
           </Link>{" "}
@@ -155,7 +155,7 @@ const Footer = async () => {
           <Link
             href="https://github.com/Would-You-Bot/website/graphs/contributors"
             target="_blank"
-            className="text-white underline"
+            className="text-foreground underline"
           >
             Contributors
           </Link>

@@ -42,7 +42,16 @@ const config = {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
+        background: {
+          DEFAULT: "hsl(var(--background))",
+          dark: "hsl(var(--background-dark))",
+          darker: "hsl(var(--background-darker))",
+          light: "hsl(var(--background-light))"
+        },
+        hover: {
+          DEFAULT: "hsl(var(--hover))",
+          light: "hsl(var(--hover-light))"
+        },
         foreground: "hsl(var(--foreground))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
