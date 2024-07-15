@@ -203,7 +203,7 @@ export default function Premium() {
                             onClick={() => {
                               fetchData()
                             }}
-                            className="flex w-full items-center justify-center gap-2 rounded-xl bg-green-500 py-2 font-bold leading-loose text-foreground transition hover:bg-green-600 focus:ring-0"
+                            className="flex w-full text-white items-center justify-center gap-2 rounded-xl bg-green-500 py-2 font-bold leading-loose text-foreground transition hover:bg-green-600 focus:ring-0"
                           >
                             Continue with Stripe
                             <StripeSquare className="h-5 w-5" />
@@ -213,7 +213,7 @@ export default function Premium() {
                             redirect="/premium"
                           />
                         }
-                        <DialogContent className="w-fit border-none bg-background-dark">
+                        <DialogContent className="w-fit border-none bg-background">
                           <DialogHeader>
                             <DialogTitle className="text-xl font-bold text-foreground">
                               <div>
