@@ -41,7 +41,7 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
   return (
     <nav className="sticky left-0 top-[1px] z-50 mb-8 flex h-auto w-full items-center justify-center py-6">
       <div className="flex h-full w-full max-w-8xl items-center justify-between px-8 transition-all duration-300">
-        <div className="flex h-16 min-w-fit items-center justify-center rounded-[10px] border-2 border-foreground/5 bg-background-darker bg-opacity-90 px-6 backdrop-blur">
+        <div className="flex h-16 min-w-fit items-center justify-center rounded-[10px] border-2 border-foreground/5 bg-background-light/90 bg-opacity-90 px-6 backdrop-blur">
           <Link
             href="/"
             className="flex items-center gap-6"
@@ -58,9 +58,9 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
           </Link>
         </div>
         <div
-          className={`absolute flex items-center justify-center gap-6 rounded-[10px] border-2 border-foreground/5 bg-background-darker bg-opacity-90 backdrop-blur md:static ${isOpen ? "right-0 top-0 z-10 h-screen w-screen rounded-none" : "right-7 top-6 h-16 w-16 md:w-min"} transition-all duration-300`}
+          className={`absolute flex items-center justify-center gap-6 rounded-[10px] border-2 border-foreground/5 bg-background-light/90 bg-opacity-90 backdrop-blur md:static ${isOpen ? "right-0 top-0 z-10 h-screen w-screen rounded-none" : "right-7 top-6 h-16 w-16 md:w-min"} transition-all duration-300`}
         >
-          <div className="hidden w-max gap-6 px-10 md:flex items-center">
+          <div className="hidden w-max gap-6 px-6 lg:px-10 md:flex items-center">
             <Link
               href="/commands"
               className="text-lg text-foreground/70 transition-all hover:text-foreground/90"
@@ -82,27 +82,24 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
             </Link>
             <Link
               href="/premium"
-              className="flex items-center gap-2 text-lg text-yellow-500 dark:text-yellow-500 drop-shadow-gold-glow transition-all hover:text-yellow-600 dark:hover:text-yellow-400"
+              className="flex items-center gap-2 text-lg text-yellow-500 dark:text-yellow-500 transition-all hover:text-yellow-600 dark:hover:text-yellow-400"
             >
               Premium
               <Crown />
             </Link>
-            <button className="flex items-center justify-center text-foreground/70 hover:text-foreground/90" onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
-              {theme === "light" ? <Moon className="w-6 h-6" /> : <Sun className="w-6 h-6" /> }
-            </button>
           </div>
           <button
             className={`absolute right-[1.05rem] top-[1.35rem] z-50 flex flex-col gap-[5px] md:hidden`}
             onClick={handleIsOpen}
           >
             <div
-              className={`h-[2px] w-[25px] rounded-[10px] bg-white ${isOpen ? "translate-y-[7px] rotate-45" : ""} transition-all duration-300`}
+              className={`h-[2px] w-[25px] rounded-[10px] bg-foreground ${isOpen ? "translate-y-[7px] rotate-45" : ""} transition-all duration-300`}
             />
             <div
-              className={`h-[2px] w-[25px] rounded-[10px] bg-white ${isOpen ? "opacity-0" : ""} transition-all`}
+              className={`h-[2px] w-[25px] rounded-[10px] bg-foreground ${isOpen ? "opacity-0" : ""} transition-all`}
             />
             <div
-              className={`h-[2px] w-[25px] rounded-[10px] bg-white ${isOpen ? "-translate-y-[7px] -rotate-45" : ""} transition-all duration-300`}
+              className={`h-[2px] w-[25px] rounded-[10px] bg-foreground ${isOpen ? "-translate-y-[7px] -rotate-45" : ""} transition-all duration-300`}
             />
           </button>
           <div
@@ -136,7 +133,7 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
             <Link
               href="/premium"
               onClick={handleIsOpen}
-              className="flex items-center gap-2 text-2xl text-yellow-500 dark:text-yellow-500 drop-shadow-gold-glow transition-all hover:text-yellow-600 dark:hover:text-yellow-400"
+              className="flex items-center gap-2 text-2xl text-yellow-500 dark:text-yellow-500 transition-all hover:text-yellow-600 dark:hover:text-yellow-400"
             >
               Premium
               <Crown />
@@ -149,7 +146,10 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
             : <DiscordLoginButton className="h-16 rounded-[10px] px-6" />}
           </div>
         </div>
-        <div className="hidden h-16 min-w-fit items-center justify-center md:flex">
+        <div className="hidden h-16 min-w-fit items-center justify-center md:flex gap-2">
+          <button className="flex h-full w-auto aspect-square rounded-xl items-center justify-center text-foreground/70 hover:text-foreground/90 hover:bg-hover-light transition" onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
+            {theme === "light" ? <Moon className="w-6 h-6 sm:w-8 sm:h-8" /> : <Sun className="w-6 h-6 sm:w-8 sm:h-8" /> }
+          </button>
           {idToken ?
             <UserDropdown
               idToken={idToken}

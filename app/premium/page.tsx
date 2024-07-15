@@ -130,14 +130,14 @@ export default function Premium() {
                   discord bot.
                 </p>
                 <div className="mx-auto my-4 max-w-2xl text-center">
-                  <label className="group relative mx-auto flex h-16 w-full max-w-[13rem] cursor-pointer items-center justify-center pl-6 pr-8 rounded-2xl bg-foreground/10 text-xl select-none">
+                  <label className="group relative mx-auto flex h-16 w-full max-w-[13rem] cursor-pointer items-center justify-center pl-6 pr-8 rounded-2xl bg-background-light text-xl select-none">
                     <input
                       type="checkbox"
                       className="peer appearance-none"
                       checked={!isMonthly}
                       onChange={handleChange}
                     />
-                    <span className="after:bg-customPrimary absolute top-0 left-2 z-10 flex h-16 w-[6rem] cursor-pointer items-center duration-300 ease-in-out after:h-12 after:w-[10rem] sm:after:w-[20rem] after:rounded-lg after:bg-brand-customPrimary after:shadow-md after:duration-300 peer-checked:after:translate-x-[6rem]"></span>
+                    <span className="absolute top-0 left-2 z-10 flex h-16 w-[6rem] cursor-pointer items-center duration-300 ease-in-out after:h-12 after:w-[10rem] sm:after:w-[20rem] after:rounded-lg after:bg-brand-customPrimaryLight dark:after:bg-brand-customPrimary after:shadow-md after:duration-300 peer-checked:after:translate-x-[6rem]"></span>
                     <div className="z-20 flex gap-10 text-base font-bold text-foreground">
                       <div className={`${!isMonthly && "text-foreground/50"}`}>
                         Monthly
@@ -152,7 +152,7 @@ export default function Premium() {
                   <div className="mb-4 w-auto rounded-[1.7rem] bg-gradient-premium p-[4px]">
                     <div className="relative overflow-hidden rounded-3xl bg-background-dark px-8 py-8">
                       <span
-                        className={`${!isMonthly ? "top-7" : "pointer-events-none -top-10 opacity-0"} hidden xs:flex text-mb absolute right-6 cursor-default rounded-xl bg-foreground/15 px-4 py-2 text-foreground transition-all duration-300`}
+                        className={`${!isMonthly ? "top-7" : "pointer-events-none -top-10 opacity-0"} hidden xs:flex text-mb absolute right-6 cursor-default rounded-xl bg-foreground/10 px-4 py-2 text-foreground transition-all duration-300`}
                       >
                         2 months free
                       </span>

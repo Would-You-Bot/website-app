@@ -25,6 +25,7 @@ const config = {
       colors: {
         brand: {
           customPrimary: "rgb(5, 152, 244)",
+          customPrimaryLight: "rgb(60, 178, 251)",
           customSecondary: "rgb(5, 152, 244)",
           customDarkBg1: "rgb(3, 122, 199)",
           customDarkBg2: "rgb(23, 23, 23)",

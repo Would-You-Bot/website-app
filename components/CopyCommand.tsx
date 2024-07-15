@@ -42,7 +42,7 @@ export default function CopyCommandWrapper({
   return (
     <div
       ref={wrapperRef}
-      className="mb-2 w-fit rounded-md bg-foreground/10 dark:bg-background-dark px-2 py-1 font-mono text-xs text-center"
+      className="mb-2 w-fit rounded-md bg-background-light dark:bg-background-dark px-2 py-1 font-mono text-xs text-center"
       onMouseEnter={() => {
         setText("--Click To Copy--")
 

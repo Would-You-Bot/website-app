@@ -22,7 +22,7 @@ export async function BlogList() {
           <Link
             href={`/blog/${post.filePath.replace(/\.mdx?$/, "")}`}
             key={post.filePath}
-            className="relative flex flex-col items-start justify-between rounded-lg bg-foreground/10 dark:bg-foreground/5 p-4 text-foreground/70 transition-all duration-300 hover:bg-foreground/20 dark:hover:bg-foreground/10 sm:flex-row"
+            className="relative flex flex-col items-start justify-between rounded-lg bg-foreground/5 p-4 text-foreground/70 transition-all duration-300 hover:bg-foreground/10 sm:flex-row"
           >
             <div className="z-10 flex flex-col items-start gap-2">
               <div className="flex w-full flex-wrap items-center gap-2">

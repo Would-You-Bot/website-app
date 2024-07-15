@@ -93,8 +93,8 @@ export default function Commands() {
                       <div
                         className={`relative cursor-pointer overflow-hidden rounded-lg p-4 text-foreground/70 transition-all duration-300 ${
                           openedCommand === command.name ?
-                            "max-h-[250px] bg-foreground/20 dark:bg-foreground/5"
-                          : "max-h-[90px] bg-hover"
+                            "max-h-[250px] bg-foreground/10"
+                          : "max-h-[90px] bg-foreground/5"
                         }`}
                         onClick={() =>
                           isActive ?
@@ -142,7 +142,7 @@ export default function Commands() {
                           {command.subcommands && (
                             <>
                               <h5 className="mb-1">Subcommands</h5>
-                              <h6 className="w-fit rounded-md bg-foreground/10 dark:bg-background-dark px-2 py-1 font-mono text-xs">
+                              <h6 className="w-fit rounded-md bg-background-light dark:bg-background-dark px-2 py-1 font-mono text-xs">
                                 {command.subcommands.join(", ")}
                               </h6>
                             </>
@@ -150,7 +150,7 @@ export default function Commands() {
                           {command.options && (
                             <>
                               <h5 className="mb-1">Options</h5>
-                              <h6 className="w-fit rounded-md bg-foreground/10 dark:bg-background-dark px-2 py-1 font-mono text-xs">
+                              <h6 className="w-fit rounded-md bg-background-light dark:bg-background-dark px-2 py-1 font-mono text-xs">
                                 {command.options.join(", ")}
                               </h6>
                             </>

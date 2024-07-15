@@ -37,7 +37,7 @@ export default function legalnotice() {
       </div>
       <p>No acceptance of parcels or packages.</p>
       <p className="select-none">Email: dominik@wouldyoubot.com</p>
-      <p className="select-none">Telefon: +49 151 23793107</p>
+      <p className="select-none">Phone: +49 151 23793107</p>
       <div>
         <h3 className="text-lg font-bold text-foreground">
           Online dispute resolution
