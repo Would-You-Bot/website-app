@@ -37,7 +37,7 @@ const ServerMarquee: FC<MarqueeProps> = ({
         speed={speed}
         direction={direction ?? "left"}
         gradient={true}
-        gradientColor="hsl(var(--background-dark))"
+        gradientColor={theme === "light" ? "hsl(var(--background-darker))" : "hsl(var(--background-dark))"}
       >
         {servers.map((s: any) => (
           <Link
@@ -56,9 +56,6 @@ const ServerMarquee: FC<MarqueeProps> = ({
             />
             <div>
               <div className="relative flex items-center">
-                <h4 className="mr-2 max-w-[160px] overflow-hidden text-ellipsis whitespace-nowrap text-lg text-foreground">
-                  {s.name}
-                </h4>
                 {s.features.includes("VERIFIED") && (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -102,6 +99,9 @@ const ServerMarquee: FC<MarqueeProps> = ({
                       />
                     </svg>
                   )}
+                <h4 className="ml-2 max-w-[160px] overflow-hidden text-ellipsis whitespace-nowrap text-lg text-foreground">
+                  {s.name}
+                </h4>
               </div>
               <p className="text-left text-sm text-foreground/60">
                 {s.memberCount.toLocaleString()} Members

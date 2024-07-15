@@ -101,8 +101,8 @@ export function HomeContent({
       </section>
 
       <section className="mt-36">
-        <LandingWave className="text-background-dark" />
-        <div className="w-full bg-background-dark px-8 pb-12 text-center text-xl sm:text-3xl md:text-4xl text-foreground md:-mt-20 md:pb-28">
+        <LandingWave className="text-background-darker dark:text-background-dark" />
+        <div className="w-full bg-background-darker dark:bg-background-dark px-8 pb-12 text-center text-xl sm:text-3xl md:text-4xl text-foreground md:-mt-20 md:pb-28">
           <h2>
             Trusted by{" "}
             <span className="bg-gradient-brand bg-clip-text font-bold text-transparent">
