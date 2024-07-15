@@ -28,14 +28,16 @@ export default function legalnotice() {
         <p className="select-none">
           Dominik Koch
           <br />
-          Parkstrasse 5<br />
-          88499 Riedlingen
+          c/o IP-Management #38305<br />
+          Ludwig-Erhard-Str. 18<br />
+          20459 Hamburg
           <br />
           Germany
         </p>
       </div>
       <p>No acceptance of parcels or packages.</p>
-      <p>Email: dominik@wouldyoubot.com</p>
+      <p className="select-none">Email: dominik@wouldyoubot.com</p>
+      <p className="select-none">Telefon: +49 151 23793107</p>
       <div>
         <h3 className="text-lg font-bold text-foreground">
           Online dispute resolution
