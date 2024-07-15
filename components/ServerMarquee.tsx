@@ -37,7 +37,7 @@ const ServerMarquee: FC<MarqueeProps> = ({
         speed={speed}
         direction={direction ?? "left"}
         gradient={true}
-        gradientColor="hsl(var(--background-dark))"
+        gradientColor={theme === "light" ? "hsl(var(--background-darker))" : "hsl(var(--background-dark))"}
       >
         {servers.map((s: any) => (
           <Link
