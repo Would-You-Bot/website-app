@@ -145,3 +145,7 @@ body::-webkit-scrollbar-track {
   display: flex;
   align-items: center;
 }
+
+.discord-embed-footer {
+  color: #999999 !important;
+}
