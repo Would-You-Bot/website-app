@@ -42,7 +42,7 @@ export default function CopyCommandWrapper({
   return (
     <div
       ref={wrapperRef}
-      className="mb-2 w-fit rounded-md bg-neutral-900 px-2 py-1 font-mono text-xs text-center"
+      className="mb-2 w-fit rounded-md bg-background-light dark:bg-background-dark px-2 py-1 font-mono text-xs text-center"
       onMouseEnter={() => {
         setText("--Click To Copy--")
 
@@ -60,7 +60,7 @@ export default function CopyCommandWrapper({
       }}
       style={{ minWidth: minWidth }}
     >
-      <span className={cn(isHovered && "text-gray-400")}>{text}</span>
+      <span className={cn(isHovered && "text-foreground/50")}>{text}</span>
     </div>
   )
 }

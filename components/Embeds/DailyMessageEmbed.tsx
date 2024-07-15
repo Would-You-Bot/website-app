@@ -10,6 +10,7 @@ import {
   DiscordThread,
   DiscordThreadMessage
 } from "@skyra/discord-components-react"
+import { useTheme } from "next-themes"
 import { FC } from "react"
 
 interface MainProps {
@@ -17,8 +18,9 @@ interface MainProps {
 }
 
 const DailyMessageEmbed: FC<MainProps> = ({ threadName }) => {
+  const { theme } = useTheme()
   return (
-    <DiscordMessages className="min-w-fit overflow-x-hidden rounded-lg shadow">
+    <DiscordMessages lightTheme={theme === 'light' ? true : false} className="min-w-fit overflow-x-hidden rounded-lg shadow">
       <DiscordMessage
         profile="wouldyou"
         author={profiles.wouldyou.author}

@@ -83,14 +83,14 @@ export default function CheckoutButton({
     <button
       disabled={!serverId || loading}
       onClick={handleCheckout}
-      className="ml-auto mt-4 flex w-fit items-center justify-center rounded-lg bg-brand-blue-100 px-5 py-1 text-sm font-bold leading-loose text-white disabled:cursor-not-allowed disabled:bg-[#1D1D1D] disabled:text-[#444444]"
+      className="ml-auto mt-4 flex w-fit items-center justify-center rounded-lg bg-brand-blue-100 px-5 py-1 text-sm font-bold leading-loose text-white disabled:cursor-not-allowed disabled:bg-background-darker disabled:text-foreground/40"
     >
       {loading ?
         <>
           <svg
             width="100"
             height="101"
-            className="mr-2 inline h-4 w-4 animate-spin text-gray-200"
+            className="mr-2 inline h-4 w-4 animate-spin text-foreground"
             viewBox="0 0 100 101"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"

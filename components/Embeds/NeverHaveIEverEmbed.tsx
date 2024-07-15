@@ -11,6 +11,7 @@ import {
   DiscordMessage,
   DiscordMessages
 } from "@skyra/discord-components-react"
+import { useTheme } from "next-themes"
 import { FC } from "react"
 
 interface MainProps {
@@ -18,8 +19,9 @@ interface MainProps {
 }
 
 const NeverHaveIEverEmbed: FC<MainProps> = ({ replayedRounds }) => {
+  const { theme } = useTheme()
   return (
-    <DiscordMessages class="overflow-x-hidden rounded-lg text-left shadow">
+    <DiscordMessages lightTheme={theme === 'light' ? true : false} class="overflow-x-hidden rounded-lg text-left shadow">
       <DiscordMessage
         profile="wouldyou"
         author={profiles.wouldyou.author}

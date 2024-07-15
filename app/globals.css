@@ -4,8 +4,14 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 210 1% 98%;
+    --background-dark: 0 0% 91.75%;
+    --background-darker: 0 0% 86.25%;
+    --background-light: 0 0% 95%;
     --foreground: 0 0% 3.9%;
+
+    --hover: 0 0% 90%;
+    --hover-light: 0 0% 93%;
 
     --card: 0 0% 100%;
     --card-foreground: 0 0% 3.9%;
@@ -33,11 +39,19 @@
     --ring: 0 0% 3.9%;
 
     --radius: 0.5rem;
+
+    --scrollbar: 0 0% 75%;
   }
 
   .dark {
-    --background: 0 0% 3.9%;
+    --background: 0 0% 9%;
+    --background-dark: 0 0% 6%;
+    --background-darker: 0 0% 13%;
+    --background-light: 0 0% 15%;
     --foreground: 0 0% 98%;
+
+    --hover: 0 0% 10%;
+    --hover-light: 0 0% 13%;
 
     --card: 0 0% 3.9%;
     --card-foreground: 0 0% 98%;
@@ -63,6 +77,8 @@
     --border: 0 0% 14.9%;
     --input: 0 0% 14.9%;
     --ring: 0 0% 83.1%;
+
+    --scrollbar: 0 0% 25%;
   }
 }
 
@@ -73,31 +89,30 @@
   body {
     @apply bg-background text-foreground;
   }
-}
-
-@media screen and (max-width: 500px) {
-  .discord-message:first-child {
-    @apply w-[95%] !important;
+  @media screen and (max-width: 500px) {
+    .discord-message:first-child {
+      @apply w-[95%] !important;
+    }
+    .smalldevice {
+      @apply mx-auto my-[0.5rem] w-[100%] !important;
+    }
+    .order-last {
+      @apply mx-auto w-[100%] !important;
+    }
+    .discord-messages {
+      @apply min-w-0 !important;
+    }
   }
-  .smalldevice {
-    @apply mx-auto my-[0.5rem] w-[100%] !important;
-  }
-  .order-last {
-    @apply mx-auto w-[100%] !important;
-  }
-  .discord-messages {
-    @apply min-w-0 !important;
-  }
-}
-@media screen and (max-width: 350px) {
-  .discord-thread-message .discord-thread-message-content {
-    @apply text-xs;
-  }
-  .discord-thread-message .discord-thread-message-timestamp {
-    @apply text-xs !important;
-  }
-  .discord-thread {
-    @apply max-w-full !important;
+  @media screen and (max-width: 350px) {
+    .discord-thread-message .discord-thread-message-content {
+      @apply text-xs;
+    }
+    .discord-thread-message .discord-thread-message-timestamp {
+      @apply text-xs !important;
+    }
+    .discord-thread {
+      @apply max-w-full !important;
+    }
   }
 }
 
@@ -106,7 +121,6 @@ body {
   flex-direction: column;
   min-height: 100vh;
   align-items: center;
-  background-color: #171717;
   font-family: "Inter", sans-serif;
   overflow-x: hidden;
   overflow-y: auto;
@@ -119,7 +133,7 @@ body::-webkit-scrollbar {
 
 body::-webkit-scrollbar-thumb {
   width: 0.5rem;
-  background-color: #616161;
+  background-color: hsl(var(--scrollbar));
   border-radius: 20px;
 }
 body::-webkit-scrollbar-track {
@@ -130,4 +144,8 @@ body::-webkit-scrollbar-track {
 .discord-button span {
   display: flex;
   align-items: center;
+}
+
+.discord-embed-footer {
+  color: #999999;
 }

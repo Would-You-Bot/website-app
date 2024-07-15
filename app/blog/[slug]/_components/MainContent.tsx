@@ -14,7 +14,7 @@ export async function MainContent({ source }: MainContentProps) {
   }
   return (
     <main
-      className={`markdown mx-auto w-full max-w-8xl px-8 text-neutral-300 ${blogStyles.markdown}`}
+      className={`markdown mx-auto w-full max-w-8xl px-8 text-foreground/70 ${blogStyles.markdown}`}
     >
       {source.content}
     </main>

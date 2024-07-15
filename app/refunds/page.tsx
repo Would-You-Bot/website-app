@@ -2,12 +2,12 @@ import Link from "next/link"
 
 export default function Terms() {
   return (
-    <main className="flex mx-auto w-full max-w-8xl flex-1 flex-col gap-8 px-8 text-neutral-300">
+    <main className="flex mx-auto w-full max-w-8xl flex-1 flex-col gap-8 px-8 text-foreground/70">
       <h1 className="text-4xl font-bold text-brand-red-100 drop-shadow-red-glow">
         Refund Policy
       </h1>
       <div>
-        <h3 className="my-4 text-lg font-bold text-white">
+        <h3 className="my-4 text-lg font-bold text-foreground">
           Last updated and effective: May 16, 2024
         </h3>
         <p>
@@ -17,7 +17,7 @@ export default function Terms() {
           protection laws, including the right to cancel a distance or
           off-premises contract without giving a reason. Right of withdrawal
         </p>
-        <h3 className="my-4 text-lg font-bold text-white">
+        <h3 className="my-4 text-lg font-bold text-foreground">
           Right of withdrawal
         </h3>
         <p>
@@ -26,7 +26,7 @@ export default function Terms() {
           period expires 14 days after the date of conclusion of the contract.
           How to exercise your right of withdrawal
         </p>
-        <h3 className="my-4 text-lg font-bold text-white">
+        <h3 className="my-4 text-lg font-bold text-foreground">
           How to make use of your right to withdrawal
         </h3>
         <p>
@@ -35,14 +35,14 @@ export default function Terms() {
           statement by contacting the Discord user <b>@dominikdev</b> via{" "}
           <Link
             target={"_blank"}
-            className="text-white underline"
+            className="text-foreground underline"
             href="/support"
           >
             https://wouldyoubot.gg/support
           </Link>{" "}
           or{" "}
           <Link
-            className="text-white underline"
+            className="text-foreground underline"
             href="mailto:support@wouldyoubot.com"
             target={"_blank"}
           >
@@ -52,7 +52,7 @@ export default function Terms() {
           address that you used for registration purposes. Contact us via
           Discord if you no longer have access to that email address.
         </p>
-        <h3 className="my-4 text-lg font-bold text-white">
+        <h3 className="my-4 text-lg font-bold text-foreground">
           Effects of withdrawal
         </h3>
         <p>

@@ -12,6 +12,7 @@ import { domAnimation, LazyMotion, m } from "framer-motion"
 import Image from "next/image"
 import Link from "next/link"
 import { useState } from "react"
+import { LandingWave } from "../LandingWave"
 
 interface HomeContentProps {
   initialQuestion: string
@@ -53,7 +54,7 @@ export function HomeContent({
           viewport={{ once: true }}
           className="flex flex-col items-center lg:block"
         >
-          <h1 className="text-[2rem] sm:text-5xl md:text-6xl font-bold leading-normal text-white mb-8">
+          <h1 className="text-[2rem] sm:text-5xl md:text-6xl font-bold leading-normal mb-8">
             Entertain Your
             <br />
             <span className="text-brand-red-100 drop-shadow-red-glow">
@@ -63,7 +64,7 @@ export function HomeContent({
               Server
             </span>
           </h1>
-          <p className="text-lg text-neutral-300">
+          <p className="text-lg text-neutral-700 dark:text-neutral-300">
             Play fun and entertaining games with Would You, featuring user polls
             and customization. Play Would You Rather, Truth or Dare, Never Have
             I Ever, Higher or Lower, and What Would You Do!{" "}
@@ -100,15 +101,8 @@ export function HomeContent({
       </section>
 
       <section className="mt-36">
-        <Image
-          src="/LandingWave.svg"
-          alt="Wave"
-          draggable={false}
-          width="10000"
-          height="10000"
-          priority
-        />
-        <div className="w-full bg-[#101010] px-8 pb-12 text-center text-xl sm:text-3xl md:text-4xl text-white md:-mt-20 md:pb-28">
+        <LandingWave className="text-background-dark" />
+        <div className="w-full bg-background-dark px-8 pb-12 text-center text-xl sm:text-3xl md:text-4xl text-foreground md:-mt-20 md:pb-28">
           <h2>
             Trusted by{" "}
             <span className="bg-gradient-brand bg-clip-text font-bold text-transparent">
@@ -136,7 +130,7 @@ export function HomeContent({
         </div>
       </section>
 
-      <section className="mt-20 flex w-full max-w-8xl flex-col items-center gap-20 px-8">
+      <section className="mt-20 flex w-full max-w-8xl flex-col items-center gap-20 px-8 text-foreground">
         <m.div
           initial={{ opacity: 0, transform: "translateY(15px)" }}
           whileInView={{ opacity: 1, transform: "translateY(0)" }}
@@ -147,7 +141,7 @@ export function HomeContent({
           <h2 className="bg-gradient-brand bg-clip-text text-6xl font-bold text-transparent">
             Features
           </h2>
-          <h3 className="mt-4 text-center text-2xl text-white">
+          <h3 className="mt-4 text-center text-2xl">
             What Does Would You Offer To Your Server?
           </h3>
         </m.div>
@@ -157,10 +151,10 @@ export function HomeContent({
           right={<DailyMessageEmbed threadName={threadName} />}
           left={
             <>
-              <h4 className="text-center text-3xl font-bold text-white md:text-left">
+              <h4 className="text-center text-3xl font-bold md:text-left">
                 Increase user engagement
               </h4>
-              <p className="mx-auto text-center text-lg text-neutral-300 md:text-left">
+              <p className="mx-auto text-center text-lg text-foreground/70 md:text-left">
                 Keep your community engaged and active with daily &quot;Would
                 You Rather&quot; messages!
               </p>
@@ -171,10 +165,10 @@ export function HomeContent({
         <FeatureItem
           left={
             <>
-              <h4 className="text-center text-3xl font-bold text-white md:text-left">
+              <h4 className="text-center text-3xl font-bold md:text-left">
                 Entertain your server
               </h4>
-              <p className="text-center text-lg text-neutral-300 md:text-left">
+              <p className="text-center text-lg text-foreground/70 md:text-left">
                 Entertain your discord server with fun and interactive games
                 like Would You Rather, Truth or Dare, Never Have I Ever, Higher
                 or Lower, and What Would You Do!
@@ -189,10 +183,10 @@ export function HomeContent({
           right={<NeverHaveIEverEmbed replayedRounds={0} />}
           left={
             <>
-              <h4 className="text-center text-3xl font-bold text-white md:text-left">
+              <h4 className="text-center text-3xl font-bold md:text-left">
                 Upgrade your server
               </h4>
-              <p className="text-center text-lg text-neutral-300 md:text-left">
+              <p className="text-center text-lg text-foreground/70 md:text-left">
                 Upgrade your server with Would You, featuring a wide variety of
                 games and customized questions.
               </p>
@@ -201,13 +195,13 @@ export function HomeContent({
         />
       </section>
 
-      <section className="mt-36 w-full bg-[#101010] px-9 py-12">
+      <section className="mt-36 w-full bg-hover-light px-9 py-12">
         <m.h2
           initial={{ opacity: 0, transform: "translateY(10px)" }}
           whileInView={{ opacity: 1, transform: "translateY(0)" }}
           viewport={{ once: true }}
           transition={{ duration: 0.65, ease: "easeInOut" }}
-          className="text-center text-5xl font-bold leading-normal text-white"
+          className="text-center text-5xl font-bold leading-normal text-foreground"
         >
           Keep Your Server Active with{" "}
           <span className="bg-gradient-brand bg-clip-text font-bold text-transparent">
@@ -219,7 +213,7 @@ export function HomeContent({
           whileInView={{ opacity: 1, transform: "translateY(0)" }}
           viewport={{ once: true }}
           transition={{ duration: 0.65, ease: "easeInOut" }}
-          className="mt-4 text-center text-xl text-neutral-300"
+          className="mt-4 text-center text-xl text-foreground/70"
         >
           Invite To Your Server Now!
         </m.h3>

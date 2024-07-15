@@ -2,7 +2,7 @@ import Link from "next/link"
 
 export default function legalnotice() {
   return (
-    <main className="flex mx-auto w-full max-w-8xl flex-col gap-8 px-8 text-neutral-300">
+    <main className="flex mx-auto w-full max-w-8xl flex-col gap-8 px-8 text-foreground/70">
       <h1 className="text-4xl font-bold text-brand-red-100 drop-shadow-red-glow">
         Legal Notice
       </h1>
@@ -16,7 +16,7 @@ export default function legalnotice() {
         For the German version please visit{" "}
         <Link
           href="/legal-de"
-          className="text-white underline"
+          className="text-foreground underline"
         >
           this page
         </Link>
@@ -24,7 +24,7 @@ export default function legalnotice() {
       </p>
       <p>Information according to § 5 TMG.</p>
       <div>
-        <h3 className="text-lg font-bold text-white">Contact</h3>
+        <h3 className="text-lg font-bold text-foreground">Contact</h3>
         <p className="select-none">
           Dominik Koch
           <br />
@@ -37,9 +37,9 @@ export default function legalnotice() {
       </div>
       <p>No acceptance of parcels or packages.</p>
       <p className="select-none">Email: dominik@wouldyoubot.com</p>
-      <p className="select-none">Telefon: +49 151 23793107</p>
+      <p className="select-none">Phone: +49 151 23793107</p>
       <div>
-        <h3 className="text-lg font-bold text-white">
+        <h3 className="text-lg font-bold text-foreground">
           Online dispute resolution
         </h3>
         <p>
@@ -47,7 +47,7 @@ export default function legalnotice() {
           resolution, available at{" "}
           <Link
             href="https://ec.europa.eu/consumers/odr/"
-            className="text-white underline"
+            className="text-foreground underline"
           >
             https://ec.europa.eu/consumers/odr/
           </Link>
@@ -56,16 +56,16 @@ export default function legalnotice() {
         </p>
       </div>
       <div>
-        <h3 className="text-lg font-bold text-white">Privacy Policy</h3>
+        <h3 className="text-lg font-bold text-foreground">Privacy Policy</h3>
         <Link
           href="https://wouldyoubot.gg/privacy/"
-          className="text-white underline"
+          className="text-foreground underline"
         >
           https://wouldyoubot.gg/privacy/
         </Link>
       </div>
       <div>
-        <h3 className="text-lg font-bold text-white">
+        <h3 className="text-lg font-bold text-foreground">
           Validity of this Legal Notice
         </h3>
         <p>
@@ -73,7 +73,7 @@ export default function legalnotice() {
           accounts and other services, as long as they are listed below.
         </p>
       </div>
-      <div className="text-white">
+      <div className="text-foreground">
         <Link
           href="https://wouldyoubot.com/"
           className="underline"
@@ -105,10 +105,10 @@ export default function legalnotice() {
       </div>
       <p>
         The Discord bot with the id{" "}
-        <span className="font-mono text-white">981649513427111957</span>
+        <span className="font-mono text-foreground">981649513427111957</span>
         <br />
         The Discord server with the id{" "}
-        <span className="font-mono text-white">1009562516105461780</span>
+        <span className="font-mono text-foreground">1009562516105461780</span>
       </p>
     </main>
   )

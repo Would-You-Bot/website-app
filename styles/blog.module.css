@@ -23,27 +23,27 @@
 }
 
 .markdown h2 {
-  @apply mb-4 mt-8 text-3xl leading-snug text-white;
+  @apply mb-4 mt-8 text-3xl leading-snug text-foreground;
 }
 
 .markdown h3 {
-  @apply text-xl leading-snug text-neutral-100;
+  @apply text-xl leading-snug text-foreground/90;
 }
 
 .markdown a {
-  @apply text-white underline;
+  @apply text-foreground underline;
 }
 
 .markdown pre {
-  @apply rounded-lg bg-neutral-800 px-2 py-1 text-sm;
+  @apply rounded-lg bg-background/80 px-2 py-1 text-sm;
 }
 
 .markdown ul {
-  @apply list-inside list-disc marker:text-neutral-500;
+  @apply list-inside list-disc marker:text-foreground/50;
 }
 
 .markdown ol {
-  @apply list-inside list-decimal marker:text-neutral-500;
+  @apply list-inside list-decimal marker:text-foreground/50;
 }
 
 .progress-bar {

@@ -12,6 +12,7 @@ import {
   DiscordMessages
 } from "@skyra/discord-components-react"
 import { LazyMotion, domAnimation, m } from "framer-motion"
+import { useTheme } from "next-themes"
 import { FC } from "react"
 
 interface MainProps {
@@ -25,6 +26,7 @@ const MainDiscordEmbed: FC<MainProps> = ({
   currentQuestion,
   replay
 }) => {
+  const { theme } = useTheme()
   return (
     <LazyMotion features={domAnimation}>
       <m.div
@@ -34,7 +36,7 @@ const MainDiscordEmbed: FC<MainProps> = ({
         viewport={{ once: true }}
         style={{ width: "90%", marginLeft: "auto", marginRight: "auto" }}
       >
-        <DiscordMessages class="mx-auto w-auto overflow-x-hidden rounded-lg text-left shadow sm:w-2/3 lg:w-auto">
+        <DiscordMessages lightTheme={theme === 'light' ? true : false} class="mx-auto w-auto overflow-x-hidden rounded-lg text-left shadow sm:w-2/3 lg:w-auto">
           <DiscordMessage
             profile="wouldyou"
             author={profiles.wouldyou.author}

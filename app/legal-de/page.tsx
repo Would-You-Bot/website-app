@@ -2,13 +2,13 @@ import Link from "next/link"
 
 export default function legalnoticede() {
   return (
-    <main className="flex mx-auto w-full max-w-8xl flex-col gap-8 px-8 text-neutral-300">
+    <main className="flex mx-auto w-full max-w-8xl flex-col gap-8 px-8 text-foreground/70">
       <h1 className="text-4xl font-bold text-brand-red-100 drop-shadow-red-glow">
         Impressum
       </h1>
       <p>Informationen gemäß § 5 TMG.</p>
       <div>
-        <h3 className="text-lg font-bold text-white">Kontakt</h3>
+        <h3 className="text-lg font-bold text-foreground">Kontakt</h3>
         <p className="select-none">
           Dominik Koch
           <br />
@@ -23,7 +23,7 @@ export default function legalnoticede() {
       <p className="select-none">Email: dominik@wouldyoubot.com</p>
       <p className="select-none">Telefon: +49 151 23793107</p>
       <div>
-        <h3 className="text-lg font-bold text-white">
+        <h3 className="text-lg font-bold text-foreground">
           Online dispute resolution
         </h3>
         <p>
@@ -31,7 +31,7 @@ export default function legalnoticede() {
           Online-Streitbeilegung Streitbeilegung, die hier zu finden ist:{" "}
           <Link
             href="https://ec.europa.eu/consumers/odr/"
-            className="text-white underline"
+            className="text-foreground underline"
           >
             https://ec.europa.eu/consumers/odr/
           </Link>
@@ -42,16 +42,16 @@ export default function legalnoticede() {
         </p>
       </div>
       <div>
-        <h3 className="text-lg font-bold text-white">Privacy Policy</h3>
+        <h3 className="text-lg font-bold text-foreground">Privacy Policy</h3>
         <Link
           href="https://wouldyoubot.gg/privacy/"
-          className="text-white underline"
+          className="text-foreground underline"
         >
           https://wouldyoubot.gg/privacy/
         </Link>
       </div>
       <div>
-        <h3 className="text-lg font-bold text-white">
+        <h3 className="text-lg font-bold text-foreground">
           Gültigkeit dieses Impressums
         </h3>
         <p>
@@ -59,7 +59,7 @@ export default function legalnoticede() {
           Media Konten und andere Dienste, sofern sie hier aufgeführt sind.
         </p>
       </div>
-      <div className="text-white">
+      <div className="text-foreground">
         <Link
           href="https://wouldyoubot.com/"
           className="underline"
@@ -91,10 +91,10 @@ export default function legalnoticede() {
       </div>
       <p>
         Der Discord Bot mit der id{" "}
-        <span className="font-mono text-white">981649513427111957</span>
+        <span className="font-mono text-foreground">981649513427111957</span>
         <br />
         Der Discord server mit der id{" "}
-        <span className="font-mono text-white">1009562516105461780</span>
+        <span className="font-mono text-foreground">1009562516105461780</span>
       </p>
     </main>
   )

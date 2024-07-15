@@ -25,6 +25,7 @@ const config = {
       colors: {
         brand: {
           customPrimary: "rgb(5, 152, 244)",
+          customPrimaryLight: "rgb(60, 178, 251)",
           customSecondary: "rgb(5, 152, 244)",
           customDarkBg1: "rgb(3, 122, 199)",
           customDarkBg2: "rgb(23, 23, 23)",
@@ -42,7 +43,16 @@ const config = {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
+        background: {
+          DEFAULT: "hsl(var(--background))",
+          dark: "hsl(var(--background-dark))",
+          darker: "hsl(var(--background-darker))",
+          light: "hsl(var(--background-light))"
+        },
+        hover: {
+          DEFAULT: "hsl(var(--hover))",
+          light: "hsl(var(--hover-light))"
+        },
         foreground: "hsl(var(--foreground))",
         primary: {
           DEFAULT: "hsl(var(--primary))",
