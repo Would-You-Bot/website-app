@@ -146,16 +146,16 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
             : <DiscordLoginButton className="h-16 rounded-[10px] px-6" />}
           </div>
         </div>
-        <div className="hidden h-16 min-w-fit items-center justify-center md:flex gap-2">
-          <button className="flex h-full w-auto aspect-square rounded-xl items-center justify-center text-foreground/70 hover:text-foreground/90 hover:bg-hover-light transition" onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
-            {theme === "light" ? <Moon className="w-6 h-6 sm:w-8 sm:h-8" /> : <Sun className="w-6 h-6 sm:w-8 sm:h-8" /> }
+        <div className="hidden h-16 min-w-fit items-center justify-center md:flex gap-1 p-1 rounded-xl border-2 border-foreground/5 bg-background-light/90 backdrop-blur">
+          <button className="flex h-full w-auto aspect-square rounded-[8px] items-center justify-center text-foreground/70 hover:text-foreground/90 hover:bg-foreground/5 transition" onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
+            {theme === "light" ? <Moon className="w-6 h-6 sm:w-7 sm:h-7" /> : <Sun className="w-6 h-6 sm:w-7 sm:h-7" /> }
           </button>
           {idToken ?
             <UserDropdown
               idToken={idToken}
               items={menuItems}
             />
-          : <DiscordLoginButton className="h-16 rounded-[10px] px-6" />}
+          : <DiscordLoginButton className="h-full rounded-[8px] px-6" />}
         </div>
       </div>
     </nav>
