@@ -142,7 +142,7 @@ const Footer = async () => {
         </div>
       </div>
       <div>
-        <hr className="border border-background-dark" />
+        <hr className="border border-foreground/10" />
         <p className="mt-8 text-center text-sm text-foreground/70">
           Made with <span className="text-brand-red-100">♥</span> by{" "}
           <Link
