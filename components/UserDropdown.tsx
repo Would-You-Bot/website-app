@@ -21,7 +21,7 @@ export default function UserDropdown({ idToken, items }: UserDropdownProps) {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="flex items-center gap-2 rounded-lg h-full px-4 py-2 transition hover:bg-hover-light">
+      <DropdownMenuTrigger className="flex items-center gap-2 rounded-[8px] h-full p-2 transition hover:bg-foreground/5">
         <Avatar>
           <AvatarImage
             src={`https://cdn.discordapp.com/avatars/${user?.id}/${user?.avatar}.jpg`}
@@ -35,7 +35,7 @@ export default function UserDropdown({ idToken, items }: UserDropdownProps) {
             />
           </AvatarFallback>
         </Avatar>
-        <span className="text-lg text-foreground">{user?.username}</span>
+        <span className="text-lg text-foreground max-w-[60px] lg:max-w-[100px] xl:max-w-full truncate">{user?.username}</span>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         {items.map((item, i) => (
