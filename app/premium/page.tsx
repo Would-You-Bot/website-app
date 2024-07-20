@@ -48,6 +48,7 @@ const pricingData: PricingData = {
     "All Freemium Features": true,
     "Unlimited Custom Questions": true,
     "Customized Webhook Branding": true,
+    "Prevent Questions from Repeating": true,
     "Get Rid of Button Ads": true,
     "Auto Pin Daily Messages": true,
     "Support the Development": true
@@ -67,7 +68,7 @@ const data = [
   },
     {
     criteria: "Question Repeat Prevention",
-    free: true,
+    free: false,
     premium: true,
   },
   {
