@@ -94,7 +94,7 @@ const HigherLowerEmbed: FC<MainProps> = ({ currentDate }) => {
           bot={profiles.wouldyou.bot}
           verified={profiles.wouldyou.verified}
         >
-          <p style={{ whiteSpace: "initial" }}>Click to see commands</p>
+          <p style={{ whiteSpace: "initial" }}>Click to see command</p>
         </DiscordReply>
         McDonalds probably has a lot more
       </DiscordMessage>
