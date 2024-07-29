@@ -9,17 +9,24 @@ import {
   DiscordEmbedDescription,
   DiscordEmbedFooter,
   DiscordMessage,
-  DiscordMessages
+  DiscordMessages,
+  DiscordReply
 } from "@skyra/discord-components-react"
 import { useTheme } from "next-themes"
-import { FC } from "react"
+import { FC, useState } from "react"
+import EphemeralRow from "../EphemeralRow"
 
 interface MainProps {
   replayedRounds: number
 }
 
+type MessageType = "vote" | "results" | null;
+
 const NeverHaveIEverEmbed: FC<MainProps> = ({ replayedRounds }) => {
-  const { theme } = useTheme()
+  const { theme } = useTheme();
+  const [haveDone, setHaveDone] = useState<boolean | null>(null);
+  const [messageType, setMessageType] = useState<MessageType>(null);
+
   return (
     <DiscordMessages lightTheme={theme === 'light' ? true : false} class="overflow-x-hidden rounded-lg text-left shadow">
       <DiscordMessage
@@ -55,8 +62,11 @@ const NeverHaveIEverEmbed: FC<MainProps> = ({ replayedRounds }) => {
         </DiscordEmbed>
         <DiscordAttachments slot="components">
           <DiscordActionRow>
-            <DiscordButton type="secondary">Results</DiscordButton>
-            <DiscordButton type="primary">
+            <DiscordButton type="secondary" onClick={() => setMessageType("results")}>Results</DiscordButton>
+            <DiscordButton type="primary" onClick={() => {
+              setHaveDone(true);
+              setMessageType("vote");
+            }}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 36 36"
@@ -74,7 +84,10 @@ const NeverHaveIEverEmbed: FC<MainProps> = ({ replayedRounds }) => {
                 />
               </svg>
             </DiscordButton>
-            <DiscordButton type="primary">
+            <DiscordButton type="primary"  onClick={() => {
+              setHaveDone(false);
+              setMessageType("vote");
+            }}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 36 36"
@@ -107,6 +120,91 @@ const NeverHaveIEverEmbed: FC<MainProps> = ({ replayedRounds }) => {
           </DiscordActionRow>
         </DiscordAttachments>
       </DiscordMessage>
+      {messageType == "vote" && <DiscordMessage
+        profile="wouldyou"
+        author={profiles.wouldyou.author}
+        avatar={profiles.wouldyou.avatar}
+        roleColor={profiles.wouldyou.roleColor}
+        bot={profiles.wouldyou.bot}
+        verified={profiles.wouldyou.verified}
+      >
+        <DiscordReply
+          slot="reply"
+          profile="wouldyou"
+          author={profiles.wouldyou.author}
+          avatar={profiles.wouldyou.avatar}
+          roleColor={profiles.wouldyou.roleColor}
+          bot={profiles.wouldyou.bot}
+          verified={profiles.wouldyou.verified}
+        >
+          <p style={{ whiteSpace: "initial" }}>Click to see command</p>
+        </DiscordReply>
+          <p>You've voted that you <span className="font-bold">{haveDone ? "have" : "have not"} done it</span>.</p>
+      </DiscordMessage>}
+      {messageType == "results" && <DiscordMessage
+        profile="wouldyou"
+        author={profiles.wouldyou.author}
+        avatar={profiles.wouldyou.avatar}
+        roleColor={profiles.wouldyou.roleColor}
+        bot={profiles.wouldyou.bot}
+        verified={profiles.wouldyou.verified}
+      >
+        <DiscordReply
+          slot="reply"
+          profile="wouldyou"
+          author={profiles.wouldyou.author}
+          avatar={profiles.wouldyou.avatar}
+          roleColor={profiles.wouldyou.roleColor}
+          bot={profiles.wouldyou.bot}
+          verified={profiles.wouldyou.verified}
+        >
+          <p style={{ whiteSpace: "initial" }}>Click to see command</p>
+        </DiscordReply>
+          <DiscordEmbed
+            slot="embeds"
+            color={haveDone ? "#0091ff" : "#f00404"}
+            image={haveDone == null 
+              ? "https://quickchart.io/chart?c=%7Btype%3A%27outlabeledPie%27%2Cdata%3A%7Blabels%3A%5B%27Have%27%2C%27Have+not%27%5D%2Cdatasets%3A%5B%7BbackgroundColor%3A%5B%27%230091ff%27%2C%27%23f00404%27%5D%2Cdata%3A%5B1%2C1%5D%7D%5D%7D%2Coptions%3A%7Bplugins%3A%7Blegend%3Afalse%2Coutlabels%3A%7Btext%3A%27%25l+%25p%27%2Ccolor%3A%27white%27%2Cstretch%3A35%2Cfont%3A%7Bresizable%3Atrue%2CminSize%3A12%2CmaxSize%3A18%7D%7D%7D%7D%7D&w=750&h=750&ref=qc-js&bkg=%232F3136&f=png&v=2"
+              : haveDone
+                ? "https://quickchart.io/chart?c=%7Btype%3A%27outlabeledPie%27%2Cdata%3A%7Blabels%3A%5B%27Have%27%2C%27Have+not%27%5D%2Cdatasets%3A%5B%7BbackgroundColor%3A%5B%27%230091ff%27%2C%27%23f00404%27%5D%2Cdata%3A%5B1%2C0%5D%7D%5D%7D%2Coptions%3A%7Bplugins%3A%7Blegend%3Afalse%2Coutlabels%3A%7Btext%3A%27%25l+%25p%27%2Ccolor%3A%27white%27%2Cstretch%3A35%2Cfont%3A%7Bresizable%3Atrue%2CminSize%3A12%2CmaxSize%3A18%7D%7D%7D%7D%7D&w=750&h=750&ref=qc-js&bkg=%232F3136&f=png&v=2"
+                : "https://quickchart.io/chart?c=%7Btype%3A%27outlabeledPie%27%2Cdata%3A%7Blabels%3A%5B%27Have%27%2C%27Have+not%27%5D%2Cdatasets%3A%5B%7BbackgroundColor%3A%5B%27%230091ff%27%2C%27%23f00404%27%5D%2Cdata%3A%5B0%2C1%5D%7D%5D%7D%2Coptions%3A%7Bplugins%3A%7Blegend%3Afalse%2Coutlabels%3A%7Btext%3A%27%25l+%25p%27%2Ccolor%3A%27white%27%2Cstretch%3A35%2Cfont%3A%7Bresizable%3Atrue%2CminSize%3A12%2CmaxSize%3A18%7D%7D%7D%7D%7D&w=750&h=750&ref=qc-js&bkg=%232F3136&f=png&v=2"}
+          >
+            <DiscordEmbedFooter
+              slot="footer"
+              footerImage={profiles.wouldyou.avatar}
+            >
+              {profiles.wouldyou.author} | Page 1/2
+            </DiscordEmbedFooter>
+          </DiscordEmbed>
+          <DiscordAttachments slot="components">
+            <DiscordActionRow>
+              <DiscordButton
+                type="secondary"
+                onClick={() =>
+                  window.open("https://wouldyoubot.gg/invite", "_blank")
+                }
+              >
+                <svg
+                  width="16"
+                  height="16"
+                  viewBox="0 0 24 24"
+                  className="mr-2 h-5 w-5"
+                >
+                  <path
+                    fill="currentColor"
+                    d="M10 5V3H5.375A2.377 2.377 0 0 0 3 5.375v13.25A2.377 2.377 0 0 0 5.375 21h13.25A2.376 2.376 0 0 0 21 18.625V14h-2v5H5V5h5Z"
+                  />
+                  <path
+                    fill="currentColor"
+                    d="M21 2.999h-7v2h3.586l-8.293 8.293 1.414 1.414L19 6.413v3.586h2v-7Z"
+                  />
+                </svg>
+                Invite Would You
+              </DiscordButton>
+            </DiscordActionRow>
+            <EphemeralRow dismissClick={() => setMessageType(null)} />
+          </DiscordAttachments>
+      </DiscordMessage>}
     </DiscordMessages>
   )
 }
