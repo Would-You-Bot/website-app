@@ -140,6 +140,7 @@ const NeverHaveIEverEmbed: FC<MainProps> = ({ replayedRounds }) => {
           <p style={{ whiteSpace: "initial" }}>Click to see command</p>
         </DiscordReply>
           <p>You've voted that you <span className="font-bold">{haveDone ? "have" : "have not"} done it</span>.</p>
+          <EphemeralRow dismissClick={() => setMessageType(null)} />
       </DiscordMessage>}
       {messageType == "results" && <DiscordMessage
         profile="wouldyou"
