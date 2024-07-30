@@ -13,7 +13,7 @@ import {
   DiscordReply
 } from "@skyra/discord-components-react"
 import { useTheme } from "next-themes"
-import { FC, useState } from "react"
+import { FC, useEffect, useState } from "react"
 import EphemeralRow from "../EphemeralRow"
 
 interface MainProps {
@@ -26,6 +26,12 @@ const NeverHaveIEverEmbed: FC<MainProps> = ({ replayedRounds }) => {
   const { theme } = useTheme();
   const [haveDone, setHaveDone] = useState<boolean | null>(null);
   const [messageType, setMessageType] = useState<MessageType>(null);
+
+  useEffect(() => {
+    // Reset the message type when the theme changes
+    // This is to prevent the message from being shown above the original command.
+    setMessageType(null);
+  }, [theme])
 
   return (
     <DiscordMessages lightTheme={theme === 'light' ? true : false} class="overflow-x-hidden rounded-lg text-left shadow">
