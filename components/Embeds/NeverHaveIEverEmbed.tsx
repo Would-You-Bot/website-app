@@ -171,10 +171,10 @@ const NeverHaveIEverEmbed: FC<MainProps> = ({ replayedRounds }) => {
             slot="embeds"
             color={haveDone ? "#0091ff" : "#f00404"}
             image={haveDone == null 
-              ? "https://quickchart.io/chart?c=%7Btype%3A%27outlabeledPie%27%2Cdata%3A%7Blabels%3A%5B%27Have%27%2C%27Have+not%27%5D%2Cdatasets%3A%5B%7BbackgroundColor%3A%5B%27%230091ff%27%2C%27%23f00404%27%5D%2Cdata%3A%5B1%2C1%5D%7D%5D%7D%2Coptions%3A%7Bplugins%3A%7Blegend%3Afalse%2Coutlabels%3A%7Btext%3A%27%25l+%25p%27%2Ccolor%3A%27white%27%2Cstretch%3A35%2Cfont%3A%7Bresizable%3Atrue%2CminSize%3A12%2CmaxSize%3A18%7D%7D%7D%7D%7D&w=750&h=750&ref=qc-js&bkg=%232F3136&f=png&v=2"
+              ? "./nhie-chart-50-50.png"
               : haveDone
-                ? "https://quickchart.io/chart?c=%7Btype%3A%27outlabeledPie%27%2Cdata%3A%7Blabels%3A%5B%27Have%27%2C%27Have+not%27%5D%2Cdatasets%3A%5B%7BbackgroundColor%3A%5B%27%230091ff%27%2C%27%23f00404%27%5D%2Cdata%3A%5B1%2C0%5D%7D%5D%7D%2Coptions%3A%7Bplugins%3A%7Blegend%3Afalse%2Coutlabels%3A%7Btext%3A%27%25l+%25p%27%2Ccolor%3A%27white%27%2Cstretch%3A35%2Cfont%3A%7Bresizable%3Atrue%2CminSize%3A12%2CmaxSize%3A18%7D%7D%7D%7D%7D&w=750&h=750&ref=qc-js&bkg=%232F3136&f=png&v=2"
-                : "https://quickchart.io/chart?c=%7Btype%3A%27outlabeledPie%27%2Cdata%3A%7Blabels%3A%5B%27Have%27%2C%27Have+not%27%5D%2Cdatasets%3A%5B%7BbackgroundColor%3A%5B%27%230091ff%27%2C%27%23f00404%27%5D%2Cdata%3A%5B0%2C1%5D%7D%5D%7D%2Coptions%3A%7Bplugins%3A%7Blegend%3Afalse%2Coutlabels%3A%7Btext%3A%27%25l+%25p%27%2Ccolor%3A%27white%27%2Cstretch%3A35%2Cfont%3A%7Bresizable%3Atrue%2CminSize%3A12%2CmaxSize%3A18%7D%7D%7D%7D%7D&w=750&h=750&ref=qc-js&bkg=%232F3136&f=png&v=2"}
+                ? "/nhie-chart-100-have.png"
+                : "/nhie-chart-100-not.png"}
           >
             <DiscordEmbedFooter
               slot="footer"
