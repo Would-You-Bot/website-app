@@ -120,18 +120,20 @@ const MainDiscordEmbed: FC<MainProps> = ({
                     type="primary"
                     onClick={() => replay()}
                   >
-                    <svg
-                      viewBox="0 0 36 36"
-                      width="36"
-                      height="36"
-                      className="mr-2 h-5 w-5"
-                    >
-                      <path
-                        fill="#FFF"
-                        d="M22.242 22.242l2.829 2.829c-3.905 3.905-10.237 3.904-14.143-.001-2.247-2.246-3.194-5.296-2.854-8.225l-4.037.367c-.215 3.84 1.128 7.752 4.062 10.687 5.467 5.467 14.333 5.468 19.799 0l2.828 2.828.849-9.334-9.333.849zM27.899 8.1C22.431 2.633 13.568 2.633 8.1 8.1L5.272 5.272l-.849 9.334 9.334-.849-2.829-2.829c3.906-3.905 10.236-3.905 14.142 0 2.248 2.247 3.194 5.297 2.856 8.226l4.036-.366c.216-3.841-1.128-7.753-4.063-10.688z"
-                      />
-                    </svg>
-                    New Question
+                    <span className="flex items-center justify-center">
+                      <svg
+                        viewBox="0 0 36 36"
+                        width="36"
+                        height="36"
+                        className="mr-2 h-5 w-5"
+                      >
+                        <path
+                          fill="#FFF"
+                          d="M22.242 22.242l2.829 2.829c-3.905 3.905-10.237 3.904-14.143-.001-2.247-2.246-3.194-5.296-2.854-8.225l-4.037.367c-.215 3.84 1.128 7.752 4.062 10.687 5.467 5.467 14.333 5.468 19.799 0l2.828 2.828.849-9.334-9.333.849zM27.899 8.1C22.431 2.633 13.568 2.633 8.1 8.1L5.272 5.272l-.849 9.334 9.334-.849-2.829-2.829c3.906-3.905 10.236-3.905 14.142 0 2.248 2.247 3.194 5.297 2.856 8.226l4.036-.366c.216-3.841-1.128-7.753-4.063-10.688z"
+                        />
+                      </svg>
+                      New Question
+                    </span>
                   </DiscordButton>
                 : <DiscordButton
                     type="secondary"
@@ -139,22 +141,24 @@ const MainDiscordEmbed: FC<MainProps> = ({
                       window.open("https://wouldyoubot.gg/invite", "_blank")
                     }
                   >
-                    <svg
-                      width="16"
-                      height="16"
-                      viewBox="0 0 24 24"
-                      className="mr-2 h-5 w-5"
-                    >
-                      <path
-                        fill="currentColor"
-                        d="M10 5V3H5.375A2.377 2.377 0 0 0 3 5.375v13.25A2.377 2.377 0 0 0 5.375 21h13.25A2.376 2.376 0 0 0 21 18.625V14h-2v5H5V5h5Z"
-                      />
-                      <path
-                        fill="currentColor"
-                        d="M21 2.999h-7v2h3.586l-8.293 8.293 1.414 1.414L19 6.413v3.586h2v-7Z"
-                      />
-                    </svg>
-                    Invite Would You
+                    <span className="flex items-center justify-center">
+                      <svg
+                        width="16"
+                        height="16"
+                        viewBox="0 0 24 24"
+                        className="mr-2 h-5 w-5"
+                      >
+                        <path
+                          fill="currentColor"
+                          d="M10 5V3H5.375A2.377 2.377 0 0 0 3 5.375v13.25A2.377 2.377 0 0 0 5.375 21h13.25A2.376 2.376 0 0 0 21 18.625V14h-2v5H5V5h5Z"
+                        />
+                        <path
+                          fill="currentColor"
+                          d="M21 2.999h-7v2h3.586l-8.293 8.293 1.414 1.414L19 6.413v3.586h2v-7Z"
+                        />
+                      </svg>
+                      Invite Would You
+                    </span>
                   </DiscordButton>
                 }
               </DiscordActionRow>

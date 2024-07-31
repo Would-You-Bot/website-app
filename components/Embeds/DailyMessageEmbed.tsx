@@ -49,6 +49,7 @@ const DailyMessageEmbed: FC<MainProps> = ({ threadName }) => {
         <DiscordThread
           slot="thread"
           name={threadName}
+          lightTheme={theme === 'light' ? true : false}
         >
           <DiscordThreadMessage
             profile="Nightkiller"
