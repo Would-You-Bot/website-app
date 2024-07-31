@@ -190,5 +190,13 @@
     "description": "Full-stack Developer",
     "imageUrl": "https://cdn.wouldyoubot.gg/staff/developer/Paul.webp",
     "websiteUrl": "https://github.com/Jester0027"
+  },
+  {
+    "name": "Dan",
+    "id": 25,
+    "categories": ["Contributors"],
+    "description": "Website Interactivity",
+    "imageUrl": "https://cdn.wouldyoubot.gg/staff/special/Dan.webp",
+    "websiteUrl": "https://compiles.me/"
   }
 ]
