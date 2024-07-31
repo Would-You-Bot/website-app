@@ -14,7 +14,6 @@ import {
 } from "@skyra/discord-components-react"
 import { useTheme } from "next-themes"
 import { FC, useState } from "react"
-import EphemeralRow from "../EphemeralRow"
 
 interface MainProps {
   replayedRounds: number
