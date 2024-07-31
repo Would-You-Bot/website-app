@@ -104,18 +104,20 @@ const NeverHaveIEverEmbed: FC<MainProps> = ({ replayedRounds }) => {
           </DiscordActionRow>
           <DiscordActionRow>
             <DiscordButton type="primary">
-              <svg
-                viewBox="0 0 36 36"
-                width="36"
-                height="36"
-                className="mr-2 h-5 w-5"
-              >
-                <path
-                  fill="#FFF"
-                  d="M22.242 22.242l2.829 2.829c-3.905 3.905-10.237 3.904-14.143-.001-2.247-2.246-3.194-5.296-2.854-8.225l-4.037.367c-.215 3.84 1.128 7.752 4.062 10.687 5.467 5.467 14.333 5.468 19.799 0l2.828 2.828.849-9.334-9.333.849zM27.899 8.1C22.431 2.633 13.568 2.633 8.1 8.1L5.272 5.272l-.849 9.334 9.334-.849-2.829-2.829c3.906-3.905 10.236-3.905 14.142 0 2.248 2.247 3.194 5.297 2.856 8.226l4.036-.366c.216-3.841-1.128-7.753-4.063-10.688z"
-                />
-              </svg>
-              New Question
+              <span className="flex items-center justify-center">
+                <svg
+                  viewBox="0 0 36 36"
+                  width="36"
+                  height="36"
+                  className="mr-2 h-5 w-5"
+                >
+                  <path
+                    fill="#FFF"
+                    d="M22.242 22.242l2.829 2.829c-3.905 3.905-10.237 3.904-14.143-.001-2.247-2.246-3.194-5.296-2.854-8.225l-4.037.367c-.215 3.84 1.128 7.752 4.062 10.687 5.467 5.467 14.333 5.468 19.799 0l2.828 2.828.849-9.334-9.333.849zM27.899 8.1C22.431 2.633 13.568 2.633 8.1 8.1L5.272 5.272l-.849 9.334 9.334-.849-2.829-2.829c3.906-3.905 10.236-3.905 14.142 0 2.248 2.247 3.194 5.297 2.856 8.226l4.036-.366c.216-3.841-1.128-7.753-4.063-10.688z"
+                  />
+                </svg>
+                New Question
+              </span>
             </DiscordButton>
           </DiscordActionRow>
         </DiscordAttachments>
@@ -128,6 +130,8 @@ const NeverHaveIEverEmbed: FC<MainProps> = ({ replayedRounds }) => {
         roleColor={profiles.wouldyou.roleColor}
         bot={profiles.wouldyou.bot}
         verified={profiles.wouldyou.verified}
+        dismissMessageClicked={() => setMessageType(null)}
+        ephemeral
       >
         <DiscordReply
           slot="reply"
@@ -141,7 +145,6 @@ const NeverHaveIEverEmbed: FC<MainProps> = ({ replayedRounds }) => {
           <p style={{ whiteSpace: "initial" }}>Click to see command</p>
         </DiscordReply>
         <p>You&apos;ve voted that you <span className="font-bold">{haveDone ? "have" : "have not"} done it</span>.</p>
-        <EphemeralRow dismissClick={() => setMessageType(null)} />
       </DiscordMessage>
       <DiscordMessage
         className={messageType == "results" ? "" : "hidden"}
@@ -151,6 +154,8 @@ const NeverHaveIEverEmbed: FC<MainProps> = ({ replayedRounds }) => {
         roleColor={profiles.wouldyou.roleColor}
         bot={profiles.wouldyou.bot}
         verified={profiles.wouldyou.verified}
+        dismissMessageClicked={() => setMessageType(null)}
+        ephemeral
       >
         <DiscordReply
           slot="reply"
@@ -163,30 +168,31 @@ const NeverHaveIEverEmbed: FC<MainProps> = ({ replayedRounds }) => {
         >
           <p style={{ whiteSpace: "initial" }}>Click to see command</p>
         </DiscordReply>
-          <DiscordEmbed
-            slot="embeds"
-            color={haveDone ? "#0091ff" : "#f00404"}
-            image={haveDone == null 
-              ? "/nhie-chart-50-50.webp"
-              : haveDone
-                ? "/nhie-chart-100-have.webp"
-                : "/nhie-chart-100-not.webp"}
+        <DiscordEmbed
+          slot="embeds"
+          color={haveDone ? "#0091ff" : "#f00404"}
+          image={haveDone == null 
+            ? "/nhie-chart-50-50.webp"
+            : haveDone
+              ? "/nhie-chart-100-have.webp"
+              : "/nhie-chart-100-not.webp"}
+        >
+          <DiscordEmbedFooter
+            slot="footer"
+            footerImage={profiles.wouldyou.avatar}
           >
-            <DiscordEmbedFooter
-              slot="footer"
-              footerImage={profiles.wouldyou.avatar}
+            {profiles.wouldyou.author} | Page 1/2
+          </DiscordEmbedFooter>
+        </DiscordEmbed>
+        <DiscordAttachments slot="components">
+          <DiscordActionRow>
+            <DiscordButton
+              type="secondary"
+              onClick={() =>
+                window.open("https://wouldyoubot.gg/invite", "_blank")
+              }
             >
-              {profiles.wouldyou.author} | Page 1/2
-            </DiscordEmbedFooter>
-          </DiscordEmbed>
-          <DiscordAttachments slot="components">
-            <DiscordActionRow>
-              <DiscordButton
-                type="secondary"
-                onClick={() =>
-                  window.open("https://wouldyoubot.gg/invite", "_blank")
-                }
-              >
+              <span className="flex items-center justify-center">
                 <svg
                   width="16"
                   height="16"
@@ -203,10 +209,10 @@ const NeverHaveIEverEmbed: FC<MainProps> = ({ replayedRounds }) => {
                   />
                 </svg>
                 Invite Would You
-              </DiscordButton>
-            </DiscordActionRow>
-            <EphemeralRow dismissClick={() => setMessageType(null)} />
-          </DiscordAttachments>
+              </span>
+            </DiscordButton>
+          </DiscordActionRow>
+        </DiscordAttachments>
       </DiscordMessage>
     </DiscordMessages>
   )
