@@ -13,7 +13,7 @@ import {
   DiscordReply
 } from "@skyra/discord-components-react"
 import { useTheme } from "next-themes"
-import { FC, useEffect, useState } from "react"
+import { FC, useState } from "react"
 import EphemeralRow from "../EphemeralRow"
 
 interface MainProps {
@@ -26,12 +26,6 @@ const NeverHaveIEverEmbed: FC<MainProps> = ({ replayedRounds }) => {
   const { theme } = useTheme();
   const [haveDone, setHaveDone] = useState<boolean | null>(null);
   const [messageType, setMessageType] = useState<MessageType>(null);
-
-  useEffect(() => {
-    // Reset the message type when the theme changes
-    // This is to prevent the message from being shown above the original command.
-    setMessageType(null);
-  }, [theme])
 
   return (
     <DiscordMessages lightTheme={theme === 'light' ? true : false} class="overflow-x-hidden rounded-lg text-left shadow">
@@ -126,7 +120,8 @@ const NeverHaveIEverEmbed: FC<MainProps> = ({ replayedRounds }) => {
           </DiscordActionRow>
         </DiscordAttachments>
       </DiscordMessage>
-      {messageType == "vote" && <DiscordMessage
+      <DiscordMessage
+        className={messageType == "vote" ? "mb-2" : "hidden"}
         profile="wouldyou"
         author={profiles.wouldyou.author}
         avatar={profiles.wouldyou.avatar}
@@ -145,10 +140,11 @@ const NeverHaveIEverEmbed: FC<MainProps> = ({ replayedRounds }) => {
         >
           <p style={{ whiteSpace: "initial" }}>Click to see command</p>
         </DiscordReply>
-          <p>You've voted that you <span className="font-bold">{haveDone ? "have" : "have not"} done it</span>.</p>
-          <EphemeralRow dismissClick={() => setMessageType(null)} />
-      </DiscordMessage>}
-      {messageType == "results" && <DiscordMessage
+        <p>You&apos;ve voted that you <span className="font-bold">{haveDone ? "have" : "have not"} done it</span>.</p>
+        <EphemeralRow dismissClick={() => setMessageType(null)} />
+      </DiscordMessage>
+      <DiscordMessage
+        className={messageType == "results" ? "" : "hidden"}
         profile="wouldyou"
         author={profiles.wouldyou.author}
         avatar={profiles.wouldyou.avatar}
@@ -171,10 +167,10 @@ const NeverHaveIEverEmbed: FC<MainProps> = ({ replayedRounds }) => {
             slot="embeds"
             color={haveDone ? "#0091ff" : "#f00404"}
             image={haveDone == null 
-              ? "./nhie-chart-50-50.png"
+              ? "/nhie-chart-50-50.webp"
               : haveDone
-                ? "/nhie-chart-100-have.png"
-                : "/nhie-chart-100-not.png"}
+                ? "/nhie-chart-100-have.webp"
+                : "/nhie-chart-100-not.webp"}
           >
             <DiscordEmbedFooter
               slot="footer"
@@ -211,7 +207,7 @@ const NeverHaveIEverEmbed: FC<MainProps> = ({ replayedRounds }) => {
             </DiscordActionRow>
             <EphemeralRow dismissClick={() => setMessageType(null)} />
           </DiscordAttachments>
-      </DiscordMessage>}
+      </DiscordMessage>
     </DiscordMessages>
   )
 }
