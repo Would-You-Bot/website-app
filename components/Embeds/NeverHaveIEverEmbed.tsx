@@ -27,7 +27,7 @@ const NeverHaveIEverEmbed: FC<MainProps> = ({ replayedRounds }) => {
   const [messageType, setMessageType] = useState<MessageType>(null);
 
   return (
-    <DiscordMessages lightTheme={theme === 'light' ? true : false} class="overflow-x-hidden rounded-lg text-left shadow">
+    <DiscordMessages lightTheme={theme === 'light' ? true : false} className="overflow-x-hidden rounded-lg text-left shadow">
       <DiscordMessage
         profile="wouldyou"
         author={profiles.wouldyou.author}

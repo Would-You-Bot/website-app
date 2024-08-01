@@ -22,7 +22,7 @@ interface MainProps {
 const HigherLowerEmbed: FC<MainProps> = ({ currentDate }) => {
   const { theme } = useTheme()
   return (
-    <DiscordMessages lightTheme={theme === 'light' ? true : false} class="overflow-x-hidden rounded-lg shadow">
+    <DiscordMessages lightTheme={theme === 'light' ? true : false} className="overflow-x-hidden rounded-lg shadow">
       <DiscordMessage
         profile="wouldyou"
         author={profiles.wouldyou.author}
