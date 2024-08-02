@@ -183,6 +183,7 @@ const NeverHaveIEverEmbed: FC<MainProps> = ({ initialQuestion }) => {
           bot={profiles.wouldyou.bot}
           verified={profiles.wouldyou.verified}
           lightTheme={theme === 'light' ? true : false}
+          command={true}
         >
           <p style={{ whiteSpace: "initial" }}>Click to see command</p>
         </DiscordReply>
@@ -208,6 +209,7 @@ const NeverHaveIEverEmbed: FC<MainProps> = ({ initialQuestion }) => {
           bot={profiles.wouldyou.bot}
           verified={profiles.wouldyou.verified}
           lightTheme={theme === 'light' ? true : false}
+          command={true}
         >
           <p style={{ whiteSpace: "initial" }}>Click to see command</p>
         </DiscordReply>
