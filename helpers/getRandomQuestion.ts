@@ -51,7 +51,6 @@ const questions: Record<QuestionTypes, string[]> = {
 export const getRandomQuestion = (type: keyof typeof questions) => {
   if (!type || !questions[type]) return `{ERROR: NO QUESTIONS FOUND FOR THIS TYPE, ${String(type)}}`;
   const questionsOfType = questions[type];
-  console.log('questionsOfType:', questionsOfType);
   const randomIndex = Math.floor(Math.random() * questionsOfType.length);
   return questionsOfType[randomIndex];
 }
