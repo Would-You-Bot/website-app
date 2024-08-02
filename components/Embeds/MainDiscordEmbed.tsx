@@ -1,5 +1,6 @@
 "use client"
 import profiles from "@/data/profiles.json"
+import { getRandomQuestion } from "@/helpers/getRandomQuestion"
 import {
   DiscordActionRow,
   DiscordAttachments,
@@ -13,20 +14,24 @@ import {
 } from "@skyra/discord-components-react"
 import { LazyMotion, domAnimation, m } from "framer-motion"
 import { useTheme } from "next-themes"
-import { FC } from "react"
+import { FC, useState } from "react"
 
 interface MainProps {
-  replayedRounds: number
-  currentQuestion: string
-  replay: Function
+  initialQuestion: string
 }
 
-const MainDiscordEmbed: FC<MainProps> = ({
-  replayedRounds,
-  currentQuestion,
-  replay
-}) => {
-  const { theme } = useTheme()
+const MainDiscordEmbed: FC<MainProps> = ({ initialQuestion }) => {
+  const { theme } = useTheme();
+  const [replayedRounds, setReplayedRounds] = useState(0);
+  const [currentQuestion, setCurrentQuestion] = useState(initialQuestion);
+
+  const replay = () => {
+    if (replayedRounds < 3) {
+      setCurrentQuestion(getRandomQuestion('rather'));
+      setReplayedRounds(replayedRounds + 1);
+    }
+  }
+
   return (
     <LazyMotion features={domAnimation}>
       <m.div
