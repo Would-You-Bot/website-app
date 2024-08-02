@@ -39,7 +39,7 @@ const NeverHaveIEverEmbed: FC<MainProps> = ({ initialQuestion }) => {
   }
 
   return (
-    <DiscordMessages lightTheme={theme === 'light' ? true : false} className="overflow-x-hidden rounded-lg text-left shadow">
+    <DiscordMessages lightTheme={theme === 'light'} className="overflow-x-hidden rounded-lg text-left shadow">
       <DiscordMessage
         profile="wouldyou"
         author={profiles.wouldyou.author}
@@ -173,6 +173,7 @@ const NeverHaveIEverEmbed: FC<MainProps> = ({ initialQuestion }) => {
         verified={profiles.wouldyou.verified}
         dismissMessageClicked={() => setMessageType(null)}
         ephemeral
+        lightTheme={theme === 'light'}
       >
         <DiscordReply
           slot="reply"
@@ -182,7 +183,7 @@ const NeverHaveIEverEmbed: FC<MainProps> = ({ initialQuestion }) => {
           roleColor={profiles.wouldyou.roleColor}
           bot={profiles.wouldyou.bot}
           verified={profiles.wouldyou.verified}
-          lightTheme={theme === 'light' ? true : false}
+          lightTheme={theme === 'light'}
           command={true}
         >
           <p style={{ whiteSpace: "initial" }}>Click to see command</p>
@@ -208,7 +209,7 @@ const NeverHaveIEverEmbed: FC<MainProps> = ({ initialQuestion }) => {
           roleColor={profiles.wouldyou.roleColor}
           bot={profiles.wouldyou.bot}
           verified={profiles.wouldyou.verified}
-          lightTheme={theme === 'light' ? true : false}
+          lightTheme={theme === 'light'}
           command={true}
         >
           <p style={{ whiteSpace: "initial" }}>Click to see command</p>

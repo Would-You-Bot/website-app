@@ -22,7 +22,7 @@ interface MainProps {
 const HigherLowerEmbed: FC<MainProps> = ({ currentDate }) => {
   const { theme } = useTheme()
   return (
-    <DiscordMessages lightTheme={theme === 'light' ? true : false} className="overflow-x-hidden rounded-lg shadow">
+    <DiscordMessages lightTheme={theme === 'light'} className="overflow-x-hidden rounded-lg shadow">
       <DiscordMessage
         profile="wouldyou"
         author={profiles.wouldyou.author}
@@ -38,6 +38,7 @@ const HigherLowerEmbed: FC<MainProps> = ({ currentDate }) => {
           avatar={profiles.finn.avatar}
           roleColor={profiles.finn.roleColor}
           command="/higherlower"
+          lightTheme={theme === 'light'}
         />
         <DiscordEmbed
           slot="embeds"
@@ -84,6 +85,7 @@ const HigherLowerEmbed: FC<MainProps> = ({ currentDate }) => {
         author={profiles.smokey.author}
         avatar={profiles.smokey.avatar}
         roleColor={profiles.smokey.roleColor}
+        lightTheme={theme === 'light'}
       >
         <DiscordReply
           slot="reply"
@@ -93,6 +95,7 @@ const HigherLowerEmbed: FC<MainProps> = ({ currentDate }) => {
           roleColor={profiles.wouldyou.roleColor}
           bot={profiles.wouldyou.bot}
           verified={profiles.wouldyou.verified}
+          lightTheme={theme === 'light'}
         >
           <p style={{ whiteSpace: "initial" }}>Click to see command</p>
         </DiscordReply>
@@ -104,6 +107,7 @@ const HigherLowerEmbed: FC<MainProps> = ({ currentDate }) => {
         author={profiles.emilia.author}
         avatar={profiles.emilia.avatar}
         roleColor={profiles.emilia.roleColor}
+        lightTheme={theme === 'light'}
       >
         Yep should be McDonalds
       </DiscordMessage>
@@ -113,6 +117,7 @@ const HigherLowerEmbed: FC<MainProps> = ({ currentDate }) => {
         author={profiles.gersti.author}
         avatar={profiles.gersti.avatar}
         roleColor={profiles.gersti.roleColor}
+        lightTheme={theme === 'light'}
       >
         <DiscordReply
           slot="reply"
@@ -120,6 +125,7 @@ const HigherLowerEmbed: FC<MainProps> = ({ currentDate }) => {
           author={profiles.emilia.author}
           avatar={profiles.emilia.avatar}
           roleColor={profiles.emilia.roleColor}
+          lightTheme={theme === 'light'}
         >
           <p style={{ whiteSpace: "initial" }}>Yep should be McDonalds</p>
         </DiscordReply>
@@ -133,6 +139,7 @@ const HigherLowerEmbed: FC<MainProps> = ({ currentDate }) => {
         roleColor={profiles.invalid.roleColor}
         bot={profiles.invalid.bot}
         verified={profiles.invalid.verified}
+        lightTheme={theme === 'light'}
       >
         Yep!
       </DiscordMessage>
