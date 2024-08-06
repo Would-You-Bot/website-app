@@ -1,5 +1,6 @@
 "use client"
 import profiles from "@/data/profiles.json"
+import { getRandomQuestion } from "@/helpers/getRandomQuestion"
 import {
   DiscordActionRow,
   DiscordAttachments,
@@ -9,19 +10,36 @@ import {
   DiscordEmbedDescription,
   DiscordEmbedFooter,
   DiscordMessage,
-  DiscordMessages
+  DiscordMessages,
+  DiscordReply
 } from "@skyra/discord-components-react"
 import { useTheme } from "next-themes"
-import { FC } from "react"
+import { FC, useState } from "react"
 
 interface MainProps {
-  replayedRounds: number
+  initialQuestion: string
 }
 
-const NeverHaveIEverEmbed: FC<MainProps> = ({ replayedRounds }) => {
-  const { theme } = useTheme()
+type MessageType = "vote" | "results" | null;
+
+const NeverHaveIEverEmbed: FC<MainProps> = ({ initialQuestion }) => {
+  const { theme } = useTheme();
+  const [haveDone, setHaveDone] = useState<boolean | null>(null);
+  const [messageType, setMessageType] = useState<MessageType>(null);
+  const [replayedRounds, setReplayedRounds] = useState(0);
+  const [currentQuestion, setCurrentQuestion] = useState(initialQuestion);
+
+  const replay = () => {
+    if (replayedRounds < 3) {
+      setMessageType(null);
+      setHaveDone(null);
+      setCurrentQuestion(getRandomQuestion('nhie'));
+      setReplayedRounds(replayedRounds + 1);
+    }
+  }
+
   return (
-    <DiscordMessages lightTheme={theme === 'light' ? true : false} class="overflow-x-hidden rounded-lg text-left shadow">
+    <DiscordMessages lightTheme={theme === 'light'} className="overflow-x-hidden rounded-lg text-left shadow">
       <DiscordMessage
         profile="wouldyou"
         author={profiles.wouldyou.author}
@@ -44,7 +62,7 @@ const NeverHaveIEverEmbed: FC<MainProps> = ({ replayedRounds }) => {
           color="#1e88e5"
         >
           <DiscordEmbedDescription slot="description">
-            Never have I ever dreamed about stopping time in class.
+            {currentQuestion}
           </DiscordEmbedDescription>
           <DiscordEmbedFooter
             slot="footer"
@@ -55,8 +73,11 @@ const NeverHaveIEverEmbed: FC<MainProps> = ({ replayedRounds }) => {
         </DiscordEmbed>
         <DiscordAttachments slot="components">
           <DiscordActionRow>
-            <DiscordButton type="secondary">Results</DiscordButton>
-            <DiscordButton type="primary">
+            <DiscordButton type="secondary" onClick={() => setMessageType("results")}>Results</DiscordButton>
+            <DiscordButton type="primary" onClick={() => {
+              setHaveDone(true);
+              setMessageType("vote");
+            }}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 36 36"
@@ -74,7 +95,10 @@ const NeverHaveIEverEmbed: FC<MainProps> = ({ replayedRounds }) => {
                 />
               </svg>
             </DiscordButton>
-            <DiscordButton type="primary">
+            <DiscordButton type="primary"  onClick={() => {
+              setHaveDone(false);
+              setMessageType("vote");
+            }}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 36 36"
@@ -90,19 +114,107 @@ const NeverHaveIEverEmbed: FC<MainProps> = ({ replayedRounds }) => {
             </DiscordButton>
           </DiscordActionRow>
           <DiscordActionRow>
-            <DiscordButton type="primary">
-              <svg
-                viewBox="0 0 36 36"
-                width="36"
-                height="36"
-                className="mr-2 h-5 w-5"
+            {replayedRounds < 3 ?
+              <DiscordButton
+                type="primary"
+                onClick={() => replay()}
+                emoji="/emojis/refresh.svg"
+                emojiName="refresh"
               >
-                <path
-                  fill="#FFF"
-                  d="M22.242 22.242l2.829 2.829c-3.905 3.905-10.237 3.904-14.143-.001-2.247-2.246-3.194-5.296-2.854-8.225l-4.037.367c-.215 3.84 1.128 7.752 4.062 10.687 5.467 5.467 14.333 5.468 19.799 0l2.828 2.828.849-9.334-9.333.849zM27.899 8.1C22.431 2.633 13.568 2.633 8.1 8.1L5.272 5.272l-.849 9.334 9.334-.849-2.829-2.829c3.906-3.905 10.236-3.905 14.142 0 2.248 2.247 3.194 5.297 2.856 8.226l4.036-.366c.216-3.841-1.128-7.753-4.063-10.688z"
-                />
-              </svg>
-              New Question
+                New Question
+              </DiscordButton>
+            : <DiscordButton
+                type="secondary"
+                onClick={() =>
+                  window.open("https://wouldyoubot.gg/invite", "_blank")
+                }
+                emoji="/emojis/external.svg"
+                emojiName="external"
+              >
+                Invite Would You
+              </DiscordButton>
+            }
+          </DiscordActionRow>
+        </DiscordAttachments>
+      </DiscordMessage>
+      <DiscordMessage
+        className={messageType == "vote" ? "mb-2" : "hidden"}
+        profile="wouldyou"
+        author={profiles.wouldyou.author}
+        avatar={profiles.wouldyou.avatar}
+        roleColor={profiles.wouldyou.roleColor}
+        bot={profiles.wouldyou.bot}
+        verified={profiles.wouldyou.verified}
+        dismissMessageClicked={() => setMessageType(null)}
+        ephemeral
+        lightTheme={theme === 'light'}
+      >
+        <DiscordReply
+          slot="reply"
+          profile="wouldyou"
+          author={profiles.wouldyou.author}
+          avatar={profiles.wouldyou.avatar}
+          roleColor={profiles.wouldyou.roleColor}
+          bot={profiles.wouldyou.bot}
+          verified={profiles.wouldyou.verified}
+          lightTheme={theme === 'light'}
+          command={true}
+        >
+          <p style={{ whiteSpace: "initial" }}>Click to see command</p>
+        </DiscordReply>
+        <p>You&apos;ve voted that you <span className="font-bold">{haveDone ? "have" : "have not"} done it</span>.</p>
+      </DiscordMessage>
+      <DiscordMessage
+        className={messageType == "results" ? "" : "hidden"}
+        profile="wouldyou"
+        author={profiles.wouldyou.author}
+        avatar={profiles.wouldyou.avatar}
+        roleColor={profiles.wouldyou.roleColor}
+        bot={profiles.wouldyou.bot}
+        verified={profiles.wouldyou.verified}
+        dismissMessageClicked={() => setMessageType(null)}
+        ephemeral
+      >
+        <DiscordReply
+          slot="reply"
+          profile="wouldyou"
+          author={profiles.wouldyou.author}
+          avatar={profiles.wouldyou.avatar}
+          roleColor={profiles.wouldyou.roleColor}
+          bot={profiles.wouldyou.bot}
+          verified={profiles.wouldyou.verified}
+          lightTheme={theme === 'light'}
+          command={true}
+        >
+          <p style={{ whiteSpace: "initial" }}>Click to see command</p>
+        </DiscordReply>
+        <DiscordEmbed
+          slot="embeds"
+          color={haveDone ? "#0091ff" : "#f00404"}
+          image={haveDone == null 
+            ? "/nhie-chart-50-50.webp"
+            : haveDone
+              ? "/nhie-chart-100-have.webp"
+              : "/nhie-chart-100-not.webp"}
+        >
+          <DiscordEmbedFooter
+            slot="footer"
+            footerImage={profiles.wouldyou.avatar}
+          >
+            {profiles.wouldyou.author} | Page 1/2
+          </DiscordEmbedFooter>
+        </DiscordEmbed>
+        <DiscordAttachments slot="components">
+          <DiscordActionRow>
+            <DiscordButton
+              type="secondary"
+              onClick={() =>
+                window.open("https://wouldyoubot.gg/invite", "_blank")
+              }
+              emoji="/emojis/external.svg"
+              emojiName="external"
+            >
+              Invite Would You
             </DiscordButton>
           </DiscordActionRow>
         </DiscordAttachments>

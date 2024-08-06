@@ -20,7 +20,7 @@ interface MainProps {
 const DailyMessageEmbed: FC<MainProps> = ({ threadName }) => {
   const { theme } = useTheme()
   return (
-    <DiscordMessages lightTheme={theme === 'light' ? true : false} className="min-w-fit overflow-x-hidden rounded-lg shadow">
+    <DiscordMessages lightTheme={theme === 'light'} className="min-w-fit overflow-x-hidden rounded-lg shadow">
       <DiscordMessage
         profile="wouldyou"
         author={profiles.wouldyou.author}
@@ -49,6 +49,7 @@ const DailyMessageEmbed: FC<MainProps> = ({ threadName }) => {
         <DiscordThread
           slot="thread"
           name={threadName}
+          lightTheme={theme === 'light'}
         >
           <DiscordThreadMessage
             profile="Nightkiller"

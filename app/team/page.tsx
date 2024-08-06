@@ -51,9 +51,8 @@ export default function Team() {
                 {staffs
                   .filter((staff) => staff.categories.includes(role))
                   .map((staff) => (
-                    // eslint-disable-next-line react/jsx-key
                     <li
-                      key={staff.id} // Add a unique key prop
+                      key={staff.name}
                       className="flex basis-full transform cursor-default flex-col content-center rounded-2xl bg-background-light px-4 py-8 shadow-lg transition duration-300 ease-in-out hover:shadow-2xl sm:basis-[calc(50%-1.5rem)] sm:px-6 lg:basis-[calc(25%-2rem)] lg:px-8 lg:hover:-translate-y-2 xl:px-10"
                     >
                       <Image

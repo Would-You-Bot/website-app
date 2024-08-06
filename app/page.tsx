@@ -63,7 +63,8 @@ const Home = async () => {
     <>
       <main className="flex w-full flex-col items-center overflow-x-hidden">
         <HomeContent
-          initialQuestion={getRandomQuestion()}
+          initialRatherQuestion={getRandomQuestion('rather')}
+          initialNhieQuestion={getRandomQuestion('nhie')}
           serverCount={serverCount}
           servers={filteredServers}
         />

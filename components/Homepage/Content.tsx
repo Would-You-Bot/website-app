@@ -15,34 +15,26 @@ import { useState } from "react"
 import { LandingWave } from "../LandingWave"
 
 interface HomeContentProps {
-  initialQuestion: string
+  initialRatherQuestion: string
+  initialNhieQuestion: string
   serverCount: number
   servers: any[]
 }
 
 export function HomeContent({
-  initialQuestion,
+  initialRatherQuestion,
+  initialNhieQuestion,
   serverCount,
   servers
 }: HomeContentProps) {
-  const currentDate = new Date().toLocaleString()
-  const [replayedRounds, setReplayedRounds] = useState(0)
-  const [currentQuestion, setCurrentQuestion] = useState(initialQuestion)
-
-  const date = new Date()
+  const date = new Date();
+  const currentDate = date.toLocaleString();
 
   const threadName = `${[
     date.getFullYear(),
     date.getMonth() + 1,
     date.getDate()
   ].join("/")} - Daily Message`
-
-  const replay = () => {
-    if (replayedRounds < 3) {
-      setCurrentQuestion(getRandomQuestion())
-      setReplayedRounds(replayedRounds + 1)
-    }
-  }
 
   return (
     <LazyMotion features={domAnimation}>
@@ -93,11 +85,7 @@ export function HomeContent({
             </Button>
           </Link>
         </m.div>
-        <MainDiscordEmbed
-          replayedRounds={replayedRounds}
-          currentQuestion={currentQuestion}
-          replay={replay}
-        />
+        <MainDiscordEmbed initialQuestion={initialRatherQuestion} />
       </section>
 
       <section className="mt-36">
@@ -180,7 +168,7 @@ export function HomeContent({
 
         <FeatureItem
           reverse
-          right={<NeverHaveIEverEmbed replayedRounds={0} />}
+          right={<NeverHaveIEverEmbed initialQuestion={initialNhieQuestion} />}
           left={
             <>
               <h4 className="text-center text-3xl font-bold md:text-left">

@@ -20,7 +20,7 @@
     "@radix-ui/react-select": "^2.0.0",
     "@radix-ui/react-slot": "^1.1.0",
     "@radix-ui/react-toast": "^1.1.5",
-    "@skyra/discord-components-react": "^3.6.1",
+    "@skyra/discord-components-react": "4.0.0-alpha.26",
     "@stripe/stripe-js": "^3.4.0",
     "@upstash/redis": "^1.30.0",
     "class-variance-authority": "^0.7.0",
