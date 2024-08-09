@@ -41,7 +41,7 @@ const MainDiscordEmbed: FC<MainProps> = ({ initialQuestion }) => {
         viewport={{ once: true }}
         style={{ width: "90%", marginLeft: "auto", marginRight: "auto" }}
       >
-        <DiscordMessages lightTheme={theme === 'light'} className="mx-auto w-auto overflow-x-hidden rounded-lg text-left shadow sm:w-2/3 lg:w-auto">
+        <DiscordMessages lightTheme={theme === 'light' ? true : false} className="mx-auto w-auto overflow-x-hidden rounded-lg text-left shadow sm:w-2/3 lg:w-auto">
           <DiscordMessage
             profile="wouldyou"
             author={profiles.wouldyou.author}
@@ -75,7 +75,7 @@ const MainDiscordEmbed: FC<MainProps> = ({ initialQuestion }) => {
               </DiscordEmbedFooter>
             </DiscordEmbed>
             <DiscordAttachments slot="components">
-              <DiscordActionRow>
+              <DiscordActionRow className="flex flex-wrap md:flex-nowrap">
                 <DiscordButton type="secondary">Results</DiscordButton>
                 <DiscordButton type="primary">
                   <svg
