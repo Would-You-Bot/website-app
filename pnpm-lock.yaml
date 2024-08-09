@@ -27,8 +27,8 @@ importers:
         specifier: ^1.1.5
         version: 1.1.5(@types/react-dom@18.2.22)(@types/react@18.2.66)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@skyra/discord-components-react':
-        specifier: 4.0.0-alpha.26
-        version: 4.0.0-alpha.26(@types/react@18.2.66)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
+        specifier: 4.0.0-alpha.28
+        version: 4.0.0-alpha.28(@types/react@18.2.66)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@stripe/stripe-js':
         specifier: ^3.4.0
         version: 3.4.0
@@ -966,12 +966,12 @@ packages:
   '@rushstack/eslint-patch@1.7.2':
     resolution: {integrity: sha512-RbhOOTCNoCrbfkRyoXODZp75MlpiHMgbE5MEBZAnnnLyQNgrigEj4p0lzsMDyc1zVsJDLrivB58tgg3emX0eEA==}
 
-  '@skyra/discord-components-core@4.0.0-alpha.26':
-    resolution: {integrity: sha512-4Jhwq/vQy7a386EAKZEbdIfMJWvQe3I7oK1sB1BKi7T9P1K+IlxRmBBnJ0KAzAj8hjtXp6MoZA5gkvn+S+u3zw==}
+  '@skyra/discord-components-core@4.0.0-alpha.28':
+    resolution: {integrity: sha512-HvxmpUb4Eh9/lioIwCyexKuT77Gl5auSOvNyjxvGjsVD7BhXs5c+FK0jc4lkMigdjWU1ckgzagSRq2CiytQHfQ==}
     engines: {node: '>=v18'}
 
-  '@skyra/discord-components-react@4.0.0-alpha.26':
-    resolution: {integrity: sha512-2po2jySYKSUKLPRd0oNyBFfyHLihXf4stvm9VtUbMB6Nt6CBXZUinnsd+SB+LCAgjY4I3KCi6YC1MlJxtIeuNg==}
+  '@skyra/discord-components-react@4.0.0-alpha.28':
+    resolution: {integrity: sha512-BDv2gw3m452pmUbYu41CvyC6495sgLl9ePzQijqumTlfIBk2GPSzay0MzRmU2uhi73DcpVQxsPhEkL2B+LSwBg==}
     engines: {node: '>=v18'}
     peerDependencies:
       react: 16.8.x || 17.x || 18.x
@@ -3771,16 +3771,16 @@ snapshots:
 
   '@rushstack/eslint-patch@1.7.2': {}
 
-  '@skyra/discord-components-core@4.0.0-alpha.26':
+  '@skyra/discord-components-core@4.0.0-alpha.28':
     dependencies:
       '@lit/context': 1.1.2
       '@open-wc/lit-helpers': 0.7.0(lit@3.1.4)
       lit: 3.1.4
 
-  '@skyra/discord-components-react@4.0.0-alpha.26(@types/react@18.2.66)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
+  '@skyra/discord-components-react@4.0.0-alpha.28(@types/react@18.2.66)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)':
     dependencies:
       '@lit/react': 1.0.5(@types/react@18.2.66)
-      '@skyra/discord-components-core': 4.0.0-alpha.26
+      '@skyra/discord-components-core': 4.0.0-alpha.28
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     transitivePeerDependencies:
@@ -4398,7 +4398,7 @@ snapshots:
       eslint: 8.57.0
       eslint-import-resolver-node: 0.3.9
       eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.2))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.2))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0)
       eslint-plugin-jsx-a11y: 6.8.0(eslint@8.57.0)
       eslint-plugin-react: 7.34.1(eslint@8.57.0)
       eslint-plugin-react-hooks: 4.6.0(eslint@8.57.0)
@@ -4422,7 +4422,7 @@ snapshots:
       enhanced-resolve: 5.16.0
       eslint: 8.57.0
       eslint-module-utils: 2.8.1(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.2))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.2))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.2))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0)
       fast-glob: 3.3.2
       get-tsconfig: 4.7.3
       is-core-module: 2.13.1
@@ -4444,7 +4444,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.2))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.2))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0):
+  eslint-plugin-import@2.29.1(@typescript-eslint/parser@6.21.0(eslint@8.57.0)(typescript@5.4.2))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0):
     dependencies:
       array-includes: 3.1.7
       array.prototype.findlastindex: 1.2.4
