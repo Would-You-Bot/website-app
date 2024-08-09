@@ -75,7 +75,7 @@ const MainDiscordEmbed: FC<MainProps> = ({ initialQuestion }) => {
               </DiscordEmbedFooter>
             </DiscordEmbed>
             <DiscordAttachments slot="components">
-              <DiscordActionRow className="flex flex-wrap md:flex-nowrap">
+              <DiscordActionRow>
                 <DiscordButton type="secondary">Results</DiscordButton>
                 <DiscordButton type="primary">
                   <svg
