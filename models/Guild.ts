@@ -5,7 +5,8 @@ export interface IGuild extends Document {
   language: string
   premium: number
   premiumExpiration: Date
-  premiumUser: string
+  premiumUser: string,
+  premiumPending: boolean,
 }
 
 const guildProfileSchema: Schema = new Schema(
@@ -30,6 +31,10 @@ const guildProfileSchema: Schema = new Schema(
     },
     premiumUser: {
       type: String
+    },
+    premiumPending: {
+      type: Boolean,
+      default: false
     }
   },
   { timestamps: true }

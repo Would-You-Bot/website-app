@@ -32,44 +32,53 @@ export async function POST(request: NextRequest) {
 
     switch (event.type) {
       // in the event of a successful checkout
-      case "customer.subscription.created":
-        const subscription: Stripe.Subscription = event.data.object
-        const userId = subscription.metadata?.userId
-        const serverId = subscription.metadata?.serverId
-        const tier =
-          subscription.metadata?.monthly === "true" ? "monthly" : "yearly"
+      case "checkout.session.completed":
+        const checkoutSession: Stripe.Checkout.Session = event.data.object
+        const serverIdSession = checkoutSession.metadata?.serverId
+        const userIdSession = checkoutSession.metadata?.userId
 
-        if (!userId || !serverId || !tier) {
-          console.error("One or more variables are undefined.")
+        if (!userIdSession || !serverIdSession) {
           return NextResponse.json(
             { message: "One or more variables are missing", status: 400 },
             { status: 400 }
           )
         }
-        try {
-          await guildProfileSchema.findOneAndUpdate(
-            { guildID: serverId },
-            {
-              guildID: serverId,
-              premiumUser: userId,
-              premium: 1,
-              premiumExpiration: new Date(
-                subscription.current_period_end * 1000
-              )
-            },
-            { upsert: true }
-          )
-        } catch (error) {
-          console.error(error)
+
+        await guildProfileSchema.findOneAndUpdate(
+          { guildID: serverIdSession },
+          {
+            premiumPending: true,
+            premiumUser: userIdSession
+          },
+          { upsert: true }
+        )
+      break;
+
+      case 'charge.succeeded': 
+        const chargeSucceeded: Stripe.Charge = event.data.object
+        const userIdCharge = chargeSucceeded.metadata?.userId
+        const serverIdCharge = chargeSucceeded.metadata?.serverId
+
+        const supscription = event.data.subscription
+
+        if (!userIdCharge || !serverIdCharge) {
           return NextResponse.json(
-            {
-              message: "An error occurred while updating the database.",
-              status: 500
-            },
-            { status: 500 }
+            { message: "One or more variables are missing", status: 400 },
+            { status: 400 }
           )
         }
-        break
+
+        await guildProfileSchema.findOneAndUpdate(
+          { guildID: serverIdSession },
+          {
+            premiumPending: false,
+            premiumUser: userIdSession
+          },
+          { upsert: true }
+        )
+    
+    break;
+        
 
       // in the event of a subscription being updated
       case "customer.subscription.updated":
@@ -82,7 +91,6 @@ export async function POST(request: NextRequest) {
           : "yearly"
 
         if (!userIdUpdated || !serverIdUpdated || !tierUpdated) {
-          console.error("One or more variables are undefined.")
           return NextResponse.json(
             { message: "One or more variables are missing", status: 400 },
             { status: 400 }
