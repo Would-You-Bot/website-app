@@ -16,9 +16,11 @@
   "dominik": {
     "author": "Dominik",
     "avatar": "./staff/Dominik.webp",
-    "roleColor": "#F47FFF",
+    "roleColor": "#55CBCD",
     "bot": false,
-    "verified": false
+    "verified": false,
+    "clanIcon": "heart",
+    "clanTag": "Cute"
   },
   "nightkiller": {
     "author": "NightKiller_2",
@@ -41,19 +43,14 @@
     "bot": false,
     "verified": false
   },
-  "smokey": {
-    "author": "Smokey",
-    "avatar": "./staff/Smokey.webp",
+  "paulos": {
+    "author": "Paulos",
+    "avatar": "./staff/Paulos.webp",
     "roleColor": "#EC7C26",
     "bot": false,
-    "verified": false
-  },
-  "emilia": {
-    "author": "Emilia",
-    "avatar": "./staff/Emilia.webp",
-    "roleColor": "#5ADBFF",
-    "bot": false,
-    "verified": false
+    "verified": false,
+    "clanIcon": "water",
+    "clanTag": "CSS3"
   },
   "invalid": {
     "author": "InvalidKiller",
