@@ -1,15 +1,15 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger
-} from "@/components/ui/user-dropdown-menu"
-import { IdTokenJWT } from "@/helpers/oauth/types"
-import { LogOut } from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
+} from '@/components/ui/user-dropdown-menu'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { IdTokenJWT } from '@/helpers/oauth/types'
+import { LogOut } from 'lucide-react'
+import Image from 'next/image'
+import Link from 'next/link'
 
 interface UserDropdownProps {
   idToken: IdTokenJWT | null
@@ -35,7 +35,9 @@ export default function UserDropdown({ idToken, items }: UserDropdownProps) {
             />
           </AvatarFallback>
         </Avatar>
-        <span className="text-lg text-foreground max-w-[60px] lg:max-w-[100px] xl:max-w-full truncate">{user?.username}</span>
+        <span className="text-lg text-foreground max-w-[60px] lg:max-w-[100px] xl:max-w-full truncate">
+          {user?.username}
+        </span>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         {items.map((item, i) => (

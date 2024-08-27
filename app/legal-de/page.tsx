@@ -1,4 +1,4 @@
-import Link from "next/link"
+import Link from 'next/link'
 
 export default function legalnoticede() {
   return (
@@ -12,8 +12,10 @@ export default function legalnoticede() {
         <p className="select-none">
           Dominik Koch
           <br />
-          c/o IP-Management #38305<br />
-          Ludwig-Erhard-Str. 18<br />
+          c/o IP-Management #38305
+          <br />
+          Ludwig-Erhard-Str. 18
+          <br />
           20459 Hamburg
           <br />
           Deutschland
@@ -28,7 +30,7 @@ export default function legalnoticede() {
         </h3>
         <p>
           Die Europäische Kommission bietet eine Plattform für die
-          Online-Streitbeilegung Streitbeilegung, die hier zu finden ist:{" "}
+          Online-Streitbeilegung Streitbeilegung, die hier zu finden ist:{' '}
           <Link
             href="https://ec.europa.eu/consumers/odr/"
             className="text-foreground underline"
@@ -90,10 +92,10 @@ export default function legalnoticede() {
         </Link>
       </div>
       <p>
-        Der Discord Bot mit der id{" "}
+        Der Discord Bot mit der id{' '}
         <span className="font-mono text-foreground">981649513427111957</span>
         <br />
-        Der Discord server mit der id{" "}
+        Der Discord server mit der id{' '}
         <span className="font-mono text-foreground">1009562516105461780</span>
       </p>
     </main>

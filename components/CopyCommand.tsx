@@ -1,8 +1,8 @@
-"use client"
+'use client'
 
-import { cn } from "@/lib/utils"
-import { copy } from "@/utils/copy-to-clipboard"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef, useState } from 'react'
+import { copy } from '@/utils/copy-to-clipboard'
+import { cn } from '@/lib/utils'
 
 interface CopyCommandWrapperProps {
   children: string
@@ -12,7 +12,7 @@ export default function CopyCommandWrapper({
   children
 }: CopyCommandWrapperProps) {
   const initial = children
-  const copyText = "--Click To Copy--"
+  const copyText = '--Click To Copy--'
   const [isHovered, setIsHovered] = useState(false)
   const [text, setText] = useState(initial)
   const wrapperRef = useRef<HTMLDivElement>(null)
@@ -33,8 +33,8 @@ export default function CopyCommandWrapper({
   }
 
   const handleCopyUsage = async (str: string) => {
-    copy(str.split(" ")[0])
-    setText("Copied!")
+    copy(str.split(' ')[0])
+    setText('Copied!')
   }
 
   console.log(minWidth)
@@ -44,7 +44,7 @@ export default function CopyCommandWrapper({
       ref={wrapperRef}
       className="mb-2 w-fit rounded-md bg-background-light dark:bg-background-dark px-2 py-1 font-mono text-xs text-center"
       onMouseEnter={() => {
-        setText("--Click To Copy--")
+        setText('--Click To Copy--')
 
         setIsHovered(true)
       }}
@@ -60,7 +60,7 @@ export default function CopyCommandWrapper({
       }}
       style={{ minWidth: minWidth }}
     >
-      <span className={cn(isHovered && "text-foreground/50")}>{text}</span>
+      <span className={cn(isHovered && 'text-foreground/50')}>{text}</span>
     </div>
   )
 }

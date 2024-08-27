@@ -1,4 +1,4 @@
-import Discord from "@/icons/Discord"
+import Discord from '@/icons/Discord'
 
 interface DiscordLoginButtonProps {
   className?: string
@@ -14,7 +14,7 @@ export default function DiscordLoginButton({
   return (
     <>
       <a
-        href={`/login?redirect=${encodeURIComponent(redirect ? redirect : "/")}&prompt=yes`}
+        href={`/login?redirect=${encodeURIComponent(redirect ? redirect : '/')}&prompt=yes`}
         className={`flex min-w-fit items-center justify-center gap-2 bg-indigo-500 px-4 py-2 leading-loose text-white transition-all duration-300 hover:bg-indigo-500/90 ${className}`}
       >
         <span className="hidden lg:flex">Login with Discord</span>

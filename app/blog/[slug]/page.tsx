@@ -1,9 +1,9 @@
-import { MainContent, TableOfContents } from "@/app/blog/[slug]/_components"
-import { getPost } from "@/app/blog/[slug]/_data"
-import { postPaths } from "@/utils/mdx"
-import { Metadata } from "next"
-import Image from "next/image"
-import Link from "next/link"
+import { MainContent, TableOfContents } from '@/app/blog/[slug]/_components'
+import { getPost } from '@/app/blog/[slug]/_data'
+import { postPaths } from '@/utils/mdx'
+import { Metadata } from 'next'
+import Image from 'next/image'
+import Link from 'next/link'
 
 export async function generateMetadata({
   params: { slug }
@@ -11,16 +11,16 @@ export async function generateMetadata({
   params: { slug: string }
 }): Promise<Metadata> {
   const { frontmatter } = await getPost(slug)
-  const title = frontmatter.title + "- Would You Bot"
+  const title = frontmatter.title + '- Would You Bot'
 
   return {
     title,
     description: frontmatter.description,
-    metadataBase: new URL("https://wouldyoubot.gg/blog/"),
+    metadataBase: new URL('https://wouldyoubot.gg/blog/'),
     openGraph: {
       title,
       publishedTime: frontmatter.seoDate,
-      type: "article",
+      type: 'article',
       description: frontmatter.description,
       authors: frontmatter.author.name,
       tags: frontmatter.tags,
@@ -31,7 +31,7 @@ export async function generateMetadata({
 
 export function generateStaticParams() {
   return postPaths
-    .map((path) => path.replace(/\.mdx?$/, ""))
+    .map((path) => path.replace(/\.mdx?$/, ''))
     .map((slug) => ({ slug }))
 }
 
@@ -51,13 +51,15 @@ const BlogPost = async ({ params: { slug } }: { params: { slug: string } }) => {
         {frontMatter.thumbnail?.banner && (
           <Image
             src={frontMatter.thumbnail.banner}
-            alt={frontMatter.title + "- Would You Bot"}
+            alt={frontMatter.title + '- Would You Bot'}
             width={1000}
             height={200}
             className="mb-4 h-auto w-full rounded-lg"
           />
         )}
-        <h1 className="text-4xl font-bold text-foreground">{frontMatter.title}</h1>
+        <h1 className="text-4xl font-bold text-foreground">
+          {frontMatter.title}
+        </h1>
         <p className="mt-4">{frontMatter.description}</p>
         <div className="mt-4 flex items-center">
           <Image

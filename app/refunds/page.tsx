@@ -1,4 +1,4 @@
-import Link from "next/link"
+import Link from 'next/link'
 
 export default function Terms() {
   return (
@@ -32,19 +32,19 @@ export default function Terms() {
         <p>
           In order to make use of your right of withdrawal, you must notify us
           of your decision to withdraw from this contract by sending us a clear
-          statement by contacting the Discord user <b>@dominikdev</b> via{" "}
+          statement by contacting the Discord user <b>@dominikdev</b> via{' '}
           <Link
-            target={"_blank"}
+            target={'_blank'}
             className="text-foreground underline"
             href="/support"
           >
             https://wouldyoubot.gg/support
-          </Link>{" "}
-          or{" "}
+          </Link>{' '}
+          or{' '}
           <Link
             className="text-foreground underline"
             href="mailto:support@wouldyoubot.com"
-            target={"_blank"}
+            target={'_blank'}
           >
             support@wouldyoubot.com
           </Link>

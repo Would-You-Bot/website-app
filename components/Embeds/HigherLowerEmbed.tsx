@@ -1,5 +1,4 @@
-"use client"
-import profiles from "@/data/profiles.json"
+'use client'
 import {
   DiscordActionRow,
   DiscordAttachments,
@@ -11,9 +10,10 @@ import {
   DiscordMessage,
   DiscordMessages,
   DiscordReply
-} from "@skyra/discord-components-react"
-import { useTheme } from "next-themes"
-import { FC } from "react"
+} from '@skyra/discord-components-react'
+import profiles from '@/data/profiles.json'
+import { useTheme } from 'next-themes'
+import { FC } from 'react'
 
 interface MainProps {
   currentDate: string
@@ -22,7 +22,10 @@ interface MainProps {
 const HigherLowerEmbed: FC<MainProps> = ({ currentDate }) => {
   const { theme } = useTheme()
   return (
-    <DiscordMessages lightTheme={theme === 'light'} className="overflow-x-hidden rounded-lg shadow">
+    <DiscordMessages
+      lightTheme={theme === 'light'}
+      className="overflow-x-hidden rounded-lg shadow"
+    >
       <DiscordMessage
         profile="wouldyou"
         author={profiles.wouldyou.author}
@@ -46,7 +49,7 @@ const HigherLowerEmbed: FC<MainProps> = ({ currentDate }) => {
           image="/higherlower.webp"
         >
           <DiscordEmbedDescription slot="description">
-            Do you think that{" "}
+            Do you think that{' '}
             <a
               target="_blank"
               rel="noopener noreferrer"
@@ -54,7 +57,7 @@ const HigherLowerEmbed: FC<MainProps> = ({ currentDate }) => {
             >
               <b>Mcdonalds </b>
             </a>
-            has higher or lower searches than{" "}
+            has higher or lower searches than{' '}
             <a
               target="_blank"
               rel="noopener noreferrer"
@@ -100,7 +103,7 @@ const HigherLowerEmbed: FC<MainProps> = ({ currentDate }) => {
           verified={profiles.wouldyou.verified}
           lightTheme={theme === 'light'}
         >
-          <p style={{ whiteSpace: "initial" }}>Click to see command</p>
+          <p style={{ whiteSpace: 'initial' }}>Click to see command</p>
         </DiscordReply>
         McDonalds probably has a lot more
       </DiscordMessage>
@@ -136,7 +139,7 @@ const HigherLowerEmbed: FC<MainProps> = ({ currentDate }) => {
           clanTag={profiles.dominik.clanTag}
           lightTheme={theme === 'light'}
         >
-          <p style={{ whiteSpace: "initial" }}>Yep should be McDonalds</p>
+          <p style={{ whiteSpace: 'initial' }}>Yep should be McDonalds</p>
         </DiscordReply>
         Soooo, we gonna press higher?
       </DiscordMessage>

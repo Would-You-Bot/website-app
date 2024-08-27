@@ -1,6 +1,6 @@
-"use server"
+'use server'
 
-import { Skeleton } from "@/components/ui/skeleton"
+import { Skeleton } from '@/components/ui/skeleton'
 
 export async function ServersListSkeleton() {
   return (

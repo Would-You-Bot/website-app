@@ -1,6 +1,6 @@
-"use server"
+'use server'
 
-import { Schema } from "../Schema"
+import { Schema } from '../Schema'
 
 export async function HomeSchemaMetadata() {
   return (

@@ -1,4 +1,4 @@
-import Link from "next/link"
+import Link from 'next/link'
 
 export default function Terms() {
   return (
@@ -20,19 +20,19 @@ export default function Terms() {
           do not agree to these Terms, you may not use Would You.
           <br />
           Would You is a bot for the chat and social platform
-          &quot;Discord&quot; (accessible at{" "}
+          &quot;Discord&quot; (accessible at{' '}
           <Link
             href="https://discord.com"
-            target={"_blank"}
+            target={'_blank'}
             className="text-foreground underline"
           >
             https://discord.com
           </Link>
           ), provided by Discord Inc. This service allows you to make use of
-          Discord&apos;s public API (its documentation is accessible at{" "}
+          Discord&apos;s public API (its documentation is accessible at{' '}
           <Link
             href="https://discord.dev"
-            target={"_blank"}
+            target={'_blank'}
             className="text-foreground underline"
           >
             https://discord.dev
@@ -74,7 +74,7 @@ export default function Terms() {
           Stripe. By subscribing to the Premium Model, you authorise the Creator
           to automatically charge the applicable subscription fee to your chosen
           payment method on a recurring basis until you cancel your
-          subscription.{" "}
+          subscription.{' '}
         </p>
         <h4 className="text-md text-foreground-400 my-4 font-bold">
           2.2 Cancellation and Refunds
@@ -230,7 +230,9 @@ export default function Terms() {
           corrections, updates, or releases in connection therewith.
         </p>
 
-        <h3 className="my-4 text-lg font-bold text-foreground">10. Governing Law</h3>
+        <h3 className="my-4 text-lg font-bold text-foreground">
+          10. Governing Law
+        </h3>
         <p>
           These Terms and your use of Would You will be governed by and
           construed in accordance with the laws of Germany. Any dispute arising
@@ -242,7 +244,9 @@ export default function Terms() {
           from the Service.
         </p>
 
-        <h3 className="my-4 text-lg font-bold text-foreground">11. Disclaimer</h3>
+        <h3 className="my-4 text-lg font-bold text-foreground">
+          11. Disclaimer
+        </h3>
         <p>
           Would You is provided &quot;as is&quot; and &quot;as available&quot;,
           and the Company makes no warranties of any kind, express or implied,
@@ -264,7 +268,9 @@ export default function Terms() {
           consequential, and punitive damages.
         </p>
 
-        <h3 className="my-4 text-lg font-bold text-foreground">13. Miscellaneous</h3>
+        <h3 className="my-4 text-lg font-bold text-foreground">
+          13. Miscellaneous
+        </h3>
         <p>
           These Terms of Use and any policies or operating rules posted by us on
           the Site or in respect to the Site constitute the entire agreement and

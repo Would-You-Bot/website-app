@@ -1,13 +1,13 @@
-import Footer from "@/components/Footer"
-import Navbar from "@/components/Navbar"
-import { getIdToken } from "@/helpers/oauth"
-import { Inter } from "next/font/google"
-import React from "react"
-import "./globals.css"
-import Alert from "@/components/Alert"
-import { ThemeProvider } from "next-themes"
+import { getIdToken } from '@/helpers/oauth'
+import { ThemeProvider } from 'next-themes'
+import Footer from '@/components/Footer'
+import Navbar from '@/components/Navbar'
+import { Inter } from 'next/font/google'
+import Alert from '@/components/Alert'
+import React from 'react'
+import './globals.css'
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = Inter({ subsets: ['latin'] })
 
 export default function RootLayout({
   children
@@ -25,10 +25,10 @@ export default function RootLayout({
       ></script>
       <body className={inter.className}>
         <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
         >
           <Alert
             href="/premium"

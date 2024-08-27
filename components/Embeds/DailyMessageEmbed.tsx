@@ -1,5 +1,4 @@
-"use client"
-import profiles from "@/data/profiles.json"
+'use client'
 import {
   DiscordEmbed,
   DiscordEmbedDescription,
@@ -9,9 +8,10 @@ import {
   DiscordMessages,
   DiscordThread,
   DiscordThreadMessage
-} from "@skyra/discord-components-react"
-import { useTheme } from "next-themes"
-import { FC } from "react"
+} from '@skyra/discord-components-react'
+import profiles from '@/data/profiles.json'
+import { useTheme } from 'next-themes'
+import { FC } from 'react'
 
 interface MainProps {
   threadName: string
@@ -20,7 +20,10 @@ interface MainProps {
 const DailyMessageEmbed: FC<MainProps> = ({ threadName }) => {
   const { theme } = useTheme()
   return (
-    <DiscordMessages lightTheme={theme === 'light'} className="min-w-fit overflow-x-hidden rounded-lg shadow">
+    <DiscordMessages
+      lightTheme={theme === 'light'}
+      className="min-w-fit overflow-x-hidden rounded-lg shadow"
+    >
       <DiscordMessage
         profile="wouldyou"
         author={profiles.wouldyou.author}

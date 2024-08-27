@@ -1,5 +1,5 @@
-const { useState, useEffect } = require("react")
-import Image from "next/image"
+const { useState, useEffect } = require('react')
+import Image from 'next/image'
 
 interface AvatarProps {
   fallbackSrc: string

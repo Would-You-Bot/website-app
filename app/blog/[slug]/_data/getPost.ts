@@ -1,9 +1,9 @@
-import { POST_PATH } from "@/utils/mdx"
-import { compileMDX, CompileMDXResult } from "next-mdx-remote/rsc"
-import { readFile } from "node:fs/promises"
-import path from "node:path"
-import { cache } from "react"
-import { mdxComponents } from "@/app/blog/[slug]/_data/mdxComponents"
+import { mdxComponents } from '@/app/blog/[slug]/_data/mdxComponents'
+import { compileMDX, CompileMDXResult } from 'next-mdx-remote/rsc'
+import { readFile } from 'node:fs/promises'
+import { POST_PATH } from '@/utils/mdx'
+import { cache } from 'react'
+import path from 'node:path'
 
 export interface FrontMatter {
   title: string

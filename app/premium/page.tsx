@@ -1,33 +1,6 @@
 // TODO remove the use client directive in favor of a server component
-"use client"
+'use client'
 
-import DiscordLoginButton from "@/components/DiscordLoginButton"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger
-} from "@/components/ui/dialog"
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue
-} from "@/components/ui/select"
-import { Toaster } from "@/components/ui/toaster"
-import { useIdToken } from "@/helpers/hooks"
-import { getServer } from "@/lib/redis"
-import { LazyMotion, domAnimation, m } from "framer-motion"
-import Head from "next/head"
-import Image from "next/image"
-import { Suspense, useState } from "react"
-import { ServersListSkeleton } from "./_components"
-import PlansComparison from "./_components/PlansComparison"
-import CheckoutButton from "./_components/checkoutButton"
 import {
   ApplePay,
   CheckIcon,
@@ -39,55 +12,82 @@ import {
   Stripe,
   StripeSquare,
   Visa
-} from "./_components/icons"
-import { DiscordGuild, PricingData } from "./_types"
+} from './_components/icons'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger
+} from '@/components/ui/dialog'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from '@/components/ui/select'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import DiscordLoginButton from '@/components/DiscordLoginButton'
+import PlansComparison from './_components/PlansComparison'
+import { LazyMotion, domAnimation, m } from 'framer-motion'
+import CheckoutButton from './_components/checkoutButton'
+import { DiscordGuild, PricingData } from './_types'
+import { ServersListSkeleton } from './_components'
+import { Toaster } from '@/components/ui/toaster'
+import { useIdToken } from '@/helpers/hooks'
+import { Suspense, useState } from 'react'
+import { getServer } from '@/lib/redis'
+import Image from 'next/image'
+import Head from 'next/head'
 
 const pricingData: PricingData = {
   price: { monthly: 2.99, yearly: 29.99 },
   premium: {
-    "All Freemium Features": true,
-    "Unlimited Custom Questions": true,
-    "Customized Webhook Branding": true,
-    "Prevent Questions from Repeating": true,
-    "Get Rid of Button Ads": true,
-    "Auto Pin Daily Messages": true,
-    "Support the Development": true
+    'All Freemium Features': true,
+    'Unlimited Custom Questions': true,
+    'Customized Webhook Branding': true,
+    'Prevent Questions from Repeating': true,
+    'Get Rid of Button Ads': true,
+    'Auto Pin Daily Messages': true,
+    'Support the Development': true
   }
 }
 
 const data = [
   {
-    criteria: "5 Gamemodes",
+    criteria: '5 Gamemodes',
     free: true,
     premium: true
   },
   {
-    criteria: "Question of the Day",
-    free: true,
-    premium: true
-  },
-    {
-    criteria: "Question Repeat Prevention",
-    free: false,
-    premium: true,
-  },
-  {
-    criteria: "Thousands of Questions",
+    criteria: 'Question of the Day',
     free: true,
     premium: true
   },
   {
-    criteria: "Custom Questions",
-    free: "Limited (100 per category)",
-    premium: "Unlimited"
-  },
-  {
-    criteria: "Custom Webhook Branding",
+    criteria: 'Question Repeat Prevention',
     free: false,
     premium: true
   },
   {
-    criteria: "Auto Pin Daily Messages",
+    criteria: 'Thousands of Questions',
+    free: true,
+    premium: true
+  },
+  {
+    criteria: 'Custom Questions',
+    free: 'Limited (100 per category)',
+    premium: 'Unlimited'
+  },
+  {
+    criteria: 'Custom Webhook Branding',
+    free: false,
+    premium: true
+  },
+  {
+    criteria: 'Auto Pin Daily Messages',
     free: false,
     premium: true
   }
@@ -140,10 +140,10 @@ export default function Premium() {
                     />
                     <span className="absolute top-0 left-2 z-10 flex h-16 w-[6rem] cursor-pointer items-center duration-300 ease-in-out after:h-12 after:w-[10rem] sm:after:w-[20rem] after:rounded-lg after:bg-brand-customPrimaryLight dark:after:bg-brand-customPrimary after:shadow-md after:duration-300 peer-checked:after:translate-x-[6rem]"></span>
                     <div className="z-20 flex gap-10 text-base font-bold text-foreground">
-                      <div className={`${!isMonthly && "text-foreground/50"}`}>
+                      <div className={`${!isMonthly && 'text-foreground/50'}`}>
                         Monthly
                       </div>
-                      <div className={`${isMonthly && "text-foreground/50"}`}>
+                      <div className={`${isMonthly && 'text-foreground/50'}`}>
                         Yearly
                       </div>
                     </div>
@@ -153,7 +153,7 @@ export default function Premium() {
                   <div className="mb-4 w-auto rounded-[1.7rem] bg-gradient-premium p-[4px]">
                     <div className="relative overflow-hidden rounded-3xl bg-background-dark px-8 py-8">
                       <span
-                        className={`${!isMonthly ? "top-7" : "pointer-events-none -top-10 opacity-0"} hidden xs:flex text-mb absolute right-6 cursor-default rounded-xl bg-foreground/10 px-4 py-2 text-foreground transition-all duration-300`}
+                        className={`${!isMonthly ? 'top-7' : 'pointer-events-none -top-10 opacity-0'} hidden xs:flex text-mb absolute right-6 cursor-default rounded-xl bg-foreground/10 px-4 py-2 text-foreground transition-all duration-300`}
                       >
                         2 months free
                       </span>
@@ -161,7 +161,7 @@ export default function Premium() {
                         Premium
                       </h4>
                       <span
-                        className={`${isMonthly && "absolute -top-10 pointer-events-none opacity-0"} flex xs:hidden w-fit text-mb cursor-default rounded-xl bg-foreground/15 px-4 py-2 text-foreground transition-all duration-300`}
+                        className={`${isMonthly && 'absolute -top-10 pointer-events-none opacity-0'} flex xs:hidden w-fit text-mb cursor-default rounded-xl bg-foreground/15 px-4 py-2 text-foreground transition-all duration-300`}
                       >
                         2 months free
                       </span>
@@ -172,22 +172,22 @@ export default function Premium() {
                           : pricingData.price.yearly}
                         </div>
                         <div className="text-foreground/60">
-                          {isMonthly ? "/ month" : "/ year"}
+                          {isMonthly ? '/ month' : '/ year'}
                         </div>
                       </div>
                       <p className="mb-8 mt-1 text-left leading-loose text-foreground/60">
                         Experience the full power of our Would You bot.
                       </p>
                       <ul className="mb-16 text-foreground">
-                        {Object.keys(pricingData["premium"]).map(
+                        {Object.keys(pricingData['premium']).map(
                           (text, index) => (
                             <li
                               className="mb-4 flex items-center"
                               key={index}
                             >
                               {(
-                                pricingData["premium"][
-                                  text as keyof (typeof pricingData)["premium"]
+                                pricingData['premium'][
+                                  text as keyof (typeof pricingData)['premium']
                                 ]
                               ) ?
                                 <CheckIcon className="mr-4 flex h-5 w-5 items-center justify-center rounded-full bg-transparent text-brand-customPrimary" />
@@ -218,19 +218,19 @@ export default function Premium() {
                           <DialogHeader>
                             <DialogTitle className="text-xl font-bold text-foreground">
                               <div>
-                                Buy{" "}
+                                Buy{' '}
                                 <span className="text-brand-red-100">
                                   Would
-                                </span>{" "}
+                                </span>{' '}
                                 <span className="text-brand-blue-100">You</span>
-                                {isMonthly ? " Monthly" : " Yearly"}
+                                {isMonthly ? ' Monthly' : ' Yearly'}
                               </div>
                             </DialogTitle>
                           </DialogHeader>
                           <DialogDescription className="w-full !rounded-2xl">
                             <Select
                               onValueChange={setServerId}
-                              defaultValue={serverId ? serverId : ""}
+                              defaultValue={serverId ? serverId : ''}
                             >
                               <SelectTrigger className="w-[300px] sm:w-[400px]">
                                 <SelectValue placeholder="Select a server to continue" />
@@ -249,7 +249,7 @@ export default function Premium() {
                                           />
                                           <AvatarFallback>
                                             <Image
-                                              src="https://cdn.discordapp.com/embed/avatars/5.png"
+                                              src="https://cdn.discordapp.com/embed/avatars/0.png"
                                               alt="avatar example"
                                               width={90}
                                               height={90}
@@ -280,13 +280,13 @@ export default function Premium() {
                         </DialogContent>
                         {idToken ?
                           <p className="text-foreground/60 text-center pt-3 mb-[-15] text-wrap">
-                            Or click{" "}
+                            Or click{' '}
                             <a
                               href="/api/subs/manage"
                               className="underline font-bold text-foreground/70"
                             >
                               here
-                            </a>{" "}
+                            </a>{' '}
                             to manage your subscriptions
                           </p>
                         : null}

@@ -1,8 +1,8 @@
-import { getAuthTokenOrNull } from "@/helpers/oauth/helpers"
-import connectDb from "@/lib/mongodb"
-import { stripe } from "@/lib/stripe"
-import guildProfileSchema from "@/models/Guild"
-import { NextResponse } from "next/server"
+import { getAuthTokenOrNull } from '@/helpers/oauth/helpers'
+import guildProfileSchema from '@/models/Guild'
+import { NextResponse } from 'next/server'
+import connectDb from '@/lib/mongodb'
+import { stripe } from '@/lib/stripe'
 
 interface StripeSubscriptionRequest {
   monthly: string
@@ -17,7 +17,7 @@ export async function POST(req: Request) {
 
   if (!user) {
     return NextResponse.json(
-      { message: "You must be logged in to subscribe", status: 401 },
+      { message: 'You must be logged in to subscribe', status: 401 },
       { status: 401 }
     )
   }
@@ -31,28 +31,28 @@ export async function POST(req: Request) {
 
   if (!serverId) {
     return NextResponse.json(
-      { message: "Missing ServerId Parameter", status: 422 },
+      { message: 'Missing ServerId Parameter', status: 422 },
       { status: 422 }
     )
   }
 
   if (!priceId) {
     return NextResponse.json(
-      { message: "Missing PriceId Parameter", status: 422 },
+      { message: 'Missing PriceId Parameter', status: 422 },
       { status: 422 }
     )
   }
 
   if (!userId) {
     return NextResponse.json(
-      { message: "Missing UserId Parameter", status: 422 },
+      { message: 'Missing UserId Parameter', status: 422 },
       { status: 422 }
     )
   }
 
   if (!monthly) {
     return NextResponse.json(
-      { message: "Missing Monthly Parameter", status: 422 },
+      { message: 'Missing Monthly Parameter', status: 422 },
       { status: 422 }
     )
   }
@@ -60,7 +60,7 @@ export async function POST(req: Request) {
   if (server && server?.premiumExpiration !== null) {
     return NextResponse.json(
       {
-        message: "This server already has an active premium subscription",
+        message: 'This server already has an active premium subscription',
         status: 409,
         action: true
       },
@@ -82,19 +82,19 @@ export async function POST(req: Request) {
         }
       },
       allow_promotion_codes: true,
-      payment_method_types: ["card", "paypal", "link"],
+      payment_method_types: ['card', 'paypal', 'link'],
       line_items: [
         {
           price: priceId,
           quantity: 1
         }
       ],
-      mode: "subscription",
+      mode: 'subscription',
 
       // normally you would redirect to a succes page/onboarding page
-      success_url: `${req.headers.get("referer")}/success?type=${monthly ? "monthly" : "annualy"}&server=${serverId}`,
+      success_url: `${req.headers.get('referer')}/success?type=${monthly ? 'monthly' : 'annualy'}&server=${serverId}`,
 
-      cancel_url: `${req.headers.get("referer")}`
+      cancel_url: `${req.headers.get('referer')}`
     })
 
     return NextResponse.json({ id: session.id })
@@ -107,7 +107,7 @@ export async function POST(req: Request) {
       )
     } else {
       return NextResponse.json(
-        { message: "An unknown error occurred", status: 500 },
+        { message: 'An unknown error occurred', status: 500 },
         { status: 500 }
       )
     }

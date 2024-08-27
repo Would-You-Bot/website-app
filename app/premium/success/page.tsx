@@ -1,14 +1,14 @@
 // TODO remove the use client directive in favor of a server component
-"use client"
-import Button from "@/components/Button"
-import Head from "next/head"
-import { useSearchParams } from "next/navigation"
+'use client'
+import { useSearchParams } from 'next/navigation'
+import Button from '@/components/Button'
+import Head from 'next/head'
 
 export default function Premium() {
   const searchParams = useSearchParams()
 
-  const type = searchParams.get("type")
-  const serverId = searchParams.get("server")
+  const type = searchParams.get('type')
+  const serverId = searchParams.get('server')
 
   return (
     <>
@@ -20,8 +20,8 @@ export default function Premium() {
           Payment Successful!
         </h1>
         <p className="mb-4 text-lg text-white">
-          Your payment for Would You Premium billed{" "}
-          <b>{type === "monthly" ? "monthly" : "annually"}</b> was successful!
+          Your payment for Would You Premium billed{' '}
+          <b>{type === 'monthly' ? 'monthly' : 'annually'}</b> was successful!
         </p>
         {
           // TODO: Add space between the premium text
@@ -29,7 +29,7 @@ export default function Premium() {
         <Button
           className="w-fit"
           onClick={() =>
-            window.open(`https://discord.com/channels/${serverId}/`, "_blank")
+            window.open(`https://discord.com/channels/${serverId}/`, '_blank')
           }
         >
           <span>

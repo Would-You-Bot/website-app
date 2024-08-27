@@ -1,6 +1,4 @@
-"use client"
-import profiles from "@/data/profiles.json"
-import { getRandomQuestion } from "@/helpers/getRandomQuestion"
+'use client'
 import {
   DiscordActionRow,
   DiscordAttachments,
@@ -11,37 +9,42 @@ import {
   DiscordEmbedFooter,
   DiscordMessage,
   DiscordMessages
-} from "@skyra/discord-components-react"
-import { LazyMotion, domAnimation, m } from "framer-motion"
-import { useTheme } from "next-themes"
-import { FC, useState } from "react"
+} from '@skyra/discord-components-react'
+import { getRandomQuestion } from '@/helpers/getRandomQuestion'
+import { LazyMotion, domAnimation, m } from 'framer-motion'
+import profiles from '@/data/profiles.json'
+import { useTheme } from 'next-themes'
+import { FC, useState } from 'react'
 
 interface MainProps {
   initialQuestion: string
 }
 
 const MainDiscordEmbed: FC<MainProps> = ({ initialQuestion }) => {
-  const { theme } = useTheme();
-  const [replayedRounds, setReplayedRounds] = useState(0);
-  const [currentQuestion, setCurrentQuestion] = useState(initialQuestion);
+  const { theme } = useTheme()
+  const [replayedRounds, setReplayedRounds] = useState(0)
+  const [currentQuestion, setCurrentQuestion] = useState(initialQuestion)
 
   const replay = () => {
     if (replayedRounds < 3) {
-      setCurrentQuestion(getRandomQuestion('rather'));
-      setReplayedRounds(replayedRounds + 1);
+      setCurrentQuestion(getRandomQuestion('rather'))
+      setReplayedRounds(replayedRounds + 1)
     }
   }
 
   return (
     <LazyMotion features={domAnimation}>
       <m.div
-        initial={{ opacity: 0, transform: "translateY(20px)" }}
-        whileInView={{ opacity: 1, transform: "translateY(0)" }}
-        transition={{ duration: 0.7, ease: "easeInOut" }}
+        initial={{ opacity: 0, transform: 'translateY(20px)' }}
+        whileInView={{ opacity: 1, transform: 'translateY(0)' }}
+        transition={{ duration: 0.7, ease: 'easeInOut' }}
         viewport={{ once: true }}
-        style={{ width: "90%", marginLeft: "auto", marginRight: "auto" }}
+        style={{ width: '90%', marginLeft: 'auto', marginRight: 'auto' }}
       >
-        <DiscordMessages lightTheme={theme === 'light' ? true : false} className="mx-auto w-auto overflow-x-hidden rounded-lg text-left shadow sm:w-2/3 lg:w-auto">
+        <DiscordMessages
+          lightTheme={theme === 'light' ? true : false}
+          className="mx-auto w-auto overflow-x-hidden rounded-lg text-left shadow sm:w-2/3 lg:w-auto"
+        >
           <DiscordMessage
             profile="wouldyou"
             author={profiles.wouldyou.author}
@@ -136,7 +139,7 @@ const MainDiscordEmbed: FC<MainProps> = ({ initialQuestion }) => {
                 : <DiscordButton
                     type="secondary"
                     onClick={() =>
-                      window.open("https://wouldyoubot.gg/invite", "_blank")
+                      window.open('https://wouldyoubot.gg/invite', '_blank')
                     }
                     emoji="/emojis/external.svg"
                     emojiName="external"

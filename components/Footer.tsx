@@ -1,70 +1,70 @@
-"use server"
+'use server'
 
-import Image from "next/image"
-import Link from "next/link"
+import Image from 'next/image'
+import Link from 'next/link'
 
 const Footer = async () => {
   const recommendedLinks = [
     {
-      name: "Home",
-      link: "/",
-      EventTarget: "_self"
+      name: 'Home',
+      link: '/',
+      EventTarget: '_self'
     },
     {
-      name: "Commands",
-      link: "/commands",
-      EventTarget: "_self"
+      name: 'Commands',
+      link: '/commands',
+      EventTarget: '_self'
     },
     {
-      name: "Team",
-      link: "/team",
-      EventTarget: "_self"
+      name: 'Team',
+      link: '/team',
+      EventTarget: '_self'
     },
     {
-      name: "Reddit",
-      link: "/reddit",
-      EventTarget: "_blank"
+      name: 'Reddit',
+      link: '/reddit',
+      EventTarget: '_blank'
     }
   ]
 
   const Links = [
     {
-      name: "Support Server",
-      link: "/discord",
-      EventTarget: "_blank"
+      name: 'Support Server',
+      link: '/discord',
+      EventTarget: '_blank'
     },
     {
-      name: "Invite",
-      link: "/invite",
-      EventTarget: "_blank"
+      name: 'Invite',
+      link: '/invite',
+      EventTarget: '_blank'
     },
     {
-      name: "Vote",
-      link: "/vote",
-      EventTarget: "_blank"
+      name: 'Vote',
+      link: '/vote',
+      EventTarget: '_blank'
     }
   ]
 
   const LegalLinks = [
     {
-      name: "Legal Notice",
-      link: "/legal",
-      EventTarget: "_self"
+      name: 'Legal Notice',
+      link: '/legal',
+      EventTarget: '_self'
     },
     {
-      name: "Privacy Policy",
-      link: "/privacy",
-      EventTarget: "_self"
+      name: 'Privacy Policy',
+      link: '/privacy',
+      EventTarget: '_self'
     },
     {
-      name: "Terms of Service",
-      link: "/terms",
-      EventTarget: "_self"
+      name: 'Terms of Service',
+      link: '/terms',
+      EventTarget: '_self'
     },
     {
-      name: "Refund Policy",
-      link: "/refunds",
-      EventTarget: "_self"
+      name: 'Refund Policy',
+      link: '/refunds',
+      EventTarget: '_self'
     }
   ]
 
@@ -84,7 +84,7 @@ const Footer = async () => {
             <p className="ml-3">Would You</p>
           </div>
           <p className="mt-4 text-center text-sm md:text-left">
-            &copy; {new Date().getFullYear()}{" "}
+            &copy; {new Date().getFullYear()}{' '}
             <Link
               href="https://rivo.gg/"
               target="_blank"
@@ -96,7 +96,9 @@ const Footer = async () => {
           </p>
         </div>
         <div className="flex w-full flex-col items-center md:items-start">
-          <h4 className="mb-2 text-lg font-bold text-foreground">Recommended</h4>
+          <h4 className="mb-2 text-lg font-bold text-foreground">
+            Recommended
+          </h4>
           <div className="flex flex-col items-center gap-2 md:items-start">
             {recommendedLinks.map((link) => (
               <Link
@@ -144,14 +146,14 @@ const Footer = async () => {
       <div>
         <hr className="border border-foreground/10" />
         <p className="mt-8 text-center text-sm text-foreground/70">
-          Made with <span className="text-brand-red-100">♥</span> by{" "}
+          Made with <span className="text-brand-red-100">♥</span> by{' '}
           <Link
             href="/team"
             className="text-foreground underline"
           >
             Would You Team
-          </Link>{" "}
-          &{" "}
+          </Link>{' '}
+          &{' '}
           <Link
             href="https://github.com/Would-You-Bot/website-app/graphs/contributors"
             target="_blank"

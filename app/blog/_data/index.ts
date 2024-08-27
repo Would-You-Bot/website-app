@@ -1,2 +1,2 @@
-export { getPosts } from "./getPosts"
-export type { Post } from "./getPosts"
+export { getPosts } from './getPosts'
+export type { Post } from './getPosts'

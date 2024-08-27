@@ -1,8 +1,8 @@
-import Link from "next/link"
-import { FC } from "react"
-import Marquee from "react-fast-marquee"
-import Avatar from "./Avatar"
-import { useTheme } from "next-themes"
+import Marquee from 'react-fast-marquee'
+import { useTheme } from 'next-themes'
+import Avatar from './Avatar'
+import Link from 'next/link'
+import { FC } from 'react'
 
 interface Server {
   name: string
@@ -16,7 +16,7 @@ interface Server {
 interface MarqueeProps {
   servers: Server[]
   speed: number
-  direction?: "left" | "right"
+  direction?: 'left' | 'right'
   className?: string
 }
 
@@ -35,9 +35,13 @@ const ServerMarquee: FC<MarqueeProps> = ({
         className="flex w-max items-center overflow-hidden"
         play
         speed={speed}
-        direction={direction ?? "left"}
+        direction={direction ?? 'left'}
         gradient={true}
-        gradientColor={theme === "light" ? "hsl(var(--background-darker))" : "hsl(var(--background-dark))"}
+        gradientColor={
+          theme === 'light' ?
+            'hsl(var(--background-darker))'
+          : 'hsl(var(--background-dark))'
+        }
       >
         {servers.map((s: any) => (
           <Link
@@ -56,7 +60,7 @@ const ServerMarquee: FC<MarqueeProps> = ({
             />
             <div>
               <div className="relative flex items-center">
-                {s.features.includes("VERIFIED") && (
+                {s.features.includes('VERIFIED') && (
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     width="60"
@@ -77,8 +81,8 @@ const ServerMarquee: FC<MarqueeProps> = ({
                     />
                   </svg>
                 )}
-                {s.features.includes("PARTNERED") &&
-                  !s.features.includes("VERIFIED") && (
+                {s.features.includes('PARTNERED') &&
+                  !s.features.includes('VERIFIED') && (
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       width="60"

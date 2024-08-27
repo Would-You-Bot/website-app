@@ -1,8 +1,8 @@
-"use client"
-import { ToastAction } from "@/components/ui/toast"
-import { useToast } from "@/components/ui/use-toast"
-import { loadStripe } from "@stripe/stripe-js"
-import { useState } from "react"
+'use client'
+import { useToast } from '@/components/ui/use-toast'
+import { ToastAction } from '@/components/ui/toast'
+import { loadStripe } from '@stripe/stripe-js'
+import { useState } from 'react'
 
 interface CheckoutButtonProps {
   monthly: string
@@ -26,10 +26,10 @@ export default function CheckoutButton({
     )
     const stripe = await stripePromise
 
-    const response = await fetch("/api/subs", {
-      method: "POST",
+    const response = await fetch('/api/subs', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json"
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
         priceId: priceId,
@@ -42,12 +42,12 @@ export default function CheckoutButton({
 
     if (data?.action) {
       toast({
-        variant: "destructive",
-        title: "Uh oh! Something went wrong.",
+        variant: 'destructive',
+        title: 'Uh oh! Something went wrong.',
         description: data.message,
         action: (
           <ToastAction
-            onClick={() => window.open("/api/subs/manage", "_blank")}
+            onClick={() => window.open('/api/subs/manage', '_blank')}
             altText="Manage"
           >
             Manage
@@ -65,8 +65,8 @@ export default function CheckoutButton({
       data.status === 401
     ) {
       toast({
-        variant: "destructive",
-        title: "Uh oh! Something went wrong.",
+        variant: 'destructive',
+        title: 'Uh oh! Something went wrong.',
         description: data.message
       })
       setLoading(false)
@@ -117,7 +117,7 @@ export default function CheckoutButton({
           </svg>
           Loading...
         </>
-      : "Checkout"}
+      : 'Checkout'}
     </button>
   )
 }

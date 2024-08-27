@@ -1,1 +1,1 @@
-export { ServersListSkeleton } from "./ServersListSkeleton"
+export { ServersListSkeleton } from './ServersListSkeleton'
