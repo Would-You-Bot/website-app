@@ -84,10 +84,13 @@ const HigherLowerEmbed: FC<MainProps> = ({ currentDate }) => {
       </DiscordMessage>
 
       <DiscordMessage
-        profile="smokey"
-        author={profiles.smokey.author}
-        avatar={profiles.smokey.avatar}
-        roleColor={profiles.smokey.roleColor}
+        profile="paulos"
+        author={profiles.paulos.author}
+        avatar={profiles.paulos.avatar}
+        roleColor={profiles.paulos.roleColor}
+         // @ts-ignore
+        clanIcon={profiles.paulos.clanIcon}
+        clanTag={profiles.paulos.clanTag}
         lightTheme={theme === 'light'}
       >
         <DiscordReply
@@ -106,10 +109,13 @@ const HigherLowerEmbed: FC<MainProps> = ({ currentDate }) => {
       </DiscordMessage>
 
       <DiscordMessage
-        profile="emilia"
-        author={profiles.emilia.author}
-        avatar={profiles.emilia.avatar}
-        roleColor={profiles.emilia.roleColor}
+        profile="dominik"
+        author={profiles.dominik.author}
+        avatar={profiles.dominik.avatar}
+        roleColor={profiles.dominik.roleColor}
+         // @ts-ignore
+        clanIcon={profiles.dominik.clanIcon}
+        clanTag={profiles.dominik.clanTag}
         lightTheme={theme === 'light'}
       >
         Yep should be McDonalds
@@ -124,10 +130,13 @@ const HigherLowerEmbed: FC<MainProps> = ({ currentDate }) => {
       >
         <DiscordReply
           slot="reply"
-          profile="emilia"
-          author={profiles.emilia.author}
-          avatar={profiles.emilia.avatar}
-          roleColor={profiles.emilia.roleColor}
+          profile="dominik"
+          author={profiles.dominik.author}
+          avatar={profiles.dominik.avatar}
+          roleColor={profiles.dominik.roleColor}
+           // @ts-ignore
+          clanIcon={profiles.dominik.clanIcon}
+          clanTag={profiles.dominik.clanTag}
           lightTheme={theme === 'light'}
         >
           <p style={{ whiteSpace: 'initial' }}>Yep should be McDonalds</p>

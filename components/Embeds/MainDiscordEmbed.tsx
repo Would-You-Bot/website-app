@@ -60,6 +60,9 @@ const MainDiscordEmbed: FC<MainProps> = ({ initialQuestion }) => {
               author={profiles.dominik.author}
               avatar={profiles.dominik.avatar}
               roleColor={profiles.dominik.roleColor}
+              // @ts-ignore
+              clanIcon={profiles.dominik.clanIcon}
+              clanTag={profiles.dominik.clanTag}
               command="/wouldyourather"
               lightTheme={theme === 'light'}
             />
