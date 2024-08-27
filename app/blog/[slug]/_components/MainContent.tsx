@@ -1,8 +1,8 @@
-"use server"
+'use server'
 
-import blogStyles from "@/styles/blog.module.css"
-import { CompileMDXResult } from "next-mdx-remote/rsc"
-import { FrontMatter } from "@/app/blog/[slug]/_data"
+import { CompileMDXResult } from 'next-mdx-remote/rsc'
+import { FrontMatter } from '@/app/blog/[slug]/_data'
+import blogStyles from '@/styles/blog.module.css'
 
 interface MainContentProps {
   source: CompileMDXResult<FrontMatter>

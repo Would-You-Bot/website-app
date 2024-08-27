@@ -1,6 +1,6 @@
-"use server"
-import { getAuthTokenOrNull } from "@/helpers/oauth/helpers"
-import { Redis } from "@upstash/redis"
+'use server'
+import { getAuthTokenOrNull } from '@/helpers/oauth/helpers'
+import { Redis } from '@upstash/redis'
 
 const redis = new Redis({
   url: process.env.REDIS_URL!,
@@ -21,7 +21,7 @@ const setServer = async (
   userId: string | undefined,
   servers: object | Array<object>
 ) => {
-  if (!userId) return console.log("No user id")
+  if (!userId) return console.log('No user id')
 
   await redis.set(userId, JSON.stringify(servers))
 }

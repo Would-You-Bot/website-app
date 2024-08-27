@@ -1,4 +1,4 @@
-import { CheckIcon, CloseIcon } from "./icons"
+import { CheckIcon, CloseIcon } from './icons'
 
 interface ArrayProps {
   criteria: string
@@ -43,15 +43,15 @@ export default function PlansComparison({
           return (
             <div
               key={index}
-              className={`flex h-16 w-full ${rowSeparator && index != 0 ? "border-t-2 border-background-light" : ""}`}
+              className={`flex h-16 w-full ${rowSeparator && index != 0 ? 'border-t-2 border-background-light' : ''}`}
             >
               <div className="flex w-full basis-1/3 items-center justify-center px-2 text-center text-sm sm:text-base">
                 {item.criteria}
               </div>
               <div
-                className={`text-md flex w-full basis-1/3 items-center justify-center font-bold text-[#7A7B7E] ${colSeparator ? "border-x-2 border-background-light" : ""}`}
+                className={`text-md flex w-full basis-1/3 items-center justify-center font-bold text-[#7A7B7E] ${colSeparator ? 'border-x-2 border-background-light' : ''}`}
               >
-                {typeof item.free === "boolean" ?
+                {typeof item.free === 'boolean' ?
                   item.free ?
                     <CheckIcon className="h-5 w-5 text-[#7A7B7E] sm:h-7 sm:w-7" />
                   : <CloseIcon className="h-5 w-5 text-[#7A7B7E] sm:h-7 sm:w-7" />
@@ -62,7 +62,7 @@ export default function PlansComparison({
                 }
               </div>
               <div className="text-md flex w-full basis-1/3 items-center justify-center font-bold text-brand-customPrimary">
-                {typeof item.premium === "boolean" ?
+                {typeof item.premium === 'boolean' ?
                   item.premium ?
                     <CheckIcon className="h-5 w-5 text-brand-customPrimary sm:h-7 sm:w-7" />
                   : <CloseIcon className="h-5 w-5 text-brand-customPrimary sm:h-7 sm:w-7" />

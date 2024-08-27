@@ -1,4 +1,4 @@
-import Link from "next/link"
+import Link from 'next/link'
 
 export default function legalnotice() {
   return (
@@ -13,7 +13,7 @@ export default function legalnotice() {
         >
           🇩🇪
         </span>
-        For the German version please visit{" "}
+        For the German version please visit{' '}
         <Link
           href="/legal-de"
           className="text-foreground underline"
@@ -28,8 +28,10 @@ export default function legalnotice() {
         <p className="select-none">
           Dominik Koch
           <br />
-          c/o IP-Management #38305<br />
-          Ludwig-Erhard-Str. 18<br />
+          c/o IP-Management #38305
+          <br />
+          Ludwig-Erhard-Str. 18
+          <br />
           20459 Hamburg
           <br />
           Germany
@@ -44,7 +46,7 @@ export default function legalnotice() {
         </h3>
         <p>
           The European Comission provides a platform for online dispute
-          resolution, available at{" "}
+          resolution, available at{' '}
           <Link
             href="https://ec.europa.eu/consumers/odr/"
             className="text-foreground underline"
@@ -104,10 +106,10 @@ export default function legalnotice() {
         </Link>
       </div>
       <p>
-        The Discord bot with the id{" "}
+        The Discord bot with the id{' '}
         <span className="font-mono text-foreground">981649513427111957</span>
         <br />
-        The Discord server with the id{" "}
+        The Discord server with the id{' '}
         <span className="font-mono text-foreground">1009562516105461780</span>
       </p>
     </main>

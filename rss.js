@@ -1,9 +1,9 @@
-const fs = require("fs")
-const RSS = require("rss")
-const matter = require("gray-matter")
-const path = require("path")
+const matter = require('gray-matter')
+const path = require('path')
+const RSS = require('rss')
+const fs = require('fs')
 
-function getFilesRecursively(dir, excludePrefix = "_") {
+function getFilesRecursively(dir, excludePrefix = '_') {
   let files = []
   const entries = fs.readdirSync(dir)
 
@@ -21,11 +21,11 @@ function getFilesRecursively(dir, excludePrefix = "_") {
   return files
 }
 
-const blogPostsDir = path.join(__dirname, "posts")
-const POST_PATHS = getFilesRecursively(blogPostsDir, "_")
+const blogPostsDir = path.join(__dirname, 'posts')
+const POST_PATHS = getFilesRecursively(blogPostsDir, '_')
 
 const POSTS = POST_PATHS.map((filePath) => {
-  const source = fs.readFileSync(filePath, "utf8")
+  const source = fs.readFileSync(filePath, 'utf8')
   const { data } = matter(source)
   return {
     filePath,
@@ -35,16 +35,16 @@ const POSTS = POST_PATHS.map((filePath) => {
 
 // Generate RSS feed
 const feed = new RSS({
-  title: "Would You Bot RSS Feed",
-  site_url: "https://wouldyoubot.gg",
-  feed_url: "https://wouldyoubot.gg/rss.xml"
+  title: 'Would You Bot RSS Feed',
+  site_url: 'https://wouldyoubot.gg',
+  feed_url: 'https://wouldyoubot.gg/rss.xml'
 })
 
 POSTS.forEach((post) => {
   feed.item({
     title: post.data.title,
     description: post.data.description,
-    url: `https://wouldyoubot.gg/blog/${path.basename(post.filePath, ".mdx")}`,
+    url: `https://wouldyoubot.gg/blog/${path.basename(post.filePath, '.mdx')}`,
     date: new Date(post.data.seoDate)
   })
 })
@@ -52,4 +52,4 @@ POSTS.forEach((post) => {
 const rss = feed.xml({ indent: true })
 
 // Write RSS feed to file
-fs.writeFileSync(path.join(__dirname, "public", "rss.xml"), rss)
+fs.writeFileSync(path.join(__dirname, 'public', 'rss.xml'), rss)

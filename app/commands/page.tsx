@@ -1,11 +1,11 @@
 // TODO remove the use client directive in favor of a server component
-"use client"
+'use client'
 
-import Head from "next/head"
-import Link from "next/link"
-import { useEffect, useRef, useState } from "react"
-import commands from "../../data/commands.json"
-import CopyCommandWrapper from "@/components/CopyCommand"
+import CopyCommandWrapper from '@/components/CopyCommand'
+import { useEffect, useRef, useState } from 'react'
+import commands from '../../data/commands.json'
+import Head from 'next/head'
+import Link from 'next/link'
 
 export default function Commands() {
   interface Command {
@@ -17,8 +17,8 @@ export default function Commands() {
     options?: string[]
   }
 
-  const [openedCommand, setOpenedCommand] = useState("")
-  const [searchTerm, setSearchTerm] = useState<string>("")
+  const [openedCommand, setOpenedCommand] = useState('')
+  const [searchTerm, setSearchTerm] = useState<string>('')
   const [filteredCommands, setFilteredCommands] = useState<Command[]>(
     commands as object as Command[]
   )
@@ -48,7 +48,7 @@ export default function Commands() {
     setSearchTerm(event.target.value)
   }
 
-  const categories = ["Settings", "Utility", "Games"]
+  const categories = ['Settings', 'Utility', 'Games']
 
   return (
     <>
@@ -93,12 +93,12 @@ export default function Commands() {
                       <div
                         className={`relative cursor-pointer overflow-hidden rounded-lg p-4 text-foreground/70 transition-all duration-300 ${
                           openedCommand === command.name ?
-                            "max-h-[250px] bg-foreground/10"
-                          : "max-h-[90px] bg-foreground/5"
+                            'max-h-[250px] bg-foreground/10'
+                          : 'max-h-[90px] bg-foreground/5'
                         }`}
                         onClick={() =>
                           isActive ?
-                            setOpenedCommand("")
+                            setOpenedCommand('')
                           : setOpenedCommand(command.name)
                         }
                         key={command.name}
@@ -106,7 +106,9 @@ export default function Commands() {
                         <div className="flex items-center justify-between">
                           <div className="grow overflow-hidden">
                             <h4 className="mb-1 text-lg font-bold text-foreground">
-                              <span className="mr-0.5 text-foreground/50">/</span>
+                              <span className="mr-0.5 text-foreground/50">
+                                /
+                              </span>
                               {command.name}
                             </h4>
                             <p className="mb-3 max-w-full overflow-hidden text-ellipsis whitespace-nowrap text-sm">
@@ -122,8 +124,8 @@ export default function Commands() {
                               viewBox="0 0 30 30"
                               className={`transition-all duration-300 ${
                                 isActive ?
-                                  "rotate-180 text-foreground/70"
-                                : "text-foreground/50"
+                                  'rotate-180 text-foreground/70'
+                                : 'text-foreground/50'
                               }`}
                             >
                               <path d="M15 20.938a.93.93 0 0 1-.663-.275l-8.75-8.75a.938.938 0 1 1 1.327-1.327L15 18.674l8.088-8.088a.938.938 0 1 1 1.326 1.327l-8.75 8.75a.94.94 0 0 1-.665.274Z" />
@@ -132,7 +134,7 @@ export default function Commands() {
                         </div>
                         <div
                           className={`transition-all duration-300 ${
-                            isActive ? "opacity-100" : "opacity-0"
+                            isActive ? 'opacity-100' : 'opacity-0'
                           }`}
                         >
                           <h5 className="mb-1">Usage</h5>
@@ -143,7 +145,7 @@ export default function Commands() {
                             <>
                               <h5 className="mb-1">Subcommands</h5>
                               <h6 className="w-fit rounded-md bg-background-light dark:bg-background-dark px-2 py-1 font-mono text-xs">
-                                {command.subcommands.join(", ")}
+                                {command.subcommands.join(', ')}
                               </h6>
                             </>
                           )}
@@ -151,7 +153,7 @@ export default function Commands() {
                             <>
                               <h5 className="mb-1">Options</h5>
                               <h6 className="w-fit rounded-md bg-background-light dark:bg-background-dark px-2 py-1 font-mono text-xs">
-                                {command.options.join(", ")}
+                                {command.options.join(', ')}
                               </h6>
                             </>
                           )}
@@ -167,7 +169,7 @@ export default function Commands() {
           })}
           {filteredCommands.length === 0 && (
             <p className="select-none font-medium text-foreground/70">
-              No commands for your search were found!{" "}
+              No commands for your search were found!{' '}
               <Link
                 className="font-semibold"
                 href="/discord"

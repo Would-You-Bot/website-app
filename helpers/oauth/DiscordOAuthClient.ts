@@ -1,4 +1,4 @@
-import { generateState, OAuth2Client } from "oslo/oauth2"
+import { generateState, OAuth2Client } from 'oslo/oauth2'
 
 /**
  * @private
@@ -7,7 +7,7 @@ class DiscordOAuthClient {
   private readonly client: OAuth2Client
   private readonly scopes: string[]
   private readonly clientSecret: string
-  private readonly revocationUrl = "https://discord.com/api/oauth2/token/revoke"
+  private readonly revocationUrl = 'https://discord.com/api/oauth2/token/revoke'
 
   constructor({
     clientId,
@@ -39,7 +39,7 @@ class DiscordOAuthClient {
   validateAuthorizationCode(authorizationCode: string) {
     return this.client.validateAuthorizationCode(authorizationCode, {
       credentials: this.clientSecret,
-      authenticateWith: "request_body"
+      authenticateWith: 'request_body'
     })
   }
 
@@ -47,13 +47,13 @@ class DiscordOAuthClient {
     return this.client.refreshAccessToken(refreshToken, {
       scopes: this.scopes,
       credentials: this.clientSecret,
-      authenticateWith: "request_body"
+      authenticateWith: 'request_body'
     })
   }
 
-  revokeToken(token: string, tokenType: "access_token" | "refresh_token") {
+  revokeToken(token: string, tokenType: 'access_token' | 'refresh_token') {
     return fetch(this.revocationUrl, {
-      method: "POST",
+      method: 'POST',
       body: new URLSearchParams({
         token,
         token_type_hint: tokenType,
@@ -61,7 +61,7 @@ class DiscordOAuthClient {
         client_secret: this.clientSecret
       }),
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded"
+        'Content-Type': 'application/x-www-form-urlencoded'
       }
     })
   }
@@ -73,5 +73,5 @@ export const discordOAuthClient = new DiscordOAuthClient({
   redirectUri: process.env.DISCORD_REDIRECT_URI!,
   tokenUrl: process.env.DISCORD_TOKEN_URL!,
   authorizeUrl: process.env.DISCORD_AUTHORIZE_URL!,
-  scopes: ["identify", "guilds"]
+  scopes: ['identify', 'guilds']
 })

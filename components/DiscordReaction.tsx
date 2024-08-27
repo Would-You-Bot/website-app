@@ -1,5 +1,5 @@
-import { DiscordReaction } from "@skyra/discord-components-react"
-import { useState } from "react"
+import { DiscordReaction } from '@skyra/discord-components-react'
+import { useState } from 'react'
 
 interface ReactionProps {
   name: string

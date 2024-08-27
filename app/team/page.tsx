@@ -1,16 +1,16 @@
-import Head from "next/head"
+import Head from 'next/head'
 
-import Image from "next/image" // Import the 'Image' component
+import Image from 'next/image' // Import the 'Image' component
 
-import staffs from "@/data/staffs.json" // Import the JSON data
+import staffs from '@/data/staffs.json' // Import the JSON data
 
 export default function Team() {
   const roles = [
-    "Developers",
-    "Admins",
-    "Translators",
-    "Contributors",
-    "Beta Testers"
+    'Developers',
+    'Admins',
+    'Translators',
+    'Contributors',
+    'Beta Testers'
   ]
 
   return (
@@ -22,11 +22,11 @@ export default function Team() {
         <div className="flex mt-auto w-full max-w-8xl flex-col px-8">
           <h1 className="text-4xl font-bold text-foreground">
             <span className="text-brand-red-100 drop-shadow-red-glow">
-              Meet{" "}
-            </span>{" "}
+              Meet{' '}
+            </span>{' '}
             <span className="text-brand-blue-100 drop-shadow-blue-glow">
-              {" "}
-              the{" "}
+              {' '}
+              the{' '}
             </span>
             Team
           </h1>
@@ -103,10 +103,10 @@ export default function Team() {
                         </ul>
                       : null}
                     </li>
-                  ))}{" "}
+                  ))}{' '}
               </ul>
             </>
-          ))}{" "}
+          ))}{' '}
         </div>
       </main>
     </>

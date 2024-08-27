@@ -1,13 +1,13 @@
-import { signJwt } from "@/helpers/jwt"
-import { discordOAuthClient } from "@/helpers/oauth"
-import { IdTokenData } from "@/helpers/oauth/types"
-import { setServer } from "@/lib/redis"
-import { stripe } from "@/lib/stripe"
-import { cookies } from "next/headers"
-import { redirect } from "next/navigation"
-import { NextRequest } from "next/server"
-import Stripe from "stripe"
-import { z } from "zod"
+import { discordOAuthClient } from '@/helpers/oauth'
+import { IdTokenData } from '@/helpers/oauth/types'
+import { redirect } from 'next/navigation'
+import { NextRequest } from 'next/server'
+import { signJwt } from '@/helpers/jwt'
+import { setServer } from '@/lib/redis'
+import { cookies } from 'next/headers'
+import { stripe } from '@/lib/stripe'
+import Stripe from 'stripe'
+import { z } from 'zod'
 
 const _queryParamsSchema = z.object({
   code: z.string().nullable(),
@@ -22,16 +22,16 @@ export async function GET(req: NextRequest) {
     error,
     redirect: redirectUrl
   } = await _queryParamsSchema.parseAsync({
-    code: req.nextUrl.searchParams.get("code"),
-    error: req.nextUrl.searchParams.get("error"),
-    redirect: req.nextUrl.searchParams.get("redirect")
+    code: req.nextUrl.searchParams.get('code'),
+    error: req.nextUrl.searchParams.get('error'),
+    redirect: req.nextUrl.searchParams.get('redirect')
   })
 
-  if (typeof code !== "string") {
+  if (typeof code !== 'string') {
     if (error) {
-      return redirect("/")
+      return redirect('/')
     } else {
-      setSecureHttpOnlyCookie("OAUTH_REDIRECT", redirectUrl ?? "/")
+      setSecureHttpOnlyCookie('OAUTH_REDIRECT', redirectUrl ?? '/')
       const oauthRedirect = await discordOAuthClient.createAuthorizationURL()
       return redirect(oauthRedirect.href)
     }
@@ -49,19 +49,19 @@ export async function GET(req: NextRequest) {
   })
   const idToken = await signJwt({ ...user } as IdTokenData)
 
-  setSecureHttpOnlyCookie("OAUTH_TOKEN", accessToken)
-  cookieJar.set("ID_TOKEN", idToken, {
-    path: "/",
+  setSecureHttpOnlyCookie('OAUTH_TOKEN', accessToken)
+  cookieJar.set('ID_TOKEN', idToken, {
+    path: '/',
     maxAge: 24 * 60 * 60
   })
 
   console.log(
-    "info  - " +
-      `${user?.username ?? "Unknown User"} (${user?.id ?? "Unknown ID"})` +
-      " logged-in on " +
+    'info  - ' +
+      `${user?.username ?? 'Unknown User'} (${user?.id ?? 'Unknown ID'})` +
+      ' logged-in on ' +
       new Date().toUTCString()
   )
-  return redirect(cookieJar.get("OAUTH_REDIRECT")?.value!)
+  return redirect(cookieJar.get('OAUTH_REDIRECT')?.value!)
 }
 
 async function exchangeAuthorizationCode(code: string) {
@@ -71,12 +71,12 @@ async function exchangeAuthorizationCode(code: string) {
       await discordOAuthClient.validateAuthorizationCode(code)
     const exp = expires_in ? now + 1000 * expires_in : null
 
-    if (!scope?.includes("identify"))
-      return { success: false, error: "Identify scope is missing" }
-    if (!scope?.includes("guilds"))
-      return { success: false, error: "Guilds scope is missing" }
+    if (!scope?.includes('identify'))
+      return { success: false, error: 'Identify scope is missing' }
+    if (!scope?.includes('guilds'))
+      return { success: false, error: 'Guilds scope is missing' }
 
-    const userResponse = await fetch("https://discord.com/api/users/@me", {
+    const userResponse = await fetch('https://discord.com/api/users/@me', {
       headers: {
         Authorization: `${token_type} ${access_token}`
       }
@@ -87,7 +87,7 @@ async function exchangeAuthorizationCode(code: string) {
     const { id, username, avatar, global_name } = user
 
     const guildsResponse = await fetch(
-      "https://discord.com/api/users/@me/guilds",
+      'https://discord.com/api/users/@me/guilds',
       {
         headers: {
           Authorization: `${token_type} ${access_token}`
@@ -124,14 +124,14 @@ async function exchangeAuthorizationCode(code: string) {
       customer = newCustomer
     }
 
-    if (scope.includes("guilds") && scope.includes("guilds.join")) {
-      if (scope.includes("guilds.join") && guilds?.length <= 100) {
+    if (scope.includes('guilds') && scope.includes('guilds.join')) {
+      if (scope.includes('guilds.join') && guilds?.length <= 100) {
         await fetch(
           `https://discord.com/api/guilds/1009562516105461780/members/${id}`,
           {
-            method: "PUT",
+            method: 'PUT',
             headers: {
-              "Content-Type": "application/json",
+              'Content-Type': 'application/json',
               Authorization: `${token_type} ${access_token}`
             },
             body: JSON.stringify({
@@ -156,10 +156,10 @@ async function exchangeAuthorizationCode(code: string) {
 
 function setSecureHttpOnlyCookie(name: string, value: string) {
   return cookies().set(name, value, {
-    path: "/",
+    path: '/',
     secure: true,
     httpOnly: true,
-    sameSite: "lax",
+    sameSite: 'lax',
     maxAge: 24 * 60 * 60
   })
 }

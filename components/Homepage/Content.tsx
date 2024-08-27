@@ -1,18 +1,16 @@
-"use client"
+'use client'
 
-import Button from "@/components/Button"
-import DailyMessageEmbed from "@/components/Embeds/DailyMessageEmbed"
-import HigherLowerEmbed from "@/components/Embeds/HigherLowerEmbed"
-import MainDiscordEmbed from "@/components/Embeds/MainDiscordEmbed"
-import NeverHaveIEverEmbed from "@/components/Embeds/NeverHaveIEverEmbed"
-import FeatureItem from "@/components/FeatureItem"
-import ServerMarquee from "@/components/ServerMarquee"
-import { getRandomQuestion } from "@/helpers/getRandomQuestion"
-import { domAnimation, LazyMotion, m } from "framer-motion"
-import Image from "next/image"
-import Link from "next/link"
-import { useState } from "react"
-import { LandingWave } from "../LandingWave"
+import NeverHaveIEverEmbed from '@/components/Embeds/NeverHaveIEverEmbed'
+import DailyMessageEmbed from '@/components/Embeds/DailyMessageEmbed'
+import HigherLowerEmbed from '@/components/Embeds/HigherLowerEmbed'
+import MainDiscordEmbed from '@/components/Embeds/MainDiscordEmbed'
+import { AvatarGroup, AvatarsListProps } from '../avatar-group'
+import { domAnimation, LazyMotion, m } from 'framer-motion'
+import ServerMarquee from '@/components/ServerMarquee'
+import FeatureItem from '@/components/FeatureItem'
+import { LandingWave } from '../LandingWave'
+import Button from '@/components/Button'
+import Link from 'next/link'
 
 interface HomeContentProps {
   initialRatherQuestion: string
@@ -27,22 +25,22 @@ export function HomeContent({
   serverCount,
   servers
 }: HomeContentProps) {
-  const date = new Date();
-  const currentDate = date.toLocaleString();
+  const date = new Date()
+  const currentDate = date.toLocaleString()
 
   const threadName = `${[
     date.getFullYear(),
     date.getMonth() + 1,
     date.getDate()
-  ].join("/")} - Daily Message`
+  ].join('/')} - Daily Message`
 
   return (
     <LazyMotion features={domAnimation}>
       <section className="mt-0 sm:mt-16 lg:mt-28 flex w-full max-w-8xl flex-col items-center justify-between gap-16 px-8 text-center lg:flex-row lg:text-left">
         <m.div
-          initial={{ opacity: 0, transform: "translateY(20px)" }}
-          whileInView={{ opacity: 1, transform: "translateY(0)" }}
-          transition={{ duration: 0.7, ease: "easeInOut" }}
+          initial={{ opacity: 0, transform: 'translateY(20px)' }}
+          whileInView={{ opacity: 1, transform: 'translateY(0)' }}
+          transition={{ duration: 0.7, ease: 'easeInOut' }}
           viewport={{ once: true }}
           className="flex flex-col items-center lg:block"
         >
@@ -51,7 +49,7 @@ export function HomeContent({
             <br />
             <span className="text-brand-red-100 drop-shadow-red-glow">
               Discord
-            </span>{" "}
+            </span>{' '}
             <span className="text-brand-blue-100 drop-shadow-blue-glow">
               Server
             </span>
@@ -59,9 +57,15 @@ export function HomeContent({
           <p className="text-lg text-neutral-700 dark:text-neutral-300">
             Play fun and entertaining games with Would You, featuring user polls
             and customization. Play Would You Rather, Truth or Dare, Never Have
-            I Ever, Higher or Lower, and What Would You Do!{" "}
+            I Ever, Higher or Lower, and What Would You Do!{' '}
             <span className="hidden">tempus voicus</span>
           </p>
+          <div className="flex flex-col lg:flex-row mt-8 items-center gap-4">
+            <AvatarGroup avatars={servers.slice(0, 5)} />
+            <span className="text-foreground/50">
+              Trusted by your favorite servers!
+            </span>
+          </div>
           <Link
             href="/invite"
             target="_blank"
@@ -88,42 +92,50 @@ export function HomeContent({
         <MainDiscordEmbed initialQuestion={initialRatherQuestion} />
       </section>
 
-      <section className="mt-36">
-        <LandingWave className="text-background-darker dark:text-background-dark" />
-        <div className="w-full bg-background-darker dark:bg-background-dark px-8 pb-12 text-center text-xl sm:text-3xl md:text-4xl text-foreground md:-mt-20 md:pb-28">
-          <h2>
-            Trusted by{" "}
-            <span className="bg-gradient-brand bg-clip-text font-bold text-transparent">
-              {serverCount.toLocaleString()}+
-            </span>{" "}
-            communities
-          </h2>
-          <h3 className="mt-4 text-sm sm:text-xl md:text-2xl">
-            keeping{" "}
-            <span className="bg-gradient-brand bg-clip-text font-bold text-transparent">
-              4,000,000+
-            </span>{" "}
-            users entertained
-          </h3>
+      <section
+        id="slider"
+        className="mt-36"
+      >
+        <LandingWave className="text-background-darker dark:text-background-dark -mb-24" />
+        <div className="w-full bg-background-darker dark:bg-background-dark px-8 pb-12 text-center text-3xl md:text-4xl text-foreground md:-mt-20 md:pb-28">
+          <div className='w-dvw px-8 mx-auto'>
+            <h2>
+              Trusted by{' '}
+              <span className="bg-gradient-brand bg-clip-text font-bold text-transparent">
+                {serverCount.toLocaleString()}+
+              </span>{' '}
+              communities
+            </h2>
+            <h3 className="mt-4 text-xl md:text-2xl px-12">
+              keeping{' '}
+              <span className="bg-gradient-brand bg-clip-text font-bold text-transparent">
+                4,000,000+
+              </span>{' '}
+              users entertained
+            </h3>
+          </div>
+          <div className='w-dvw mx-auto overflow-x-hidden'>
 
-          <ServerMarquee
-            servers={servers.slice(0, Math.ceil(servers.length / 2))}
-            speed={40}
-          />
-          <ServerMarquee
-            servers={servers.slice(Math.ceil(servers.length / 2))}
-            speed={30}
-            direction="right"
-          />
+            <ServerMarquee
+              servers={servers.slice(0, Math.ceil(servers.length / 2))}
+              speed={40}
+            />
+            <ServerMarquee
+              servers={servers.slice(Math.ceil(servers.length / 2))}
+              speed={30}
+              direction="right"
+            />
+          </div>
+
         </div>
       </section>
 
       <section className="mt-20 flex w-full max-w-8xl flex-col items-center gap-20 px-8 text-foreground">
         <m.div
-          initial={{ opacity: 0, transform: "translateY(15px)" }}
-          whileInView={{ opacity: 1, transform: "translateY(0)" }}
+          initial={{ opacity: 0, transform: 'translateY(15px)' }}
+          whileInView={{ opacity: 1, transform: 'translateY(0)' }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: "easeInOut" }}
+          transition={{ duration: 0.6, ease: 'easeInOut' }}
           className="flex flex-col items-center"
         >
           <h2 className="bg-gradient-brand bg-clip-text text-6xl font-bold text-transparent">
@@ -185,31 +197,31 @@ export function HomeContent({
 
       <section className="mt-36 w-full bg-hover-light px-9 py-12">
         <m.h2
-          initial={{ opacity: 0, transform: "translateY(10px)" }}
-          whileInView={{ opacity: 1, transform: "translateY(0)" }}
+          initial={{ opacity: 0, transform: 'translateY(10px)' }}
+          whileInView={{ opacity: 1, transform: 'translateY(0)' }}
           viewport={{ once: true }}
-          transition={{ duration: 0.65, ease: "easeInOut" }}
+          transition={{ duration: 0.65, ease: 'easeInOut' }}
           className="text-center text-5xl font-bold leading-normal text-foreground"
         >
-          Keep Your Server Active with{" "}
+          Keep Your Server Active with{' '}
           <span className="bg-gradient-brand bg-clip-text font-bold text-transparent">
             Would You
           </span>
         </m.h2>
         <m.h3
-          initial={{ opacity: 0, transform: "translateY(10px)" }}
-          whileInView={{ opacity: 1, transform: "translateY(0)" }}
+          initial={{ opacity: 0, transform: 'translateY(10px)' }}
+          whileInView={{ opacity: 1, transform: 'translateY(0)' }}
           viewport={{ once: true }}
-          transition={{ duration: 0.65, ease: "easeInOut" }}
+          transition={{ duration: 0.65, ease: 'easeInOut' }}
           className="mt-4 text-center text-xl text-foreground/70"
         >
           Invite To Your Server Now!
         </m.h3>
         <m.div
-          initial={{ opacity: 0, transform: "translateY(-20px)" }}
-          whileInView={{ opacity: 1, transform: "translateY(0)" }}
+          initial={{ opacity: 0, transform: 'translateY(-20px)' }}
+          whileInView={{ opacity: 1, transform: 'translateY(0)' }}
           viewport={{ once: true }}
-          transition={{ duration: 0.65, ease: "easeInOut" }}
+          transition={{ duration: 0.65, ease: 'easeInOut' }}
           className="mt-8 flex justify-center"
         >
           <Link

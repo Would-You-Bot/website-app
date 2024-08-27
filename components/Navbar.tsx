@@ -1,16 +1,16 @@
-"use client"
-import DiscordLoginButton from "@/components/DiscordLoginButton"
-import { useIdToken } from "@/helpers/hooks/useIdToken"
-import { IdTokenJWT } from "@/helpers/oauth/types"
-import { Crown } from "@/icons/Crown"
-import { useAnimationControls } from "framer-motion"
-import { LayoutDashboardIcon, Moon, Sun } from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
-import { useState } from "react"
-import UserDropdown from "./UserDropdown"
-import { useTheme } from "next-themes"
-import { Button } from "@/components/ui/button"
+'use client'
+import DiscordLoginButton from '@/components/DiscordLoginButton'
+import { LayoutDashboardIcon, Moon, Sun } from 'lucide-react'
+import { useIdToken } from '@/helpers/hooks/useIdToken'
+import { useAnimationControls } from 'framer-motion'
+import { IdTokenJWT } from '@/helpers/oauth/types'
+import { Button } from '@/components/ui/button'
+import UserDropdown from './UserDropdown'
+import { useTheme } from 'next-themes'
+import { Crown } from '@/icons/Crown'
+import { useState } from 'react'
+import Image from 'next/image'
+import Link from 'next/link'
 
 interface NavbarProps {
   idToken: IdTokenJWT | null
@@ -18,8 +18,8 @@ interface NavbarProps {
 
 const menuItems = [
   {
-    label: "Manage Subscription",
-    href: "/api/subs/manage",
+    label: 'Manage Subscription',
+    href: '/api/subs/manage',
     icon: LayoutDashboardIcon
   }
 ]
@@ -58,7 +58,7 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
           </Link>
         </div>
         <div
-          className={`absolute flex items-center justify-center gap-6 rounded-[10px] border-2 border-foreground/5 bg-background-light/90 backdrop-blur md:static ${isOpen ? "right-0 top-0 z-10 h-screen w-screen rounded-none" : "right-7 top-6 h-16 w-16 md:w-min"} transition-all duration-300`}
+          className={`absolute flex items-center justify-center gap-6 rounded-[10px] border-2 border-foreground/5 bg-background-light/90 backdrop-blur md:static ${isOpen ? 'right-0 top-0 z-10 h-screen w-screen rounded-none' : 'right-7 top-6 h-16 w-16 md:w-min'} transition-all duration-300`}
         >
           <div className="hidden w-max gap-6 px-6 lg:px-10 md:flex items-center">
             <Link
@@ -93,20 +93,25 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
             onClick={handleIsOpen}
           >
             <div
-              className={`h-[2px] w-[25px] rounded-[10px] bg-foreground ${isOpen ? "translate-y-[7px] rotate-45" : ""} transition-all duration-300`}
+              className={`h-[2px] w-[25px] rounded-[10px] bg-foreground ${isOpen ? 'translate-y-[7px] rotate-45' : ''} transition-all duration-300`}
             />
             <div
-              className={`h-[2px] w-[25px] rounded-[10px] bg-foreground ${isOpen ? "opacity-0" : ""} transition-all`}
+              className={`h-[2px] w-[25px] rounded-[10px] bg-foreground ${isOpen ? 'opacity-0' : ''} transition-all`}
             />
             <div
-              className={`h-[2px] w-[25px] rounded-[10px] bg-foreground ${isOpen ? "-translate-y-[7px] -rotate-45" : ""} transition-all duration-300`}
+              className={`h-[2px] w-[25px] rounded-[10px] bg-foreground ${isOpen ? '-translate-y-[7px] -rotate-45' : ''} transition-all duration-300`}
             />
           </button>
           <div
-            className={`mb-auto flex h-full w-full flex-col items-center justify-center gap-8 p-4 text-foreground md:hidden ${isOpen ? "pointer-events-auto opacity-100 transition-all delay-150 duration-300" : "pointer-events-none opacity-0"}`}
+            className={`mb-auto flex h-full w-full flex-col items-center justify-center gap-8 p-4 text-foreground md:hidden ${isOpen ? 'pointer-events-auto opacity-100 transition-all delay-150 duration-300' : 'pointer-events-none opacity-0'}`}
           >
-            <button className="flex items-center justify-center text-foreground/70 hover:text-foreground/90" onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
-              {theme === "light" ? <Moon className="w-6 h-6" /> : <Sun className="w-6 h-6" /> }
+            <button
+              className="flex items-center justify-center text-foreground/70 hover:text-foreground/90"
+              onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+            >
+              {theme === 'light' ?
+                <Moon className="w-6 h-6" />
+              : <Sun className="w-6 h-6" />}
             </button>
             <Link
               href="/commands"
@@ -147,8 +152,13 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
           </div>
         </div>
         <div className="hidden h-16 min-w-fit items-center justify-center md:flex gap-1 p-1 rounded-xl border-2 border-foreground/5 bg-background-light/90 backdrop-blur">
-          <button className="flex h-full w-auto aspect-square rounded-[8px] items-center justify-center text-foreground/70 hover:text-foreground/90 hover:bg-foreground/5 transition" onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
-            {theme === "light" ? <Moon className="w-6 h-6 sm:w-7 sm:h-7" /> : <Sun className="w-6 h-6 sm:w-7 sm:h-7" /> }
+          <button
+            className="flex h-full w-auto aspect-square rounded-[8px] items-center justify-center text-foreground/70 hover:text-foreground/90 hover:bg-foreground/5 transition"
+            onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
+          >
+            {theme === 'light' ?
+              <Moon className="w-6 h-6 sm:w-7 sm:h-7" />
+            : <Sun className="w-6 h-6 sm:w-7 sm:h-7" />}
           </button>
           {idToken ?
             <UserDropdown

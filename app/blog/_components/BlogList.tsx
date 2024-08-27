@@ -1,8 +1,8 @@
-"use server"
+'use server'
 
-import { getPosts } from "@/app/blog/_data"
-import Image from "next/image"
-import Link from "next/link"
+import { getPosts } from '@/app/blog/_data'
+import Image from 'next/image'
+import Link from 'next/link'
 
 export async function BlogList() {
   const posts = await getPosts()
@@ -10,7 +10,9 @@ export async function BlogList() {
   return (
     <>
       {posts.length === 0 && (
-        <p className="text-lg text-foreground/70">There are no blog posts yet.</p>
+        <p className="text-lg text-foreground/70">
+          There are no blog posts yet.
+        </p>
       )}
       {posts
         .sort((a, b) =>
@@ -20,7 +22,7 @@ export async function BlogList() {
         )
         .map((post) => (
           <Link
-            href={`/blog/${post.filePath.replace(/\.mdx?$/, "")}`}
+            href={`/blog/${post.filePath.replace(/\.mdx?$/, '')}`}
             key={post.filePath}
             className="relative flex flex-col items-start justify-between rounded-lg bg-foreground/5 p-4 text-foreground/70 transition-all duration-300 hover:bg-foreground/10 sm:flex-row"
           >

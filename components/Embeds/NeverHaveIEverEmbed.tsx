@@ -1,6 +1,4 @@
-"use client"
-import profiles from "@/data/profiles.json"
-import { getRandomQuestion } from "@/helpers/getRandomQuestion"
+'use client'
 import {
   DiscordActionRow,
   DiscordAttachments,
@@ -12,34 +10,39 @@ import {
   DiscordMessage,
   DiscordMessages,
   DiscordReply
-} from "@skyra/discord-components-react"
-import { useTheme } from "next-themes"
-import { FC, useState } from "react"
+} from '@skyra/discord-components-react'
+import { getRandomQuestion } from '@/helpers/getRandomQuestion'
+import profiles from '@/data/profiles.json'
+import { useTheme } from 'next-themes'
+import { FC, useState } from 'react'
 
 interface MainProps {
   initialQuestion: string
 }
 
-type MessageType = "vote" | "results" | null;
+type MessageType = 'vote' | 'results' | null
 
 const NeverHaveIEverEmbed: FC<MainProps> = ({ initialQuestion }) => {
-  const { theme } = useTheme();
-  const [haveDone, setHaveDone] = useState<boolean | null>(null);
-  const [messageType, setMessageType] = useState<MessageType>(null);
-  const [replayedRounds, setReplayedRounds] = useState(0);
-  const [currentQuestion, setCurrentQuestion] = useState(initialQuestion);
+  const { theme } = useTheme()
+  const [haveDone, setHaveDone] = useState<boolean | null>(null)
+  const [messageType, setMessageType] = useState<MessageType>(null)
+  const [replayedRounds, setReplayedRounds] = useState(0)
+  const [currentQuestion, setCurrentQuestion] = useState(initialQuestion)
 
   const replay = () => {
     if (replayedRounds < 3) {
-      setMessageType(null);
-      setHaveDone(null);
-      setCurrentQuestion(getRandomQuestion('nhie'));
-      setReplayedRounds(replayedRounds + 1);
+      setMessageType(null)
+      setHaveDone(null)
+      setCurrentQuestion(getRandomQuestion('nhie'))
+      setReplayedRounds(replayedRounds + 1)
     }
   }
 
   return (
-    <DiscordMessages lightTheme={theme === 'light' ? true : false} className="overflow-x-hidden rounded-lg text-left shadow">
+    <DiscordMessages
+      lightTheme={theme === 'light' ? true : false}
+      className="overflow-x-hidden rounded-lg text-left shadow"
+    >
       <DiscordMessage
         profile="wouldyou"
         author={profiles.wouldyou.author}
@@ -92,10 +95,13 @@ const NeverHaveIEverEmbed: FC<MainProps> = ({ initialQuestion }) => {
                 />
               </svg>
             </DiscordButton>
-            <DiscordButton type="primary"  onClick={() => {
-              setHaveDone(false);
-              setMessageType("vote");
-            }}>
+            <DiscordButton
+              type="primary"
+              onClick={() => {
+                setHaveDone(false)
+                setMessageType('vote')
+              }}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 36 36"
@@ -123,7 +129,7 @@ const NeverHaveIEverEmbed: FC<MainProps> = ({ initialQuestion }) => {
             : <DiscordButton
                 type="secondary"
                 onClick={() =>
-                  window.open("https://wouldyoubot.gg/invite", "_blank")
+                  window.open('https://wouldyoubot.gg/invite', '_blank')
                 }
                 emoji="/emojis/external.svg"
                 emojiName="external"
@@ -135,7 +141,7 @@ const NeverHaveIEverEmbed: FC<MainProps> = ({ initialQuestion }) => {
         </DiscordAttachments>
       </DiscordMessage>
       <DiscordMessage
-        className={messageType == "vote" ? "mb-2" : "hidden"}
+        className={messageType == 'vote' ? 'mb-2' : 'hidden'}
         profile="wouldyou"
         author={profiles.wouldyou.author}
         avatar={profiles.wouldyou.avatar}
@@ -157,12 +163,18 @@ const NeverHaveIEverEmbed: FC<MainProps> = ({ initialQuestion }) => {
           lightTheme={theme === 'light'}
           command={true}
         >
-          <p style={{ whiteSpace: "initial" }}>Click to see command</p>
+          <p style={{ whiteSpace: 'initial' }}>Click to see command</p>
         </DiscordReply>
-        <p>You&apos;ve voted that you <span className="font-bold">{haveDone ? "have" : "have not"} done it</span>.</p>
+        <p>
+          You&apos;ve voted that you{' '}
+          <span className="font-bold">
+            {haveDone ? 'have' : 'have not'} done it
+          </span>
+          .
+        </p>
       </DiscordMessage>
       <DiscordMessage
-        className={messageType == "results" ? "" : "hidden"}
+        className={messageType == 'results' ? '' : 'hidden'}
         profile="wouldyou"
         author={profiles.wouldyou.author}
         avatar={profiles.wouldyou.avatar}
@@ -183,16 +195,17 @@ const NeverHaveIEverEmbed: FC<MainProps> = ({ initialQuestion }) => {
           lightTheme={theme === 'light'}
           command={true}
         >
-          <p style={{ whiteSpace: "initial" }}>Click to see command</p>
+          <p style={{ whiteSpace: 'initial' }}>Click to see command</p>
         </DiscordReply>
         <DiscordEmbed
           slot="embeds"
-          color={haveDone ? "#0091ff" : "#f00404"}
-          image={haveDone == null 
-            ? "/nhie-chart-50-50.webp"
-            : haveDone
-              ? "/nhie-chart-100-have.webp"
-              : "/nhie-chart-100-not.webp"}
+          color={haveDone ? '#0091ff' : '#f00404'}
+          image={
+            haveDone == null ? '/nhie-chart-50-50.webp'
+            : haveDone ?
+              '/nhie-chart-100-have.webp'
+            : '/nhie-chart-100-not.webp'
+          }
         >
           <DiscordEmbedFooter
             slot="footer"
@@ -206,7 +219,7 @@ const NeverHaveIEverEmbed: FC<MainProps> = ({ initialQuestion }) => {
             <DiscordButton
               type="secondary"
               onClick={() =>
-                window.open("https://wouldyoubot.gg/invite", "_blank")
+                window.open('https://wouldyoubot.gg/invite', '_blank')
               }
               emoji="/emojis/external.svg"
               emojiName="external"

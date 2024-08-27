@@ -1,4 +1,4 @@
-import { JWT } from "oslo/jwt"
+import { JWT } from 'oslo/jwt'
 
 export type IdTokenData = {
   id: string
