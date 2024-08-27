@@ -96,7 +96,7 @@ export function HomeContent({
         id="slider"
         className="mt-36"
       >
-        <LandingWave className="text-background-darker dark:text-background-dark -mb-24" />
+        <LandingWave className="text-background-darker dark:text-background-dark -mb-32" />
         <div className="w-full bg-background-darker dark:bg-background-dark px-8 pb-12 text-center text-3xl md:text-4xl text-foreground md:-mt-20 md:pb-28">
           <div className='w-dvw px-8 mx-auto'>
             <h2>
