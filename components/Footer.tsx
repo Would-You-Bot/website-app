@@ -155,7 +155,7 @@ const Footer = async () => {
           </Link>{' '}
           &{' '}
           <Link
-            href="https://github.com/Would-You-Bot/website/graphs/contributors"
+            href="https://github.com/Would-You-Bot/website-app/graphs/contributors"
             target="_blank"
             className="text-foreground underline"
           >
