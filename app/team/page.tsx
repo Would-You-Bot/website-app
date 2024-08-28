@@ -18,7 +18,7 @@ export default function Team() {
       <Head>
         <title>Would You - Team</title>
       </Head>
-      <main className="">
+      <main className="flex flex-col items-center">
         <div className="flex mt-auto w-full max-w-8xl flex-col px-8">
           <h1 className="text-4xl font-bold text-foreground">
             <span className="text-brand-red-100 drop-shadow-red-glow">

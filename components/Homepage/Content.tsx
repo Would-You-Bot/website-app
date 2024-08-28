@@ -98,7 +98,7 @@ export function HomeContent({
       >
         <LandingWave className="text-background-darker dark:text-background-dark -mb-32" />
         <div className="w-full bg-background-darker dark:bg-background-dark px-8 pb-12 text-center text-3xl md:text-4xl text-foreground md:-mt-20 md:pb-28">
-          <div className='w-dvw px-8 mx-auto'>
+          <div className="w-dvw px-8 mx-auto">
             <h2>
               Trusted by{' '}
               <span className="bg-gradient-brand bg-clip-text font-bold text-transparent">
@@ -114,8 +114,7 @@ export function HomeContent({
               users entertained
             </h3>
           </div>
-          <div className='w-dvw mx-auto overflow-x-hidden'>
-
+          <div className="w-dvw mx-auto overflow-x-hidden">
             <ServerMarquee
               servers={servers.slice(0, Math.ceil(servers.length / 2))}
               speed={40}
@@ -126,7 +125,6 @@ export function HomeContent({
               direction="right"
             />
           </div>
-
         </div>
       </section>
 
