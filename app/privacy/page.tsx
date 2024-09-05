@@ -8,7 +8,7 @@ export default function Privacy() {
       </h1>
       <div>
         <h3 className="mb-4 text-lg font-bold text-foreground">
-          Last updated and effective March 08, 2024
+          Last updated and effective September 05, 2024
         </h3>
         <p>
           Thank you for choosing to be part of our community at Would
@@ -206,6 +206,24 @@ export default function Privacy() {
             className="text-foreground underline"
           >
             See the Plausible Analytics Data Policy.
+          </Link>
+        </p>
+
+        <h3 className="my-4 text-lg font-bold text-foreground">
+          Third-Party Advertising
+        </h3>
+        <p>
+          We may work with third-party advertisers (such as Google LLC) and partners to deliver ads
+          on our behalf. These third parties may collect information about your
+          online activities over time and across different websites. We do not
+          control the data practices of these third-party advertisers, and we
+          encourage you to review their privacy policies.{' '}
+          <Link
+            href="https://policies.google.com/privacy"
+            target={'_blank'}
+            className="text-foreground underline"
+          >
+            See the Google AdSense Privacy Policy.
           </Link>
         </p>
 
