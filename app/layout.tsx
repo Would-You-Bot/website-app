@@ -6,6 +6,7 @@ import { Inter } from 'next/font/google'
 import Alert from '@/components/Alert'
 import React from 'react'
 import './globals.css'
+import AdSense from '@/components/Homepage/AdSense'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -23,6 +24,7 @@ export default function RootLayout({
         data-domain="wouldyoubot.gg"
         src="https://stats.wouldyoubot.gg/js/script.js"
       ></script>
+      <AdSense pId={process.env.NEXT_PUBLIC_PUBLISHER_ID!} />
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"
