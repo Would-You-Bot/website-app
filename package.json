@@ -11,7 +11,8 @@
     "format": "prettier --write ./**/*.{ts,tsx}",
     "postbuild": "node sitemap.js && node rss.js",
     "docker:build": "docker compose build -t website-wy",
-    "docker:start": "docker compose up -d"
+    "docker:start": "docker compose up -d",
+    "create-page": "node scripts/createPage.js"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.0.4",

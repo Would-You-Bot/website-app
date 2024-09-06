@@ -1,3 +1,4 @@
+import AdSense from '@/components/Homepage/AdSense'
 import { getIdToken } from '@/helpers/oauth'
 import { ThemeProvider } from 'next-themes'
 import Footer from '@/components/Footer'
@@ -6,7 +7,6 @@ import { Inter } from 'next/font/google'
 import Alert from '@/components/Alert'
 import React from 'react'
 import './globals.css'
-import AdSense from '@/components/Homepage/AdSense'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -25,7 +25,10 @@ export default function RootLayout({
         src="https://stats.wouldyoubot.gg/js/script.js"
       ></script>
       <AdSense pId={process.env.NEXT_PUBLIC_PUBLISHER_ID!} />
-      <body className={inter.className}>
+      <body
+        className={inter.className}
+        suppressHydrationWarning
+      >
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -39,7 +42,7 @@ export default function RootLayout({
           >
             <b>Would You Bot</b> • Upgrade your server with Premium
           </Alert>
-          <div className="w-full relative">
+          <div className="w-full flex flex-col relative flex-1">
             <Navbar idToken={idToken} />
             {children}
             <Footer />

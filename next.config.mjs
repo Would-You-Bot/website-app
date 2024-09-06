@@ -69,6 +69,12 @@ const nextConfig = {
         hostname: 'cdn.wouldyoubot.gg',
         port: '',
         pathname: '/**'
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+        port: '',
+        pathname: '/**'
       }
     ]
   }
