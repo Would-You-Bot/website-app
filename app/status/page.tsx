@@ -1,26 +1,27 @@
 import { ClusterCardsList } from './_components/ClusterCardsList'
 import { ClusterStats } from './_interfaces'
+import Head from 'next/head'
 
 const Status = async () => {
-  // const cluster = await fetch(
-  //   process.env.API_URL!,
-  //   {
-  //     method: 'GET',
-  //     headers: {
-  //       Authorization: process.env.API_KEY!,
-  //     },
-  //     cache: 'no-cache',
-  //   },
-  // )
+   const cluster = await fetch(
+     process.env.API_URL!,
+     {
+       method: 'GET',
+       headers: {
+         Authorization: process.env.API_KEY!,
+       },
+       cache: 'no-cache',
+     },
+   )
 
-  // const clusterData = await cluster.json()
+   const clusterData = await cluster.json()
 
-  // // Formula to calculate the shardid from the guild id
-  // // shard_id = (guild_id >> 22) % num_shards
-  // // Might need to be moved to a simple api route to be used in the frontend
-  // const shardFromGuild = (guildId: string) => (parseInt(guildId) >> 22) % clusterData.flat().length
+   // Formula to calculate the shardid from the guild id
+   // shard_id = (guild_id >> 22) % num_shards
+   // Might need to be moved to a simple api route to be used in the frontend
+   const shardFromGuild = (guildId: string) => (parseInt(guildId) >> 22) % clusterData.flat().length
 
-  const clusterData: ClusterStats[] = [
+  const clusterData2: ClusterStats[] = [
     [
       {
         id: 0,
@@ -198,12 +199,19 @@ const Status = async () => {
   ]
 
   return (
-    <div className="p-8 min-h-screen max-w-8xl mx-auto">
-      <h1 className="text-3xl font-bold mb-6 text-center text-foreground">
-        Bot Clusters Status
-      </h1>
-      <ClusterCardsList data={clusterData} />
-    </div>
+    <>
+      <Head>
+        <title>Would You - Status</title>
+      </Head>
+      <main className="w-full mx-auto max-w-8xl px-8">
+        <h1 className="text-4xl font-bold text-brand-red-100 drop-shadow-red-glow">
+          Status
+        </h1>
+        <div className="mt-8 flex flex-col gap-4">
+          <ClusterCardsList data={clusterData} />
+        </div>
+      </main>
+    </>
   )
 }
 
