@@ -81,6 +81,11 @@ const config = {
         card: {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))'
+        },
+        status: {
+          green: 'hsl(var(--status-green))',
+          yellow: 'hsl(var(--status-yellow))',
+          red: 'hsl(var(--status-red))'
         }
       },
       borderRadius: {

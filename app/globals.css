@@ -41,6 +41,10 @@
     --radius: 0.5rem;
 
     --scrollbar: 0 0% 75%;
+
+    --status-green: 112 100% 35%;
+    --status-yellow: 29 100% 50%;
+    --status-red: 0 97% 40%;
   }
 
   .dark {
@@ -79,6 +83,10 @@
     --ring: 0 0% 83.1%;
 
     --scrollbar: 0 0% 25%;
+
+    --status-green: 112 100% 72%;
+    --status-yellow: 29 100% 60%;
+    --status-red: 0 97% 48%;
   }
 }
 
