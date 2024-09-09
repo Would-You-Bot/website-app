@@ -1,25 +1,30 @@
+import { ClusterCardsListSkeleton } from './_components/ClusterCardsListSkeleton'
 import { ClusterCardsList } from './_components/ClusterCardsList'
 import { ClusterStats } from './_interfaces'
-import Head from 'next/head'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Would You - Status'
+}
 
 const Status = async () => {
-   const cluster = await fetch(
-     process.env.API_URL!,
-     {
-       method: 'GET',
-       headers: {
-         Authorization: process.env.API_KEY!,
-       },
-       cache: 'no-cache',
-     },
-   )
+  //  const cluster = await fetch(
+  //    process.env.API_URL!,
+  //    {
+  //      method: 'GET',
+  //      headers: {
+  //        Authorization: process.env.API_KEY!,
+  //      },
+  //      cache: 'no-cache',
+  //    },
+  //  )
 
-   const clusterData = await cluster.json()
+  //  const clusterData = await cluster.json()
 
-   // Formula to calculate the shardid from the guild id
-   // shard_id = (guild_id >> 22) % num_shards
-   // Might need to be moved to a simple api route to be used in the frontend
-   const shardFromGuild = (guildId: string) => (parseInt(guildId) >> 22) % clusterData.flat().length
+  //  // Formula to calculate the shardid from the guild id
+  //  // shard_id = (guild_id >> 22) % num_shards
+  //  // Might need to be moved to a simple api route to be used in the frontend
+  //  const shardFromGuild = (guildId: string) => (parseInt(guildId) >> 22) % clusterData.flat().length
 
   const clusterData2: ClusterStats[] = [
     [
@@ -198,17 +203,25 @@ const Status = async () => {
     ]
   ]
 
+  const areSystemsDegraded = clusterData2.some((cluster) =>
+    cluster.some((shard) => shard.status !== 0)
+  )
+
   return (
     <>
-      <Head>
-        <title>Would You - Status</title>
-      </Head>
       <main className="w-full mx-auto max-w-8xl px-8">
         <h1 className="text-4xl font-bold text-brand-red-100 drop-shadow-red-glow">
           Status
         </h1>
+        {areSystemsDegraded && (
+          <span className="flex mt-8 py-4 px-6 rounded-2xl bg-status-yellow/25 border border-status-yellow/25 w-fit">
+            Some systems are degraded
+          </span>
+        )}
         <div className="mt-8 flex flex-col gap-4">
-          <ClusterCardsList data={clusterData} />
+          {clusterData2.length > 0 ?
+            <ClusterCardsList data={clusterData2} />
+          : <ClusterCardsListSkeleton />}
         </div>
       </main>
     </>
