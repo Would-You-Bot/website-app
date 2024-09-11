@@ -210,24 +210,6 @@ export default function Privacy() {
         </p>
 
         <h3 className="my-4 text-lg font-bold text-foreground">
-          Third-Party Advertising
-        </h3>
-        <p>
-          We may work with third-party advertisers (such as Google LLC) and partners to deliver ads
-          on our behalf. These third parties may collect information about your
-          online activities over time and across different websites. We do not
-          control the data practices of these third-party advertisers, and we
-          encourage you to review their privacy policies.{' '}
-          <Link
-            href="https://policies.google.com/privacy"
-            target={'_blank'}
-            className="text-foreground underline"
-          >
-            See the Google AdSense Privacy Policy.
-          </Link>
-        </p>
-
-        <h3 className="my-4 text-lg font-bold text-foreground">
           Information We Collect and How We Collect It
         </h3>
         <p>
