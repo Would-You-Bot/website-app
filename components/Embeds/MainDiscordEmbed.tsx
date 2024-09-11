@@ -11,7 +11,7 @@ import {
   DiscordMessages
 } from '@skyra/discord-components-react'
 import { getRandomQuestion } from '@/helpers/getRandomQuestion'
-import { motion } from 'framer-motion'
+import { LazyMotion, domAnimation, m } from 'framer-motion'
 import profiles from '@/data/profiles.json'
 import { useTheme } from 'next-themes'
 import { FC, useState } from 'react'
@@ -33,7 +33,8 @@ const MainDiscordEmbed: FC<MainProps> = ({ initialQuestion }) => {
   }
 
   return (
-     <motion.div
+    <LazyMotion features={domAnimation}>
+      <m.div
         initial={{ opacity: 0, transform: 'translateY(20px)' }}
         whileInView={{ opacity: 1, transform: 'translateY(0)' }}
         transition={{ duration: 0.7, ease: 'easeInOut' }}
@@ -150,7 +151,8 @@ const MainDiscordEmbed: FC<MainProps> = ({ initialQuestion }) => {
             </DiscordAttachments>
           </DiscordMessage>
         </DiscordMessages>
-      </motion.div>
+      </m.div>
+    </LazyMotion>
   )
 }
 export default MainDiscordEmbed

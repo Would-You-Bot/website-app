@@ -32,22 +32,11 @@ export const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
     const router = useRouter()
 
     const formatMemberCount = (count: number): string => {
-      const MILLION = 1_000_000;
-      const THOUSAND = 1_000;
-    
-      if (count >= MILLION) {
-        const millions = count / MILLION;
-        return `${millions.toFixed(1)}M`;
+      if (count >= 1000) {
+        return (count / 1000).toFixed(1) + 'k'
       }
-    
-      if (count >= THOUSAND) {
-        const thousands = count / THOUSAND;
-        return `${thousands.toFixed(1)}k`;
-      }
-    
-      return count.toString();
-    };
-    
+      return count.toString()
+    }
 
     const handleClick = () => {
       const element = document.getElementById('slider')
