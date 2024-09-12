@@ -42,6 +42,11 @@ const Footer = async () => {
       name: 'Vote',
       link: '/vote',
       EventTarget: '_blank'
+    },
+    {
+      name: 'Status',
+      link: '/status',
+      EventTarget: '_self'
     }
   ]
 

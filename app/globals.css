@@ -41,6 +41,10 @@
     --radius: 0.5rem;
 
     --scrollbar: 0 0% 75%;
+
+    --status-green: 112 100% 35%;
+    --status-yellow: 29 100% 50%;
+    --status-red: 0 97% 40%;
   }
 
   .dark {
@@ -79,6 +83,10 @@
     --ring: 0 0% 83.1%;
 
     --scrollbar: 0 0% 25%;
+
+    --status-green: 112 100% 72%;
+    --status-yellow: 29 100% 60%;
+    --status-red: 0 97% 48%;
   }
 }
 
@@ -148,4 +156,18 @@ body::-webkit-scrollbar-track {
 
 .discord-embed-footer {
   color: #999999;
+}
+
+.ring-pulse {
+  animation: 2s pulse infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0px hsl(var(--foreground) / 0.15);
+  }
+
+  100% {
+    box-shadow: 0 0 0 14px hsl(var(--secondary) / 0);
+  }
 }
