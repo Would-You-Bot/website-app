@@ -17,19 +17,6 @@ interface PageContentProps {
 }
 
 const PageContent = ({ clusterData }: PageContentProps) => {
-  //  const cluster = await fetch(
-  //    process.env.API_URL!,
-  //    {
-  //      method: 'GET',
-  //      headers: {
-  //        Authorization: process.env.API_KEY!,
-  //      },
-  //      cache: 'no-cache',
-  //    },
-  //  )
-
-  //  const clusterData = await cluster.json()
-
   const [guildId, setGuildId] = useState('')
   const [filteredClusterData, setFilteredClusterData] = useState(clusterData)
 
