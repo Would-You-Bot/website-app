@@ -14,76 +14,96 @@ interface ClusterCardProps {
 }
 
 export const ClusterCardsList = ({ data }: ClusterCardProps) => {
-  const isAnyShardDown = data.map((cluster) =>
-    cluster.some((shard) => shard.status !== Status.Ready)
-  )
+  // Flatten the cluster data to get all shards in a single array
+  const allShards = data.flat()
 
-  const areAllShardsDown = data.map((cluster) =>
-    cluster.every((shard) => shard.status === Status.Disconnected)
-  )
+  // Determine if any shard is selected
+  const isAnyShardSelected = allShards.some((shard) => shard.selected)
 
   return (
     <div className="flex flex-wrap gap-8 justify-center">
       <TooltipProvider delayDuration={0}>
-        {data.map((cluster, index) => {
-          return (
-            <div
-              key={index}
-              className="basis-[calc(33.333%-1.5rem)] min-w-[280px] sm:min-w-[420px] space-y-4 bg-foreground/10 dark:bg-black/25 rounded-2xl p-4 sm:p-6"
-            >
-              <div className="flex gap-3 items-center text-xl font-bold text-foregorund">
-                <span>Cluster {index}</span>
-                <span
-                  className={cn(
-                    'w-2.5 h-2.5 rounded-full',
-                    isAnyShardDown[index] ? 'bg-status-yellow'
-                    : areAllShardsDown[index] ? 'bg-status-red'
-                    : 'bg-status-green'
-                  )}
-                ></span>
-              </div>
-              <div
+        {data.map((cluster, clusterIndex) => (
+          <div
+            key={clusterIndex}
+            className="basis-[calc(33.333%-1.5rem)] min-w-[280px] sm:min-w-[435px] space-y-4 bg-foreground/10 dark:bg-black/25 rounded-xl sm:rounded-2xl p-4 sm:p-6"
+          >
+            <div className="flex gap-3 items-center text-xl font-bold text-foreground">
+              <span>Cluster {clusterIndex + 1}</span>
+              <span
                 className={cn(
-                  'flex flex-wrap gap-3 sm:gap-4',
-                  cluster.length > 5 && 'sm:justify-between'
+                  'w-2.5 h-2.5 rounded-full',
+                  cluster.some((shard) => shard.status !== Status.Ready) ?
+                    'bg-status-yellow'
+                  : (
+                    cluster.every(
+                      (shard) => shard.status === Status.Disconnected
+                    )
+                  ) ?
+                    'bg-status-red'
+                  : 'bg-status-green'
                 )}
-              >
-                {cluster.map((shard, index) => (
-                  <Tooltip key={index}>
-                    <TooltipTrigger>
-                      <div
-                        className={cn(
-                          'w-10 h-10 sm:w-16 sm:h-16 bg-foreground/5 rounded-2xl flex items-center justify-center',
-                          shard.status === Status.Ready ?
-                            'text-status-green sm:hover:bg-status-green/25 sm:hover:text-foreground'
-                          : shard.status === Status.Disconnected ?
-                            'text-status-red sm:hover:bg-status-red/25 sm:hover:text-foreground'
-                          : 'text-status-yellow sm:hover:bg-status-yellow/25 sm:hover:text-foreground'
-                        )}
-                      >
-                        {index}
-                      </div>
-                    </TooltipTrigger>
-                    <TooltipContent className="border-0 rounded-xl px-4 py-2 hidden sm:flex">
-                      <div className="flex gap-3 text-sm sm:text-base">
-                        <div className="flex flex-col items-start gap-1 text-foreground/50">
-                          <span>Shard</span>
-                          <span>Status</span>
-                          <span>Ping</span>
-                        </div>
-                        <div className="flex flex-col items-start gap-1 text-foreground">
-                          <span>{shard.id}</span>
-                          <span>{Status[shard.status]}</span>
-                          <span>{shard.ping}ms</span>
-                        </div>
-                      </div>
-                    </TooltipContent>
-                  </Tooltip>
-                ))}
-              </div>
+              ></span>
             </div>
-          )
-        })}
+            <div
+              className={cn(
+                'flex flex-wrap gap-3 sm:gap-4',
+                cluster.length > 5 && 'sm:justify-between'
+              )}
+            >
+              {cluster.map((shard, index) => (
+                <Tooltip key={shard.id}>
+                  <TooltipTrigger
+                    className={
+                      isAnyShardSelected && !shard.selected ?
+                        'pointer-events-none'
+                      : undefined
+                    }
+                  >
+                    <div
+                      className={cn(
+                        'w-10 h-10 sm:w-16 sm:h-16 bg-foreground/5 rounded-xl sm:rounded-2xl flex items-center justify-center',
+                        shard.status === Status.Ready ?
+                          'text-status-green sm:hover:bg-status-green/25 sm:hover:text-foreground'
+                        : shard.status === Status.Disconnected ?
+                          'text-status-red sm:hover:bg-status-red/25 sm:hover:text-foreground'
+                        : 'text-status-yellow sm:hover:bg-status-yellow/25 sm:hover:text-foreground',
+                        shard.selected && 'ring-pulse', // Apply ring-pulse to the selected shard
+                        isAnyShardSelected &&
+                          !shard.selected &&
+                          'opacity-50 !text-foreground/50' // Apply global styles if any shard is selected
+                      )}
+                    >
+                      {index + 1}
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent className="border-0 rounded-xl px-4 py-2 hidden sm:flex">
+                    <div className="flex gap-3 text-sm sm:text-base">
+                      <div className="flex flex-col items-start gap-1 text-foreground/50">
+                        <span>Shard</span>
+                        <span>Status</span>
+                        <span>Ping</span>
+                      </div>
+                      <div className="flex flex-col items-start gap-1 text-foreground">
+                        <span>{shard.id + 1}</span>
+                        <span>{Status[shard.status]}</span>
+                        <span
+                          className={cn(
+                            shard.ping < 500 ?
+                              'text-status-green'
+                            : 'text-status-yellow'
+                          )}
+                        >
+                          {shard.ping}ms
+                        </span>
+                      </div>
+                    </div>
+                  </TooltipContent>
+                </Tooltip>
+              ))}
+            </div>
+          </div>
+        ))}
       </TooltipProvider>
     </div>
   )

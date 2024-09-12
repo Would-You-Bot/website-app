@@ -4,6 +4,7 @@ export interface ShardStats {
   ping: number
   guilds: number
   members: number
+  selected?: boolean
 }
 
 export interface ClusterStats extends Array<ShardStats> {}

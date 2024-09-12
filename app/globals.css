@@ -157,3 +157,17 @@ body::-webkit-scrollbar-track {
 .discord-embed-footer {
   color: #999999;
 }
+
+.ring-pulse {
+  animation: 2s pulse infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0px hsl(var(--foreground) / 0.15);
+  }
+
+  100% {
+    box-shadow: 0 0 0 14px hsl(var(--secondary) / 0);
+  }
+}
