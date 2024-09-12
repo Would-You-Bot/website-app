@@ -26,7 +26,7 @@ export const ClusterCardsList = ({ data }: ClusterCardProps) => {
         {data.map((cluster, clusterIndex) => (
           <div
             key={clusterIndex}
-            className="basis-[calc(33.333%-1.5rem)] min-w-[280px] sm:min-w-[435px] space-y-4 bg-foreground/10 dark:bg-black/25 rounded-xl sm:rounded-2xl p-4 sm:p-6"
+            className="basis-[calc(33.333%-1.5rem)] min-w-[280px] xs:min-w-[360px] sm:min-w-[435px] space-y-4 bg-foreground/10 dark:bg-black/25 rounded-xl sm:rounded-2xl p-4 sm:p-6"
           >
             <div className="flex gap-3 items-center text-xl font-bold text-foreground">
               <span>Cluster {clusterIndex + 1}</span>
@@ -47,7 +47,7 @@ export const ClusterCardsList = ({ data }: ClusterCardProps) => {
             </div>
             <div
               className={cn(
-                'flex flex-wrap gap-3 sm:gap-4',
+                'flex flex-wrap gap-2 xs:gap-3 sm:gap-4',
                 cluster.length > 5 && 'sm:justify-between'
               )}
             >
@@ -62,7 +62,7 @@ export const ClusterCardsList = ({ data }: ClusterCardProps) => {
                   >
                     <div
                       className={cn(
-                        'w-10 h-10 sm:w-16 sm:h-16 bg-foreground/5 rounded-xl sm:rounded-2xl flex items-center justify-center',
+                        'w-[43px] h-[43px] xs:w-14 xs:h-14 sm:w-16 sm:h-16 bg-foreground/5 rounded-lg xs:rounded-xl  sm:rounded-2xl flex items-center justify-center',
                         shard.status === Status.Ready ?
                           'text-status-green sm:hover:bg-status-green/25 sm:hover:text-foreground'
                         : shard.status === Status.Disconnected ?
@@ -89,9 +89,9 @@ export const ClusterCardsList = ({ data }: ClusterCardProps) => {
                         <span>{Status[shard.status]}</span>
                         <span
                           className={cn(
-                            shard.ping < 500 ?
-                              'text-status-green'
-                            : 'text-status-yellow'
+                            shard.ping > 0 ? 'text-status-green'
+                            : shard.ping > 500 ? 'text-status-yellow'
+                            : 'text-status-red'
                           )}
                         >
                           {shard.ping}ms

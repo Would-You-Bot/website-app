@@ -37,7 +37,7 @@ export default function RootLayout({
           >
             <b>Would You Bot</b> • Upgrade your server with Premium
           </Alert>
-          <div className="w-full relative">
+          <div className="w-full relative min-h-dvh flex flex-col">
             <Navbar idToken={idToken} />
             {children}
             <Footer />
