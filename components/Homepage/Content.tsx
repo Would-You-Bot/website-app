@@ -5,6 +5,7 @@ import DailyMessageEmbed from '@/components/Embeds/DailyMessageEmbed'
 import HigherLowerEmbed from '@/components/Embeds/HigherLowerEmbed'
 import MainDiscordEmbed from '@/components/Embeds/MainDiscordEmbed'
 import { AvatarGroup } from '../avatar-group'
+import { domAnimation, LazyMotion, m } from 'framer-motion'
 import ServerMarquee from '@/components/ServerMarquee'
 import FeatureItem from '@/components/FeatureItem'
 import { LandingWave } from '../LandingWave'
@@ -34,9 +35,15 @@ export function HomeContent({
   ].join('/')} - Daily Message`
 
   return (
-    <>
+    <LazyMotion features={domAnimation}>
       <section className="mt-0 sm:mt-16 lg:mt-28 flex w-full max-w-8xl flex-col items-center justify-between gap-16 px-8 text-center lg:flex-row lg:text-left">
-        <div className="flex flex-col items-center lg:block">
+        <m.div
+          initial={{ opacity: 0, transform: 'translateY(20px)' }}
+          whileInView={{ opacity: 1, transform: 'translateY(0)' }}
+          transition={{ duration: 0.7, ease: 'easeInOut' }}
+          viewport={{ once: true }}
+          className="flex flex-col items-center lg:block"
+        >
           <h1 className="text-[2rem] sm:text-5xl md:text-6xl font-bold leading-normal mb-8">
             Entertain Your
             <br />
@@ -81,7 +88,7 @@ export function HomeContent({
               </svg>
             </Button>
           </Link>
-        </div>
+        </m.div>
         <MainDiscordEmbed initialQuestion={initialRatherQuestion} />
       </section>
 
@@ -122,14 +129,20 @@ export function HomeContent({
       </section>
 
       <section className="mt-20 flex w-full max-w-8xl flex-col items-center gap-20 px-8 text-foreground">
-        <div className="flex flex-col items-center">
+        <m.div
+          initial={{ opacity: 0, transform: 'translateY(15px)' }}
+          whileInView={{ opacity: 1, transform: 'translateY(0)' }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: 'easeInOut' }}
+          className="flex flex-col items-center"
+        >
           <h2 className="bg-gradient-brand bg-clip-text text-6xl font-bold text-transparent">
             Features
           </h2>
           <h3 className="mt-4 text-center text-2xl">
             What Does Would You Offer To Your Server?
           </h3>
-        </div>
+        </m.div>
 
         <FeatureItem
           reverse
@@ -181,24 +194,42 @@ export function HomeContent({
       </section>
 
       <section className="mt-36 w-full bg-hover-light px-9 py-12">
-        <h2 className="text-center text-5xl font-bold leading-normal text-foreground">
+        <m.h2
+          initial={{ opacity: 0, transform: 'translateY(10px)' }}
+          whileInView={{ opacity: 1, transform: 'translateY(0)' }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.65, ease: 'easeInOut' }}
+          className="text-center text-5xl font-bold leading-normal text-foreground"
+        >
           Keep Your Server Active with{' '}
           <span className="bg-gradient-brand bg-clip-text font-bold text-transparent">
             Would You
           </span>
-        </h2>
-        <h3 className="mt-4 text-center text-xl text-foreground/70">
+        </m.h2>
+        <m.h3
+          initial={{ opacity: 0, transform: 'translateY(10px)' }}
+          whileInView={{ opacity: 1, transform: 'translateY(0)' }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.65, ease: 'easeInOut' }}
+          className="mt-4 text-center text-xl text-foreground/70"
+        >
           Invite To Your Server Now!
-        </h3>
-        <div className="mt-8 flex justify-center">
+        </m.h3>
+        <m.div
+          initial={{ opacity: 0, transform: 'translateY(-20px)' }}
+          whileInView={{ opacity: 1, transform: 'translateY(0)' }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.65, ease: 'easeInOut' }}
+          className="mt-8 flex justify-center"
+        >
           <Link
             href="/invite"
             target="_blank"
           >
             <Button>Invite</Button>
           </Link>
-        </div>
+        </m.div>
       </section>
-    </>
+    </LazyMotion>
   )
 }
