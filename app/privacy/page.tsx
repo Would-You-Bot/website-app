@@ -8,7 +8,7 @@ export default function Privacy() {
       </h1>
       <div>
         <h3 className="mb-4 text-lg font-bold text-foreground">
-          Last updated and effective September 05, 2024
+          Last updated and effective September 15, 2024
         </h3>
         <p>
           Thank you for choosing to be part of our community at Would
@@ -206,6 +206,22 @@ export default function Privacy() {
             className="text-foreground underline"
           >
             See the Plausible Analytics Data Policy.
+          </Link>
+        </p>
+
+        <h3 className="my-4 text-lg font-bold text-foreground">
+          Services Provided by Others
+        </h3>
+        <p>
+          Our website uses Hackerone to help us receive security reports to
+          ensure ours users and their data is safe. No user data is shared with
+          Hackerone.{' '}
+          <Link
+            href="https://www.hackerone.com/privacy"
+            target={'_blank'}
+            className="text-foreground underline"
+          >
+            See the Hackerone Privacy Policy.
           </Link>
         </p>
 
