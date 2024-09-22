@@ -32,10 +32,13 @@ export const AvatarGroup = React.forwardRef<HTMLDivElement, AvatarGroupProps>(
     const router = useRouter()
 
     const formatMemberCount = (count: number): string => {
-      if (count >= 1000) {
-        return (count / 1000).toFixed(1) + 'k'
+      if (count >= 1000000) {
+        return (count / 1000000).toFixed(1) + 'M';
       }
-      return count.toString()
+      if (count >= 1000) {
+        return (count / 1000).toFixed(1) + 'k';
+      }
+      return count.toString();
     }
 
     const handleClick = () => {

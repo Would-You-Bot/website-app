@@ -61,7 +61,7 @@ export function HomeContent({
             <span className="hidden">tempus voicus</span>
           </p>
           <div className="flex flex-col lg:flex-row mt-8 items-center gap-4">
-            <AvatarGroup avatars={servers.slice(0, 5)} />
+            <AvatarGroup avatars={servers.reverse().slice(0, 5)} />
             <span className="text-foreground/50">
               Trusted by your favorite servers!
             </span>
