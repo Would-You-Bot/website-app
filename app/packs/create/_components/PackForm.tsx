@@ -18,23 +18,41 @@ import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import { z } from 'zod'
 
-enum PackType {
-  type1 = 'would you rather',
-  type2 = 'never have i ever',
-  type3 = 'what would you do'
-}
+type PackType =
+  | 'wouldyourather'
+  | 'neverhaveiever'
+  | 'wwyd'
+  | 'truth'
+  | 'dare'
+  | 'topic'
+  | 'mixed'
 
 const packTypes = [
-  { value: 'would you rather', label: 'Would you rather', id: 'ab' },
-  { value: 'never have i ever', label: 'Never have i ever', id: 'cd' },
-  { value: 'what would you do', label: 'What would you do', id: 'ef' }
+  { value: 'wouldyourather', label: 'Would you rather', id: 'ab' },
+  { value: 'neverhaveiever', label: 'Never have I ever', id: 'cd' },
+  { value: 'wwyd', label: 'What would you do', id: 'ef' },
+  { value: 'truth', label: 'Truth', id: 'gh' },
+  { value: 'dare', label: 'Dare', id: 'ij' },
+  { value: 'topic', label: 'Truth', id: 'kl' },
+  { value: 'mixed', label: 'Mixed', id: 'mn' },
 ]
 
 const PackSchema = z.object({
-  type: z.enum(['would you rather', 'never have i ever', 'what would you do'], {
-    required_error: 'Please select a pack type'
-  }),
-  name: z.string().min(4, 'please give your pack a name').max(100),
+  type: z.enum(
+    [
+      'wouldyourather',
+      'neverhaveiever',
+      'wwyd',
+      'truth',
+      'dare',
+      'topic',
+      'mixed'
+    ],
+    {
+      required_error: 'Please select a pack type'
+    }
+  ),
+  name: z.string().min(4, 'Please give your pack a name').max(100),
   description: z.string().min(3).max(500),
   tags: z.array(z.string()).min(1, 'At least one tag is required').max(10),
   questions: z
@@ -94,8 +112,8 @@ function PackForm() {
     }
   }
 
-  const handleTypeChange = (value: string) => {
-    setValue('type', value as PackType)
+  const handleTypeChange = (value: PackType) => {
+    setValue('type', value)
     clearErrors('type')
   }
 
@@ -113,12 +131,8 @@ function PackForm() {
     //  for now log the data and show a toast for dev purposes
     console.log(data)
     toast({
-      title: 'You submitted the following values:',
-      description: (
-        <pre className="mt-2 w-[340px] rounded-md bg-slate-950 p-4">
-          <code className="text-white">{JSON.stringify(data, null, 2)}</code>
-        </pre>
-      )
+      title: 'Success!',
+      description: 'Successfully submitted your question pack!'
     })
   }
 
@@ -147,7 +161,7 @@ function PackForm() {
                       <SelectItem
                         key={type.id}
                         value={type.value}
-                        className='text-foreground'
+                        className="text-foreground"
                       >
                         {type.label}
                       </SelectItem>
@@ -205,7 +219,7 @@ function PackForm() {
                     <span
                       key={tag}
                       onClick={() => deleteTag(tag)}
-                      className="inline-block px-2 py-1 mr-1 text-xs bg-blue-500 rounded-full text-white cursor-pointer"
+                      className="inline-block px-2 py-1 mr-1 text-xs bg-secondary rounded-lg text-white cursor-pointer"
                     >
                       {tag}
                     </span>
@@ -220,7 +234,7 @@ function PackForm() {
               <Button
                 type="button"
                 onClick={validateBeforeMoving}
-                className="rounded-full w-fit py-2 px-4 bg-brand-blue-100 hover:bg-brand-blue-200 text-white"
+                className="rounded-lg w-fit py-2 px-4 bg-brand-blue-100 hover:bg-brand-blue-200 text-white"
                 size="sm"
               >
                 Next
@@ -232,7 +246,7 @@ function PackForm() {
                 <div className="flex flex-col items-center justify-center gap-2">
                   <span className="text-sm">Pack Questions</span>
                   <Button
-                    className="rounded-full w-fit py-2 px-4"
+                    className="rounded-lg w-fit py-2 px-4"
                     size="sm"
                     variant="secondary"
                     type="button"
@@ -243,7 +257,7 @@ function PackForm() {
                 <div className="flex flex-col gap-2 justify-center">
                   <span className="text-sm">Submit Packs</span>
                   <Button
-                    className="rounded-full w-fit py-2 px-4 bg-brand-blue-100 hover:bg-brand-blue-200 text-white"
+                    className="rounded-lg w-fit py-2 px-4 bg-brand-blue-100 hover:bg-brand-blue-200 text-white"
                     size="sm"
                     type="submit"
                   >
@@ -259,11 +273,11 @@ function PackForm() {
               <div className="border rounded-xl overflow-hidden divide-y">
                 <div className="dark:bg-[#1D1D1D] bg-background-light flex justify-between px-4 py-2 gap-4">
                   <div className="flex items-center gap-4">
-                    <p className="block w-fit">Question</p>
+                    <p className="block w-fit">Questions</p>
                     <div className="relative">
                       <Search className="size-4 absolute left-2 bottom-3 dark:text-[#666666]" />
                       <Input
-                        placeholder="Search Questions"
+                        placeholder="Search for a Question"
                         className="md:w-[441px] pl-8 focus:ring-0"
                       />
                     </div>
@@ -300,6 +314,7 @@ function PackForm() {
                 ))}
               </div>
             </section>
+
         }
       </form>
     </div>

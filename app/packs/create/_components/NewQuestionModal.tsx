@@ -43,13 +43,14 @@ function NewQuestionModal({ control }: { control: Control<PackData> }) {
           variant={'ghost'}
           type="button"
         >
-          <Plus className='text-muted-foreground size-4' />
+          <Plus className="text-muted-foreground size-4" />
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="lg:text-2xl xl:text-3xl">
-            New Question
+            Add a{' '}<span className="text-brand-red-100">New</span>{' '}
+            <span className="text-brand-blue-100">Question</span>!
           </DialogTitle>
           <DialogDescription className="sr-only">
             Add a new question to your pack
@@ -75,7 +76,7 @@ function NewQuestionModal({ control }: { control: Control<PackData> }) {
           <DialogClose asChild>
             <Button
               type="button"
-              className="rounded-full w-fit py-2 px-4"
+              className="rounded-lg w-fit py-2 px-4"
               size="sm"
               variant="secondary"
             >
@@ -83,7 +84,7 @@ function NewQuestionModal({ control }: { control: Control<PackData> }) {
             </Button>
           </DialogClose>
           <Button
-            className="rounded-full w-fit py-2 px-4 bg-brand-blue-100 hover:bg-brand-blue-200 text-white"
+            className="rounded-lg w-fit py-2 px-4 bg-brand-blue-100 hover:bg-brand-blue-200 text-white"
             size="sm"
             type="submit"
             onClick={addQuestion}

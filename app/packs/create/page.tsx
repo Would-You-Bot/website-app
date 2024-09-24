@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: 'Create question packs for your server'
 }
 
-function Page() {
+function Create() {
   return (
     <Container className="pt-8 lg:pt-10 space-y-8">
       <h1 className="space-x-2 text-xl lg:text-2xl font-bold xl:text-4xl">
@@ -19,4 +19,4 @@ function Page() {
   )
 }
 
-export default Page
+export default Create
