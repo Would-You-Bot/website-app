@@ -28,9 +28,9 @@ type PackType =
   | 'mixed'
 
 const packTypes = [
-  { value: 'wouldyourather', label: 'Would you rather', id: 'ab' },
-  { value: 'neverhaveiever', label: 'Never have I ever', id: 'cd' },
-  { value: 'wwyd', label: 'What would you do', id: 'ef' },
+  { value: 'wouldyourather', label: 'Would You Rather', id: 'ab' },
+  { value: 'neverhaveiever', label: 'Never Have I Ever', id: 'cd' },
+  { value: 'wwyd', label: 'What Would You Do', id: 'ef' },
   { value: 'truth', label: 'Truth', id: 'gh' },
   { value: 'dare', label: 'Dare', id: 'ij' },
   { value: 'topic', label: 'Truth', id: 'kl' },
