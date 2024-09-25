@@ -92,7 +92,7 @@
 
 @layer base {
   * {
-    @apply border-border;
+    @apply rounded border-border ring-offset-background focus:outline-none focus-visible:outline-none focus-visible:outline-transparent focus-visible:ring-2 focus-visible:ring-brand-customPrimaryLight;
   }
   body {
     @apply scroll-smooth bg-background text-foreground;
