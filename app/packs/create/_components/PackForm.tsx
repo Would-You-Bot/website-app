@@ -7,13 +7,14 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select'
+import { ArrowLeft, Pen, Search, Trash2, XCircle } from 'lucide-react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Textarea } from '@/components/ui/textarea'
-import { Pen, Search, Trash2 } from 'lucide-react'
 import { toast } from '@/components/ui/use-toast'
 import NewQuestionModal from './NewQuestionModal'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { useRouter } from 'next/navigation'
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import { z } from 'zod'
@@ -34,7 +35,7 @@ const packTypes = [
   { value: 'truth', label: 'Truth', id: 'gh' },
   { value: 'dare', label: 'Dare', id: 'ij' },
   { value: 'topic', label: 'Truth', id: 'kl' },
-  { value: 'mixed', label: 'Mixed', id: 'mn' },
+  { value: 'mixed', label: 'Mixed', id: 'mn' }
 ]
 
 const PackSchema = z.object({
@@ -49,7 +50,8 @@ const PackSchema = z.object({
       'mixed'
     ],
     {
-      required_error: 'Please select a pack type'
+      required_error: 'Please select a pack type',
+      message: 'Please select a pack type'
     }
   ),
   name: z.string().min(4, 'Please give your pack a name').max(100),
@@ -63,6 +65,12 @@ const PackSchema = z.object({
 export type PackData = z.infer<typeof PackSchema>
 
 function PackForm() {
+  const localPackValues = localStorage.getItem('PACKVALUES')
+  const defaultValues: PackData =
+    localPackValues ?
+      JSON.parse(localPackValues)
+    : { type: '', name: '', description: '', tags: [], questions: [] }
+
   const {
     register,
     handleSubmit,
@@ -74,10 +82,11 @@ function PackForm() {
     formState: { errors, isLoading }
   } = useForm<PackData>({
     resolver: zodResolver(PackSchema),
-    defaultValues: { tags: [], questions: [] }
+    defaultValues: { ...defaultValues }
   })
   const [tagInputValue, setTagInputValue] = useState('')
   const [step, setStep] = useState(1)
+  const router = useRouter()
   //   we could use url params to determine the step
   //   for now i think this works
 
@@ -119,8 +128,18 @@ function PackForm() {
 
   const validateBeforeMoving = () => {
     const { type, name, description, tags } = watch()
-    if (type && name && description && tags) {
+    if (type && name && description && tags.length) {
       setStep(2)
+      localStorage.setItem(
+        'PACKVALUES',
+        JSON.stringify({
+          type,
+          name,
+          description,
+          tags,
+          questions: defaultValues.questions ?? []
+        })
+      )
     } else {
       trigger(['type', 'name', 'description', 'tags'])
     }
@@ -130,16 +149,25 @@ function PackForm() {
     //  not sure what to do here
     //  for now log the data and show a toast for dev purposes
     console.log(data)
+    localStorage.removeItem('PACKVALUES')
     toast({
       title: 'Success!',
       description: 'Successfully submitted your question pack!'
     })
+
+    router.push('/packs')
   }
 
   const deleteQuestion = (Qindex: number) => {
-    setValue(
-      'questions',
-      addedQuestions.filter((_, index) => index !== Qindex)
+    const updatedQuestions = addedQuestions.filter(
+      (_, index) => index !== Qindex
+    )
+
+    setValue('questions', updatedQuestions)
+
+    localStorage.setItem(
+      'PACKVALUES',
+      JSON.stringify({ ...defaultValues, questions: updatedQuestions })
     )
   }
 
@@ -161,6 +189,7 @@ function PackForm() {
                       <SelectItem
                         key={type.id}
                         value={type.value}
+                        defaultChecked={type.value === defaultValues.type}
                         className="text-foreground"
                       >
                         {type.label}
@@ -214,15 +243,19 @@ function PackForm() {
                   onKeyDown={handleKeyDown}
                   disabled={selectedTags.length >= 10}
                 />
-                <div>
+                <div className="flex gap-2 items-center">
                   {selectedTags.map((tag) => (
-                    <span
+                    <button
+                      type="button"
                       key={tag}
                       onClick={() => deleteTag(tag)}
-                      className="inline-block px-2 py-1 mr-1 text-xs bg-secondary rounded-lg text-white cursor-pointer"
+                      className="flex items-center gap-1 px-2 py-1 mr-1 text-xs rounded-lg dark:bg-[#1D1D1D] bg-background-light cursor-pointer"
                     >
+                      <span>
+                        <XCircle size={14} />
+                      </span>
                       {tag}
-                    </span>
+                    </button>
                   ))}
                 </div>
                 {errors.tags && (
@@ -243,6 +276,16 @@ function PackForm() {
             //  second step adding questions to the pack
           : <section className="space-y-8  min-h-[calc(100vh-160px)]">
               <div className="flex items-center gap-6 lg:gap-10">
+                <Button
+                  className="rounded-lg w-fit py-2 px-4 flex gap-2 self-end"
+                  size="sm"
+                  variant="secondary"
+                  type="button"
+                  onClick={() => setStep(1)}
+                >
+                  <ArrowLeft className="size-4" />
+                  Back
+                </Button>
                 <div className="flex flex-col items-center justify-center gap-2">
                   <span className="text-sm">Pack Questions</span>
                   <Button

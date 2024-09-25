@@ -29,10 +29,17 @@ function NewQuestionModal({ control }: { control: Control<PackData> }) {
 
   const addQuestion = () => {
     const question = questionValue.trim()
-    if (!question) return
+    const localPackValues = localStorage.getItem('PACKVALUES')
 
+    if (!question) return
     onChange([...value, question])
     setQuestionValue('')
+
+    if (localPackValues) {
+      const packValues:PackData = JSON.parse(localPackValues)
+      const newLocalPackValues = {...packValues, questions: [...packValues.questions, question]}
+      localStorage.setItem('PACKVALUES', JSON.stringify(newLocalPackValues))
+    }
   }
 
   return (
