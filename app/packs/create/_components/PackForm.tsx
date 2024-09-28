@@ -106,9 +106,13 @@ function PackForm() {
   }
 
   const deleteTag = (tagToDelete: string) => {
-    setValue(
-      'tags',
-      selectedTags.filter((tag: string) => tag !== tagToDelete)
+    const updatedTags = selectedTags.filter((tag) => tag !== tagToDelete)
+
+    setValue('tags', updatedTags)
+
+    localStorage.setItem(
+      'PACKVALUES',
+      JSON.stringify({ ...defaultValues, tags: updatedTags })
     )
   }
 
@@ -328,33 +332,35 @@ function PackForm() {
                   {/* this can be repurposed for editing questions as well */}
                   <NewQuestionModal control={control} />
                 </div>
-                {addedQuestions.map((question: string, index) => (
-                  <div
-                    key={`${question}-${index}`}
-                    className="flex justify-between px-4 py-2 items-center"
-                  >
-                    <p className="line-clamp-1 lg:text-lg">{question}</p>
-                    <div className="flex items-center gap-4">
-                      <Button
-                        size={'icon'}
-                        variant={'ghost'}
-                        type="button"
-                        className="hover:text-brand-blue-100"
-                      >
-                        <Pen className="size-4" />
-                      </Button>
-                      <Button
-                        size={'icon'}
-                        variant={'ghost'}
-                        onClick={() => deleteQuestion(index)}
-                        type="button"
-                        className="hover:text-brand-red-100"
-                      >
-                        <Trash2 className="size-4" />
-                      </Button>
-                    </div>
-                  </div>
-                ))}
+                <ul className="divide-y max-h-[700px] overflow-y-auto">
+                  {addedQuestions.map((question: string, index) => (
+                    <li
+                      key={`${question}-${index}`}
+                      className="flex justify-between px-4 py-2 items-center"
+                    >
+                      <p className="line-clamp-1 lg:text-lg">{question}</p>
+                      <div className="flex items-center gap-4">
+                        <Button
+                          size={'icon'}
+                          variant={'ghost'}
+                          type="button"
+                          className="hover:text-brand-blue-100"
+                        >
+                          <Pen className="size-4" />
+                        </Button>
+                        <Button
+                          size={'icon'}
+                          variant={'ghost'}
+                          onClick={() => deleteQuestion(index)}
+                          type="button"
+                          className="hover:text-brand-red-100"
+                        >
+                          <Trash2 className="size-4" />
+                        </Button>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </section>
 
