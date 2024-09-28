@@ -171,3 +171,13 @@ body::-webkit-scrollbar-track {
     box-shadow: 0 0 0 14px hsl(var(--secondary) / 0);
   }
 }
+
+@layer components {
+  .popular-pack {
+    border-style: solid;
+    border-image: linear-gradient(to right, #a855f7, #ec4899) 1;
+  }
+  /* seems border image doesnt adhere to the border radius might have to use another method  */
+  /* box shadows */
+  /* or some other element */
+}
