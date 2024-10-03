@@ -29,8 +29,6 @@ function Filter() {
   const searchParams = useSearchParams()
   const t = searchParams.get('t')
 
-  const filterBy = (type: string) => {}
-
   function selectType(type: string) {
     const params = new URLSearchParams(searchParams.toString())
     params.set('t', type)
@@ -45,7 +43,7 @@ function Filter() {
 
   return (
     <section className="flex flex-col gap-3">
-      <div className="flex flex-col gap-6 lg:flex-row">
+      <div className="flex flex-col gap-4 lg:gap-6 lg:flex-row">
         <div className="relative w-full">
           <label
             htmlFor="search"
@@ -53,23 +51,23 @@ function Filter() {
           >
             Search for a pack
           </label>
-          <Search className="size-4 absolute left-4 bottom-3 dark:text-[#666666]" />
+          <Search className="size-4 absolute left-4 bottom-3 lg:bottom-4 dark:text-[#666666]" />
           <Input
             type="search"
             id="search"
             name="search"
             placeholder="Search..."
-            className="pl-10 pr-4"
+            className="pl-10 pr-4 lg:h-12 dark:bg-[#1D1D1D]"
           />
         </div>
         <Button
           asChild
           variant="secondary"
-          className="md:w-fit"
+          className="sm:w-fit h-auto"
         >
           <Link
             href="/packs/create"
-            className="space-x-2"
+            className="space-x-2 flex-1"
           >
             <Plus size={16} />
             <span>Create Packs</span>
@@ -81,7 +79,7 @@ function Filter() {
           type="button"
           onClick={() => resetFilter()}
           className={cn(
-            'flex items-center gap-1 px-2 py-1 mr-1 text-xs rounded-md bg-background-light cursor-pointer',
+            'flex items-center gap-1 px-2 py-1.5 text-xs text-muted-foreground rounded-md bg-background-light cursor-pointer',
             {
               'bg-brand-customPrimary text-white': !t
             }
@@ -98,7 +96,7 @@ function Filter() {
             key={type.id}
             onClick={() => selectType(type.slug)}
             className={cn(
-              'flex items-center gap-1 px-2 py-1 mr-1 text-xs rounded-md bg-background-light cursor-pointer',
+              'flex items-center gap-1 px-2 py-1.5 text-muted-foreground text-xs rounded-md bg-background-light cursor-pointer',
               {
                 'bg-brand-customPrimary text-white': t && t === type.slug
               }

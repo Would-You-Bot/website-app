@@ -57,7 +57,7 @@
     --hover: 0 0% 10%;
     --hover-light: 0 0% 13%;
 
-    --card: 0 0% 3.9%;
+    --card: 0 0% 8%;
     --card-foreground: 0 0% 98%;
 
     --popover: 0 0% 3.9%;
@@ -174,10 +174,25 @@ body::-webkit-scrollbar-track {
 
 @layer components {
   .popular-pack {
-    border-style: solid;
-    border-image: linear-gradient(to right, #a855f7, #ec4899) 1;
+    position: relative;
   }
-  /* seems border image doesnt adhere to the border radius might have to use another method  */
-  /* box shadows */
-  /* or some other element */
+
+  .popular-pack::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    inset: 0;
+    border-radius: calc(var(--radius) + 0.1875rem);
+    z-index: -1;
+    background-image: linear-gradient(146.78deg, #0598F6 -1.37%, #F00505 104.43%);
+  }
+
+  .popular-btn {
+    background: linear-gradient(102.07deg, #0e93ed -169.31%, #e10f14 113.25%);
+  }
+
+  .popular-badge {
+    background: linear-gradient(98.64deg, #4a6db0 -12.21%, #725487 119.79%);
+  }
 }

@@ -3,6 +3,7 @@ import { useSearchParams } from 'next/navigation'
 import { questionPacks } from '@/lib/constants'
 import QuestionPack from './QuestionPack'
 import Filter from './Filter'
+import React from 'react'
 
 function PageContent() {
   const searchParams = useSearchParams()
@@ -15,11 +16,11 @@ function PageContent() {
     <div className="space-y-10 lg:space-y-14 mb-10">
       <Filter />
       <section>
-        <ul className="grid grid-cols-[repeat(auto-fill,_minmax(350px,_1fr))] gap-8 lg:gap-10">
+        <ul className="grid grid-cols-[repeat(auto-fill,_minmax(300px,_1fr))] gap-10 lg:gap-x-12 xl:gap-x-16">
           {packsToShow.map((question) => (
-            <li key={`pack-${question.id}`}>
+            <React.Fragment key={`pack-${question.id}`}>
               <QuestionPack pack={{ ...question }} />
-            </li>
+            </React.Fragment>
           ))}
         </ul>
       </section>
