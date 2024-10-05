@@ -44,10 +44,11 @@ export function QuestionPackDetails({
             }
           )}
         >
-          <ExternalLink className="mr-2 h-4 w-4 shrink-0" /> <span>Use pack</span>
+          <ExternalLink className="mr-2 h-4 w-4 shrink-0" />{' '}
+          <span>Use pack</span>
         </Button>
       </DialogTrigger>
-      <DialogContent className="md:min-w-max">
+      <DialogContent className="max-w-[90%] sm:max-w-lg">
         <DialogHeader>
           <DialogTitle>{name}</DialogTitle>
           <DialogDescription>{description}</DialogDescription>
@@ -64,16 +65,12 @@ export function QuestionPackDetails({
                 height={32}
                 className="rounded-full"
               />
-              <p className="capitalize">
-                Dominic
-              </p>
+              <p className="capitalize">Dominic</p>
             </div>
           </div>
           <div className="flex flex-col gap-1">
             <h3 className="text-sm text-muted-foreground">Questions</h3>
-            <p className="capitalize">
-              {questions.length}
-            </p>
+            <p className="capitalize">{questions.length}</p>
           </div>
           <div className="flex flex-col gap-1">
             <h3 className="text-sm text-muted-foreground">Type</h3>
@@ -93,7 +90,7 @@ export function QuestionPackDetails({
               id="command"
               defaultValue={`/import wouldyourather ${id}`}
               readOnly
-              className='focus:bg-brand-blue-100/10 focus:text-brand-blue-100'
+              className="focus:bg-brand-blue-100/10 focus:text-brand-blue-100"
             />
             <Button
               type="submit"
