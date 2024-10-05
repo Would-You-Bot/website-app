@@ -81,6 +81,12 @@
     "usage": "/support"
   },
   {
+    "name": "topic",
+    "category": "Games",
+    "description": "Gives you a random topic to talk about.",
+    "usage": "/topic"
+  },
+  {
     "name": "truth",
     "category": "Games",
     "description": "Gives you a random truth question to answer.",
