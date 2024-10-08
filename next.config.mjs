@@ -14,11 +14,6 @@ const nextConfig = {
   async redirects() {
     return [
       {
-        source: '/vote',
-        destination: 'https://wumpus.store/bot/981649513427111957/vote',
-        permanent: true
-      },
-      {
         source: '/support',
         destination: 'https://discord.com/invite/vMyXAxEznS',
         permanent: true

@@ -74,13 +74,6 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
               Blog
             </Link>
             <Link
-              href="/vote"
-              target="_blank"
-              className="text-lg text-foreground/70 transition-all hover:text-foreground/90 hidden lg:block"
-            >
-              Vote
-            </Link>
-            <Link
               href="/premium"
               className="flex items-center gap-2 text-lg text-yellow-500 dark:text-yellow-500 transition-all hover:text-yellow-600 dark:hover:text-yellow-400"
             >
@@ -126,14 +119,6 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
               className="text-2xl text-foreground/70 transition-all hover:text-foreground/90"
             >
               Blog
-            </Link>
-            <Link
-              href="/vote"
-              target="_blank"
-              onClick={handleIsOpen}
-              className="text-2xl text-foreground/70 transition-all hover:text-foreground/90"
-            >
-              Vote
             </Link>
             <Link
               href="/premium"
