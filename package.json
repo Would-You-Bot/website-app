@@ -9,7 +9,6 @@
     "start": "node .next/standalone/server.js -p 2123",
     "lint": "next lint",
     "format": "prettier --write ./**/*.{ts,tsx}",
-    "postbuild": "next-sitemap --config next-sitemap.config.cjs",
     "docker:build": "docker compose build -t website-wy",
     "docker:start": "docker compose up -d"
   },
@@ -67,5 +66,6 @@
   },
   "volta": {
     "node": "20.12.1"
-  }
+  },
+  "packageManager": "pnpm@9.12.1"
 }
