@@ -1,7 +1,7 @@
 import { MainContent, TableOfContents } from '@/app/blog/[slug]/_components'
 import { getPost } from '@/app/blog/[slug]/_data'
 import { postPaths } from '@/utils/mdx'
-import { Metadata } from 'next'
+import { Metadata, Viewport } from 'next'
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -17,6 +17,15 @@ export async function generateMetadata({
     title,
     description: frontmatter.description,
     metadataBase: new URL('https://wouldyoubot.gg/'),
+    alternates: {
+      canonical: "/",
+    },
+    twitter: {
+      title,
+      description: frontmatter.description,
+      card: "summary_large_image",
+      images: frontmatter.thumbnail?.large
+    },
     openGraph: {
       title,
       publishedTime: frontmatter.seoDate,
@@ -25,9 +34,18 @@ export async function generateMetadata({
       authors: frontmatter.author.name,
       tags: frontmatter.tags,
       images: frontmatter.thumbnail?.large
-    }
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
   }
 }
+
+export const viewport: Viewport = {
+	maximumScale: 5,
+	themeColor: "#4876F2",
+};
 
 export function generateStaticParams() {
   return postPaths
