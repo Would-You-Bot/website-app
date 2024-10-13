@@ -5,7 +5,7 @@ import { Metadata } from 'next'
 import React from 'react'
 
 export const metadata: Metadata = {
-  title: 'Review',
+  title: 'Review Packs | Would You',
   description: 'Review question packs submitted by users'
 }
 

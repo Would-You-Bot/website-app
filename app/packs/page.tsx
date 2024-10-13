@@ -13,11 +13,13 @@ export const metadata: Metadata = {
   twitter: {
     title: "Question Packs - Would You",
     card: "summary_large_image",
+    images: "/question-packs.png",
     description:
       "Explore a huge list of custom questions including would you rather, truth or dare, never have I ever, and many more!",
   },
   openGraph: {
     title: "Question Packs - Would You",
+    images: "/question-packs.png",
     description:
       "Explore a huge list of custom questions including would you rather, truth or dare, never have I ever, and many more!",
   },

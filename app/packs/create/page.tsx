@@ -3,7 +3,7 @@ import PackForm from './_components/PackForm'
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Create pack',
+  title: 'Create pack | Would You',
   description: 'Create question packs for your server'
 }
 
