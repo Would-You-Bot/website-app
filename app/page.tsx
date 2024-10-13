@@ -16,11 +16,9 @@ export const metadata: Metadata = {
       'Would you lets you play Would You Rather, Never Have I Ever, Higher or Lower, Truth or Dare and What Would You Do on Discord!',
     type: 'website',
     url: 'https://wouldyoubot.gg',
-    images: 'https://i.imgur.com/BsWSxze.png'
   },
   twitter: {
     card: 'summary_large_image',
-    images: 'https://i.imgur.com/BsWSxze.png',
     title: 'Would You - The Discord Bot',
     description:
       'Would you lets you play Would You Rather, Never Have I Ever, Higher or Lower, Truth or Dare and What Would You Do on Discord!',
