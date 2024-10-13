@@ -44,7 +44,7 @@ export async function generateMetadata({
 
 export const viewport: Viewport = {
 	maximumScale: 5,
-	themeColor: "#4876F2",
+	themeColor: "#0598F6",
 };
 
 export function generateStaticParams() {
