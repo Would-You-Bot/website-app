@@ -64,7 +64,7 @@ export function UnreviewedPackDetails({
                 height={32}
                 className="rounded-full"
               />
-              <p className="capitalize">Dominic</p>
+              <p className="capitalize">Dominik</p>
             </div>
           </div>
           <div className="flex flex-col gap-1">

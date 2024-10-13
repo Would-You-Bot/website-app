@@ -15,10 +15,8 @@ function page() {
    
   return (
     <Container className="pt-8 lg:pt-10 space-y-8 lg:space-y-10 min-h-[calc(100vh-112px)]">
-      <h1 className="space-x-2 text-xl lg:text-3xl font-bold xl:text-5xl">
-        <span className="text-brand-red-100 drop-shadow-red-glow">
-          Unreviewd
-        </span>
+          <h1 className="text-4xl font-bold">
+          <span className="text-brand-red-100 drop-shadow-red-glow">Unreviewed</span>{" "}
         <span className="text-brand-blue-100 drop-shadow-blue-glow">Packs</span>
       </h1>
       <PageContent />

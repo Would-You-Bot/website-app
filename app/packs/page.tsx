@@ -1,12 +1,36 @@
 import Container from '@/components/Container'
 
 import PageContent from './_components/PageContent'
-import { Metadata } from 'next'
+import { Metadata, Viewport } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Question Packs',
-  description: 'Explore a huge list of customized questions!'
+  metadataBase: new URL("https://wouldyoubot.gg"),
+  alternates: {
+    canonical: "/",
+  },
+  title: 'Question Packs - Would You',
+  description: 'Explore a huge list of custom questions including would you rather, truth or dare, never have I ever, and many more!',
+  twitter: {
+    title: "Question Packs - Would You",
+    card: "summary_large_image",
+    description:
+      "Explore a huge list of custom questions including would you rather, truth or dare, never have I ever, and many more!",
+  },
+  openGraph: {
+    title: "Question Packs - Would You",
+    description:
+      "Explore a huge list of custom questions including would you rather, truth or dare, never have I ever, and many more!",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 }
+
+export const viewport: Viewport = {
+	maximumScale: 5,
+	themeColor: "#0598F6",
+};
 
 export const dynamic = 'force-dynamic'
 
@@ -27,10 +51,8 @@ async function page({
 
   return (
     <Container className="pt-8 lg:pt-10 space-y-8 min-h-[calc(100vh-112px)]">
-      <h1 className="space-x-2 text-xl lg:text-3xl font-bold xl:text-5xl">
-        <span className="text-brand-red-100 drop-shadow-red-glow">
-          Question
-        </span>
+        <h1 className="text-4xl font-bold">
+          <span className="text-brand-red-100 drop-shadow-red-glow">Question</span>{" "}
         <span className="text-brand-blue-100 drop-shadow-blue-glow">Packs</span>
       </h1>
       <PageContent />
