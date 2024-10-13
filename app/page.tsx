@@ -15,6 +15,7 @@ export const metadata: Metadata = {
   publisher: 'Rivo',
   openGraph: {
     title: 'Would You - The Discord Bot',
+    images: 'https://wouldyoubot.gg/showcase.png',
     description:
       'Would you lets you play Would You Rather, Never Have I Ever, Higher or Lower, Truth or Dare and What Would You Do on Discord!',
     type: 'website',
@@ -23,6 +24,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Would You - The Discord Bot',
+    images: 'https://wouldyoubot.gg/showcase.png',
     description:
       'Would you lets you play Would You Rather, Never Have I Ever, Higher or Lower, Truth or Dare and What Would You Do on Discord!',
     site: '@WouldYouBot'
