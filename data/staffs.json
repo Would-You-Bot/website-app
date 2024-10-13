@@ -21,34 +21,6 @@
     "websiteUrl": "https://github.com/nidrux"
   },
   {
-    "name": "Sans",
-    "categories": ["Developers"],
-    "description": "Developer",
-    "imageUrl": "https://cdn.wouldyoubot.gg/staff/developer/Sans.webp",
-    "websiteUrl": "https://github.com/Sans3108"
-  },
-  {
-    "name": "Gersti",
-    "categories": ["Developers"],
-    "description": "Developer",
-    "imageUrl": "https://cdn.wouldyoubot.gg/staff/developer/Gersti.webp",
-    "websiteUrl": "https://github.com/gxrsti"
-  },
-  {
-    "name": "FlashJPO",
-    "categories": ["Admins"],
-    "description": "Discord Admin",
-    "imageUrl": "https://cdn.wouldyoubot.gg/staff/admins/Flash.webp",
-    "websiteUrl": null
-  },
-  {
-    "name": "Kivvyato",
-    "categories": ["Admins"],
-    "description": "Discord Admin",
-    "imageUrl": "https://cdn.wouldyoubot.gg/staff/admins/Kivvy.webp",
-    "websiteUrl": "https://www.reddit.com/user/FuzzyKnowledge1649/"
-  },
-  {
     "name": "Noam",
     "categories": ["Translators", "Beta Testers"],
     "description": "French Translator, Beta Tester",
@@ -79,7 +51,7 @@
   {
     "name": "Finn",
     "categories": ["Contributors"],
-    "description": "Higher or Lower Developer, Developer (on break)",
+    "description": "Higher or Lower Developer",
     "imageUrl": "https://cdn.wouldyoubot.gg/staff/special/Finn.webp",
     "websiteUrl": "https://github.com/finnkoetting"
   },
@@ -99,7 +71,7 @@
   },
   {
     "name": "InvalidKiller",
-    "categories": ["Contributors"],
+    "categories": ["Admins"],
     "description": "Discord Moderator",
     "imageUrl": "https://cdn.wouldyoubot.gg/staff/moderator/InvalidKiller.webp",
     "websiteUrl": null
