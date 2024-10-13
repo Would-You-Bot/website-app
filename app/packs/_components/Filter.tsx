@@ -19,25 +19,40 @@ const packTypes = [
   },
   {
     id: 'zxcvbnm12',
-    label: 'Never have i ever',
+    label: 'Never have I ever',
     slug: 'nhie'
+  },
+  {
+    id: 'djwne0i2we',
+    label: 'Truth',
+    slug: 'truth'
+  },
+  {
+    id: 'ojeijded23',
+    label: 'Dare',
+    slug: 'dare'
+  },
+  {
+    id: 'jdfoenD69d',
+    label: 'Topic',
+    slug: 'topic'
   }
 ]
 
 function Filter() {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const t = searchParams.get('t')
+  const t = searchParams.get('type')
 
   function selectType(type: string) {
     const params = new URLSearchParams(searchParams.toString())
-    params.set('t', type)
+    params.set('type', type)
     router.push('?' + params.toString(), { scroll: false })
   }
 
   function resetFilter() {
     const params = new URLSearchParams(searchParams.toString())
-    params.delete('t')
+    params.delete('type')
     router.push('?' + params.toString(), { scroll: false })
   }
 
@@ -74,12 +89,13 @@ function Filter() {
           </Link>
         </Button>
       </div>
-      <div className="flex gap-3 items-center flex-wrap">
+      <div className="w-full overflow-x-auto pb-2 thin-scrollbar">
+      <div className="flex space-x-2 whitespace-nowrap">
         <button
           type="button"
           onClick={() => resetFilter()}
           className={cn(
-            'flex items-center gap-1 px-2 py-1.5 text-xs text-muted-foreground rounded-md bg-background-light cursor-pointer',
+            'flex items-center gap-1 px-2 py-1.5 text-muted-foreground text-xs rounded-md bg-background-light cursor-pointer shrink-0',
             {
               'bg-brand-customPrimary text-white': !t
             }
@@ -108,6 +124,7 @@ function Filter() {
             <span>{type.label}</span>
           </button>
         ))}
+        </div>
       </div>
     </section>
   )
