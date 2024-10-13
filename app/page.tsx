@@ -3,13 +3,16 @@ import { getRandomQuestion } from '@/helpers/getRandomQuestion'
 import { HomeContent } from '@/components/Homepage/Content'
 import type { Metadata, Viewport } from 'next'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = { 
+  metadataBase: new URL('https://wouldyoubot.gg'),
+  alternates: {
+    canonical: "/",
+  },
   title: 'Would You - The Discord Bot',
   description:
     'Would you lets you play Would You Rather, Never Have I Ever, Higher or Lower, Truth or Dare and What Would You Do on Discord!',
   robots: 'index, follow',
   publisher: 'Rivo',
-  metadataBase: new URL('https://wouldyoubot.gg'),
   openGraph: {
     title: 'Would You - The Discord Bot',
     description:
