@@ -1,7 +1,7 @@
 import { getAuthTokenOrNull } from '@/helpers/oauth/helpers'
-import { NextResponse } from 'next/server'
+import { type NextRequest, NextResponse } from 'next/server'
 
-export async function middleware() {
+export async function middleware(request: NextRequest) {
   const token = await getAuthTokenOrNull()
   if (token === null) {
     return NextResponse.json(
@@ -14,8 +14,8 @@ export async function middleware() {
 
 export const config = {
   matcher: [
-    '/api/packs/',
-    '/api/admin/',
+    '/api/packs',
+    '/api/admin',
     '/api/packs/:path*',
     '/api/admin/:path*'
   ]
