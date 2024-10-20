@@ -1,14 +1,20 @@
 import { getAuthTokenOrNull } from '@/helpers/oauth/helpers'
+import { NextResponse } from 'next/server'
+import { NextRequest } from 'next/server'
 
-export async function GET() {
- const token = await getAuthTokenOrNull()
- if(token === null) {
-  return Response.json({success: false, error: "Unauthorized"}, { status: 401 })
- }
-  return Response.json({message: "Get Request", token})
+export async function middleware() {
+  const token = await getAuthTokenOrNull()
+  if(token === null) {
+   return NextResponse.json({success: false, error: "Unauthorized"}, { status: 401 })
+  }
+  return NextResponse.next();
 }
 
-export async function POST(request: Request) {
+export async function GET() {
+  return NextResponse.json({message: "Get Request"}, {status: 200})
+}
+
+export async function POST(request: NextRequest) {
 
   const data = await request.json()
 
@@ -17,7 +23,7 @@ export async function POST(request: Request) {
   const parsedPackResult = packSchema.safeParse(data)
 
   if(!parsedPackResult.success) {
-    return Response.json({success: false, error: parsedPackResult.error.issues}, { status: 400 })
+    return NextResponse.json({success: false, error: parsedPackResult.error.issues}, { status: 400 })
   }
-  return Response.json({message: "Post Request", data},)
+  return NextResponse.json({message: "Post Request", data}, {status: 200})
 }
