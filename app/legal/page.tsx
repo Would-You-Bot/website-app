@@ -28,11 +28,9 @@ export default function legalnotice() {
         <p className="select-none">
           Dominik Koch
           <br />
-          c/o IP-Management #38305
+          Parkstraße 5
           <br />
-          Ludwig-Erhard-Str. 18
-          <br />
-          20459 Hamburg
+          88499 Riedlingen
           <br />
           Germany
         </p>

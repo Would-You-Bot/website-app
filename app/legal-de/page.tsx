@@ -10,13 +10,11 @@ export default function legalnoticede() {
       <div>
         <h3 className="text-lg font-bold text-foreground">Kontakt</h3>
         <p className="select-none">
-          Dominik Koch
+        Dominik Koch
           <br />
-          c/o IP-Management #38305
+          Parkstraße 5
           <br />
-          Ludwig-Erhard-Str. 18
-          <br />
-          20459 Hamburg
+          88499 Riedlingen
           <br />
           Deutschland
         </p>
