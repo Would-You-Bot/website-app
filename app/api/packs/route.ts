@@ -1,4 +1,8 @@
+import { PackData, PackType } from '@/app/packs/create/_components/PackForm';
+import { getAuthTokenOrNull } from '@/helpers/oauth/helpers';
+import { prisma } from '@/lib/prisma'
 import { NextResponse, type NextRequest } from 'next/server'
+import { v4 as uuidv4 } from 'uuid';
 
 export async function GET() {
   return NextResponse.json({message: "Get Request"}, {status: 200})
@@ -6,7 +10,7 @@ export async function GET() {
 
 export async function POST(request: NextRequest) {
 
-  const data = await request.json()
+  const data: PackData = await request.json()
 
   const { packSchema } = (await import('@/utils/zod/schemas'))
 
@@ -15,5 +19,41 @@ export async function POST(request: NextRequest) {
   if(!parsedPackResult.success) {
     return NextResponse.json({success: false, error: parsedPackResult.error.issues}, { status: 400 })
   }
-  return NextResponse.json({message: "Post Request", data}, {status: 200})
+
+  const tokenData = await getAuthTokenOrNull()
+  
+  type Questions = {
+    id: string,
+    question: string,
+    type: Exclude<PackType, 'mixed'>
+  }
+
+  const {type, name, description, tags, questions: preProcessedQuestion} = data;
+  // Add some logic so whenever the main type is = to mixed the others have different types but when its set to anything else all questions need to have the same type
+  // TODO: Give this actual logic
+
+  if(type === "mixed") {
+    return;
+  }
+
+  const questions: Questions[] = [{
+    id: uuidv4(),
+    question: preProcessedQuestion[0],
+    type: type
+  }]
+
+    const newPack = await prisma.questionPack.create({
+    data: {
+      type,
+      name,
+      description,
+      tags,
+      featured: false,
+      likes: [`${tokenData?.payload.id}`],
+      questions
+    }
+  }).catch((err: Error) => {
+      return NextResponse.json({message: "Error creating a database entry for the pack, please contact the support!", error: err.message}, {status: 500})
+  })
+  return NextResponse.json({message: "New pack creation successfully!", data: newPack}, {status: 200})
 }

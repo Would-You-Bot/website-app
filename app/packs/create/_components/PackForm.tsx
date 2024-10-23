@@ -20,7 +20,7 @@ import { useState } from 'react'
 import { packSchema } from '@/utils/zod/schemas'
 import { z } from 'zod'
 
-type PackType =
+export type PackType =
   | 'wouldyourather'
   | 'neverhaveiever'
   | 'wwyd'
