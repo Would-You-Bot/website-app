@@ -1,17 +1,37 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
   provider = "mongodb"
-  url      = env("DATABASE_URL")
+  url      = env("MONGODB_URI")
 }
 
 // For mongodb specific schema docs, read this: https://www.prisma.io/docs/orm/overview/databases/mongodb
-// Also install Prisma extension for models intellisense and support.
+enum PackType {
+  wouldyourather
+  neverhaveiever
+  wwyd
+  truth
+  dare
+  topic
+  mixed
+}
+
+model QuestionPack {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  type        PackType
+  name        String   @db.String
+  description String   @db.String
+  tags        String[]
+  questions   String[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("questionpacks")
+
+  // Indexes for better query performance
+  @@index([type])
+  @@index([tags])
+  @@index([name])
+}
