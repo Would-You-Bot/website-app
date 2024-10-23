@@ -35,4 +35,6 @@ const guildProfileSchema: Schema = new Schema(
   { timestamps: true }
 )
 
-export default models.Guild || model('guildProfile', guildProfileSchema)
+const guildProfile = models.guildProfile || model('guildProfile', guildProfileSchema)
+
+export default guildProfile;
