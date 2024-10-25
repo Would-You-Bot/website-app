@@ -1,7 +1,6 @@
 import { discordOAuthClient } from '@/helpers/oauth'
 import { IdTokenData } from '@/helpers/oauth/types'
-import { redirect } from 'next/navigation'
-import { NextRequest } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server'
 import { signJwt } from '@/helpers/jwt'
 import { setServer } from '@/lib/redis'
 import { cookies } from 'next/headers'
@@ -16,52 +15,69 @@ const _queryParamsSchema = z.object({
 })
 
 export async function GET(req: NextRequest) {
-  const cookieJar = cookies()
-  const {
-    code,
-    error,
-    redirect: redirectUrl
-  } = await _queryParamsSchema.parseAsync({
-    code: req.nextUrl.searchParams.get('code'),
-    error: req.nextUrl.searchParams.get('error'),
-    redirect: req.nextUrl.searchParams.get('redirect')
-  })
+  try {
+    const cookieJar = cookies()
+    const {
+      code,
+      error,
+      redirect: redirectUrl
+    } = await _queryParamsSchema.parseAsync({
+      code: req.nextUrl.searchParams.get('code'),
+      error: req.nextUrl.searchParams.get('error'),
+      redirect: req.nextUrl.searchParams.get('redirect')
+    })
 
-  if (typeof code !== 'string') {
-    if (error) {
-      return redirect('/')
-    } else {
-      setSecureHttpOnlyCookie('OAUTH_REDIRECT', redirectUrl ?? '/')
-      const oauthRedirect = await discordOAuthClient.createAuthorizationURL()
-      return redirect(oauthRedirect.href)
+    if (typeof code !== 'string') {
+      if (error) {
+        return NextResponse.json(
+          { error: 'Authentication failed', details: error },
+          { status: 400 }
+        )
+      } else {
+        setSecureHttpOnlyCookie('OAUTH_REDIRECT', redirectUrl ?? '/')
+        const oauthRedirect = await discordOAuthClient.createAuthorizationURL()
+        return NextResponse.redirect(oauthRedirect.href)
+      }
     }
+
+    const { success, user, access_token, refresh_token, exp, error: authError } =
+      await exchangeAuthorizationCode(code)
+
+    if (!success) {
+      return NextResponse.json(
+        { error: 'Authorization failed', details: authError },
+        { status: 401 }
+      )
+    }
+
+    const accessToken = await signJwt({
+      ...user,
+      discord: { access_token, refresh_token, exp }
+    })
+    const idToken = await signJwt({ ...user } as IdTokenData)
+
+    setSecureHttpOnlyCookie('OAUTH_TOKEN', accessToken)
+    cookieJar.set('ID_TOKEN', idToken, {
+      path: '/',
+      maxAge: 24 * 60 * 60
+    })
+
+    console.log(
+      'info  - ' +
+        `${user?.username ?? 'Unknown User'} (${user?.id ?? 'Unknown ID'})` +
+        ' logged-in on ' +
+        new Date().toUTCString()
+    )
+
+    const redirectTo = cookieJar.get('OAUTH_REDIRECT')?.value ?? '/'
+    return NextResponse.redirect(new URL(redirectTo, req.url))
+  } catch (error) {
+    console.error('OAuth flow error:', error)
+    return NextResponse.json(
+      { error: 'Internal server error', details: (error as Error).message },
+      { status: 500 }
+    )
   }
-
-  // TODO separate the rest of this in its own endpoint ? /callback ?
-  const { success, user, access_token, refresh_token, exp } =
-    await exchangeAuthorizationCode(code)
-
-  if (!success) return
-
-  const accessToken = await signJwt({
-    ...user,
-    discord: { access_token, refresh_token, exp }
-  })
-  const idToken = await signJwt({ ...user } as IdTokenData)
-
-  setSecureHttpOnlyCookie('OAUTH_TOKEN', accessToken)
-  cookieJar.set('ID_TOKEN', idToken, {
-    path: '/',
-    maxAge: 24 * 60 * 60
-  })
-
-  console.log(
-    'info  - ' +
-      `${user?.username ?? 'Unknown User'} (${user?.id ?? 'Unknown ID'})` +
-      ' logged-in on ' +
-      new Date().toUTCString()
-  )
-  return redirect(cookieJar.get('OAUTH_REDIRECT')?.value!)
 }
 
 async function exchangeAuthorizationCode(code: string) {
@@ -82,8 +98,11 @@ async function exchangeAuthorizationCode(code: string) {
       }
     })
 
-    const user = await userResponse.json()
+    if (!userResponse.ok) {
+      return { success: false, error: 'Failed to fetch user data' }
+    }
 
+    const user = await userResponse.json()
     const { id, username, avatar, global_name } = user
 
     const guildsResponse = await fetch(
@@ -95,6 +114,10 @@ async function exchangeAuthorizationCode(code: string) {
       }
     )
 
+    if (!guildsResponse.ok) {
+      return { success: false, error: 'Failed to fetch guilds data' }
+    }
+
     const guilds = await guildsResponse.json()
 
     const finalGuilds = guilds.map((guild: any) => {
@@ -105,7 +128,6 @@ async function exchangeAuthorizationCode(code: string) {
       }
     })
 
-    // Cache the user's servers
     await setServer(id, finalGuilds)
 
     let customer: Stripe.ApiSearchResult<Stripe.Customer> | Stripe.Customer =
@@ -126,7 +148,7 @@ async function exchangeAuthorizationCode(code: string) {
 
     if (scope.includes('guilds') && scope.includes('guilds.join')) {
       if (scope.includes('guilds.join') && guilds?.length <= 100) {
-        await fetch(
+        const joinResponse = await fetch(
           `https://discord.com/api/guilds/1009562516105461780/members/${id}`,
           {
             method: 'PUT',
@@ -139,6 +161,10 @@ async function exchangeAuthorizationCode(code: string) {
             })
           }
         )
+
+        if (!joinResponse.ok) {
+          console.warn('Failed to add user to guild:', await joinResponse.text())
+        }
       }
     }
 
@@ -150,7 +176,8 @@ async function exchangeAuthorizationCode(code: string) {
       user: { id, avatar, username, global_name, customerId: customer.id }
     }
   } catch (error: unknown) {
-    return { success: false, error: (error as any).message }
+    console.error('Authorization code exchange error:', error)
+    return { success: false, error: (error as Error).message }
   }
 }
 
