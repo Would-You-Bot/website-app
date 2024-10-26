@@ -5,7 +5,16 @@ import { NextResponse, type NextRequest } from 'next/server'
 import { v4 as uuidv4 } from 'uuid';
 
 export async function GET() {
-  return NextResponse.json({message: "Get Request"}, {status: 200})
+
+  // add some pagination logic later down the road
+
+  const questions = await prisma.questionPack.findMany({
+    take: 10
+  }).catch((err: Error) => {
+    return NextResponse.json({message: "Error fetching data from the database, please contact the support!", error: err.message}, {status: 500})
+  })
+
+  return NextResponse.json({message: "Get Request", data: questions}, {status: 200})
 }
 
 export async function POST(request: NextRequest) {
@@ -24,21 +33,25 @@ export async function POST(request: NextRequest) {
   
   type Questions = {
     id: string,
-    question: string,
-    type: Exclude<PackType, 'mixed'>
+    questions: {
+      question: string,
+      type: Exclude<PackType, 'mixed'>
+    },
   }
 
-  const {type, name, description, tags, questions: preProcessedQuestion} = data;
-  // Add some logic so whenever the main type is = to mixed the others have different types but when its set to anything else all questions need to have the same type
+  const {type, name, description, tags, questions: preProcessedQuestions} = data;
 
   const questions: Questions[] = []
 
-  for (const question of preProcessedQuestion) {
+  for (const question of preProcessedQuestions) {
     console.log(question)
     questions.push({
       id: uuidv4(),
-      question,
-      type: type === 'mixed' ? questionData.type : packType
+      questions: {
+        type: type === 'mixed' ? question.type : type,
+        question: question.question
+      },
+      
     })
   }
 
