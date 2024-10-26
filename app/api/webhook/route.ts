@@ -53,6 +53,7 @@ export async function POST(request: NextRequest) {
               guildID: serverId,
               premiumUser: userId,
               premium: 1,
+              pending: true,
               premiumExpiration: new Date(
                 subscription.current_period_end * 1000
               )
@@ -68,6 +69,69 @@ export async function POST(request: NextRequest) {
             },
             { status: 500 }
           )
+        }
+        break
+        
+      case 'invoice.paid':
+      case 'invoice.payment_succeeded':
+        const invoice: Stripe.Invoice = event.data.object
+        const userIdInvoice = invoice.metadata?.userId
+        const serverIdInvoice = invoice.metadata?.serverId
+        const tierInvoice =
+          invoice.metadata?.monthly === 'true' ? 'monthly' : 'yearly'
+
+        if (!userIdInvoice || !serverIdInvoice || !tierInvoice) {
+          console.error('One or more variables are undefined.')
+          return NextResponse.json(
+            { message: 'One or more variables are missing', status: 400 },
+            { status: 400 }
+          )
+        }
+        switch (invoice.billing_reason) {
+          case 'subscription_create':
+            try {
+              await guildProfileSchema.findOneAndUpdate(
+                { guildID: serverIdInvoice },
+                {
+                  pending: false,
+                  premiumExpiration: new Date(
+                    invoice.lines.data[0].period.end * 1000
+                  )
+                }
+              )
+            } catch (error) {
+              console.error(error)
+              return NextResponse.json(
+                {
+                  message: 'An error occurred while updating the database.',
+                  status: 500
+                },
+                { status: 500 }
+              )
+            }
+            break
+          case 'subscription_update':
+            try {
+              await guildProfileSchema.findOneAndUpdate(
+                { guildID: serverIdInvoice },
+                {
+                  pending: false,
+                  premiumExpiration: new Date(
+                    invoice.lines.data[0].period.end * 1000
+                  )
+                }
+              )
+            } catch (error) {
+              console.error(error)
+              return NextResponse.json(
+                {
+                  message: 'An error occurred while updating the database.',
+                  status: 500
+                },
+                { status: 500 }
+              )
+            }
+            break
         }
         break
 

@@ -4,6 +4,7 @@ export interface IGuild extends Document {
   guildID: string
   language: string
   premium: number
+  pending: boolean
   premiumExpiration: Date
   premiumUser: string
 }
@@ -23,6 +24,10 @@ const guildProfileSchema: Schema = new Schema(
     premium: {
       type: Number,
       default: 0
+    },
+    pending: {
+      type: Boolean,
+      default: false
     },
     premiumExpiration: {
       type: Date,
