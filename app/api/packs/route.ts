@@ -30,17 +30,17 @@ export async function POST(request: NextRequest) {
 
   const {type, name, description, tags, questions: preProcessedQuestion} = data;
   // Add some logic so whenever the main type is = to mixed the others have different types but when its set to anything else all questions need to have the same type
-  // TODO: Give this actual logic
 
-  if(type === "mixed") {
-    return;
+  const questions: Questions[] = []
+
+  for (const question of preProcessedQuestion) {
+    console.log(question)
+    questions.push({
+      id: uuidv4(),
+      question,
+      type: type === 'mixed' ? questionData.type : packType
+    })
   }
-
-  const questions: Questions[] = [{
-    id: uuidv4(),
-    question: preProcessedQuestion[0],
-    type: type
-  }]
 
     const newPack = await prisma.questionPack.create({
     data: {
