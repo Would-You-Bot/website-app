@@ -7,23 +7,25 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select'
-import { ArrowLeft, Pen, Search, Trash2, XCircle } from 'lucide-react'
+import { ArrowLeft, Loader2, Pen, Search, Trash2, XCircle } from 'lucide-react'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { useLocalStorage } from '@/hooks/use-localstorage'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Textarea } from '@/components/ui/textarea'
 import { toast } from '@/components/ui/use-toast'
 import NewQuestionModal from './NewQuestionModal'
+import { packSchema } from '@/utils/zod/schemas'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { useRouter } from 'next/navigation'
+import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
-import { useState } from 'react'
-import { packSchema } from '@/utils/zod/schemas'
 import { z } from 'zod'
+import { Badge } from '@/components/ui/badge'
 
 export type PackType =
   | 'wouldyourather'
   | 'neverhaveiever'
-  | 'wwyd'
+  | 'whatwouldyoudo'
   | 'truth'
   | 'dare'
   | 'topic'
@@ -32,21 +34,27 @@ export type PackType =
 const packTypes = [
   { value: 'wouldyourather', label: 'Would You Rather', id: 'ab' },
   { value: 'neverhaveiever', label: 'Never Have I Ever', id: 'cd' },
-  { value: 'wwyd', label: 'What Would You Do', id: 'ef' },
+  { value: 'whatwouldyoudo', label: 'What Would You Do', id: 'ef' },
   { value: 'truth', label: 'Truth', id: 'gh' },
   { value: 'dare', label: 'Dare', id: 'ij' },
-  { value: 'topic', label: 'Truth', id: 'kl' },
+  { value: 'topic', label: 'Topic', id: 'kl' },
   { value: 'mixed', label: 'Mixed', id: 'mn' }
 ]
 
-export type PackData = z.infer<typeof packSchema>
+const defaultValues = {
+  type: '',
+  name: '',
+  description: '',
+  tags: [],
+  questions: []
+}
 
+export type PackData = z.infer<typeof packSchema>
 function PackForm() {
-  const localPackValues = localStorage.getItem('PACKVALUES')
-  const defaultValues: PackData =
-    localPackValues ?
-      JSON.parse(localPackValues)
-    : { type: '', name: '', description: '', tags: [], questions: [] }
+  const [formData, setFormData] = useLocalStorage<PackData>(
+    'PACKVALUES',
+    defaultValues as PackData
+  )
 
   const {
     register,
@@ -54,45 +62,43 @@ function PackForm() {
     watch,
     setValue,
     clearErrors,
+    getValues,
     trigger,
     control,
-    formState: { errors, isLoading }
+    formState: { errors, isSubmitting }
   } = useForm<PackData>({
     resolver: zodResolver(packSchema),
-    defaultValues: { ...defaultValues }
+    defaultValues: formData
   })
+
   const [tagInputValue, setTagInputValue] = useState('')
-  const [step, setStep] = useState(1)
   const router = useRouter()
-  //   we could use url params to determine the step
-  //   for now i think this works
+  const searchParams = useSearchParams()
+  const step = searchParams.get('step')
+  const { tags: selectedTags, questions: addedQuestions, type } = watch()
 
-  const selectedTags = watch('tags') // watches the tags array for changes
-  const addedQuestions = watch('questions') // watches the questions array for changes
+  function switchStep(step: string) {
+    const params = new URLSearchParams(searchParams.toString())
+    params.set('step', step)
+    router.push('?' + params.toString())
+  }
 
+  // Add tags
   const filterAndAddTag = (tag: string) => {
     const trimmedValue = tag.trim()
     const tagAlreadyExists = selectedTags.includes(trimmedValue)
     const tagsAreLessThanMax = selectedTags.length < 10
 
     if (trimmedValue && !tagAlreadyExists && tagsAreLessThanMax) {
-      setValue('tags', [...selectedTags, trimmedValue])
+      const newTags = [...selectedTags, trimmedValue]
+      setValue('tags', newTags)
+      setFormData({ ...getValues(), tags: newTags })
       setTagInputValue('')
       clearErrors('tags')
     }
   }
 
-  const deleteTag = (tagToDelete: string) => {
-    const updatedTags = selectedTags.filter((tag) => tag !== tagToDelete)
-
-    setValue('tags', updatedTags)
-
-    localStorage.setItem(
-      'PACKVALUES',
-      JSON.stringify({ ...defaultValues, tags: updatedTags })
-    )
-  }
-
+  // KEYDOWN listener for tag input
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (!tagInputValue.trim()) return
 
@@ -102,66 +108,94 @@ function PackForm() {
     }
   }
 
+  // DELETE tags
+  const deleteTag = (tagToDelete: string) => {
+    const updatedTags = selectedTags.filter((tag) => tag !== tagToDelete)
+    setValue('tags', updatedTags)
+    setFormData({ ...getValues(), tags: updatedTags })
+  }
+
+  // SWITCH pack type
   const handleTypeChange = (value: PackType) => {
     setValue('type', value)
+    setFormData({ ...getValues(), type: value })
     clearErrors('type')
   }
 
-  const validateBeforeMoving = () => {
-    const { type, name, description, tags } = watch()
-    if (type && name && description && tags.length) {
-      setStep(2)
-      localStorage.setItem(
-        'PACKVALUES',
-        JSON.stringify({
-          type,
-          name,
-          description,
-          tags,
-          questions: defaultValues.questions ?? []
-        })
-      )
+  // Check all fields are valid before switching steps
+  const validateBeforeMoving = async () => {
+    const currentValues = getValues()
+    const isValid = await trigger(['type', 'name', 'description', 'tags'])
+
+    if (isValid) {
+      switchStep('2')
+      setFormData(currentValues)
     } else {
-      trigger(['type', 'name', 'description', 'tags'])
+      return
     }
-  }
-
-  const onSubmit = async (data: PackData) => {
-    //  not sure what to do here
-    //  for now log the data and show a toast for dev purposes
-    console.log(data)
-    localStorage.removeItem('PACKVALUES')
-    toast({
-      title: 'Success!',
-      description: 'Successfully submitted your question pack!'
-    })
-
-    router.push('/packs')
   }
 
   const deleteQuestion = (Qindex: number) => {
     const updatedQuestions = addedQuestions.filter(
       (_, index) => index !== Qindex
     )
-
     setValue('questions', updatedQuestions)
-
-    localStorage.setItem(
-      'PACKVALUES',
-      JSON.stringify({ ...defaultValues, questions: updatedQuestions })
-    )
+    setFormData({ ...getValues(), questions: updatedQuestions })
   }
+
+  const onSubmit = async (data: PackData) => {
+    console.log(data)
+    const endpoint = process.env.NEXT_PUBLIC_API_URL
+    try {
+      const res = await fetch(`/api/packs`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      })
+
+      if (res.ok) {
+        toast({
+          title: 'Success!',
+          description: 'Successfully submitted your question pack!'
+        })
+        router.push('/packs')
+        // Reset storage
+        setFormData(defaultValues as PackData)
+      } else {
+        // const errorData = await res.json()
+        // console.error('Server response:', errorData)
+        throw new Error('Failed to submit pack')
+      }
+    } catch (error) {
+      console.error(error)
+      toast({
+        title: 'Oops',
+        description: 'Something went wrong with creating your pack!',
+        variant: 'destructive'
+      })
+    }
+  }
+
+  // NAME and DESCRIPTION are handled by Hook form so they're not automatically updated in local storage on change
+  // only when some other field changes I.E type or tags as these pull all the current data from hook-form and set to storage
+  // we could potentially store the NAME and DESCRIPTION on change with a useEffect but idk they seem like really simple fields
+  // plus i doubt users would refresh all the time. everything is captured and stored before switching steps tho
 
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
         {
-          step === 1 ?
+          !step || step === '1' ?
             <section className="grid gap-6 max-w-screen-md">
               {/* select field */}
               <div className="space-y-3">
                 <label htmlFor="type">Pack Type</label>
-                <Select onValueChange={handleTypeChange}>
+                <Select
+                  value={type}
+                  onValueChange={handleTypeChange}
+                >
                   <SelectTrigger>
                     <SelectValue placeholder="Select a pack type" />
                   </SelectTrigger>
@@ -170,7 +204,6 @@ function PackForm() {
                       <SelectItem
                         key={type.id}
                         value={type.value}
-                        defaultChecked={type.value === defaultValues.type}
                         className="text-foreground"
                       >
                         {type.label}
@@ -256,37 +289,43 @@ function PackForm() {
             </section>
             //  second step adding questions to the pack
           : <section className="space-y-8  min-h-[calc(100vh-160px)]">
-              <div className="flex items-center gap-6 lg:gap-10">
-                <Button
-                  className="rounded-lg w-fit py-2 px-4 flex gap-2 self-end"
-                  size="sm"
-                  variant="secondary"
-                  type="button"
-                  onClick={() => setStep(1)}
-                >
-                  <ArrowLeft className="size-4" />
-                  Back
-                </Button>
-                <div className="flex flex-col items-center justify-center gap-2">
-                  <span className="text-sm">Pack Questions</span>
+              <div className="flex flex-col gap-2">
+                <div className="flex flex-wrap items-center gap-6 lg:gap-10">
                   <Button
-                    className="rounded-lg w-fit py-2 px-4"
+                    className="rounded-lg w-fit py-2 px-4 flex gap-2 self-end"
                     size="sm"
-                    variant="secondary"
+                    variant="outline"
                     type="button"
+                    disabled={isSubmitting}
+                    onClick={() => switchStep('1')}
                   >
-                    Import JSON
+                    <ArrowLeft className="size-4" />
+                    Back
                   </Button>
-                </div>
-                <div className="flex flex-col gap-2 justify-center">
-                  <span className="text-sm">Submit Packs</span>
-                  <Button
-                    className="rounded-lg w-fit py-2 px-4 bg-brand-blue-100 hover:bg-brand-blue-200 text-white"
-                    size="sm"
-                    type="submit"
-                  >
-                    Submit
-                  </Button>
+                  <div className="flex flex-col items-center justify-center gap-2">
+                    <span className="text-sm">Pack Questions</span>
+                    <Button
+                      className="rounded-lg w-fit py-2 px-4"
+                      size="sm"
+                      variant="outline"
+                      type="button"
+                      disabled={isSubmitting}
+                    >
+                      Import JSON
+                    </Button>
+                  </div>
+                  <div className="flex flex-col gap-2 justify-center">
+                    <span className="text-sm">Submit Packs</span>
+                    <Button
+                      className="rounded-lg w-fit py-2 px-4 bg-brand-blue-100 hover:bg-brand-blue-200 text-white"
+                      size="sm"
+                      type="submit"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting && <Loader2 size={16} />}
+                      {isSubmitting ? 'Submitting' : 'Submit'}
+                    </Button>
+                  </div>
                 </div>
                 {errors.questions && (
                   <p className="px-1 text-xs text-brand-red-100">
@@ -307,16 +346,22 @@ function PackForm() {
                     </div>
                   </div>
                   {/* this can be repurposed for editing questions as well */}
-                  <NewQuestionModal control={control} />
+                  <NewQuestionModal
+                    control={control}
+                    type={type}
+                  />
                 </div>
                 <ul className="divide-y max-h-[700px] overflow-y-auto">
-                  {addedQuestions.map((question: string, index) => (
+                  {addedQuestions.map((question, index) => (
                     <li
                       key={`${question}-${index}`}
                       className="flex justify-between px-4 py-2 items-center"
                     >
-                      <p className="line-clamp-1 lg:text-lg">{question}</p>
+                      <p className="line-clamp-1 text-sm lg:text-base">
+                        {question.question}
+                      </p>
                       <div className="flex items-center gap-4">
+                      <Badge variant="outline">{question.type}</Badge>
                         <Button
                           size={'icon'}
                           variant={'ghost'}

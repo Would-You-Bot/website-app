@@ -50,7 +50,7 @@ export const questionPacks = [
       'Over 500 what would you do questions for fun family conversations.',
     type: 'what would you do',
     featured: false,
-    slug: 'wwyd',
+    slug: 'whatwouldyoudo',
     questions: [
       'What would you do if you found a wallet full of cash?',
       'What would you do if you caught a sibling sneaking out?',
@@ -115,7 +115,7 @@ export const questionPacks = [
       'Intense what would you do questions that push you out of your comfort zone.',
     type: 'what would you do',
     featured: false,
-    slug: 'wwyd',
+    slug: 'whatwouldyoudo',
     questions: [
       'What would you do if you were dared to eat something disgusting?',
       'What would you do if someone double dared you in public?',
@@ -158,7 +158,7 @@ export const questionPacks = [
       'Challenging what would you do questions for office and workplace scenarios.',
     type: 'what would you do',
     featured: false,
-    slug: 'wwyd',
+    slug: 'whatwouldyoudo',
     questions: [
       'What would you do if your boss asked you to work on your day off?',
       'What would you do if you found out a coworker was stealing credit for your work?',
@@ -224,7 +224,7 @@ export const questionPacks = [
       'What would you do questions inspired by wild college scenarios.',
     type: 'what would you do',
     featured: false,
-    slug: 'wwyd',
+    slug: 'whatwouldyoudo',
     questions: [
       'What would you do if you were failing a class in your major?',
       'What would you do if your roommate was throwing a party and you had a test the next day?',
@@ -312,7 +312,7 @@ export const questionPacks = [
       'Couple-themed what would you do questions to test your relationship.',
     type: 'what would you do',
     featured: false,
-    slug: 'wwyd',
+    slug: 'whatwouldyoudo',
     questions: [
       'What would you do if your partner forgot your anniversary?',
       'What would you do if you caught your partner lying?',
@@ -378,7 +378,7 @@ export const questionPacks = [
       'What would you do questions about funny and tricky holiday scenarios.',
     type: 'what would you do',
     featured: false,
-    slug: 'wwyd',
+    slug: 'whatwouldyoudo',
     questions: [
       'What would you do if your flight got canceled on Christmas Eve?',
       'What would you do if you got a gift you hated?',
@@ -444,7 +444,7 @@ export const questionPacks = [
       'What would you do questions inspired by summer vacations and getaways.',
     type: 'what would you do',
     featured: false,
-    slug: 'wwyd',
+    slug: 'whatwouldyoudo',
     questions: [
       'What would you do if you missed your flight while on vacation?',
       'What would you do if your hotel lost your reservation?',
