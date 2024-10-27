@@ -20,6 +20,7 @@ enum PackType {
 
 model QuestionPack {
   id          String     @id @default(auto()) @map("_id") @db.ObjectId
+  authorId    String     @db.String
   type        PackType
   name        String     @db.String
   description String     @db.String
@@ -27,6 +28,7 @@ model QuestionPack {
   featured    Boolean
   likes       String[]
   questions   Json[]
+  pending     Boolean
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
 

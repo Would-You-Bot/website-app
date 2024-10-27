@@ -127,7 +127,7 @@ function PackForm() {
     const isValid = await trigger(['type', 'name', 'description', 'tags'])
 
     if (isValid) {
-      switchStep('q')
+      switchStep('2')
       setFormData(currentValues)
     } else {
       return
@@ -186,7 +186,7 @@ function PackForm() {
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
         {
-          !step || step === 'i' ?
+          !step || step === '1' ?
             <section className="grid gap-6 max-w-screen-md">
               {/* select field */}
               <div className="space-y-3">
@@ -296,7 +296,7 @@ function PackForm() {
                     variant="outline"
                     type="button"
                     disabled={isSubmitting}
-                    onClick={() => switchStep('i')}
+                    onClick={() => switchStep('1')}
                   >
                     <ArrowLeft className="size-4" />
                     Back
