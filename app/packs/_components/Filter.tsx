@@ -15,7 +15,7 @@ const packTypes = [
   {
     id: 'asdfghjkl12',
     label: 'What would you do',
-    slug: 'wwyd'
+    slug: 'whatwouldyoudo'
   },
   {
     id: 'zxcvbnm12',

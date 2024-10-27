@@ -20,11 +20,12 @@ import { Input } from '@/components/ui/input'
 import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
+import { Badge } from '@/components/ui/badge'
 
 export type PackType =
   | 'wouldyourather'
   | 'neverhaveiever'
-  | 'wwyd'
+  | 'whatwouldyoudo'
   | 'truth'
   | 'dare'
   | 'topic'
@@ -33,7 +34,7 @@ export type PackType =
 const packTypes = [
   { value: 'wouldyourather', label: 'Would You Rather', id: 'ab' },
   { value: 'neverhaveiever', label: 'Never Have I Ever', id: 'cd' },
-  { value: 'wwyd', label: 'What Would You Do', id: 'ef' },
+  { value: 'whatwouldyoudo', label: 'What Would You Do', id: 'ef' },
   { value: 'truth', label: 'Truth', id: 'gh' },
   { value: 'dare', label: 'Dare', id: 'ij' },
   { value: 'topic', label: 'Topic', id: 'kl' },
@@ -360,6 +361,7 @@ function PackForm() {
                         {question.question}
                       </p>
                       <div className="flex items-center gap-4">
+                      <Badge variant="outline">{question.type}</Badge>
                         <Button
                           size={'icon'}
                           variant={'ghost'}

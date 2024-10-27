@@ -178,7 +178,7 @@ function NewQuestionModal({ control, type }: NewQuestionModalProps) {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="wouldyourather">Would you rather</SelectItem>
-                <SelectItem value="wwyd">What would you do</SelectItem>
+                <SelectItem value="whatwouldyoudo">What would you do</SelectItem>
                 <SelectItem value="neverhaveiever">Never have I ever</SelectItem>
                 <SelectItem value="truth">Truth</SelectItem>
                 <SelectItem value="dare">Dare</SelectItem>
