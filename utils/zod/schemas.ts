@@ -30,3 +30,16 @@ export const packSchema = z.object({
     )
   })).min(1, 'At least one question is required').max(150, 'You can only have 100 questions in a pack')
 })
+
+export const questionSchema = z.object({
+  question: z.string()
+    .min(10, "Make sure your question is atleast 10 characters long")
+    .max(100, "Make sure your question is only 100 characters long"),
+  type: z.enum(
+    ['truth', 'dare', 'wouldyourather', 'neverhaveiever', 'wwyd', 'topic'],
+    {
+      required_error: 'Please select a valid question type',
+      message: 'Please select a valid question type'
+    }
+  )
+});
