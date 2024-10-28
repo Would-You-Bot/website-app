@@ -1,13 +1,29 @@
 'use client'
 
 import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu'
+import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select'
-import { ArrowLeft, Loader2, Pen, Search, Trash2, XCircle } from 'lucide-react'
+import {
+  ArrowLeft,
+  EllipsisVertical,
+  Loader2,
+  Pen,
+  Search,
+  Trash2,
+  XCircle
+} from 'lucide-react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useLocalStorage } from '@/hooks/use-localstorage'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -17,10 +33,10 @@ import NewQuestionModal from './NewQuestionModal'
 import { packSchema } from '@/utils/zod/schemas'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { Badge } from '@/components/ui/badge'
 import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
-import { Badge } from '@/components/ui/badge'
 
 export type PackType =
   | 'wouldyourather'
@@ -334,10 +350,10 @@ function PackForm() {
                 )}
               </div>
               <div className="border rounded-xl overflow-hidden divide-y">
-                <div className="dark:bg-[#1D1D1D] bg-background-light flex justify-between px-4 py-2 gap-4">
+                <div className="dark:bg-[#1D1D1D] bg-background-light flex justify-between p-2 pl-4 gap-4">
                   <div className="flex items-center gap-4">
                     <p className="block w-fit">Questions</p>
-                    <div className="relative">
+                    <div className="relative hidden xs:block">
                       <Search className="size-4 absolute left-2 bottom-3 dark:text-[#666666]" />
                       <Input
                         placeholder="Search for a Question"
@@ -355,30 +371,61 @@ function PackForm() {
                   {addedQuestions.map((question, index) => (
                     <li
                       key={`${question}-${index}`}
-                      className="flex justify-between px-4 py-2 items-center"
+                      className="flex justify-between p-2 pl-4 items-center gap-2"
                     >
-                      <p className="line-clamp-1 text-sm lg:text-base">
+                      <p className="text-sm lg:text-base py-2">
                         {question.question}
                       </p>
-                      <div className="flex items-center gap-4">
-                      <Badge variant="outline">{question.type}</Badge>
-                        <Button
-                          size={'icon'}
-                          variant={'ghost'}
-                          type="button"
-                          className="hover:text-brand-blue-100"
-                        >
-                          <Pen className="size-4" />
-                        </Button>
-                        <Button
-                          size={'icon'}
-                          variant={'ghost'}
-                          onClick={() => deleteQuestion(index)}
-                          type="button"
-                          className="hover:text-brand-red-100"
-                        >
-                          <Trash2 className="size-4" />
-                        </Button>
+                      <div className="flex items-center gap-2 sm:gap-4 bg-background">
+                        <div className="hidden sm:flex items-center gap-4">
+                          <Badge variant="outline">{question.type}</Badge>
+                          <Button
+                            size={'icon'}
+                            variant={'ghost'}
+                            type="button"
+                            className="hover:text-brand-blue-100"
+                          >
+                            <Pen className="size-4" />
+                          </Button>
+                          <Button
+                            size={'icon'}
+                            variant={'ghost'}
+                            onClick={() => deleteQuestion(index)}
+                            type="button"
+                            className="hover:text-brand-red-100"
+                          >
+                            <Trash2 className="size-4" />
+                          </Button>
+                        </div>
+                        <div className="flex items-center gap-2 sm:hidden">
+                          <DropdownMenu>
+                            <DropdownMenuTrigger>
+                              <Button
+                                size={'icon'}
+                                variant={'ghost'}
+                              >
+                                <EllipsisVertical className="size-4" />
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end">
+                              <DropdownMenuLabel>
+                                Type: {question.type}
+                              </DropdownMenuLabel>
+                              <DropdownMenuSeparator />
+                              <DropdownMenuItem>
+                                <Pen className="size-4" />
+                                Edit
+                              </DropdownMenuItem>
+                              <DropdownMenuItem
+                                className="focus:text-red-400"
+                                onClick={() => deleteQuestion(index)}
+                              >
+                                <Trash2 className="size-4" />
+                                Delete
+                              </DropdownMenuItem>
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </div>
                       </div>
                     </li>
                   ))}

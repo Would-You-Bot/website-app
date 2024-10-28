@@ -15,14 +15,14 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select'
+import { useLocalStorage } from '@/hooks/use-localstorage'
 import { useController, Control } from 'react-hook-form'
+import { questionSchema } from '@/utils/zod/schemas'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
 import { PackData, PackType } from './PackForm'
-import { Plus } from 'lucide-react'
 import React, { useState } from 'react'
-import { useLocalStorage } from '@/hooks/use-localstorage'
-import { questionSchema } from '@/utils/zod/schemas'
+import { Plus } from 'lucide-react'
 import { z } from 'zod'
 
 interface NewQuestionModalProps {
@@ -30,11 +30,11 @@ interface NewQuestionModalProps {
   type: PackType
 }
 
-type QuestionType = Exclude<PackType, 'mixed'> 
+type QuestionType = Exclude<PackType, 'mixed'>
 
 function NewQuestionModal({ control, type }: NewQuestionModalProps) {
   const {
-    field: { onChange, value },
+    field: { onChange, value }
   } = useController({
     name: 'questions',
     control,
@@ -42,70 +42,68 @@ function NewQuestionModal({ control, type }: NewQuestionModalProps) {
   })
 
   const [questionValue, setQuestionValue] = useState('')
-  const [typeValue, setTypeValue] = useState(type === "mixed" ? null : type)
+  const [typeValue, setTypeValue] = useState(type === 'mixed' ? null : type)
   const [typeError, setTypeError] = useState<string | null>(null)
-  const [questionError, setQuestionError] = useState<string | null>(null) 
+  const [questionError, setQuestionError] = useState<string | null>(null)
   const [open, setOpen] = useState(false)
-  const [formData, setFormData] = useLocalStorage<PackData>('PACKVALUES', {} as PackData)
-
-
+  const [formData, setFormData] = useLocalStorage<PackData>(
+    'PACKVALUES',
+    {} as PackData
+  )
 
   const validateQuestion = () => {
     const questionData = {
       question: questionValue,
       type: typeValue as QuestionType
-    };
+    }
 
     try {
-      questionSchema.parse(questionData);
-      return true;
+      questionSchema.parse(questionData)
+      return true
     } catch (error) {
       if (error instanceof z.ZodError) {
         error.errors.forEach((err) => {
           if (err.path[0] === 'question') {
-            setQuestionError(err.message);
+            setQuestionError(err.message)
           }
           if (err.path[0] === 'type') {
-            setTypeError(err.message);
+            setTypeError(err.message)
           }
-        });
+        })
       }
-      return false;
+      return false
     }
-  };
-
-
+  }
 
   const addQuestion = () => {
     const question = questionValue.trim()
-    setQuestionError(null);
-    setTypeError(null);
+    setQuestionError(null)
+    setTypeError(null)
 
     if (!validateQuestion()) {
-      return;
+      return
     }
 
-
     const newQuestions = [...value, { type: typeValue, question: question }]
-    
+
     try {
       z.array(questionSchema)
         .max(150, 'You can only have 100 questions in a pack')
-        .parse(newQuestions);
+        .parse(newQuestions)
     } catch (error) {
       if (error instanceof z.ZodError) {
-        setQuestionError(error.errors[0].message);
-        return;
+        setQuestionError(error.errors[0].message)
+        return
       }
     }
-    
-    onChange(newQuestions);
-    setQuestionValue('');
+
+    onChange(newQuestions)
+    setQuestionValue('')
 
     if (formData) {
       // @ts-expect-error ignore this bs
-      setFormData({...formData, questions: newQuestions});
-      setOpen(false);
+      setFormData({ ...formData, questions: newQuestions })
+      setOpen(false)
     }
   }
 
@@ -114,9 +112,9 @@ function NewQuestionModal({ control, type }: NewQuestionModalProps) {
     setTypeError(null)
   }
 
-  const handleQuestionInput = (value:string) => {
+  const handleQuestionInput = (value: string) => {
     setQuestionValue(value)
-    if(questionValue && questionValue.trim() !== ""){
+    if (questionValue && questionValue.trim() !== '') {
       setQuestionError(null)
     }
   }
@@ -178,8 +176,12 @@ function NewQuestionModal({ control, type }: NewQuestionModalProps) {
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="wouldyourather">Would you rather</SelectItem>
-                <SelectItem value="whatwouldyoudo">What would you do</SelectItem>
-                <SelectItem value="neverhaveiever">Never have I ever</SelectItem>
+                <SelectItem value="whatwouldyoudo">
+                  What would you do
+                </SelectItem>
+                <SelectItem value="neverhaveiever">
+                  Never have I ever
+                </SelectItem>
                 <SelectItem value="truth">Truth</SelectItem>
                 <SelectItem value="dare">Dare</SelectItem>
                 <SelectItem value="topic">Topic</SelectItem>
@@ -190,11 +192,11 @@ function NewQuestionModal({ control, type }: NewQuestionModalProps) {
             )}
           </div>
         )}
-        <DialogFooter className="space-x-6 justify-end">
+        <DialogFooter className="justify-end gap-2 flex-row">
           <DialogClose asChild>
             <Button
               type="button"
-              className="rounded-lg w-fit py-2 px-4"
+              className="rounded-lg w-fit py-2 px-6"
               size="sm"
               variant="secondary"
             >
@@ -202,7 +204,7 @@ function NewQuestionModal({ control, type }: NewQuestionModalProps) {
             </Button>
           </DialogClose>
           <Button
-            className="rounded-lg w-fit py-2 px-4 bg-brand-blue-100 hover:bg-brand-blue-200 text-white"
+            className="rounded-lg w-fit py-2 px-6 bg-brand-blue-100 hover:bg-brand-blue-200 text-white"
             size="sm"
             type="submit"
             onClick={addQuestion}
