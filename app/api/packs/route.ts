@@ -4,12 +4,29 @@ import { NextResponse, type NextRequest } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { v4 as uuidv4 } from 'uuid'
 
-export async function GET() {
-  // add some pagination logic later down the road
+export async function GET(request: NextRequest) {
+  const { searchParams } = new URL(request.url)
 
-  const questions = await prisma.questionPack
+  const PAGE_NUMBER = parseInt(searchParams.get('page') || '1')
+  const PAGE_SIZE = 15
+
+  const skip = (PAGE_NUMBER - 1) * PAGE_SIZE
+
+  const questionsPromise = prisma.questionPack
     .findMany({
-      take: 10
+      where: {
+        pending: false
+      },
+      select: {
+        id: true,
+        name: true,
+        description: true,
+        tags: true,
+        likes: true,
+        questions: false
+      },
+      skip,
+      take: PAGE_SIZE
     })
     .catch((err: Error) => {
       return NextResponse.json(
@@ -22,8 +39,19 @@ export async function GET() {
       )
     })
 
+    const totalPagePromise = prisma.questionPack.count({
+      where: {
+        pending: false
+      }
+    })
+
+    const [questions, totalPage] = await Promise.all([
+      questionsPromise,
+      totalPagePromise
+    ])
+
   return NextResponse.json(
-    { message: 'Get Request', data: questions },
+    { data: questions, pages: Math.floor(totalPage / PAGE_SIZE) },
     { status: 200 }
   )
 }
@@ -37,7 +65,7 @@ export async function POST(request: NextRequest) {
 
   if (!parsedPackResult.success) {
     return NextResponse.json(
-      { success: false, error: parsedPackResult.error.issues },
+      { error: parsedPackResult.error.issues },
       { status: 400 }
     )
   }

@@ -7,9 +7,9 @@ import React from 'react'
 
 function PageContent() {
   const searchParams = useSearchParams()
-  const t = searchParams.get('t')
+  const type = searchParams.get('type')
   const packsToShow =
-    t ? questionPacks.filter((pack) => pack.slug === t) : questionPacks
+    type ? questionPacks.filter((pack) => pack.slug === type) : questionPacks
   // or we could do it server side in page.tsx
 
   return (
