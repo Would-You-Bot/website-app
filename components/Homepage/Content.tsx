@@ -69,6 +69,7 @@ export function HomeContent({
           <Link
             href="/invite"
             target="_blank"
+            prefetch={false}
             className="mt-8 flex w-fit justify-center"
           >
             <Button className="gap-2">
@@ -224,6 +225,7 @@ export function HomeContent({
         >
           <Link
             href="/invite"
+            prefetch={false}
             target="_blank"
           >
             <Button>Invite</Button>
