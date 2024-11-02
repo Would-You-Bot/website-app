@@ -8,7 +8,7 @@ export default function Terms() {
       </h1>
       <div>
         <h3 className="my-4 text-lg font-bold text-foreground">
-          Last updated and effective: May 16, 2024
+          Last updated and effective: Nov 2, 2024
         </h3>
         <h3 className="my-4 text-lg font-bold text-foreground">
           Agreement to Terms
@@ -64,7 +64,7 @@ export default function Terms() {
           (&quot;Premium Model&quot;) that provides additional features and
           benefits. By subscribing to the Premium Model, you agree to pay the
           specified subscription fee on a recurring basis using the payment
-          processing services of Stripe, Inc. (&quot;Stripe&quot;).
+          processing services of Stripe, Inc. (&quot;Stripe&quot;). You also agree to us creating a customer object in Stripe with the data you provide us For example by logging into our website.{' '}
         </p>
         <h4 className="text-md text-foreground-400 my-4 font-bold">
           2.1 Payment Processing
