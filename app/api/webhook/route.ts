@@ -75,10 +75,16 @@ export async function POST(request: NextRequest) {
       case 'invoice.paid':
       case 'invoice.payment_succeeded':
         const invoice: Stripe.Invoice = event.data.object
-        const userIdInvoice = invoice.metadata?.userId
-        const serverIdInvoice = invoice.metadata?.serverId
+
+        if(invoice.subscription_details === null) return NextResponse.json(
+          { message: 'No subscription details found', status: 400 },
+          { status: 400 }
+        )
+
+        const userIdInvoice = invoice.subscription_details.metadata?.userId
+        const serverIdInvoice = invoice.subscription_details.metadata?.serverId
         const tierInvoice =
-          invoice.metadata?.monthly === 'true' ? 'monthly' : 'yearly'
+          invoice.subscription_details.metadata?.monthly === 'true' ? 'monthly' : 'yearly'
 
         if (!userIdInvoice || !serverIdInvoice || !tierInvoice) {
           console.error('One or more variables are undefined.')
