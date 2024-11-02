@@ -1,8 +1,8 @@
-import guildProfileSchema from '@/models/Guild'
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 import { stripe } from '@/lib/stripe'
 import type Stripe from 'stripe'
+import { prisma } from '@/lib/prisma'
 
 export async function POST(request: NextRequest) {
   try {
@@ -47,19 +47,25 @@ export async function POST(request: NextRequest) {
           )
         }
         try {
-          await guildProfileSchema.findOneAndUpdate(
-            { guildID: serverId },
-            {
+          await prisma.guild.upsert({
+            where: {
+              guildID: serverId
+            },
+            create: {
               guildID: serverId,
               premiumUser: userId,
               premium: 1,
               pending: true,
-              premiumExpiration: new Date(
-                subscription.current_period_end * 1000
-              )
+              premiumExpiration: new Date(subscription.current_period_end * 1000),
+              language: 'en_US'
             },
-            { upsert: true }
-          )
+            update: {
+              premiumUser: userId,
+              premium: 1,
+              pending: true,
+              premiumExpiration: new Date(subscription.current_period_end * 1000)
+            }
+          })
         } catch (error) {
           console.error(error)
           return NextResponse.json(
@@ -96,15 +102,18 @@ export async function POST(request: NextRequest) {
         switch (invoice.billing_reason) {
           case 'subscription_create':
             try {
-              await guildProfileSchema.findOneAndUpdate(
-                { guildID: serverIdInvoice },
-                {
+
+              await prisma.guild.update({
+                // @ts-ignore
+                where: {
+                  guildID: serverIdInvoice
+                },
+                data: {
                   pending: false,
-                  premiumExpiration: new Date(
-                    invoice.lines.data[0].period.end * 1000
-                  )
+                  premiumExpiration: new Date(invoice.lines.data[0].period.end * 1000)
                 }
-              )
+              })
+
             } catch (error) {
               console.error(error)
               return NextResponse.json(
@@ -118,15 +127,16 @@ export async function POST(request: NextRequest) {
             break
           case 'subscription_update':
             try {
-              await guildProfileSchema.findOneAndUpdate(
-                { guildID: serverIdInvoice },
-                {
+              await prisma.guild.update({
+                // @ts-ignore
+                where: {
+                  guildID: serverIdInvoice
+                },
+                data: {
                   pending: false,
-                  premiumExpiration: new Date(
-                    invoice.lines.data[0].period.end * 1000
-                  )
+                  premiumExpiration: new Date(invoice.lines.data[0].period.end * 1000)
                 }
-              )
+              })
             } catch (error) {
               console.error(error)
               return NextResponse.json(
@@ -159,17 +169,18 @@ export async function POST(request: NextRequest) {
           )
         }
 
-        await guildProfileSchema.findOneAndUpdate(
-          { guildID: serverIdUpdated },
-          {
-            premium: 1,
-            premiumExpiration: new Date(
-              subscriptionUpdated.current_period_end * 1000
-            )
+        await prisma.guild.update({
+          // @ts-ignore
+          where: {
+            guildID: serverIdUpdated
           },
-          { upsert: true }
-        )
-        break
+          data: {
+            premium: 1,
+            premiumExpiration: new Date( subscriptionUpdated.current_period_end * 1000 )
+          }
+        })
+
+        break;
 
       // in the event of a subscription being deleted
       case 'customer.subscription.deleted':
@@ -189,14 +200,19 @@ export async function POST(request: NextRequest) {
           )
         }
         try {
-          await guildProfileSchema.findOneAndUpdate(
-            { guildID: serverIdDeleted },
-            {
-              premiumUser: null,
+          
+          await prisma.guild.update({
+            // @ts-ignore
+            where: {
+              guildID: serverIdDeleted
+            },
+            data: {
               premium: 0,
-              premiumExpiration: null
+              premiumExpiration: null,
+              premiumUser: null
             }
-          )
+          })
+
         } catch (error) {
           console.error(error)
           return NextResponse.json(

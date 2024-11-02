@@ -155,7 +155,7 @@ export default function Terms() {
           7. Contribution licence
         </h3>
         <p>
-          You and Site agree that we may access, store, process, and use any
+          You agree that we may access, store, process, and use any
           information and personal data that you provide following the terms of
           the Privacy Policy and your choices (including settings).
           <br />

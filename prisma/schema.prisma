@@ -1,0 +1,54 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("MONGODB_URI")
+}
+
+// For mongodb specific schema docs, read this: https://www.prisma.io/docs/orm/overview/databases/mongodb
+enum PackType {
+  wouldyourather
+  neverhaveiever
+  whatwouldyoudo
+  truth
+  dare
+  topic
+  mixed
+}
+
+model QuestionPack {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  authorId    String   @db.String
+  type        PackType
+  name        String   @db.String
+  description String   @db.String
+  tags        String[]
+  featured    Boolean
+  likes       String[]
+  questions   Json[]
+  pending     Boolean
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Indexes for better query performance
+  @@index([type])
+  @@index([tags])
+  @@index([name])
+  @@map("questionpacks")
+}
+
+model Guild {
+  id                String   @id @default(auto()) @map("_id") @db.ObjectId
+  guildID           String   @db.String @unique
+  language          String   @db.String @default("en_US")
+  premium           Int      @db.Int @default(0)
+  pending           Boolean? @default(true)
+  premiumExpiration DateTime? @db.Date
+  premiumUser       String?  @db.String 
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  @@map("guildProfile")
+}
