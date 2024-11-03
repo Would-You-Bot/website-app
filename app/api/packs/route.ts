@@ -13,31 +13,23 @@ export async function GET(request: NextRequest) {
   const skip = (PAGE_NUMBER - 1) * PAGE_SIZE
 
   const questionsPromise = prisma.questionPack
-    .findMany({
-      where: {
-        pending: false
-      },
-      select: {
-        id: true,
-        name: true,
-        description: true,
-        tags: true,
-        likes: true,
-        questions: false
-      },
-      skip,
-      take: PAGE_SIZE
-    })
-    .catch((err: Error) => {
-      return NextResponse.json(
-        {
-          message:
-            'Error fetching data from the database, please contact the support!',
-          error: err.message
-        },
-        { status: 500 }
-      )
-    })
+  .findMany({
+    where: {
+      pending: false
+    },
+    select: {
+      type: true,
+      id: true,
+      name: true,
+      description: true,
+      tags: true,
+      // For MongoDB arrays, you can use the array length
+      likes: true,
+      questions: true
+    },
+    skip,
+    take: PAGE_SIZE
+  })
 
     const totalPagePromise = prisma.questionPack.count({
       where: {
@@ -50,8 +42,23 @@ export async function GET(request: NextRequest) {
       totalPagePromise
     ])
 
+    console.log(questions)
+
+    if (!questions) {
+      return NextResponse.json(
+        { message: 'No questions found!' },
+        { status: 404 }
+      )
+    }
+
+    const questionsWithCounts = questions.map((question) => ({
+      ...question,
+      likes: question.likes.length,
+      questions: question.questions.length
+    }))
+
   return NextResponse.json(
-    { data: questions, pages: Math.floor(totalPage / PAGE_SIZE) },
+    { data: questionsWithCounts, pages: Math.floor(totalPage / PAGE_SIZE) === 0 ? 1 : Math.floor(totalPage / PAGE_SIZE) },
     { status: 200 }
   )
 }
@@ -119,7 +126,7 @@ export async function POST(request: NextRequest) {
         featured: false,
         likes: [`${tokenData?.payload.id}`],
         questions,
-        pending: true
+        pending: false
       }
     })
     .catch((err: Error) => {
@@ -132,6 +139,19 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       )
     })
+    
+
+    console.log(newPack)
+// @ts-ignore If the pack creation fails, return a 500 status code
+    if(newPack.status === 500) {
+      return NextResponse.json(
+        { message: 'Error creating a database entry for the pack, please contact the support!' },
+        { status: 500 }
+      )
+    }
+
+
+
   return NextResponse.json(
     { message: 'New pack creation successfully!', data: newPack },
     { status: 200 }
