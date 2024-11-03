@@ -23,7 +23,6 @@ export async function GET(request: NextRequest) {
       name: true,
       description: true,
       tags: true,
-      // For MongoDB arrays, you can use the array length
       likes: true,
       questions: true
     },
@@ -80,11 +79,9 @@ export async function POST(request: NextRequest) {
   const tokenData = await getAuthTokenOrNull()
 
   type Questions = {
-    questions: {
       id: string
       question: string
       type: Exclude<PackType, 'mixed'>
-    }
   }
 
   const {
@@ -100,11 +97,9 @@ export async function POST(request: NextRequest) {
   for (const question of preProcessedQuestions) {
     console.log(question)
     questions.push({
-      questions: {
         id: uuidv4(),
         type: type === 'mixed' ? question.type : type,
         question: question.question
-      }
     })
   }
 
@@ -114,6 +109,8 @@ export async function POST(request: NextRequest) {
       { status: 401 }
     )
   }
+
+  console.log(questions)
 
   const newPack = await prisma.questionPack
     .create({
@@ -139,18 +136,16 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       )
     })
-    
+   
 
     console.log(newPack)
-// @ts-ignore If the pack creation fails, return a 500 status code
+    // @ts-ignore If the pack creation fails, return a 500 status code
     if(newPack.status === 500) {
       return NextResponse.json(
         { message: 'Error creating a database entry for the pack, please contact the support!' },
         { status: 500 }
       )
     }
-
-
 
   return NextResponse.json(
     { message: 'New pack creation successfully!', data: newPack },
