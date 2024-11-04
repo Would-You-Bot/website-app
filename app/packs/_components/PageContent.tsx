@@ -4,26 +4,12 @@ import { questionPacks } from '@/lib/constants'
 import QuestionPack from './QuestionPack'
 import Filter from './Filter'
 import React from 'react'
+import PacksPagination from './PacksPagination'
 
 function PageContent() {
+  // we'll get rid of all these when data is passed from server comp and just map over that  
   const searchParams = useSearchParams()
   const type = searchParams.get('type')
-  const page = parseInt(searchParams.get('page') || '1')
-
-  const getQuestionPacks = async () => {
-    const res = await fetch(`/api/packs?page=${page}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    })
-    return await res.json()
-  }
-
-  const questionPack2s = getQuestionPacks()
-
-  console.log(questionPack2s)
-
   const packsToShow =
     type ? questionPacks.filter((pack) => pack.slug === type) : questionPacks
   
@@ -40,6 +26,7 @@ function PageContent() {
           ))}
         </ul>
       </section>
+      <PacksPagination totalPages={120} />
     </div>
   )
 }
