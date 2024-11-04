@@ -1,3 +1,4 @@
+import CookieBanner from '@/components/cookies-banner'
 import { getIdToken } from '@/helpers/oauth'
 import { ThemeProvider } from 'next-themes'
 import Footer from '@/components/Footer'
@@ -37,6 +38,7 @@ export default function RootLayout({
           >
             <b>Would You Bot</b> • Upgrade your server with Premium
           </Alert>
+          <CookieBanner />
           <div className="w-full relative min-h-dvh flex flex-col">
             <Navbar idToken={idToken} />
             {children}

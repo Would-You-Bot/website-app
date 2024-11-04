@@ -1,3 +1,5 @@
+'use client'
+
 import { useIsClient } from '@/helpers/hooks/useIsClient'
 import { useMemo } from 'react'
 

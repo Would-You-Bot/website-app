@@ -4,6 +4,7 @@
 import CopyCommandWrapper from '@/components/CopyCommand'
 import { useEffect, useRef, useState } from 'react'
 import commands from '../../data/commands.json'
+import { useCookies } from '@/helpers/hooks'
 import Head from 'next/head'
 import Link from 'next/link'
 
@@ -49,6 +50,9 @@ export default function Commands() {
   }
 
   const categories = ['Settings', 'Utility', 'Games']
+
+  const cookies = useCookies()
+  console.log(cookies)
 
   return (
     <>
