@@ -26,6 +26,7 @@
     "@radix-ui/react-tooltip": "^1.1.2",
     "@skyra/discord-components-react": "4.0.0-alpha.34",
     "@stripe/stripe-js": "^3.4.0",
+    "@upstash/ratelimit": "^2.0.4",
     "@upstash/redis": "^1.30.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",

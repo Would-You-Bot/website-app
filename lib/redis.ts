@@ -37,4 +37,4 @@ const getServer = async () => {
   return data
 }
 
-export { add, get, getServer, setServer }
+export { add, get, getServer, setServer, redis }

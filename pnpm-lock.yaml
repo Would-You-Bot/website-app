@@ -47,6 +47,9 @@ importers:
       '@stripe/stripe-js':
         specifier: ^3.4.0
         version: 3.5.0
+      '@upstash/ratelimit':
+        specifier: ^2.0.4
+        version: 2.0.4
       '@upstash/redis':
         specifier: ^1.30.0
         version: 1.34.0
@@ -1303,6 +1306,13 @@ packages:
 
   '@ungap/structured-clone@1.2.0':
     resolution: {integrity: sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==}
+
+  '@upstash/core-analytics@0.0.10':
+    resolution: {integrity: sha512-7qJHGxpQgQr9/vmeS1PktEwvNAF7TI4iJDi8Pu2CFZ9YUGHZH4fOP5TfYlZ4aVxfopnELiE4BS4FBjyK7V1/xQ==}
+    engines: {node: '>=16.0.0'}
+
+  '@upstash/ratelimit@2.0.4':
+    resolution: {integrity: sha512-rKZWlZXXK93Xv1cz5/eCbGN4ZbvN3dWbjT2V6Of/3vqQGzd3TnD/xS3Okxp8EoG7L4MeLpy6UsRuMKGnuDZFAQ==}
 
   '@upstash/redis@1.34.0':
     resolution: {integrity: sha512-TrXNoJLkysIl8SBc4u9bNnyoFYoILpCcFJcLyWCccb/QSUmaVKdvY0m5diZqc3btExsapcMbaw/s/wh9Sf1pJw==}
@@ -4405,6 +4415,14 @@ snapshots:
       eslint-visitor-keys: 3.4.3
 
   '@ungap/structured-clone@1.2.0': {}
+
+  '@upstash/core-analytics@0.0.10':
+    dependencies:
+      '@upstash/redis': 1.34.0
+
+  '@upstash/ratelimit@2.0.4':
+    dependencies:
+      '@upstash/core-analytics': 0.0.10
 
   '@upstash/redis@1.34.0':
     dependencies:
