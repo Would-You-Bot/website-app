@@ -101,7 +101,7 @@ const Footer = () => {
           </p>
           <Button
             variant="link"
-            className="px-0 gap-1 mt-auto"
+            className="p-0 gap-1 mt-auto"
             onClick={showCookieDialog}
           >
             <Settings className="size-4" />
