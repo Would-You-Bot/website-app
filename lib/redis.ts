@@ -7,6 +7,10 @@ const redis = new Redis({
   token: process.env.REDIS_TOKEN!
 })
 
+const getRedis = async () => {
+  return redis
+}
+
 const add = async (key: string, value: any) => {
   await redis.set(key, JSON.stringify(value))
 }
@@ -37,4 +41,4 @@ const getServer = async () => {
   return data
 }
 
-export { add, get, getServer, setServer, redis }
+export { add, get, getServer, setServer, getRedis }

@@ -1,5 +1,7 @@
 import { Ratelimit } from '@upstash/ratelimit'
-import { redis } from './redis'
+import { getRedis } from './redis'
+
+const redis = await getRedis()
 
 const defautlRateLimiter = new Ratelimit({
   redis,
