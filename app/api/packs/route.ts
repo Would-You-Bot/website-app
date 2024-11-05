@@ -8,15 +8,19 @@ export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
 
   const PAGE_NUMBER = parseInt(searchParams.get('page') || '1')
+  const TYPE = searchParams.get('type') || ''
   const PAGE_SIZE = 15
 
   const skip = (PAGE_NUMBER - 1) * PAGE_SIZE
 
+  const where = {
+    pending: false,
+    ...(TYPE && ['wouldyourather', 'neverhaveiever', 'whatwouldyoudo', 'truth', 'dare', 'topic', 'mixed'].includes(TYPE) && { type: TYPE as PackType })
+  };
+
   const questionsPromise = prisma.questionPack
   .findMany({
-    where: {
-      pending: false
-    },
+    where,
     select: {
       type: true,
       id: true,

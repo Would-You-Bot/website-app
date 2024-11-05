@@ -3,14 +3,14 @@ import { getRedis } from './redis'
 
 const redis = await getRedis()
 
-const defautlRateLimiter = new Ratelimit({
+export const defaultRateLimiter = new Ratelimit({
   redis,
-  limiter: Ratelimit.slidingWindow(30, '60 s')
+  limiter: Ratelimit.slidingWindow(30, '60 s'),
+  timeout: 10_000 // 10 seconds
 })
 
-const createRateLimiter = new Ratelimit({
+export const createRateLimiter = new Ratelimit({
   redis,
-  limiter: Ratelimit.slidingWindow(3, '60 s')
+  limiter: Ratelimit.slidingWindow(6, '60 s'),
+  timeout: 120_000 // 2 minutes
 })
-
-export { defautlRateLimiter, createRateLimiter }

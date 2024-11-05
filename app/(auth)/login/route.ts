@@ -16,7 +16,7 @@ const _queryParamsSchema = z.object({
 
 export async function GET(req: NextRequest) {
   try {
-    const cookieJar = cookies()
+    const cookieJar = await cookies()
     const {
       code,
       error,
