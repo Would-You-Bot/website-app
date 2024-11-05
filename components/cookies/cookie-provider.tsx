@@ -8,8 +8,7 @@ import React, {
   useEffect
 } from 'react'
 import { CookiePreferences } from '@/helpers/hooks/useCookiesPreferences'
-import { CookieDialog } from './cookie-dialog'
-import { CookieBanner } from './cookie-banner'
+import { CookieDialog, CookieBanner } from '@/components/cookies'
 
 const actionTypes = {
   SHOW_DIALOG: 'SHOW_DIALOG',

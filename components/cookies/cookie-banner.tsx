@@ -1,8 +1,7 @@
 'use client'
 
-import { useCookieContext } from './cookie-provider'
+import { useCookieContext, CookieDialog } from '@/components/cookies'
 import { Button } from '@/components/ui/button'
-import { CookieDialog } from './cookie-dialog'
 import { useState, useEffect } from 'react'
 
 export function CookieBanner() {
