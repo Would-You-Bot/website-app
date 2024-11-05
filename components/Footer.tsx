@@ -2,6 +2,7 @@
 
 import { useCookieContext } from './cookies'
 import { Settings } from 'lucide-react'
+import { StatusBadge } from './status'
 import { Button } from './ui/button'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -99,6 +100,7 @@ const Footer = () => {
             </Link>
             . All rights reserved.
           </p>
+          {/* <StatusBadge /> */}
           <Button
             variant="link"
             className="p-0 gap-1 mt-auto"
