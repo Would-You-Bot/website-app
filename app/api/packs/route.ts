@@ -24,6 +24,7 @@ export async function GET(request: NextRequest) {
     select: {
       type: true,
       id: true,
+      featured: true,
       name: true,
       description: true,
       tags: true,
