@@ -26,6 +26,7 @@
     "@radix-ui/react-tooltip": "^1.1.2",
     "@skyra/discord-components-react": "4.0.0-alpha.34",
     "@stripe/stripe-js": "^3.4.0",
+    "@types/validator": "^13.12.2",
     "@upstash/ratelimit": "^2.0.4",
     "@upstash/redis": "^1.30.0",
     "class-variance-authority": "^0.7.0",
@@ -51,6 +52,7 @@
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
     "uuid": "^10.0.0",
+    "validator": "^13.12.0",
     "zod": "^3.22.4"
   },
   "devDependencies": {

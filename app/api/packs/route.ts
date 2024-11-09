@@ -3,13 +3,15 @@ import { getAuthTokenOrNull } from '@/helpers/oauth/helpers'
 import { NextResponse, type NextRequest } from 'next/server'
 import { prisma } from '@/lib/prisma'
 import { v4 as uuidv4 } from 'uuid'
+import validator from 'validator'
 
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
 
-  const PAGE_NUMBER = parseInt(searchParams.get('page') || '1')
-  const TYPE = searchParams.get('type') || ''
-  const PACK_ID = searchParams.get('id') || ''
+  const PAGE_NUMBER = parseInt(validator.escape(searchParams.get('page') || '1'))
+  const TYPE = validator.escape(searchParams.get('type') || '')
+  const PACK_ID =  validator.escape(searchParams.get('id') || '')
+
   const PAGE_SIZE = 15
 
   const skip = (PAGE_NUMBER - 1) * PAGE_SIZE

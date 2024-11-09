@@ -1,6 +1,6 @@
 import { prisma } from "@/lib/prisma";
 import { NextResponse, type NextRequest } from "next/server";
-
+import validator from "validator";
 
 // Get all packs left to review
 export async function GET(request: NextRequest, {
@@ -8,7 +8,7 @@ export async function GET(request: NextRequest, {
 }: {
   params: Promise<{ id: string }>
 }) {
-  const id = (await params).id
+  const id = validator.escape((await params).id)
 
   const question = await prisma.questionPack
   .findFirst({
