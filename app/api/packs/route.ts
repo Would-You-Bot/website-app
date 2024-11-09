@@ -9,13 +9,15 @@ export async function GET(request: NextRequest) {
 
   const PAGE_NUMBER = parseInt(searchParams.get('page') || '1')
   const TYPE = searchParams.get('type') || ''
+  const PACK_ID = searchParams.get('id') || ''
   const PAGE_SIZE = 15
 
   const skip = (PAGE_NUMBER - 1) * PAGE_SIZE
 
   const where = {
     pending: false,
-    ...(TYPE && ['wouldyourather', 'neverhaveiever', 'whatwouldyoudo', 'truth', 'dare', 'topic', 'mixed'].includes(TYPE) && { type: TYPE as PackType })
+    ...(TYPE && ['wouldyourather', 'neverhaveiever', 'whatwouldyoudo', 'truth', 'dare', 'topic', 'mixed'].includes(TYPE) && { type: TYPE as PackType }),
+    ...(PACK_ID && { id: PACK_ID })
   };
 
   const questionsPromise = prisma.questionPack
@@ -46,7 +48,6 @@ export async function GET(request: NextRequest) {
       totalPagePromise
     ])
 
-    console.log(questions)
 
     if (!questions) {
       return NextResponse.json(
@@ -62,7 +63,7 @@ export async function GET(request: NextRequest) {
     }))
 
   return NextResponse.json(
-    { data: questionsWithCounts, pages: Math.floor(totalPage / PAGE_SIZE) === 0 ? 1 : Math.floor(totalPage / PAGE_SIZE) },
+    { data: questionsWithCounts, totalPages: Math.floor(totalPage / PAGE_SIZE) === 0 ? 1 : Math.floor(totalPage / PAGE_SIZE) },
     { status: 200 }
   )
 }
@@ -76,7 +77,7 @@ export async function POST(request: NextRequest) {
 
   if (!parsedPackResult.success) {
     return NextResponse.json(
-      { error: parsedPackResult.error.issues },
+      { message: parsedPackResult.error.issues },
       { status: 400 }
     )
   }
@@ -100,7 +101,6 @@ export async function POST(request: NextRequest) {
   const questions: Questions[] = []
 
   for (const question of preProcessedQuestions) {
-    console.log(question)
     questions.push({
         id: uuidv4(),
         type: type === 'mixed' ? question.type : type,
@@ -114,8 +114,6 @@ export async function POST(request: NextRequest) {
       { status: 401 }
     )
   }
-
-  console.log(questions)
 
   const newPack = await prisma.questionPack
     .create({
@@ -142,8 +140,6 @@ export async function POST(request: NextRequest) {
       )
     })
    
-
-    console.log(newPack)
     // @ts-ignore If the pack creation fails, return a 500 status code
     if(newPack.status === 500) {
       return NextResponse.json(
@@ -156,4 +152,13 @@ export async function POST(request: NextRequest) {
     { message: 'New pack creation successfully!', data: newPack },
     { status: 200 }
   )
+}
+
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: '1mb',
+    },
+  },
+  maxDuration: 10,
 }

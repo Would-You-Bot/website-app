@@ -32,10 +32,11 @@ export async function middleware(request: NextRequest) {
       { status: 401 }
     )
   }
+  // Limiting by user ID and IP
+  const { success: successID } = await createRateLimiter.limit(token.payload.id)
+  const { success: successIP } = await createRateLimiter.limit(ip)
 
-  // Limiting by user ID instead of IP
-  const { success } = await createRateLimiter.limit(token.payload.id)
-  if (!success) {
+  if (!successID || !successIP) {
     return NextResponse.json(
       { success: false, error: `Rate limit exceeded, please wait a bit before trying again!`  },
       { status: 429 }, 
