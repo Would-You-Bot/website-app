@@ -36,14 +36,6 @@ export const viewport: Viewport = {
 
 export const dynamic = 'force-dynamic'
 
-const getPacks = async () => {
-  try {
-    const response = await fetch('/')
-  } catch (error) {
-    console.error(error)
-  }
-}
-
 async function page({
   searchParams
 }: {
