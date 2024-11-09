@@ -1,21 +1,19 @@
 import { CopyIcon, ExternalLink, Search } from 'lucide-react'
 
+import { Button } from '@/components/ui/button'
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger
 } from '@/components/ui/dialog'
-import { QuestionPackProps } from './QuestionPack'
-import { toast } from '@/components/ui/use-toast'
-import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { toast } from '@/components/ui/use-toast'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
+import { QuestionPackProps } from './QuestionPack'
 
 export function QuestionPackDetails({
   id,
@@ -48,7 +46,7 @@ export function QuestionPackDetails({
           <span>Use pack</span>
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-[90%] sm:max-w-lg">
+      <DialogContent className="max-w-[90%] sm:max-w-lg lg:max-w-2xl">
         <DialogHeader>
           <DialogTitle>{name}</DialogTitle>
           <DialogDescription>{description}</DialogDescription>
