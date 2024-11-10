@@ -156,11 +156,4 @@ export async function POST(request: NextRequest) {
   )
 }
 
-export const config = {
-  api: {
-    bodyParser: {
-      sizeLimit: '1mb',
-    },
-  },
-  maxDuration: 10,
-}
+export const maxDuration = 10
