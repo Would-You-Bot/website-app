@@ -7,8 +7,8 @@ import React, {
   useCallback,
   useEffect
 } from 'react'
-import { CookiePreferences } from '@/helpers/hooks/useCookiesPreferences'
 import { CookieDialog, CookieBanner } from '@/components/cookies'
+import { CookiePreferences } from '@/helpers/hooks/useCookies'
 
 const actionTypes = {
   SHOW_DIALOG: 'SHOW_DIALOG',
@@ -29,9 +29,7 @@ const initialState: CookieState = {
   showBanner: false,
   preferences: {
     necessary: true,
-    functional: false,
-    analytics: false,
-    marketing: false
+    analytics: false
   }
 }
 

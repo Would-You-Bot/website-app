@@ -18,11 +18,18 @@ export function CookieBanner() {
   const handleAcceptAll = () => {
     const allPreferences = {
       necessary: true,
-      functional: true,
-      analytics: true,
-      marketing: true
+      analytics: true
     }
     setPreferences(allPreferences)
+    setShowBanner(false)
+  }
+
+  const handleRequiredOnly = () => {
+    const requiredPreferences = {
+      necessary: true,
+      analytics: false
+    }
+    setPreferences(requiredPreferences)
     setShowBanner(false)
   }
 
@@ -34,25 +41,24 @@ export function CookieBanner() {
         <div className="max-w-8xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 py-4 px-8">
           <div className="text-sm">
             We use cookies to enhance your browsing experience and analyze our
-            traffic.{' '}
-            <Button
-              variant="link"
-              className="p-0 h-auto text-primary"
-              onClick={() => setShowModal(true)}
-            >
-              Learn more
-            </Button>
+            traffic.
           </div>
-          <div className="flex gap-4">
+          <div className="flex flex-wrap justify-center sm:flex-nowrap gap-4">
             <Button
-              variant="outline"
-              className="h-10"
+              variant="secondary"
+              className="h-10 bg-foreground/10 hover:bg-foreground/5"
               onClick={() => setShowModal(true)}
             >
               Customize
             </Button>
             <Button
-              className="h-10"
+              className="h-10 bg-brand-red-100 hover:bg-brand-red-200 text-white"
+              onClick={handleRequiredOnly}
+            >
+              Required Only
+            </Button>
+            <Button
+              className="h-10 bg-brand-blue-100 hover:bg-brand-blue-200 text-white"
               onClick={handleAcceptAll}
             >
               Accept All

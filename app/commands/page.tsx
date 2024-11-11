@@ -51,9 +51,6 @@ export default function Commands() {
 
   const categories = ['Settings', 'Utility', 'Games']
 
-  const cookies = useCookies()
-  console.log(cookies)
-
   return (
     <>
       <Head>

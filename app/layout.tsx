@@ -1,3 +1,4 @@
+import { PlausibleScript } from '@/components/plausible-script'
 import { CookieProvider } from '@/components/cookies'
 import { getIdToken } from '@/helpers/oauth'
 import { ThemeProvider } from 'next-themes'
@@ -20,11 +21,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <script
-          defer
-          data-domain="wouldyoubot.gg"
-          src="https://stats.wouldyoubot.gg/js/script.js"
-        ></script>
+        <PlausibleScript />
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

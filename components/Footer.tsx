@@ -102,8 +102,8 @@ const Footer = () => {
           </p>
           {/* <StatusBadge /> */}
           <Button
-            variant="link"
-            className="p-0 gap-1 mt-auto"
+            variant="ghost"
+            className="gap-1 mt-auto"
             onClick={showCookieDialog}
           >
             <Settings className="size-4" />
