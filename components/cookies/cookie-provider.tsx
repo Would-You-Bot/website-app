@@ -55,14 +55,12 @@ const CookieContext = createContext<{
   showCookieDialog: () => void
   hideCookieDialog: () => void
   setPreferences: (preferences: CookiePreferences) => void
-  revokePermissions: () => void
   setShowBanner: (show: boolean) => void
 }>({
   state: initialState,
   showCookieDialog: () => {},
   hideCookieDialog: () => {},
   setPreferences: () => {},
-  revokePermissions: () => {},
   setShowBanner: () => {}
 })
 
@@ -83,12 +81,6 @@ export const CookieProvider: React.FC<{ children: React.ReactNode }> = ({
   const setPreferences = useCallback((preferences: CookiePreferences) => {
     dispatch({ type: actionTypes.SET_PREFERENCES, payload: preferences })
     document.cookie = `cookiePreferences=${JSON.stringify(preferences)}; path=/`
-  }, [])
-
-  const revokePermissions = useCallback(() => {
-    dispatch({ type: actionTypes.REVOKE_PERMISSIONS })
-    document.cookie =
-      'cookiePreferences=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/'
   }, [])
 
   const setShowBanner = useCallback((show: boolean) => {
@@ -119,7 +111,6 @@ export const CookieProvider: React.FC<{ children: React.ReactNode }> = ({
         showCookieDialog,
         hideCookieDialog,
         setPreferences,
-        revokePermissions,
         setShowBanner
       }}
     >
@@ -131,7 +122,6 @@ export const CookieProvider: React.FC<{ children: React.ReactNode }> = ({
           onSave={setPreferences}
           onClose={hideCookieDialog}
           open={state.showDialog}
-          revokePermissions={revokePermissions}
         />
       )}
     </CookieContext.Provider>
