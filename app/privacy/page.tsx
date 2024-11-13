@@ -8,7 +8,7 @@ export default function Privacy() {
       </h1>
       <div>
         <h3 className="mb-4 text-lg font-bold text-foreground">
-          Last updated and effective September 15, 2024
+          Last updated and effective November 13, 2024
         </h3>
         <p>
           Thank you for choosing to be part of our community at Would
@@ -189,17 +189,17 @@ export default function Privacy() {
         </p>
 
         <h3 className="my-4 text-lg font-bold text-foreground">
-          Analytics Provided by Others
+        Cookie Usage
         </h3>
         <p>
-          Our website uses Plausible Analytics to help us understand visitor
-          trends and the effectiveness of our marketing outreach. We chose
-          Plausible Analytics because it is a privacy-focused company and
-          platform that eschews personally identifiable information in favor of
-          anonymous aggregate data. We do not use Plausible Analytics to track
-          or collect any personally identifiable information about you.
-          Plausible is self-hosted and does not use cookies nor store any
-          personal information.{' '}
+          To ensure that our app functions as intended, we use cookies. These
+          cookies are necessary for the core functionality of the app and cannot
+          be disabled. Additionally, we may use optional analytics tools,
+          including Plausible Analytics, to help us understand visitor trends
+          and improve our services. Plausible Analytics is a privacy-focused
+          platform that provides aggregate data without tracking or collecting
+          any personally identifiable information, and it does not use cookies
+          or store any personal information. However you may opt out of Plausible Analytics tracking by disabling the checkbox in the cookie settings.{' '}
           <Link
             href="https://plausible.io/data-policy"
             target={'_blank'}
