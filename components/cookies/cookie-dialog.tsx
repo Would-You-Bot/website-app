@@ -96,15 +96,17 @@ export function CookieDialog({
             )
           )}
         </div>
-        <DialogFooter>
+        <DialogFooter className="gap-2">
           <Button
             variant="outline"
+            className="order-last sm:order-first"
             onClick={handleReset}
           >
             Reset
           </Button>
           <Button
             variant="secondary"
+            className="order-first sm:order-last"
             onClick={handleSavePreferences}
           >
             Save Preferences

@@ -5,8 +5,7 @@ import { Button } from '@/components/ui/button'
 import { useState, useEffect } from 'react'
 
 export function CookieBanner() {
-  const { setShowBanner, state, setPreferences } =
-    useCookieContext()
+  const { setShowBanner, state, setPreferences } = useCookieContext()
   const [showModal, setShowModal] = useState(false)
 
   useEffect(() => {
@@ -45,14 +44,15 @@ export function CookieBanner() {
           </div>
           <div className="flex flex-wrap justify-center sm:flex-nowrap gap-4">
             <Button
-              variant="secondary"
-              className="h-10 bg-foreground/10 hover:bg-foreground/5"
+              variant="ghost"
+              className="h-10 hover:bg-foreground/5"
               onClick={() => setShowModal(true)}
             >
               Customize
             </Button>
             <Button
-              className="h-10 bg-brand-red-100 hover:bg-brand-red-200 text-white"
+              variant="secondary"
+              className="h-10 bg-foreground/10 hover:bg-foreground/5"
               onClick={handleRequiredOnly}
             >
               Required Only

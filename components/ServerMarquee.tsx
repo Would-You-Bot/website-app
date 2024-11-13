@@ -1,6 +1,7 @@
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 import Marquee from 'react-fast-marquee'
 import { useTheme } from 'next-themes'
-import Avatar from './Avatar'
+import Image from 'next/image'
 import Link from 'next/link'
 import { FC } from 'react'
 
@@ -27,6 +28,7 @@ const ServerMarquee: FC<MarqueeProps> = ({
   className
 }) => {
   const { theme } = useTheme()
+
   return (
     <div
       className={`relative mx-auto my-auto mt-8 max-w-7xl overflow-hidden ${className}`}
@@ -50,14 +52,21 @@ const ServerMarquee: FC<MarqueeProps> = ({
             href={`https://discord.gg/${s.vanityURLCode}`}
             target="_blank"
           >
-            <Avatar
-              src={s.iconURL}
-              alt={s.name + "'s server icon"}
-              fallbackSrc="/logo.svg"
-              width={60}
-              height={60}
-              className="rounded-lg"
-            />
+            <Avatar className="rounded-lg size-16">
+              <AvatarImage
+                src={s.iconURL}
+                alt={s.name + "'s server icon"}
+              />
+              <AvatarFallback className="rounded-lg size-16">
+                <Image
+                  src="/logo.svg"
+                  alt="Missing server icon"
+                  width={64}
+                  height={64}
+                  className="rounded-lg"
+                />
+              </AvatarFallback>
+            </Avatar>
             <div>
               <div className="relative flex items-center">
                 {s.features.includes('VERIFIED') && (
