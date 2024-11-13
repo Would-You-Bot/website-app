@@ -21,11 +21,19 @@ export default function Alert({
     (href ?
       <Link
         href={href}
-        className={cn('w-full px-8 py-3 text-center z-10', className)}
+        className={cn(
+          'w-full px-8 py-3 text-center z-10 rounded-t-none',
+          className
+        )}
       >
         {children}
       </Link>
-    : <div className={cn('w-full px-8 py-3 text-center z-10', className)}>
+    : <div
+        className={cn(
+          'w-full px-8 py-3 text-center z-10 rounded-t-none',
+          className
+        )}
+      >
         {children}
       </div>)
   )

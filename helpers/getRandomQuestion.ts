@@ -1,4 +1,4 @@
-type QuestionTypes = 'rather' | 'nhie' //| 'truth' | 'dare' | 'wwyd';
+type QuestionTypes = 'rather' | 'nhie' //| 'truth' | 'dare' | 'whatwouldyoudo';
 
 const questions: Record<QuestionTypes, string[]> = {
   rather: [

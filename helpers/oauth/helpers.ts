@@ -28,13 +28,13 @@ export function getAuthToken(): Promise<OAuthTokenJWT> {
 /**
  * @desc Returns the validated auth token, or null if any error is thrown (e.g. not token found, token is expired, invalid signature,...)
  */
-export const getAuthTokenOrNull = cache((): Promise<OAuthTokenJWT | null> => {
+export const getAuthTokenOrNull = (): Promise<OAuthTokenJWT | null> => {
   try {
     return getAuthToken()
   } catch (e: unknown) {
     return Promise.resolve(null)
   }
-})
+}
 
 export abstract class OAuthException extends Error {}
 
