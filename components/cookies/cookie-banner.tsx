@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { useState, useEffect } from 'react'
 
 export function CookieBanner() {
-  const { setShowBanner, state, setPreferences, revokePermissions } =
+  const { setShowBanner, state, setPreferences } =
     useCookieContext()
   const [showModal, setShowModal] = useState(false)
 
@@ -72,7 +72,6 @@ export function CookieBanner() {
         preferences={state.preferences}
         onSave={setPreferences}
         onClose={() => setShowModal(false)}
-        revokePermissions={() => revokePermissions()}
       />
     </>
   )
