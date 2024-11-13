@@ -12,6 +12,7 @@ import { CookiePreferences } from '@/helpers/hooks/useCookies'
 import { Button } from '@/components/ui/button'
 import { Switch } from '@/components/ui/switch'
 import { Label } from '@/components/ui/label'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 
 interface CookieDialogProps {
@@ -19,26 +20,28 @@ interface CookieDialogProps {
   onSave: (preferences: CookiePreferences) => void
   onClose: () => void
   open: boolean
-  revokePermissions: () => void
 }
 
 export function CookieDialog({
   preferences,
   onSave,
   onClose,
-  open,
-  revokePermissions
+  open
 }: CookieDialogProps) {
   const [localPreferences, setLocalPreferences] = useState(preferences)
-
-  const handleRevokePermissions = () => {
-    revokePermissions()
-    onClose()
-  }
+  const router = useRouter()
 
   const handleSavePreferences = () => {
     onSave(localPreferences)
     onClose()
+    router.refresh()
+  }
+
+  const handleReset = () => {
+    setLocalPreferences({
+      necessary: true,
+      analytics: false
+    })
   }
 
   const preferenceDescriptions: Record<keyof CookiePreferences, string> = {
@@ -95,7 +98,13 @@ export function CookieDialog({
         </div>
         <DialogFooter>
           <Button
-            className="bg-brand-blue-100 hover:bg-brand-blue-200 text-white"
+            variant="outline"
+            onClick={handleReset}
+          >
+            Reset
+          </Button>
+          <Button
+            variant="secondary"
             onClick={handleSavePreferences}
           >
             Save Preferences

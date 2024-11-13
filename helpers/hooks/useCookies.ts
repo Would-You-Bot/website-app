@@ -24,35 +24,36 @@ export interface CookiePreferences {
 
 export const useCookiePreferences = () => {
   const cookies = useCookies()
-  const [cookiePreferences, setCookiePreferences] = useState<CookiePreferences>(
-    {
-      necessary: true,
-      analytics: false
-    }
-  )
+  const [data, setData] = useState<CookiePreferences>({
+    necessary: true,
+    analytics: false
+  })
   const [showBanner, setShowBanner] = useState(true)
 
   useEffect(() => {
     const savedPreferences = cookies.get('cookiePreferences')
     if (savedPreferences) {
-      setCookiePreferences(JSON.parse(savedPreferences))
+      setData(JSON.parse(savedPreferences))
       setShowBanner(false)
     }
   }, [cookies])
 
-  const savePreferences = (preferences: typeof cookiePreferences) => {
-    setCookiePreferences(preferences)
+  const savePreferences = (preferences: typeof data) => {
+    setData(preferences)
     const expires = new Date(Date.now() + 365 * 864e5).toUTCString()
     document.cookie = `cookiePreferences=${JSON.stringify(preferences)}; expires=${expires}; path=/`
+  }
 
-    window.location.reload()
+  const hasAnalytics = () => {
+    return data.analytics
   }
 
   return {
-    cookiePreferences,
-    setCookiePreferences,
+    data,
+    setData,
     showBanner,
     setShowBanner,
-    savePreferences
+    savePreferences,
+    hasAnalytics
   }
 }

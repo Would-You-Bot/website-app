@@ -3,16 +3,17 @@
 import { useCookiePreferences } from '@/helpers/hooks/useCookies'
 
 export function PlausibleScript() {
-  const cookies = useCookiePreferences()
-  const analytics = cookies.cookiePreferences.analytics
+  const { hasAnalytics } = useCookiePreferences()
 
-  if (!analytics) return null
-
-  return (
-    <script
-      defer
-      data-domain="wouldyoubot.gg"
-      src="https://stats.wouldyoubot.gg/js/script.js"
-    />
-  )
+  if (hasAnalytics()) {
+    return (
+      <script
+        defer
+        data-domain="wouldyoubot.gg"
+        src="https://stats.wouldyoubot.gg/js/script.js"
+      />
+    )
+  } else {
+    return null
+  }
 }
