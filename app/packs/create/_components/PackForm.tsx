@@ -34,7 +34,7 @@ import { packSchema } from '@/utils/zod/schemas'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 
@@ -47,6 +47,12 @@ export type PackType =
   | 'topic'
   | 'mixed'
 
+export type PackLanguage =
+  | 'en_EN'
+  | 'de_DE'
+  | 'it_IT'
+  | 'fr_FR'
+
 const packTypes = [
   { value: 'wouldyourather', label: 'Would You Rather', id: 'ab' },
   { value: 'neverhaveiever', label: 'Never Have I Ever', id: 'cd' },
@@ -56,10 +62,17 @@ const packTypes = [
   { value: 'topic', label: 'Topic', id: 'kl' },
   { value: 'mixed', label: 'Mixed', id: 'mn' }
 ]
+const packLanguages = [
+  { value: 'en_EN', label: 'English', id: 'qwert' },
+  { value: 'de_DE', label: 'Spanish', id: 'yuiop' },
+  { value: 'it_IT', label: 'Italian', id: 'asdfg' },
+  { value: 'fr_FR', label: 'French', id: 'hjklm' },
+]
 
 const defaultValues = {
   type: '',
   name: '',
+  language: 'en_EN',
   description: '',
   tags: [],
   questions: []
@@ -91,7 +104,7 @@ function PackForm() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const step = searchParams.get('step')
-  const { tags: selectedTags, questions: addedQuestions, type } = watch()
+  const { tags: selectedTags, questions: addedQuestions, type, language } = watch()
 
   function switchStep(step: string) {
     const params = new URLSearchParams(searchParams.toString())
@@ -138,6 +151,13 @@ function PackForm() {
     clearErrors('type')
   }
 
+  // SWITCH pack language
+  const handleLanguageChange = (value: PackLanguage) => {
+    setValue('language', value)
+    setFormData({ ...getValues(), language: value })
+    clearErrors('language')
+  }
+
   // Check all fields are valid before switching steps
   const validateBeforeMoving = async () => {
     const currentValues = getValues()
@@ -160,7 +180,6 @@ function PackForm() {
   }
 
   const onSubmit = async (data: PackData) => {
-    console.log(data)
     const endpoint = process.env.NEXT_PUBLIC_API_URL
     try {
       const res = await fetch(`/api/packs`, {
@@ -180,8 +199,6 @@ function PackForm() {
         // Reset storage
         setFormData(defaultValues as PackData)
       } else {
-        // const errorData = await res.json()
-        // console.error('Server response:', errorData)
         throw new Error('Failed to submit pack')
       }
     } catch (error) {
@@ -205,7 +222,7 @@ function PackForm() {
         {
           !step || step === '1' ?
             <section className="grid gap-6 max-w-screen-md">
-              {/* select field */}
+              {/* type select */}
               <div className="space-y-3">
                 <label htmlFor="type">Pack Type</label>
                 <Select
@@ -230,6 +247,34 @@ function PackForm() {
                 {errors.type && (
                   <p className="px-1 text-xs text-brand-red-100">
                     {errors.type.message}
+                  </p>
+                )}
+              </div>
+              {/* language select */}
+              <div className="space-y-3">
+                <label htmlFor="language">Language</label>
+                <Select
+                  value={language}
+                  onValueChange={handleLanguageChange}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Choose your language" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {packLanguages.map((language) => (
+                      <SelectItem
+                        key={language.id}
+                        value={language.value}
+                        className="text-foreground"
+                      >
+                        {language.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                {errors.language && (
+                  <p className="px-1 text-xs text-brand-red-100">
+                    {errors.language.message}
                   </p>
                 )}
               </div>
@@ -432,7 +477,6 @@ function PackForm() {
                 </ul>
               </div>
             </section>
-
         }
       </form>
     </div>
