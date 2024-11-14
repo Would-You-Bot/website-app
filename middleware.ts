@@ -10,6 +10,7 @@ export async function middleware(request: NextRequest) {
   const ip = request.ip ?? '127.0.0.1'
 
   // Allow GET requests to /api/packs without being logged in or an admin
+
   if (method === 'GET' && pathname === '/api/packs') {
 
     const { success } = await defaultRateLimiter.limit(ip)
@@ -25,6 +26,14 @@ export async function middleware(request: NextRequest) {
   }
 
   const token = await getAuthTokenOrNull()
+
+  if (pathname.includes('/packs/create')) {
+    if (token === null) {
+      const url = request.nextUrl.clone()
+      url.pathname = '/login'
+      return NextResponse.rewrite(url)
+    }
+  }
   
   if (token === null) {
     return NextResponse.json(
@@ -60,6 +69,7 @@ export async function middleware(request: NextRequest) {
 
 export const config = {
   matcher: [
+    '/packs/create',
     '/api/packs/review',
     '/api/packs',
     '/api/packs/:path*',

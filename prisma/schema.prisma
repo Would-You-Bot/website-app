@@ -26,6 +26,7 @@ model QuestionPack {
   description String   @db.String
   tags        String[]
   featured    Boolean
+  language    String   @db.String
   likes       String[]
   questions   Json[]
   pending     Boolean

@@ -52,6 +52,7 @@ export type PackLanguage =
   | 'de_DE'
   | 'it_IT'
   | 'fr_FR'
+  | 'es_ES'
 
 const packTypes = [
   { value: 'wouldyourather', label: 'Would You Rather', id: 'ab' },
@@ -64,7 +65,8 @@ const packTypes = [
 ]
 const packLanguages = [
   { value: 'en_EN', label: 'English', id: 'qwert' },
-  { value: 'de_DE', label: 'Spanish', id: 'yuiop' },
+  { value: 'de_DE', label: 'German', id: 'eweds' },
+  { value: 'es_ES', label: 'Spanish', id: 'yuiop' },
   { value: 'it_IT', label: 'Italian', id: 'asdfg' },
   { value: 'fr_FR', label: 'French', id: 'hjklm' },
 ]

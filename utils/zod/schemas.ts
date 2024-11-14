@@ -22,10 +22,11 @@ export const packSchema = z.object({
       'de_DE',
       'it_IT',
       'fr_FR',
+      'es_ES',
     ],
     {
-      required_error: 'Please select a language',
-      message: 'Please select a language'
+      required_error: 'Please select a valid language',
+      message: 'Please select a valid language'
     }
   ),
   name: z.string().min(4, 'Make sure your packs name is atleast 4 characters long').max(100, "Make sure your packs name is only 100 characters long"),
