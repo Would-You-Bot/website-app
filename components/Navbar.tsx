@@ -88,6 +88,8 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
             </Link>
           </div>
           <button
+            type='button'
+            title={`${ isOpen ? "close" : "open" } menu`}
             className={`absolute right-[1.05rem] top-[1.35rem] z-50 flex flex-col gap-[5px] md:hidden`}
             onClick={handleIsOpen}
           >

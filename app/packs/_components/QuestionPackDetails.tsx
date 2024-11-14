@@ -1,6 +1,5 @@
 import { CopyIcon, ExternalLink, Search } from 'lucide-react'
 
-import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
@@ -9,27 +8,22 @@ import {
   DialogTitle,
   DialogTrigger
 } from '@/components/ui/dialog'
-import { Input } from '@/components/ui/input'
 import { toast } from '@/components/ui/use-toast'
+import { Button } from '@/components/ui/button'
+import { questionPacks } from '@/lib/constants'
+import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
-import { QuestionPackProps } from './QuestionPack'
 
-export function QuestionPackDetails({
-  id,
-  featured,
-  name,
-  description,
-  likes,
-  questions,
-  type
-}: QuestionPackProps) {
+export function QuestionPackDetails({ id }: { id: string }) {
   const copyCommand = () => {
     navigator.clipboard.writeText('commnad')
     toast({
       title: 'Copied to clipboard!'
     })
   }
+
+  const packToShow = questionPacks.find((pack) => pack.id === id) || questionPacks[6]
 
   return (
     <Dialog>
@@ -38,7 +32,7 @@ export function QuestionPackDetails({
           className={cn(
             'w-full bg-brand-blue-100 hover:bg-brand-blue-200 text-white',
             {
-              'popular-btn': featured
+              'popular-btn': packToShow.featured
             }
           )}
         >
@@ -48,8 +42,8 @@ export function QuestionPackDetails({
       </DialogTrigger>
       <DialogContent className="max-w-[90%] sm:max-w-lg lg:max-w-2xl">
         <DialogHeader>
-          <DialogTitle>{name}</DialogTitle>
-          <DialogDescription>{description}</DialogDescription>
+          <DialogTitle>{packToShow.name}</DialogTitle>
+          <DialogDescription>{packToShow.description}</DialogDescription>
         </DialogHeader>
 
         <section className="grid gap-3 grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 my-2 lg:my-4">
@@ -68,11 +62,11 @@ export function QuestionPackDetails({
           </div>
           <div className="flex flex-col gap-1">
             <h3 className="text-sm text-muted-foreground">Questions</h3>
-            <p className="capitalize">{questions.length}</p>
+            <p className="capitalize">{packToShow.questions.length}</p>
           </div>
           <div className="flex flex-col gap-1">
             <h3 className="text-sm text-muted-foreground">Type</h3>
-            <p className="capitalize">{type}</p>
+            <p className="capitalize">{packToShow.type}</p>
           </div>
         </section>
 
@@ -117,8 +111,8 @@ export function QuestionPackDetails({
                 />
               </div>
             </div>
-            <ul className="divide-y max-h-[100px] md:max-h-[200px] overflow-y-auto">
-              {questions.map((question: string, index) => (
+            <ul className="divide-y max-h-[100px] md:max-h-[200px] overflow-y-auto thin-scrollbar">
+              {packToShow.questions.map((question: string, index) => (
                 <li
                   key={`${question}-${index}`}
                   className="px-4 py-2"

@@ -31,6 +31,7 @@ export async function GET(request: NextRequest) {
       featured: true,
       name: true,
       description: true,
+      language: true,
       tags: true,
       likes: true,
       questions: true
@@ -97,6 +98,7 @@ export async function POST(request: NextRequest) {
     name,
     description,
     tags,
+    language,
     questions: preProcessedQuestions
   } = data
 
@@ -124,6 +126,7 @@ export async function POST(request: NextRequest) {
         type,
         name,
         description,
+        language,
         tags,
         featured: false,
         likes: [`${tokenData?.payload.id}`],

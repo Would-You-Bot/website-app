@@ -1,7 +1,10 @@
 import Container from '@/components/Container'
 
-import PageContent from './_components/PageContent'
+import QuestionPackList from './_components/QuestionPackList'
+import PacksPagination from './_components/PacksPagination'
+import Filter from './_components/Filter'
 import { Metadata, Viewport } from 'next'
+import { Smile } from 'lucide-react'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://wouldyoubot.gg'),
@@ -41,22 +44,26 @@ export interface PackResponse {
   data: {
     id: string
     name: string
+    type: string
     description: string
     tags: string[]
     likes: string[]
     questions: string[]
     featured: boolean
-  }
+  }[]
   pages: number
 }
 
 const getQuestionPacks = async (page: string, type: string) => {
-  const res = await fetch(`https://localhost:3000/api/packs?page=${page}&type=${type}`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json'
+  const res = await fetch(
+    `http://localhost:3000/api/packs?page=${page}&type=${type}`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
     }
-  })
+  )
   const resData: PackResponse = await res.json()
   return resData
 }
@@ -66,10 +73,10 @@ async function page({
 }: {
   searchParams: { [key: string]: string | string[] | undefined }
 }) {
-  const type = searchParams.type ? searchParams.type as string : 'all'
-  const page = searchParams.page ? searchParams.page as string : '1';
+  const type = searchParams.type ? (searchParams.type as string) : 'all'
+  const page = searchParams.page ? (searchParams.page as string) : '1'
 
-  // const data = await getQuestionPacks(page, type)
+  const responseData = await getQuestionPacks(page, type)
 
   return (
     <Container className="pt-8 lg:pt-10 space-y-8 min-h-[calc(100vh-112px)]">
@@ -79,8 +86,21 @@ async function page({
         </span>{' '}
         <span className="text-brand-blue-100 drop-shadow-blue-glow">Packs</span>
       </h1>
-      {/* pass data down */}
-      <PageContent />
+      <div className="space-y-10 lg:space-y-14 mb-10">
+        <Filter />
+        {responseData ?
+          <section className="min-h-96">
+            <QuestionPackList packList={responseData.data} />
+          </section>
+        : <section className="min-h-96 grid place-content-center">
+            <div className="flex flex-col text-muted-foreground items-center gap-4">
+              <Smile size={56} />
+              <p>Nothing to show here yet please check back later</p>
+            </div>
+          </section>
+        }
+        <PacksPagination totalPages={9} />
+      </div>
     </Container>
   )
 }
