@@ -30,8 +30,8 @@ export async function GET(request: NextRequest) {
       id: true,
       featured: true,
       name: true,
-      description: true,
       language: true,
+      description: true,
       tags: true,
       likes: true,
       questions: true
