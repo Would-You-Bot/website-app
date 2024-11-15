@@ -47,24 +47,21 @@ export interface PackResponse {
     type: string
     description: string
     tags: string[]
-    likes: string[]
-    questions: string[]
+    likes: number
+    questions: number
     featured: boolean
   }[]
-  pages: number
+  totalPages: number
 }
 
 const getQuestionPacks = async (page: string, type: string) => {
-  const res = await fetch(
-    `/api/packs?page=${page}&type=${type}`,
-    {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
+  const endpoint = process.env.NEXT_PUBLIC_API_URL
+  const res = await fetch(`${endpoint}/api/packs?page=${page}&type=${type}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
     }
-  )
-  console.log(res)
+  })
   const resData: PackResponse = await res.json()
   return resData
 }
@@ -100,7 +97,7 @@ async function page({
             </div>
           </section>
         }
-        <PacksPagination totalPages={9} />
+        {responseData.totalPages > 1 && <PacksPagination totalPages={responseData.totalPages} />}
       </div>
     </Container>
   )

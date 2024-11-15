@@ -37,8 +37,6 @@ export default function CopyCommandWrapper({
     setText('Copied!')
   }
 
-  console.log(minWidth)
-
   return (
     <div
       ref={wrapperRef}

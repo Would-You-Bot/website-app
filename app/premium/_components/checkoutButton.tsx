@@ -74,7 +74,6 @@ export default function CheckoutButton({
     }
 
     const stripeSession = data as { id: string }
-    console.log(stripeSession.id)
     await stripe?.redirectToCheckout({ sessionId: stripeSession.id })
     setLoading(false)
   }

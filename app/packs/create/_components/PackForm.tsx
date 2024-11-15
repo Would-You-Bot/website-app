@@ -184,7 +184,7 @@ function PackForm() {
   const onSubmit = async (data: PackData) => {
     const endpoint = process.env.NEXT_PUBLIC_API_URL
     try {
-      const res = await fetch(`/api/packs`, {
+      const res = await fetch(`${endpoint}/api/packs`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

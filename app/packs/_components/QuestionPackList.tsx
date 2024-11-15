@@ -15,7 +15,7 @@ function QuestionPackList({ packList }: { packList: QuestionPackProps[] }) {
     <ul className="grid grid-cols-[repeat(auto-fill,_minmax(320px,_1fr))] gap-10 lg:gap-x-12 xl:gap-x-14 max-md:max-w-[500px] max-md:mx-auto">
       {packsToShow.map((question) => (
         <React.Fragment key={`pack-${question.id}`}>
-          <QuestionPack {...question} />
+          <QuestionPack {...packList} />
         </React.Fragment>
       ))}
     </ul>
