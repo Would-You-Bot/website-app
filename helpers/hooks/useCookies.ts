@@ -40,7 +40,7 @@ export const useCookiePreferences = () => {
 
   const savePreferences = (preferences: typeof data) => {
     setData(preferences)
-    const expires = new Date(Date.now() + 365 * 864e5).toUTCString()
+    const expires = new Date(Date.now() + 31 * 864e5).toUTCString()
     document.cookie = `cookiePreferences=${JSON.stringify(preferences)}; expires=${expires}; path=/`
   }
 
