@@ -45,13 +45,3 @@
 .markdown ol {
   @apply list-inside list-decimal marker:text-foreground/50;
 }
-
-.progress-bar {
-  position: fixed;
-  top: 80px;
-  left: 0;
-  right: 0;
-  height: 5px;
-  background: #0598f4;
-  transform-origin: 0;
-}

@@ -1,4 +1,31 @@
+import type { Metadata, Viewport } from 'next'
 import Link from 'next/link'
+
+export const metadata: Metadata = {
+  metadataBase: new URL('https://wouldyoubot.gg'),
+  title: 'Impressum - Would You Bot',
+  alternates: {
+    canonical: "/legal",
+  },
+  description: 'Das Impressum von Would You Bot.',
+  twitter: {
+    title: 'Impressum - Would You Bot',
+    description: 'Das Impressum von Would You Bot.',
+  },
+  openGraph: {
+    title: 'Impressum - Would You Bot',
+    description: 'Das Impressum von Would You Bot.',
+  },
+  robots: {
+    index: true,
+    follow: true
+  }
+}
+
+export const viewport: Viewport = {
+  themeColor: '#0598F6',
+  maximumScale: 5
+}
 
 export default function legalnoticede() {
   return (

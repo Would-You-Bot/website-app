@@ -31,7 +31,6 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import DiscordLoginButton from '@/components/DiscordLoginButton'
 import PlansComparison from './_components/PlansComparison'
-import { LazyMotion, domAnimation, m } from 'framer-motion'
 import CheckoutButton from './_components/checkoutButton'
 import { DiscordGuild, PricingData } from './_types'
 import { ServersListSkeleton } from './_components'
@@ -115,13 +114,7 @@ export default function Premium() {
       </Head>
       <main className="relative mb-40 flex w-full justify-center">
         <div className="flex w-full max-w-8xl flex-col gap-52 px-8">
-          <LazyMotion features={domAnimation}>
-            <m.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
+            <div>
               <div className="container mx-auto px-4">
                 <h1 className="text-4xl font-bold text-yellow-500 drop-shadow-gold-glow">
                   Premium
@@ -309,22 +302,14 @@ export default function Premium() {
                   </a>
                 </div>
               </div>
-            </m.div>
-          </LazyMotion>
-          <LazyMotion features={domAnimation}>
-            <m.div
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
+            </div>
+            <div>
               <PlansComparison
                 data={data}
                 rowSeparator
                 colSeparator
               />
-            </m.div>
-          </LazyMotion>
+            </div>
         </div>
       </main>
     </>

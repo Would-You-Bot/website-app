@@ -1,43 +1,22 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import NeverHaveIEverEmbed from '@/components/Embeds/NeverHaveIEverEmbed'
 import DailyMessageEmbed from '@/components/Embeds/DailyMessageEmbed'
 import HigherLowerEmbed from '@/components/Embeds/HigherLowerEmbed'
 import MainDiscordEmbed from '@/components/Embeds/MainDiscordEmbed'
-import { AvatarGroup } from '../avatar-group'
-import { domAnimation, LazyMotion, m } from 'framer-motion'
 import ServerMarquee from '@/components/ServerMarquee'
 import FeatureItem from '@/components/FeatureItem'
+import { AvatarGroup } from '../avatar-group'
 import { LandingWave } from '../LandingWave'
 import Button from '@/components/Button'
+import { motion } from 'framer-motion'
 import Link from 'next/link'
 
 interface HomeContentProps {
   initialRatherQuestion: string
   initialNhieQuestion: string
   serverCount: number
-  servers: any[] // Consider defining a more specific type for servers if possible
-}
-
-function useHydrated() {
-  const [isHydrated, setIsHydrated] = useState(false)
-
-  useEffect(() => {
-    setIsHydrated(true)
-  }, [])
-
-  return isHydrated
-}
-
-function ClientOnly({ children }: { children: React.ReactNode }) {
-  const isHydrated = useHydrated()
-
-  if (!isHydrated) {
-    return null
-  }
-
-  return <>{children}</>
+  servers: any[]
 }
 
 export function HomeContent({
@@ -56,10 +35,9 @@ export function HomeContent({
   ].join('/')} - Daily Message`
 
   return (
-    <LazyMotion features={domAnimation}>
+    <>
       <section className="mt-0 sm:mt-16 lg:mt-28 flex w-full max-w-8xl flex-col items-center justify-between gap-16 px-8 text-center lg:flex-row lg:text-left">
-        <ClientOnly>
-          <m.div
+          <motion.div
             initial={{ opacity: 0, transform: 'translateY(20px)' }}
             whileInView={{ opacity: 1, transform: 'translateY(0)' }}
             transition={{ duration: 0.7, ease: 'easeInOut' }}
@@ -77,9 +55,9 @@ export function HomeContent({
               </span>
             </h1>
             <p className="text-lg text-neutral-700 dark:text-neutral-300">
-              Play fun and entertaining games with Would You, featuring user polls
-              and customization. Play Would You Rather, Truth or Dare, Never Have
-              I Ever, Higher or Lower, and What Would You Do!{' '}
+              Play fun and entertaining games with Would You, featuring user
+              polls and customization. Play Would You Rather, Truth or Dare,
+              Never Have I Ever, Higher or Lower, and What Would You Do!{' '}
             </p>
             <div className="flex flex-col lg:flex-row mt-8 items-center gap-4">
               <AvatarGroup avatars={servers.reverse().slice(0, 5)} />
@@ -109,11 +87,9 @@ export function HomeContent({
                 </svg>
               </Button>
             </Link>
-          </m.div>
-        </ClientOnly>
+          </motion.div>
         <MainDiscordEmbed initialQuestion={initialRatherQuestion} />
       </section>
-
       <section
         id="slider"
         className="mt-36"
@@ -149,10 +125,8 @@ export function HomeContent({
           </div>
         </div>
       </section>
-
       <section className="mt-20 flex w-full max-w-8xl flex-col items-center gap-20 px-8 text-foreground">
-        <ClientOnly>
-          <m.div
+            <motion.div
             initial={{ opacity: 0, transform: 'translateY(15px)' }}
             whileInView={{ opacity: 1, transform: 'translateY(0)' }}
             viewport={{ once: true }}
@@ -165,9 +139,14 @@ export function HomeContent({
             <h3 className="mt-4 text-center text-2xl">
               What Does Would You Offer To Your Server?
             </h3>
-          </m.div>
-        </ClientOnly>
-
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, transform: 'translateY(15px)' }}
+            whileInView={{ opacity: 1, transform: 'translateY(0)' }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: 'easeInOut' }}
+            className="flex flex-col items-center"
+          >
         <FeatureItem
           reverse
           right={<DailyMessageEmbed threadName={threadName} />}
@@ -199,27 +178,22 @@ export function HomeContent({
           }
           right={<HigherLowerEmbed currentDate={currentDate} />}
         />
-
         <FeatureItem
           reverse
           right={<NeverHaveIEverEmbed initialQuestion={initialNhieQuestion} />}
           left={
-            <>
-              <h4 className="text-center text-3xl font-bold md:text-left">
-                Upgrade your server
-              </h4>
-              <p className="text-center text-lg text-foreground/70 md:text-left">
+              <><h4 className="text-center text-3xl font-bold md:text-left">
+              Upgrade your server
+            </h4><p className="text-center text-lg text-foreground/70 md:text-left">
                 Upgrade your server with Would You, featuring a wide variety of
                 games and customized questions.
-              </p>
-            </>
-          }
+              </p></>
+              }
         />
+        </motion.div>
       </section>
-
       <section className="mt-36 w-full bg-hover-light px-9 py-12">
-        <ClientOnly>
-          <m.h2
+          <motion.h2
             initial={{ opacity: 0, transform: 'translateY(10px)' }}
             whileInView={{ opacity: 1, transform: 'translateY(0)' }}
             viewport={{ once: true }}
@@ -230,22 +204,18 @@ export function HomeContent({
             <span className="bg-gradient-brand bg-clip-text font-bold text-transparent">
               Would You
             </span>
-          </m.h2>
-        </ClientOnly>
-        <ClientOnly>
-          <m.h3
-            initial={{ opacity: 0, transform: 'translateY(10px)' }}
+          </motion.h2>
+          <motion.h3
+            initial={{ opacity: 1, transform: 'translateY(10px)' }}
             whileInView={{ opacity: 1, transform: 'translateY(0)' }}
             viewport={{ once: true }}
             transition={{ duration: 0.65, ease: 'easeInOut' }}
             className="mt-4 text-center text-xl text-foreground/70"
           >
             Invite To Your Server Now!
-          </m.h3>
-        </ClientOnly>
-        <ClientOnly>
-          <m.div
-            initial={{ opacity: 0, transform: 'translateY(-20px)' }}
+          </motion.h3>
+          <motion.div
+            initial={{ opacity: 1, transform: 'translateY(-20px)' }}
             whileInView={{ opacity: 1, transform: 'translateY(0)' }}
             viewport={{ once: true }}
             transition={{ duration: 0.65, ease: 'easeInOut' }}
@@ -257,9 +227,8 @@ export function HomeContent({
             >
               <Button>Invite</Button>
             </Link>
-          </m.div>
-        </ClientOnly>
+          </motion.div>
       </section>
-    </LazyMotion>
+    </>
   )
 }

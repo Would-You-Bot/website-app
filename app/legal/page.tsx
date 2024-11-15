@@ -1,4 +1,33 @@
+import type { Metadata, Viewport } from 'next'
 import Link from 'next/link'
+
+export const metadata: Metadata = {
+  metadataBase: new URL('https://wouldyoubot.gg'),
+  title: 'Legal Notice - Would You Bot',
+  alternates: {
+    languages: {
+      de: 'https://wouldyoubot.gg/legal-de'
+    }
+  },
+  description: 'The legal notice of Would You Bot.',
+  twitter: {
+    title: 'Legal Notice - Would You Bot',
+    description: 'The legal notice of Would You Bot.'
+  },
+  openGraph: {
+    title: 'Legal Notice - Would You Bot',
+    description: 'The legal notice of Would You Bot.'
+  },
+  robots: {
+    index: true,
+    follow: true
+  }
+}
+
+export const viewport: Viewport = {
+  themeColor: '#0598F6',
+  maximumScale: 5
+}
 
 export default function legalnotice() {
   return (

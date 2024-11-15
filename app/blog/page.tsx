@@ -1,5 +1,5 @@
 import { BlogList, BlogListSkeleton } from '@/app/blog/_components'
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Suspense } from 'react'
 
 export const metadata: Metadata = {
@@ -22,6 +22,11 @@ export const metadata: Metadata = {
     follow: true,
   },
 };
+
+export const viewport: Viewport = {
+  themeColor: '#0598F6',
+  maximumScale: 5,
+}
 
 const BlogPosts = async () => {
   return (
