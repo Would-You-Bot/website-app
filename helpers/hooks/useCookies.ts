@@ -26,7 +26,7 @@ export const useCookiePreferences = () => {
   const cookies = useCookies()
   const [data, setData] = useState<CookiePreferences>({
     necessary: true,
-    analytics: false
+    analytics: true
   })
   const [showBanner, setShowBanner] = useState(true)
 

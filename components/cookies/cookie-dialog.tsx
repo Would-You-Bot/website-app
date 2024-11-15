@@ -40,7 +40,7 @@ export function CookieDialog({
   const handleReset = () => {
     setLocalPreferences({
       necessary: true,
-      analytics: false
+      analytics: true
     })
   }
 

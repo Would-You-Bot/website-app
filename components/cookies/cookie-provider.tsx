@@ -29,7 +29,7 @@ const initialState: CookieState = {
   showBanner: false,
   preferences: {
     necessary: true,
-    analytics: false
+    analytics: true
   }
 }
 
