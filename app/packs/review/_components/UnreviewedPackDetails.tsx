@@ -47,7 +47,7 @@ export function UnreviewedPackDetails({
           <span className="text-white">Review</span>
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-[90%] sm:max-w-lg">
+      <DialogContent className="max-w-[90%] sm:max-w-lg lg:max-w-2xl">
         <DialogHeader>
           <DialogTitle>{name}</DialogTitle>
           <DialogDescription>{description}</DialogDescription>
@@ -104,7 +104,6 @@ export function UnreviewedPackDetails({
           </div>
         </section>
         <DialogFooter className="grid grid-cols-2 md:flex py-2 gap-4">
-          {/* depending on the desired UX we might not want to close on click */}
           <DialogClose asChild>
             <Button
               onClick={() => rejectPack()}

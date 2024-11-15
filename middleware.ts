@@ -1,8 +1,7 @@
 import { getAuthTokenOrNull } from '@/helpers/oauth/helpers'
 import { type NextRequest, NextResponse } from 'next/server'
 import { createRateLimiter, defaultRateLimiter } from './lib/ratelimiter'
-
-const ALLOWED_ADMIN_IDS = ['347077478726238228', '268843733317976066']
+import ALLOWED_ADMIN_IDS from './data/reviewers.json'
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
@@ -27,7 +26,7 @@ export async function middleware(request: NextRequest) {
 
   const token = await getAuthTokenOrNull()
 
-  if (pathname.includes('/packs/create')) {
+  if (pathname.includes('/packs/create') || pathname.includes('/packs/review')) {
     if (token === null) {
       const url = request.nextUrl.clone()
       url.pathname = '/login'
@@ -53,7 +52,7 @@ export async function middleware(request: NextRequest) {
   }
 
   // For review routes, check if user has admin perms
-  if (pathname.includes('/review')) {
+  if (pathname.includes('/api/review') || pathname.includes('/packs/review') ) {
     const userId = token.payload.id 
     
     if (!ALLOWED_ADMIN_IDS.includes(userId)) {
@@ -74,5 +73,6 @@ export const config = {
     '/api/packs',
     '/api/packs/:path*',
     '/api/packs/review/:path*',
+    '/packs/review'
   ]
 }
