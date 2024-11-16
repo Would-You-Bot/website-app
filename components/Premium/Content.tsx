@@ -26,8 +26,8 @@ import { ServersListSkeleton } from '@/app/premium/_components'
 import CheckoutButton from '@/app/premium/_components/checkoutButton'
 import PlansComparison from '@/app/premium/_components/PlansComparison'
 import { PricingData, DiscordGuild } from '@/app/premium/_types'
-import { CloseIcon, StripeSquare, ApplePay, GooglePay, MasterCard, Visa, PayPal, Stripe } from '@/app/premium/_components/icons'
-import { CheckIcon, Link } from 'lucide-react'
+import { Link, CloseIcon, StripeSquare, ApplePay, GooglePay, MasterCard, Visa, PayPal, Stripe } from '@/app/premium/_components/icons'
+import { CheckIcon } from 'lucide-react'
 
 const pricingData: PricingData = {
   price: { monthly: 2.99, yearly: 29.99 },
