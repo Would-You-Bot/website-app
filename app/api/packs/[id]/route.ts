@@ -19,6 +19,7 @@ export async function GET(request: NextRequest, {
     select: {
       type: true,
       id: true,
+      language: true,
       featured: true,
       name: true,
       description: true,
