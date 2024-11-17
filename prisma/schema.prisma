@@ -30,6 +30,7 @@ model QuestionPack {
   likes       String[]
   questions   Json[]
   pending     Boolean
+  denied    Boolean
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 

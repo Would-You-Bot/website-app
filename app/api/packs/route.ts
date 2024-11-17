@@ -18,6 +18,7 @@ export async function GET(request: NextRequest) {
 
   const where = {
     pending: false,
+    denied: false,
     ...(TYPE && ['wouldyourather', 'neverhaveiever', 'whatwouldyoudo', 'truth', 'dare', 'topic', 'mixed'].includes(TYPE) && { type: TYPE as PackType }),
     ...(PACK_ID && { id: PACK_ID })
   };
@@ -131,7 +132,8 @@ export async function POST(request: NextRequest) {
         featured: false,
         likes: [`${tokenData?.payload.id}`],
         questions,
-        pending: false
+        pending: false,
+        denied: false,
       }
     })
     .catch((err: Error) => {

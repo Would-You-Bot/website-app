@@ -7,7 +7,8 @@ export async function GET() {
   const question = await prisma.questionPack
   .findFirst({
     where: {
-      pending: true
+      pending: true,
+      denied: false
     },
     select: {
       type: true,

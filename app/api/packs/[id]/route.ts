@@ -14,7 +14,8 @@ export async function GET(request: NextRequest, {
   .findFirst({
     where: {
       id: id,
-      pending: false
+      pending: false,
+      denied: false
     },
     select: {
       type: true,
