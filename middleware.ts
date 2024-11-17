@@ -1,6 +1,6 @@
+import { createRateLimiter, defaultRateLimiter } from './lib/ratelimiter'
 import { getAuthTokenOrNull } from '@/helpers/oauth/helpers'
 import { type NextRequest, NextResponse } from 'next/server'
-import { createRateLimiter, defaultRateLimiter } from './lib/ratelimiter'
 import ALLOWED_ADMIN_IDS from './data/reviewers.json'
 
 export async function middleware(request: NextRequest) {
@@ -11,12 +11,14 @@ export async function middleware(request: NextRequest) {
   // Allow GET requests to /api/packs without being logged in or an admin
 
   if (method === 'GET' && pathname === '/api/packs') {
-
     const { success } = await defaultRateLimiter.limit(ip)
 
     if (!success) {
       return NextResponse.json(
-        { success: false, error: `Rate limit exceeded, please wait a bit before trying again!`  },
+        {
+          success: false,
+          error: `Rate limit exceeded, please wait a bit before trying again!`
+        },
         { status: 429 }
       )
     }
@@ -26,14 +28,17 @@ export async function middleware(request: NextRequest) {
 
   const token = await getAuthTokenOrNull()
 
-  if (pathname.includes('/packs/create') || pathname.includes('/packs/review')) {
+  if (
+    pathname.includes('/packs/create') ||
+    pathname.includes('/packs/review')
+  ) {
     if (token === null) {
       const url = request.nextUrl.clone()
       url.pathname = '/login'
       return NextResponse.rewrite(url)
     }
   }
-  
+
   if (token === null) {
     return NextResponse.json(
       { success: false, error: 'Unauthorized' },
@@ -41,20 +46,27 @@ export async function middleware(request: NextRequest) {
     )
   }
   // Limiting by user ID and IP
-  const { success: successID } = await createRateLimiter.limit(token.payload.id)
-  const { success: successIP } = await createRateLimiter.limit(ip)
-
-  if (!successID || !successIP) {
-    return NextResponse.json(
-      { success: false, error: `Rate limit exceeded, please wait a bit before trying again!`  },
-      { status: 429 }, 
+  if (method === 'POST' && pathname === '/api/packs') {
+    const { success: successID } = await createRateLimiter.limit(
+      token.payload.id
     )
+    const { success: successIP } = await createRateLimiter.limit(ip)
+
+    if (!successID || !successIP) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: `Rate limit exceeded, please wait a bit before trying again!`
+        },
+        { status: 429 }
+      )
+    }
   }
 
   // For review routes, check if user has admin perms
-  if (pathname.includes('/api/review') || pathname.includes('/packs/review') ) {
-    const userId = token.payload.id 
-    
+  if (pathname.includes('/api/review') || pathname.includes('/packs/review')) {
+    const userId = token.payload.id
+
     if (!ALLOWED_ADMIN_IDS.includes(userId)) {
       return NextResponse.json(
         { success: false, error: 'Forbidden - Admin access required' },

@@ -5,7 +5,7 @@ const redis = await getRedis()
 
 export const defaultRateLimiter = new Ratelimit({
   redis,
-  limiter: Ratelimit.slidingWindow(30, '60 s'),
+  limiter: Ratelimit.slidingWindow(120, '60 s'),
   timeout: 10_000 // 10 seconds
 })
 

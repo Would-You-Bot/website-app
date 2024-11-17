@@ -55,8 +55,7 @@ export interface PackResponse {
 }
 
 const getQuestionPacks = async (page: string, type: string) => {
-  const endpoint = process.env.NEXT_PUBLIC_API_URL
-  const res = await fetch(`${endpoint}/api/packs?page=${page}&type=${type}`, {
+  const res = await fetch(`/api/packs?page=${page}&type=${type}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'
