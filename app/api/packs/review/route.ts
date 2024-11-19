@@ -27,7 +27,7 @@ export async function GET() {
   })
 
   // @ts-expect-error 
-  if(question.status === 500) {
+  if(question?.status === 500) {
     return NextResponse.json(
       { message: 'Error getting questions left to review, please fix!' },
       { status: 500 }
