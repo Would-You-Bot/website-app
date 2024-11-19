@@ -64,7 +64,6 @@ const getQuestionPacks = async (page: string, type: string) => {
     next: { revalidate: 5 } 
   })
   const resData: PackResponse = await res.json()
-  console.log(resData)
   return resData
 }
 

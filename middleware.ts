@@ -9,8 +9,7 @@ export async function middleware(request: NextRequest) {
   const ip = request.ip ?? '127.0.0.1'
 
   // Allow GET requests to /api/packs without being logged in or an admin
-
-  if (method === 'GET' && pathname === '/api/packs') {
+  if (method === 'GET' && (pathname === '/api/packs' || pathname.startsWith('/api/packs/'))) {
     const { success } = await defaultRateLimiter.limit(ip)
 
     if (!success) {

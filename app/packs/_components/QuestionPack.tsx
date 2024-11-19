@@ -80,7 +80,7 @@ export default function QuestionPack({
               {likes} Likes
             </span>
           </Button>
-          <QuestionPackDetails id={id} />
+          <QuestionPackDetails id={id} type={type} />
         </CardFooter>
       </Card>
     </li>
