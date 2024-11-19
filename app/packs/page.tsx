@@ -1,3 +1,5 @@
+"use client";
+
 import Container from '@/components/Container'
 
 import QuestionPackList from './_components/QuestionPackList'
@@ -48,7 +50,7 @@ export interface PackResponse {
     name: string;
     language: string;
     description: string;
-    tags: string[]; // Assuming `tags` is an array of strings.
+    tags: string[];
     likes: number;
     questions: number;
   }[]
