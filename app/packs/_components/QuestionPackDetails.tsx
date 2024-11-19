@@ -1,16 +1,24 @@
 'use client'
 
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger
+} from '@/components/ui/dialog'
 import { CopyIcon, ExternalLink, Search } from 'lucide-react'
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+import { PackData } from '../create/_components/PackForm'
+import { Skeleton } from '@/components/ui/skeleton'
 import { toast } from '@/components/ui/use-toast'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
+import { useState, useEffect } from 'react'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
-import { useState, useEffect } from 'react'
-import { PackData } from '../create/_components/PackForm'
 
-const PackDetails = ({ id, type }: { id: string, type: string }) => {
+const PackDetails = ({ id, type }: { id: string; type: string }) => {
   const [packToShow, setPack] = useState<PackData | null>(null)
 
   useEffect(() => {
@@ -29,7 +37,7 @@ const PackDetails = ({ id, type }: { id: string, type: string }) => {
     })
   }
 
-  if (!packToShow) return null
+  if (!packToShow) return <QuestionPackDetailsSkeleton />
 
   return (
     <>
@@ -79,7 +87,7 @@ const PackDetails = ({ id, type }: { id: string, type: string }) => {
           <Button
             type="submit"
             size="sm"
-            variant={'ghost'}
+            variant="ghost"
             onClick={copyCommand}
             className="p-2 h-fit text-brand-blue-100 hover:text-brand-blue-200 absolute right-2 top-1"
           >
@@ -119,10 +127,27 @@ const PackDetails = ({ id, type }: { id: string, type: string }) => {
   )
 }
 
-export function QuestionPackDetails({ id, type }: { id: string, type: string }) {
+export function QuestionPackDetails({
+  id,
+  type
+}: {
+  id: string
+  type: string
+}) {
   const [isOpen, setIsOpen] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    if (id) {
+      setIsLoading(true)
+    }
+  }, [id])
+
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+    <Dialog
+      open={isOpen}
+      onOpenChange={setIsOpen}
+    >
       <DialogTrigger asChild>
         <Button
           className={cn(
@@ -137,8 +162,89 @@ export function QuestionPackDetails({ id, type }: { id: string, type: string }) 
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-[90%] sm:max-w-lg lg:max-w-2xl">
-          {isOpen && <PackDetails id={id} type={type} />}
+        {isOpen && (
+          <PackDetails
+            id={id}
+            type={type}
+          />
+        )}
       </DialogContent>
     </Dialog>
+  )
+}
+
+const QuestionPackDetailsSkeleton = () => {
+  return (
+    <>
+      <DialogHeader>
+        <DialogTitle>
+          <Skeleton className="w-52 h-6 bg-foreground/15" />
+        </DialogTitle>
+        <DialogDescription>
+          <Skeleton className="w-48 h-4 bg-foreground/15" />
+        </DialogDescription>
+      </DialogHeader>
+
+      <section className="grid gap-3 grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 my-2 lg:my-4">
+        <div className="flex flex-col gap-1">
+          <Skeleton className="w-16 h-4 bg-foreground/15" />
+          <div className="flex items-center gap-1">
+            <Skeleton className="size-8 rounded-full bg-foreground/15" />
+            <Skeleton className="w-16 h-4 bg-foreground/15" />
+          </div>
+        </div>
+        <div className="flex flex-col gap-1">
+          <Skeleton className="w-16 h-4 bg-foreground/15" />
+          <Skeleton className="w-24 h-4 bg-foreground/15 mt-2" />
+        </div>
+        <div className="flex flex-col gap-1">
+          <Skeleton className="w-16 h-4 bg-foreground/15" />
+          <Skeleton className="w-24 h-4 bg-foreground/15 mt-2" />
+        </div>
+      </section>
+
+      <section className="grid flex-1 gap-2 my-1">
+        <Skeleton className="w-32 h-4 bg-foreground/15" />
+        <div className="w-full relative">
+          <div className="p-3 rounded-lg border">
+            <Skeleton className="w-96 h-4 bg-foreground/15" />
+          </div>
+          <Button
+            type="submit"
+            size="sm"
+            variant="ghost"
+            className="p-2 h-fit text-brand-blue-100 hover:text-brand-blue-200 absolute right-2 top-1"
+            disabled
+          >
+            <span className="sr-only">Copy command</span>
+            <CopyIcon className="h-4 w-4" />
+          </Button>
+        </div>
+      </section>
+
+      <section>
+        <Skeleton className="w-32 h-4 bg-foreground/15 my-2" />
+        <div className="border rounded-xl overflow-hidden">
+          <div className="dark:bg-[#1D1D1D] bg-background-light flex items-center px-4 py-2 gap-4 border-b">
+            <div className="relative md:w-3/4">
+              <div className="p-3 rounded-lg border">
+                <Search className="size-4 absolute left-2 bottom-3 dark:text-[#666666]" />
+                <Skeleton className="w-24 h-4 bg-foreground/15 ml-4" />
+              </div>
+            </div>
+          </div>
+          <ul className="divide-y max-h-[100px] md:max-h-[200px] overflow-y-auto thin-scrollbar">
+            {Array.from({ length: 3 }).map((_, index) => (
+              <li
+                key={index}
+                className="px-4 py-2"
+              >
+                <Skeleton className="w-52 h-4 bg-foreground/15" />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+    </>
   )
 }

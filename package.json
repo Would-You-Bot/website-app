@@ -10,7 +10,8 @@
     "lint": "next lint",
     "format": "prettier --write ./**/*.{ts,tsx}",
     "docker:build": "docker compose build -t website-wy",
-    "docker:start": "docker compose up -d"
+    "docker:start": "docker compose up -d",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",

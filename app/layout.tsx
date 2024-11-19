@@ -1,3 +1,4 @@
+import { Toaster } from '@/components/ui/toaster'
 import { getIdToken } from '@/helpers/oauth'
 import { ThemeProvider } from 'next-themes'
 import Footer from '@/components/Footer'
@@ -6,7 +7,6 @@ import { Inter } from 'next/font/google'
 import Alert from '@/components/Alert'
 import React from 'react'
 import './globals.css'
-import { Toaster } from "@/components/ui/toaster"
 const inter = Inter({ subsets: ['latin'] })
 
 export default function RootLayout({
@@ -18,12 +18,12 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <script
-        defer
-        data-domain="wouldyoubot.gg"
-        src="https://stats.wouldyoubot.gg/js/script.js"
-      ></script>
       <body className={inter.className}>
+        <script
+          defer
+          data-domain="wouldyoubot.gg"
+          src="https://stats.wouldyoubot.gg/js/script.js"
+        ></script>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

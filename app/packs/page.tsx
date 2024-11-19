@@ -42,27 +42,30 @@ export const dynamic = 'force-dynamic'
 
 export interface PackResponse {
   data: {
-    type: string;
-    id: string;
-    featured: boolean;
-    name: string;
-    language: string;
-    description: string;
-    tags: string[];
-    likes: number;
-    questions: number;
+    type: string
+    id: string
+    featured: boolean
+    name: string
+    language: string
+    description: string
+    tags: string[]
+    likes: number
+    questions: number
   }[]
   totalPages: number
 }
 
 const getQuestionPacks = async (page: string, type: string) => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/packs?page=${page}&type=${type}`, {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    next: { revalidate: 5 } 
-  })
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/packs?page=${page}&type=${type}`,
+    {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      next: { revalidate: 5 }
+    }
+  )
   const resData: PackResponse = await res.json()
   return resData
 }
@@ -98,7 +101,9 @@ async function page({
             </div>
           </section>
         }
-        {responseData.totalPages > 1 && <PacksPagination totalPages={responseData.totalPages} />}
+        {responseData.totalPages > 1 && (
+          <PacksPagination totalPages={responseData.totalPages} />
+        )}
       </div>
     </Container>
   )
