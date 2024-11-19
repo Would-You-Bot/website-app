@@ -65,7 +65,7 @@ export default function QuestionPack({
             </div>
             <div className="flex flex-col gap-0.5">
               <h3 className="text-sm text-muted-foreground">Type</h3>
-              <p className="">{type}</p>
+              <p className="">{type.toUpperCase()}</p>
             </div>
           </CardContent>
         </div>

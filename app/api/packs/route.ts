@@ -132,7 +132,7 @@ export async function POST(request: NextRequest) {
         featured: false,
         likes: [`${tokenData?.payload.id}`],
         questions,
-        pending: false,
+        pending: true,
         denied: false,
       }
     })
