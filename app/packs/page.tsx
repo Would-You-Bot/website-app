@@ -56,7 +56,8 @@ export interface PackResponse {
 }
 
 const getQuestionPacks = async (page: string, type: string) => {
-  const res = await fetch(`http://localhost:2123/api/packs?page=${page}&type=${type}`, {
+  "use client";
+  const res = await fetch(`/api/packs?page=${page}&type=${type}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'
