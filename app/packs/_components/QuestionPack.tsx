@@ -14,23 +14,27 @@ import { Flame, Heart } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 export interface QuestionPackProps {
-  id: string
-  featured?: boolean // popular
-  name: string
-  description: string
-  likes: string[]
   type: string
-  questions: string[]
+  id: string
+  featured: boolean
+  name: string
+  language: string
+  description: string
+  tags: string[]
+  likes: number
+  questions: number
 }
 
 export default function QuestionPack({
-  id,
-  name,
-  description,
-  featured,
-  questions,
   type,
-  likes
+  id,
+  featured,
+  name,
+  language,
+  description,
+  tags,
+  likes,
+  questions
 }: QuestionPackProps) {
   const likePack = (packToLike: string) => {
     console.log(`Liked pack ${packToLike}`)
@@ -57,7 +61,7 @@ export default function QuestionPack({
           <CardContent className="grid grid-cols-2">
             <div className="flex flex-col gap-0.5">
               <h3 className="text-sm text-muted-foreground">Questions</h3>
-              <p className="">{questions.length}</p>
+              <p className="">{questions}</p>
             </div>
             <div className="flex flex-col gap-0.5">
               <h3 className="text-sm text-muted-foreground">Type</h3>
@@ -73,7 +77,7 @@ export default function QuestionPack({
           >
             <Heart className="mr-2 h-4 w-4 text-brand-customGrayText fill-brand-customGrayText shrink-0" />
             <span className="text-muted-foreground">
-              {likes.length.toLocaleString()} Likes
+              {likes} Likes
             </span>
           </Button>
           <QuestionPackDetails id={id} />

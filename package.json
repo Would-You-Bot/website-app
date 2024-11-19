@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbo",
+    "dev": "next dev --turbo -p 2123",
     "debug": "next dev -p 2123",
     "build": "next build",
     "start": "node .next/standalone/server.js -p 2123",

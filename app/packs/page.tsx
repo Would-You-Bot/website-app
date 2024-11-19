@@ -42,26 +42,28 @@ export const dynamic = 'force-dynamic'
 
 export interface PackResponse {
   data: {
-    id: string
-    name: string
-    type: string
-    description: string
-    tags: string[]
-    likes: number
-    questions: number
-    featured: boolean
+    type: string;
+    id: string;
+    featured: boolean;
+    name: string;
+    language: string;
+    description: string;
+    tags: string[]; // Assuming `tags` is an array of strings.
+    likes: number;
+    questions: number;
   }[]
   totalPages: number
 }
 
 const getQuestionPacks = async (page: string, type: string) => {
-  const res = await fetch(`/api/packs?page=${page}&type=${type}`, {
+  const res = await fetch(`http://localhost:2123/api/packs?page=${page}&type=${type}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'
     }
   })
   const resData: PackResponse = await res.json()
+  console.log(resData)
   return resData
 }
 

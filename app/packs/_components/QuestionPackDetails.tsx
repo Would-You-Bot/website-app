@@ -37,7 +37,7 @@ export function QuestionPackDetails({ id }: { id: string }) {
           )}
         >
           <ExternalLink className="mr-2 h-4 w-4 shrink-0" />{' '}
-          <span>Use pack</span>
+          <span>Use Pack</span>
         </Button>
       </DialogTrigger>
       <DialogContent className="max-w-[90%] sm:max-w-lg lg:max-w-2xl">
