@@ -9,7 +9,7 @@ import FeatureItem from '@/components/FeatureItem'
 import { AvatarGroup } from '../avatar-group'
 import { LandingWave } from '../LandingWave'
 import Button from '@/components/Button'
-import { motion } from 'framer-motion'
+import { motion } from "motion/react"
 import Link from 'next/link'
 
 interface HomeContentProps {

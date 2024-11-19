@@ -12,7 +12,7 @@ import {
   DiscordMessages
 } from '@skyra/discord-components-react'
 import { getRandomQuestion } from '@/helpers/getRandomQuestion'
-import { motion } from 'framer-motion'
+import { motion } from "motion/react"
 import profiles from '@/data/profiles.json'
 import { useTheme } from 'next-themes'
 import { FC, useState } from 'react'
