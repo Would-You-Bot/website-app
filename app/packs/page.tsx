@@ -60,7 +60,8 @@ const getQuestionPacks = async (page: string, type: string) => {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json'
-    }
+    },
+    next: { revalidate: 5 } 
   })
   const resData: PackResponse = await res.json()
   console.log(resData)
