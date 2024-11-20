@@ -1,10 +1,8 @@
 'use client'
 import DiscordLoginButton from '@/components/DiscordLoginButton'
-import { LayoutDashboardIcon, Moon, Sun } from 'lucide-react'
+import { LayoutDashboardIcon, Moon, Sun, UserRound } from 'lucide-react'
 import { useIdToken } from '@/helpers/hooks/useIdToken'
-import { useAnimationControls } from 'framer-motion'
 import { IdTokenJWT } from '@/helpers/oauth/types'
-import { Button } from '@/components/ui/button'
 import UserDropdown from './UserDropdown'
 import { useTheme } from 'next-themes'
 import { Crown } from '@/icons/Crown'
@@ -18,6 +16,11 @@ interface NavbarProps {
 
 const menuItems = [
   {
+    label: 'View Profile',
+    href: '/profile',
+    icon: UserRound
+  },
+  {
     label: 'Manage Subscription',
     href: '/api/subs/manage',
     icon: LayoutDashboardIcon
@@ -26,13 +29,8 @@ const menuItems = [
 
 const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
   const { setTheme, theme } = useTheme()
-  const [mobileMenu, setMobileMenu] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
   const idToken = useIdToken(idToken_)
-  const lineOneControls = useAnimationControls()
-  const lineTwoControls = useAnimationControls()
-  const lineThreeControls = useAnimationControls()
-  const menuControls = useAnimationControls()
 
   const handleIsOpen = () => {
     if (window.innerWidth < 768) setIsOpen(!isOpen)
