@@ -9,5 +9,5 @@ export default async function Profile({ params: { id } }: { params: { id: string
     return redirect(`/profile/${userId}`);
   }
   
-  return redirect(`/404`);
+  return redirect(`/login`);
 }
