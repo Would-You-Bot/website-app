@@ -1,7 +1,7 @@
 import { getAuthTokenOrNull } from "@/helpers/oauth/helpers";
 import { redirect } from "next/navigation";
 
-export default async function Profile({ params: { id } }: { params: { id: string } }) {
+export default async function Profile() {
   const auth = await getAuthTokenOrNull();
   const userId = auth?.payload?.id;
 
