@@ -89,7 +89,7 @@ async function page({
         <Filter />
         {responseData ?
           <section className="min-h-96">
-            <QuestionPackList packList={responseData.data} />
+            <QuestionPackList packList={responseData.data.sort((a, b) => Number(b.featured) - Number(a.featured))}  />
           </section>
         : <section className="min-h-96 grid place-content-center">
             <div className="flex flex-col text-muted-foreground items-center gap-4">
