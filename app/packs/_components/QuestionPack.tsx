@@ -12,6 +12,7 @@ import { QuestionPackDetails } from './QuestionPackDetails'
 import { Button } from '@/components/ui/button'
 import { Flame, Heart } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { useState } from 'react'
 
 export interface QuestionPackProps {
   type: string
@@ -21,7 +22,7 @@ export interface QuestionPackProps {
   language: string
   description: string
   tags: string[]
-  likes: number
+  likes: string[]
   questions: number
 }
 
@@ -33,11 +34,30 @@ export default function QuestionPack({
   language,
   description,
   tags,
-  likes,
+  likes: initialLikes,
   questions
 }: QuestionPackProps) {
-  const likePack = (packToLike: string) => {
-    console.log(`Liked pack ${packToLike}`)
+  const userId = '347077478726238228'
+  const [likes, setLikes] = useState<string[]>(initialLikes)
+
+  async function likePack(packId: string) {
+    try {
+      const response = await fetch(`/api/packs/${packId}/likes`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`)
+      }
+
+      const updatedLikes = await response.json() // Get updated likes array from the backend.
+      setLikes(updatedLikes) // Update local state with the new likes.
+    } catch (error) {
+      console.error('Error toggling like:', error)
+    }
   }
 
   return (
@@ -58,29 +78,49 @@ export default function QuestionPack({
               </div>
             )}
           </CardHeader>
+
           <CardContent className="grid grid-cols-2">
             <div className="flex flex-col gap-0.5">
               <h3 className="text-sm text-muted-foreground">Questions</h3>
-              <p className="">{questions}</p>
+              <p>{questions}</p>
             </div>
             <div className="flex flex-col gap-0.5">
               <h3 className="text-sm text-muted-foreground">Type</h3>
-              <p className="">{type.toUpperCase()}</p>
+              <p>{type.toUpperCase()}</p>
             </div>
           </CardContent>
         </div>
+
         <CardFooter className="grid grid-cols-2 gap-4 lg:gap-10">
           <Button
             onClick={() => likePack(id)}
             variant="secondary"
             className="w-full dark:bg-[hsl(0,0%,6%)]"
           >
-            <Heart className="mr-2 h-4 w-4 text-brand-customGrayText fill-brand-customGrayText shrink-0" />
-            <span className="text-muted-foreground">
-              {likes === 1 ? `${likes} Like` : `${likes} Likes`}
+            <Heart
+              className={cn(
+                'mr-2 h-4 w-4 shrink-0',
+                likes.includes(userId) ?
+                  'text-red-500 fill-red-500'
+                : 'text-brand-customGrayText fill-brand-customGrayText'
+              )}
+            />
+            <span
+              className={cn(
+                'text-muted-foreground',
+                likes.includes(userId) && 'text-red-500'
+              )}
+            >
+              {likes.length === 1 ?
+                `${likes.length} Like`
+              : `${likes.length} Likes`}
             </span>
           </Button>
-          <QuestionPackDetails id={id} type={type} />
+
+          <QuestionPackDetails
+            id={id}
+            type={type}
+          />
         </CardFooter>
       </Card>
     </li>

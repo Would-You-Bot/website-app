@@ -49,7 +49,7 @@ export interface PackResponse {
     language: string;
     description: string;
     tags: string[];
-    likes: number;
+    likes: string[];
     questions: number;
   }[]
   totalPages: number
