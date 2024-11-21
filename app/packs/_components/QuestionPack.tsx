@@ -77,7 +77,7 @@ export default function QuestionPack({
           >
             <Heart className="mr-2 h-4 w-4 text-brand-customGrayText fill-brand-customGrayText shrink-0" />
             <span className="text-muted-foreground">
-              {likes} Likes
+              {likes === 1 ? `${likes} Like` : `${likes} Likes`}
             </span>
           </Button>
           <QuestionPackDetails id={id} type={type} />
