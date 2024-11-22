@@ -78,7 +78,7 @@ export default function Team() {
                         src={staff.imageUrl}
                         width={128}
                         height={128}
-                        alt=""
+                        alt={`${staff.name}'s profile picture`}
                       />
                       <h3 className="mt-6 text-base font-semibold leading-7 tracking-tight text-foreground">
                         {staff.name}
