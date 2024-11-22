@@ -54,7 +54,7 @@ export default function QuestionPack({
       }
 
       const updatedLikes = await response.json() // Get updated likes array from the backend.
-      setLikes(updatedLikes) // Update local state with the new likes.
+      setLikes(updatedLikes.likes) // Update local state with the new likes.
     } catch (error) {
       console.error('Error toggling like:', error)
     }
@@ -86,7 +86,7 @@ export default function QuestionPack({
             </div>
             <div className="flex flex-col gap-0.5">
               <h3 className="text-sm text-muted-foreground">Type</h3>
-              <p>{type.toUpperCase()}</p>
+              <p>{type}</p>
             </div>
           </CardContent>
         </div>
