@@ -4,8 +4,8 @@
 import CopyCommandWrapper from '@/components/CopyCommand'
 import { useEffect, useRef, useState } from 'react'
 import commands from '../../data/commands.json'
-import Head from 'next/head'
 import Link from 'next/link'
+import { Input } from '../ui/input'
 
 export default function Commands() {
   interface Command {
@@ -57,12 +57,7 @@ export default function Commands() {
         <h2 className="select-none font-semibold text-foreground/70">
           Search for a command
         </h2>
-        <input
-          className="w-full rounded-md bg-hover p-2 text-foreground/70"
-          onChange={handleSearchChange}
-          id="search"
-          type="text"
-        ></input>
+        <Input type="text" onChange={handleSearchChange} id="search" placeholder="Enter a command to search (e.g., 'help')" />
         {categories.map((category, index) => {
           // Filter commands for the current category
           const categoryCommands = filteredCommands.filter((command) => command.category.includes(category)
