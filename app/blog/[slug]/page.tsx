@@ -17,9 +17,6 @@ export async function generateMetadata({
     title,
     description: frontmatter.description,
     metadataBase: new URL('https://wouldyoubot.gg/'),
-    alternates: {
-      canonical: "/",
-    },
     twitter: {
       title,
       description: frontmatter.description,

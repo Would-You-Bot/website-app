@@ -5,9 +5,6 @@ import type { Metadata, Viewport } from 'next'
 
 export const metadata: Metadata = { 
   metadataBase: new URL('https://wouldyoubot.gg'),
-  alternates: {
-    canonical: "/",
-  },
   title: 'Would You - The Discord Bot',
   description:
     'Would you lets you play Would You Rather, Never Have I Ever, Higher or Lower, Truth or Dare and What Would You Do on Discord!',
