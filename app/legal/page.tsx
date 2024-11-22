@@ -103,12 +103,6 @@ export default function legalnotice() {
         </p>
       </div>
       <div className="text-foreground">
-        <Link
-          href="https://wouldyoubot.com/"
-          className="underline"
-        >
-          https://wouldyoubot.com/
-        </Link>
         <br />
         <Link
           href="https://wouldyoubot.gg/"

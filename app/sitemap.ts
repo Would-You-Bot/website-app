@@ -44,21 +44,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.9,
     },
     {
-      url: 'https://wouldyoubot.gg/security',
-      lastModified: new Date(),
-      changeFrequency: 'never',
-      priority: 1,
-    },
-    {
       url: 'https://wouldyoubot.gg/refunds',
       lastModified: new Date(),
       changeFrequency: 'always',
-      priority: 1,
-    },
-    {
-      url: 'https://wouldyoubot.gg/security',
-      lastModified: new Date(),
-      changeFrequency: 'never',
       priority: 1,
     },
     {

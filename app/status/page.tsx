@@ -1,9 +1,14 @@
 import PageContent from './_components/PageContent'
-import { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Would You - Status'
+  title: 'Would You - Status',
+  description: 'The current status of the Would You clusters.',
 }
+  export const viewport: Viewport = {
+    themeColor: '#0598F6',
+    maximumScale: 5
+  }
 
 const Status = async () => {
   const cluster = await fetch(process.env.API_URL!, {

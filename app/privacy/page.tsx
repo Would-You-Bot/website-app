@@ -31,15 +31,7 @@ export default function Privacy() {
               className="text-foreground underline"
             >
               https://wouldyoubot.gg
-            </Link>{' '}
-            or{' '}
-            <Link
-              href="https://wouldyoubot.com"
-              target={'_blank'}
-              className="text-foreground underline"
-            >
-              https://wouldyoubot.com
-            </Link>
+            </Link>.{' '}
           </li>
           <li>
             - Engage with us in other related ways — including any sales,

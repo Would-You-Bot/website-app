@@ -116,12 +116,5 @@
     "description": "Lets you manage your own questions.",
     "usage": "/custom <subcommand>",
     "subcommands": ["add", "export", "import", "remove", "removeall", "view"]
-  },
-  {
-    "name": "type",
-    "category": "Settings",
-    "description": "Changes the kind of questions you get.",
-    "usage": "/type <subcommand>",
-    "subcommands": ["regular", "mixed", "custom"]
   }
 ]

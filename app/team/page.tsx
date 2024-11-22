@@ -1,8 +1,29 @@
-import Head from 'next/head'
-
 import Image from 'next/image' // Import the 'Image' component
-
 import staffs from '@/data/staffs.json' // Import the JSON data
+import type { Metadata, Viewport } from 'next'
+
+ export const metadata: Metadata = {
+    metadataBase: new URL('https://wouldyoubot.gg'),
+    title: 'Our Team - Would You Bot',
+    description: 'Meet the amazing team and contributors behind Would You.',
+    twitter: {
+      title: 'Our Team - Would You Bot',
+      description: 'Meet the amazing team and contributors behind Would You.'
+    },
+    openGraph: {
+      title: 'Our Team - Would You Bot',
+      description: 'Meet the amazing team and contributors behind Would You.'
+    },
+    robots: {
+      index: true,
+      follow: true
+    }
+  }
+
+  export const viewport: Viewport = {
+    themeColor: '#0598F6',
+    maximumScale: 5
+  }
 
 export default function Team() {
   const roles = [
@@ -15,9 +36,6 @@ export default function Team() {
 
   return (
     <>
-      <Head>
-        <title>Would You - Team</title>
-      </Head>
       <main className="flex flex-col items-center">
         <div className="flex mt-auto w-full max-w-8xl flex-col px-8">
           <h1 className="text-4xl font-bold text-foreground">
