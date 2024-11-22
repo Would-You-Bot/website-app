@@ -38,7 +38,8 @@ export default function QuestionPack({
   likes: initialLikes,
   questions
 }: { userId: string | null } & QuestionPackProps) {
-  const [likes, setLikes] = useState<string[]>(initialLikes)
+  const [likes, setLikes] = useState<Number>(initialLikes.length)
+  const [userLiked, setUserLiked] = useState<boolean>(initialLikes.includes(userId || ''))
   async function likePack(packId: string) {
     if (!userId) return
 
@@ -47,6 +48,9 @@ export default function QuestionPack({
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json'
+        },
+        next: {
+          revalidate: false
         }
       })
 
@@ -56,6 +60,12 @@ export default function QuestionPack({
 
       const updatedLikes = await response.json()
 
+      if(updatedLikes.userLiked) {
+        setUserLiked(true)
+      } else {
+        setUserLiked(false)
+      }
+      console.log(userLiked)
       setLikes(updatedLikes.likes)
     } catch (error) {
       console.error('Error toggling like:', error)
@@ -102,7 +112,7 @@ export default function QuestionPack({
             <Heart
               className={cn(
                 'mr-2 h-4 w-4 shrink-0',
-                likes?.includes(userId || '0') ?
+                userLiked ?
                   'text-red-500 fill-red-500'
                 : 'text-brand-customGrayText fill-brand-customGrayText'
               )}
@@ -110,12 +120,12 @@ export default function QuestionPack({
             <span
               className={cn(
                 'text-muted-foreground',
-                likes?.includes(userId || '0') && 'text-red-500'
+                userLiked && 'text-red-500'
               )}
             >
-              {likes?.length === 1 ?
-                `${likes?.length} Like`
-              : `${likes?.length} Likes`}
+              {likes === 1 ?
+                `${likes} Like`
+              : `${likes} Likes`}
             </span>
           </Button>
 
