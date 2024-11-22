@@ -41,7 +41,11 @@ export const viewport: Viewport = {
 
 const Home = async () => {
   const response = await fetch(
-    'https://japi.rest/discord/v1/application/981649513427111957/'
+    'https://japi.rest/discord/v1/application/981649513427111957/', {
+      next: {
+        revalidate: 60
+      }
+    }
   )
 
   const data = await response.json()
