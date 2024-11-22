@@ -62,7 +62,6 @@ export async function GET(request: NextRequest) {
 
     const questionsWithCounts = questions.map((question) => ({
       ...question,
-      likes: question.likes.length,
       questions: question.questions.length
     }))
 

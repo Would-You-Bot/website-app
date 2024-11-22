@@ -2,7 +2,7 @@ import { prisma } from "@/lib/prisma";
 import { NextResponse, type NextRequest } from "next/server";
 import validator from "validator";
 
-// Get all packs left to review
+// Get all packs left to review we need request otherwise we can't get the params
 export async function GET(request: NextRequest, {
   params,
 }: {

@@ -5,6 +5,7 @@ import PacksPagination from './_components/PacksPagination'
 import Filter from './_components/Filter'
 import { Metadata, Viewport } from 'next'
 import { Smile } from 'lucide-react'
+import { getAuthTokenOrNull } from '@/helpers/oauth/helpers'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://wouldyoubot.gg'),
@@ -42,15 +43,15 @@ export const dynamic = 'force-dynamic'
 
 export interface PackResponse {
   data: {
-    type: string
-    id: string
-    featured: boolean
-    name: string
-    language: string
-    description: string
-    tags: string[]
-    likes: number
-    questions: number
+    type: string;
+    id: string;
+    featured: boolean;
+    name: string;
+    language: string;
+    description: string;
+    tags: string[];
+    likes: string[];
+    questions: number;
   }[]
   totalPages: number
 }
@@ -78,6 +79,9 @@ async function page({
   const type = searchParams.type ? (searchParams.type as string) : 'all'
   const page = searchParams.page ? (searchParams.page as string) : '1'
 
+  const auth = await getAuthTokenOrNull()
+  const userId = auth?.payload?.id || null
+
   const responseData = await getQuestionPacks(page, type)
 
   return (
@@ -92,7 +96,7 @@ async function page({
         <Filter />
         {responseData ?
           <section className="min-h-96">
-            <QuestionPackList packList={responseData.data} />
+            <QuestionPackList packList={responseData.data.sort((a, b) => Number(b.featured) - Number(a.featured))} userId={userId} />
           </section>
         : <section className="min-h-96 grid place-content-center">
             <div className="flex flex-col text-muted-foreground items-center gap-4">
