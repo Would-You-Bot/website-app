@@ -1,4 +1,28 @@
+import type { Metadata, Viewport } from 'next'
 import Link from 'next/link'
+
+export const metadata: Metadata = {
+  metadataBase: new URL('https://wouldyoubot.gg'),
+  title: 'Privacy Policy - Would You Bot',
+  description: 'The privacy policy of Would You Bot.',
+  twitter: {
+    title: 'Privacy Policy - Would You Bot',
+    description: 'The privacy policy of Would You Bot.'
+  },
+  openGraph: {
+    title: 'Privacy Policy - Would You Bot',
+    description: 'The privacy policy of Would You Bot.'
+  },
+  robots: {
+    index: true,
+    follow: true
+  }
+}
+
+export const viewport: Viewport = {
+  themeColor: '#0598F6',
+  maximumScale: 5
+}
 
 export default function Privacy() {
   return (
