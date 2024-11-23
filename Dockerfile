@@ -73,6 +73,7 @@ ENV UPSTASH_API_KEY=${UPSTASH_API_KEY}
 # Uncomment the following line in case you want to disable telemetry during the build.
 ENV NEXT_TELEMETRY_DISABLED 1
 
+RUN corepack enable pnpm
 RUN pnpm dlx prisma generate
 
 RUN \

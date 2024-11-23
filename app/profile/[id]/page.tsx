@@ -45,15 +45,14 @@ export async function generateMetadata(
       description: user.description || `Check out ${user.displayName}'s Would You profile and statistics.`,
       url: `https://wouldyoubot.gg/profile/${id}`,
       siteName: 'Would You',
-      images: [user.avatarUrl, ...previousImages],
+      images: user.bannerUrl ? [user.bannerUrl] : previousImages,
       locale: 'en_US',
-      type: 'profile',
     },
     twitter: {
       card: 'summary_large_image',
       title: `${user.displayName}'s Would You Profile`,
       description: user.description || `Check out ${user.displayName}'s Would You profile and statistics.`,
-      images: [user.avatarUrl],
+      images: user.bannerUrl ? [user.bannerUrl] : [],
     },
   }
 }
@@ -72,4 +71,3 @@ export default async function ProfilePage({ params: { id } }: Props) {
 
   return <ProfileContent userData={userData.data} canEdit={canEdit} />
 }
-
