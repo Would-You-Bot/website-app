@@ -39,22 +39,6 @@ export async function HomeSchemaMetadata() {
             }
   `}
       />
-
-      <Schema
-        json={`
-        {
-          "@context": "http://schema.org",
-          "@type": "VideoObject",
-          "name": "How to use Would You Bot",
-          "description": "Boost Your Discord Server's Engagement with 'Would You' Bot! Discover how this powerful Discord bot revolutionizes your community interactions, sparking lively discussions, and keeping your server active. Engage your members with captivating 'Would You Rather' questions, polls, and games, fostering a dynamic and thriving community. Watch our video for a comprehensive overview and step-by-step setup guide to unleash the full potential of 'Would You' bot and take your Discord server to the next level!",
-          "thumbnailUrl": "https://i.ytimg.com/vi/x6BMCtgIy-8/default.jpg",
-          "uploadDate": "2023-06-21T13:03:23Z",
-          "duration": "PT30S",
-          "embedUrl": "https://www.youtube.com/embed/x6BMCtgIy-8",
-          "interactionCount": "166"
-        }
-      `}
-      />
     </>
   )
 }
