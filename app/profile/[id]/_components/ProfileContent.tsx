@@ -79,7 +79,14 @@ export default function ProfileContent({ userData, canEdit }: { userData: UserDa
     userData.higherlower.used.command + 
     userData.truth.command + 
     userData.dare.command + 
-    userData.random.command
+    userData.random.command + 
+    userData.truth.replay +
+    userData.dare.replay +
+    userData.random.replay +
+    userData.higherlower.used.replay +
+    userData.wouldyourather.used.replay +
+    userData.neverhaveiever.used.replay +
+    userData.whatwouldyoudo.used.replay
 
   const totalYes = 
     userData.wouldyourather.yes + 

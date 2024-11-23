@@ -27,15 +27,8 @@ export async function GET(request: NextRequest,{
 
   if (userData.votePrivacy && userId !== id) {
     return NextResponse.json(
-      { 
-        data: {
-          userID: userData.userID,
-          displayName: userData.displayName,
-          globalName: userData.globalName,
-          avatarUrl: userData.avatarUrl,
-        },
-      },
-      { status: 200 }
+      { message: 'User not found!' },
+      { status: 404 }
     )
   }
 
