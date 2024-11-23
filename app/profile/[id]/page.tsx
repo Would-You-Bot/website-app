@@ -1,9 +1,14 @@
-import { Metadata, ResolvingMetadata } from 'next'
+import type { Metadata, ResolvingMetadata, Viewport } from 'next'
 import { getAuthTokenOrNull } from "@/helpers/oauth/helpers"
 import ProfileContent from "./_components/ProfileContent"
 
 type Props = {
   params: { id: string }
+}
+
+export const viewport: Viewport = {
+  themeColor: '#0598F6',
+  maximumScale: 5,
 }
 
 const getUserData = async (id: string) => {
@@ -35,7 +40,6 @@ export async function generateMetadata(
   }
 
   const user = userData.data
-  const previousImages = (await parent).openGraph?.images || []
 
   return {
     title: `${user.displayName}'s Profile | Would You`,
@@ -45,14 +49,11 @@ export async function generateMetadata(
       description: user.description || `Check out ${user.displayName}'s Would You profile and statistics.`,
       url: `https://wouldyoubot.gg/profile/${id}`,
       siteName: 'Would You',
-      images: user.bannerUrl ? [user.bannerUrl] : previousImages,
       locale: 'en_US',
     },
     twitter: {
-      card: 'summary_large_image',
       title: `${user.displayName}'s Would You Profile`,
       description: user.description || `Check out ${user.displayName}'s Would You profile and statistics.`,
-      images: user.bannerUrl ? [user.bannerUrl] : [],
     },
   }
 }
