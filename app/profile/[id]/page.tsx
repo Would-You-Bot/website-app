@@ -50,10 +50,12 @@ export async function generateMetadata(
       url: `https://wouldyoubot.gg/profile/${id}`,
       siteName: 'Would You',
       locale: 'en_US',
+      images: `https://staging.wouldyoubot.gg/api/user/${id}/og/`,
     },
     twitter: {
       title: `${user.displayName}'s Would You Profile`,
       description: user.description || `Check out ${user.displayName}'s Would You profile and statistics.`,
+      images: `https://staging.wouldyoubot.gg/api/user/${id}/og/`,
     },
   }
 }
