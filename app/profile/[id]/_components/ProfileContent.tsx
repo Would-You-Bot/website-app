@@ -91,8 +91,8 @@ export default function ProfileContent({ userData, canEdit }: { userData: UserDa
     userData.neverhaveiever.no + 
     userData.whatwouldyoudo.no
 
-  const handlePrivacyToggle = (setting: 'profilePrivacy' | 'votePrivacy' | 'likedPacksPrivacy') => {
-    // Handle privacy toggle logic here
+  function handlePrivacyToggle(setting: 'profilePrivacy' | 'votePrivacy' | 'likedPacksPrivacy') {
+    // Handle privacy toggle
   }
 
   return (
@@ -102,12 +102,12 @@ export default function ProfileContent({ userData, canEdit }: { userData: UserDa
 
         <div className="space-y-6">
           <Tabs defaultValue="statistics" className="w-full">
-            <TabsList className="bg-muted w-full justify-start h-auto p-1 rounded-lg flex flex-wrap">
-              <TabsTrigger value="statistics">Statistics</TabsTrigger>
-              <TabsTrigger value="liked">Liked Packs</TabsTrigger>
-              <TabsTrigger value="created">Created Packs</TabsTrigger>
-              <TabsTrigger value="achievements">Achievements</TabsTrigger>
-              {canEdit && <TabsTrigger value="edit">Edit Profile</TabsTrigger>}
+            <TabsList className="w-full justify-start h-auto p-1 rounded-lg flex flex-wrap ">
+              <TabsTrigger value="statistics" className="rounded-md data-[state=active]:text-brand-blue-100">Statistics</TabsTrigger>
+              <TabsTrigger value="liked" className="rounded-md data-[state=active]:text-brand-blue-100">Liked Packs</TabsTrigger>
+              <TabsTrigger value="created" className="rounded-md data-[state=active]:text-brand-blue-100">Created Packs</TabsTrigger>
+              <TabsTrigger value="achievements" className="rounded-md data-[state=active]:text-brand-blue-100">Achievements</TabsTrigger>
+              {canEdit && <TabsTrigger value="edit" className="rounded-md data-[state=active]:text-brand-blue-100">Edit Profile</TabsTrigger>}
             </TabsList>
 
             <TabsContent value="statistics" className="mt-6">

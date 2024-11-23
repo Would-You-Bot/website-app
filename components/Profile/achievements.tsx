@@ -20,13 +20,13 @@ export function Achievements({ achievements }: AchievementsProps) {
 -2 lg:grid-cols-4 gap-4">
           {achievements.map((achievement) => (
             <div key={achievement.title} className="bg-card p-4 rounded-lg shadow-sm text-center space-y-2">
-              <div className="w-12 h-12 mx-auto bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center text-2xl">
+              <div className="w-12 h-12 mx-auto rounded-full bg-primary flex items-center justify-center text-2xl">
                 {achievement.icon}
               </div>
               <h4 className="font-bold text-foreground">{achievement.title}</h4>
               <p className="text-xs text-muted-foreground">{achievement.desc}</p>
               <Progress value={achievement.progress} className="h-2" />
-              <p className="text-sm text-primary">{achievement.progress}%</p>
+              <p className="text-sm text-brand-blue-100">{achievement.progress}%</p>
             </div>
           ))}
         </div>

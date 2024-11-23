@@ -37,7 +37,7 @@ export function EditProfile({ description, votePrivacy, onDescriptionChange, onP
                 </div>
                 <Switch
                   id="profile-privacy"
-                  checked={false}
+                  defaultChecked={false}
                   onCheckedChange={() => onPrivacyToggle('profilePrivacy')}
                 />
               </div>
@@ -48,7 +48,7 @@ export function EditProfile({ description, votePrivacy, onDescriptionChange, onP
                 </div>
                 <Switch
                   id="vote-privacy"
-                  checked={votePrivacy}
+                  defaultChecked={false}
                   onCheckedChange={() => onPrivacyToggle('votePrivacy')}
                 />
               </div>
@@ -59,13 +59,13 @@ export function EditProfile({ description, votePrivacy, onDescriptionChange, onP
                 </div>
                 <Switch
                   id="liked-packs-privacy"
-                  checked={false}
+                  defaultChecked={false}
                   onCheckedChange={() => onPrivacyToggle('likedPacksPrivacy')}
                 />
               </div>
             </div>
           </div>
-          <Button className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">Save Changes</Button>
+          <Button className="w-full bg-brand-blue-100 hover:bg-brand-blue-100/90 text-primary-foreground">Save Changes</Button>
         </div>
       </CardContent>
     </Card>
