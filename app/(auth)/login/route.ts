@@ -119,7 +119,8 @@ async function exchangeAuthorizationCode(code: string) {
         userID: id,
         displayName: username,
         avatarUrl: `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.webp`,
-        globalName: global_name
+        globalName: global_name,
+        description: "We don't know much about this user yet, but they seem cool!",
       }
     })
 
