@@ -111,14 +111,14 @@ async function exchangeAuthorizationCode(code: string) {
     await prisma.user.upsert({
       where: { userID: id },
       update: {
-        displayName: global_name,
+        displayName: global_name || username,
         avatarUrl: `https://cdn.discordapp.com/avatars/${id}/${avatar}.webp`,
         globalName: username,
         bannerUrl: `https://cdn.discordapp.com/banners/${id}/${banner}.png?size=480`
       },
       create: {
         userID: id,
-        displayName: global_name,
+        displayName: global_name || username,
         avatarUrl: `https://cdn.discordapp.com/avatars/${id}/${avatar}.webp`,
         globalName: username,
         description: "We don't know much about this user yet, but they seem cool!",
