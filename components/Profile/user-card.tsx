@@ -21,16 +21,14 @@ export function UserCard({ userData }: UserCardProps) {
     <Card className="border shadow-sm h-fit">
       <CardContent className="p-4">
         <div className="relative">
-          <div className="h-20 rounded-lg overflow-hidden bg-gradient-to-r from-gray-200 to-gray-300">
-            {userData.bannerUrl && (
+          <div className="h-20 rounded-lg overflow-hidden ">
               <Image
                 alt="Profile banner"
                 className="w-full h-full object-cover"
-                src={userData.bannerUrl}
+                src={userData.bannerUrl || "/ProfileBanner.png"}
                 height={80}
                 width={280}
               />
-            )}
           </div>
           <Avatar className="absolute -bottom-4 left-4 w-16 h-16 border-4 border-background">
             <AvatarImage src={userData.avatarUrl} />

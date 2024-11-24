@@ -19,7 +19,7 @@ const getUserData = async (id: string) => {
       headers: {
         'Content-Type': 'application/json'
       },
-      next: { revalidate: 5 }
+      next: { revalidate: 1 }
     }
   )
   const userData = await user.json()

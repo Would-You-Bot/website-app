@@ -1,53 +1,54 @@
 "use client"
 
 import { useState } from "react"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { useSearchParams } from "next/navigation"
 import { UserCard } from "@/components/Profile/user-card"
 import { StatsOverview } from "@/components/Profile/stats-overview"
 import { GameStats } from "@/components/Profile/game-stats"
 import { PackList } from "@/components/Profile/pack-list"
 import { Achievements } from "@/components/Profile/achievements"
 import { EditProfile } from "@/components/Profile/edit-profile"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 interface UserData {
-  wouldyourather: GameStats;
-  neverhaveiever: GameStats;
-  higherlower: HigherLowerStats;
-  whatwouldyoudo: GameStats;
-  truth: UsageStats;
-  dare: UsageStats;
-  random: UsageStats;
-  topic: null;
   id: string;
-  userID: string;
-  votePrivacy: boolean;
-  language: string;
-  avatarUrl: string;
-  bannerUrl: string;
-  description: string | null;
+  userID?: string;
   displayName: string;
-  globalName: string;
-  createdAt: string;
-  updatedAt: string;
+  avatarUrl?: string;
+  globalName?: string;
+  description?: string;
+  language?: string;
+  bannerUrl?: string;
+  votePrivacy?: boolean;
+  createdAt?: string;
+  updatedAt?: string;
+  wouldyourather?: GameStats;
+  neverhaveiever?: GameStats;
+  higherlower?: HigherLowerStats;
+  whatwouldyoudo?: GameStats;
+  truth?: UsageStats;
+  dare?: UsageStats;
+  random?: UsageStats;
+  topic?: null;
 }
 
 interface GameStats {
-  yes: number;
-  no: number;
-  used: UsageStats;
-  highscore: number | null;
+  yes?: number;
+  no?: number;
+  used?: UsageStats;
+  highscore?: number | null;
 }
 
 interface HigherLowerStats {
-  yes: number;
-  no: number;
-  used: UsageStats;
-  highscore: number;
+  yes?: number;
+  no?: number;
+  used?: UsageStats;
+  highscore?: number | null;
 }
 
 interface UsageStats {
-  command: number;
-  replay: number;
+  command?: number;
+  replay?: number;
 }
 
 // Pseudo data for liked and created packs
@@ -69,87 +70,130 @@ const achievements = [
   { title: "Decision Maker", desc: "Made 200+ choices", progress: 45, icon: "🤔" },
 ]
 
-export default function ProfileContent({ userData, canEdit }: { userData: UserData, canEdit: boolean }) {
-  const [description, setDescription] = useState(userData.description)
+export default function ProfileContent({ userData, canEdit }: { userData: UserData; canEdit: boolean }) {
+  const [description, setDescription] = useState(userData.description ?? "")
+  const searchParams = useSearchParams()
+  const currentTab = searchParams.get("tab") || "statistics"
 
   const totalGamesPlayed = 
-    userData.wouldyourather.used.command + 
-    userData.neverhaveiever.used.command + 
-    userData.whatwouldyoudo.used.command + 
-    userData.higherlower.used.command + 
-    userData.truth.command + 
-    userData.dare.command + 
-    userData.random.command + 
-    userData.truth.replay +
-    userData.dare.replay +
-    userData.random.replay +
-    userData.higherlower.used.replay +
-    userData.wouldyourather.used.replay +
-    userData.neverhaveiever.used.replay +
-    userData.whatwouldyoudo.used.replay
+    (userData.wouldyourather?.used?.command ?? 0) +
+    (userData.neverhaveiever?.used?.command ?? 0) +
+    (userData.whatwouldyoudo?.used?.command ?? 0) +
+    (userData.higherlower?.used?.command ?? 0) +
+    (userData.truth?.command ?? 0) +
+    (userData.dare?.command ?? 0) +
+    (userData.random?.command ?? 0) +
+    (userData.truth?.replay ?? 0) +
+    (userData.dare?.replay ?? 0) +
+    (userData.random?.replay ?? 0) +
+    (userData.higherlower?.used?.replay ?? 0) +
+    (userData.wouldyourather?.used?.replay ?? 0) +
+    (userData.neverhaveiever?.used?.replay ?? 0) +
+    (userData.whatwouldyoudo?.used?.replay ?? 0)
 
   const totalYes = 
-    userData.wouldyourather.yes + 
-    userData.neverhaveiever.yes + 
-    userData.whatwouldyoudo.yes
+    (userData.wouldyourather?.yes ?? 0) +
+    (userData.neverhaveiever?.yes ?? 0) +
+    (userData.whatwouldyoudo?.yes ?? 0)
 
   const totalNo = 
-    userData.wouldyourather.no + 
-    userData.neverhaveiever.no + 
-    userData.whatwouldyoudo.no
+    (userData.wouldyourather?.no ?? 0) +
+    (userData.neverhaveiever?.no ?? 0) +
+    (userData.whatwouldyoudo?.no ?? 0)
 
-  function handlePrivacyToggle(setting: 'profilePrivacy' | 'votePrivacy' | 'likedPacksPrivacy') {
-    // Handle privacy toggle
+  const handlePrivacyToggle = (setting: 'profilePrivacy' | 'votePrivacy' | 'likedPacksPrivacy') => {
+    // Handle privacy toggle logic here
   }
 
+  const hasGameStats = !!(userData.wouldyourather || userData.neverhaveiever || userData.whatwouldyoudo || userData.higherlower)
+
   return (
-    <main className="w-full mx-auto max-w-8xl px-4 sm:px-6 lg:px-8 py-8">
+    <main className="w-full mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
       <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-6">
-        <UserCard userData={userData} />
+        {userData.displayName && (
+          <UserCard
+            userData={{
+              bannerUrl: userData.bannerUrl ?? "",
+              avatarUrl: userData.avatarUrl ?? "",
+              displayName: userData.displayName,
+              globalName: userData.globalName ?? "",
+              description: userData.description ?? null,
+              createdAt: userData.createdAt ?? "",
+              language: userData.language ?? ""
+            }}
+          />
+        )}
 
         <div className="space-y-6">
-          <Tabs defaultValue="statistics" className="w-full">
-            <TabsList className="w-full justify-start h-auto p-1 rounded-lg flex flex-wrap ">
-              <TabsTrigger value="statistics" className="rounded-md data-[state=active]:text-brand-blue-100">Statistics</TabsTrigger>
-              <TabsTrigger value="liked" className="rounded-md data-[state=active]:text-brand-blue-100">Liked Packs</TabsTrigger>
-              <TabsTrigger value="created" className="rounded-md data-[state=active]:text-brand-blue-100">Created Packs</TabsTrigger>
-              <TabsTrigger value="achievements" className="rounded-md data-[state=active]:text-brand-blue-100">Achievements</TabsTrigger>
-              {canEdit && <TabsTrigger value="edit" className="rounded-md data-[state=active]:text-brand-blue-100">Edit Profile</TabsTrigger>}
+          <Tabs defaultValue={currentTab} className="w-full">
+            <TabsList className="grid w-full grid-cols-4 lg:grid-cols-5">
+              <TabsTrigger value="statistics">Statistics</TabsTrigger>
+              <TabsTrigger value="liked">Liked Packs</TabsTrigger>
+              <TabsTrigger value="created">Created Packs</TabsTrigger>
+              <TabsTrigger value="achievements">Achievements</TabsTrigger>
+              {canEdit && <TabsTrigger value="edit">Edit Profile</TabsTrigger>}
             </TabsList>
-
-            <TabsContent value="statistics" className="mt-6">
+            <TabsContent value="statistics">
               <div className="space-y-6">
                 <StatsOverview
                   totalGamesPlayed={totalGamesPlayed}
-                  highScore={userData.higherlower.highscore}
+                  highScore={userData.higherlower?.highscore ?? 0}
                   totalYes={totalYes}
                   totalNo={totalNo}
                 />
-                <GameStats
-                  wouldYouRather={userData.wouldyourather}
-                  neverHaveIEver={userData.neverhaveiever}
-                  whatWouldYouDo={userData.whatwouldyoudo}
-                  higherLower={userData.higherlower}
-                />
+                {hasGameStats && (
+                  <GameStats
+                    wouldYouRather={userData.wouldyourather ? {
+                      yes: userData.wouldyourather.yes ?? 0,
+                      no: userData.wouldyourather.no ?? 0,
+                      used: {
+                        command: userData.wouldyourather.used?.command ?? 0,
+                        replay: userData.wouldyourather.used?.replay ?? 0
+                      }
+                    } : undefined}
+                    neverHaveIEver={userData.neverhaveiever ? {
+                      yes: userData.neverhaveiever.yes ?? 0,
+                      no: userData.neverhaveiever.no ?? 0,
+                      used: {
+                        command: userData.neverhaveiever.used?.command ?? 0,
+                        replay: userData.neverhaveiever.used?.replay ?? 0
+                      }
+                    } : undefined}
+                    whatWouldYouDo={userData.whatwouldyoudo ? {
+                      yes: userData.whatwouldyoudo.yes ?? 0,
+                      no: userData.whatwouldyoudo.no ?? 0,
+                      used: {
+                        command: userData.whatwouldyoudo.used?.command ?? 0,
+                        replay: userData.whatwouldyoudo.used?.replay ?? 0
+                      }
+                    } : undefined}
+                    higherLower={userData.higherlower ? {
+                      yes: userData.higherlower.yes ?? 0,
+                      no: userData.higherlower.no ?? 0,
+                      used: {
+                        command: userData.higherlower.used?.command ?? 0,
+                        replay: userData.higherlower.used?.replay ?? 0
+                      },
+                      highscore: userData.higherlower.highscore ?? 0
+                    } : undefined}
+                  />
+                )}
               </div>
             </TabsContent>
-
-            <TabsContent value="liked" className="mt-6">
+            <TabsContent value="liked">
               <PackList packs={likedPacks} type="liked" />
             </TabsContent>
-
-            <TabsContent value="created" className="mt-6">
+            <TabsContent value="created">
               <PackList packs={createdPacks} type="created" />
             </TabsContent>
-
-            <TabsContent value="achievements" className="mt-6">
+            <TabsContent value="achievements">
               <Achievements achievements={achievements} />
             </TabsContent>
             {canEdit && (
-              <TabsContent value="edit" className="mt-6">
+              <TabsContent value="edit">
                 <EditProfile
                   description={description}
-                  votePrivacy={userData.votePrivacy}
+                  votePrivacy={userData.votePrivacy ?? false}
                   onDescriptionChange={setDescription}
                   onPrivacyToggle={handlePrivacyToggle}
                 />
