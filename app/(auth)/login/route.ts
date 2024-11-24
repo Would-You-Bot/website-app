@@ -104,24 +104,26 @@ async function exchangeAuthorizationCode(code: string) {
     }
 
     const user = await userResponse.json()
-    const { id, username, avatar, global_name } = user
-
+    const { id, username, avatar, global_name, banner } = user
+    
     // Create a user account in the prisma database
     // if it doesn't already exist
     await prisma.user.upsert({
       where: { userID: id },
       update: {
         displayName: username,
-        avatarUrl: `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.webp`,
-        globalName: global_name
+        avatarUrl: `https://cdn.discordapp.com/avatars/${id}/${avatar}.webp`,
+        globalName: global_name,
+        bannerUrl: `https://cdn.discordapp.com/banners/${id}/${banner}.png?size=480`
       },
       create: {
         userID: id,
         displayName: username,
-        avatarUrl: `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.webp`,
+        avatarUrl: `https://cdn.discordapp.com/avatars/${id}/${avatar}.webp`,
         globalName: global_name,
         description: "We don't know much about this user yet, but they seem cool!",
         language: 'en_EN',
+        bannerUrl: `https://cdn.discordapp.com/banners/${id}/${banner}.png?size=480`,
         votePrivacy: false
       }
     })
