@@ -1,5 +1,15 @@
 import z from "zod"
 
+export const userSchema = z.object({
+  description: z.string()
+    .min(10, "Make sure your description is atleast 10 characters long")
+    .max(150, "Make sure your description is only 150 characters long")
+    .optional(),
+  profilePrivacy: z.boolean().optional(),
+  votePrivacy: z.boolean().optional(),
+  likedPackPrivacy: z.boolean().optional(),
+})
+
 export const packSchema = z.object({
   type: z.enum(
     [

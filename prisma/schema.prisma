@@ -58,6 +58,8 @@ model User {
   id                String     @id @default(auto()) @map("_id") @db.ObjectId
   userID            String     @unique
   votePrivacy       Boolean    @default(false)
+  profilePrivacy    Boolean    @default(false)
+  likedPackPrivacy  Boolean    @default(false)
   language          String     @default("en_EN")
   wouldyourather    GameStats?
   neverhaveiever    GameStats?

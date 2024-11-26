@@ -1,18 +1,92 @@
+"use client"
+
+import { useState } from "react"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Switch } from "@/components/ui/switch"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { User, MessageCircle, Heart } from 'lucide-react'
+import { useToast } from "@/components/ui/use-toast"
 
 interface EditProfileProps {
+  userId: string;
   description: string | null;
   votePrivacy: boolean;
-  onDescriptionChange: (value: string) => void;
-  onPrivacyToggle: (setting: 'profilePrivacy' | 'votePrivacy' | 'likedPacksPrivacy') => void;
+  profilePrivacy: boolean;
+  likedPacksPrivacy: boolean;
+  onDataRefresh: () => void;
 }
 
-export function EditProfile({ description, votePrivacy, onDescriptionChange, onPrivacyToggle }: EditProfileProps) {
+export function EditProfile({ 
+  userId, 
+  description: initialDescription, 
+  votePrivacy: initialVotePrivacy,
+  profilePrivacy: initialProfilePrivacy,
+  likedPacksPrivacy: initialLikedPacksPrivacy,
+  onDataRefresh 
+}: EditProfileProps) {
+  const [description, setDescription] = useState(initialDescription || '')
+  const [votePrivacy, setVotePrivacy] = useState(initialVotePrivacy)
+  const [profilePrivacy, setProfilePrivacy] = useState(initialProfilePrivacy)
+  const [likedPacksPrivacy, setLikedPacksPrivacy] = useState(initialLikedPacksPrivacy)
+  const [isSaving, setIsSaving] = useState(false)
+  const { toast } = useToast()
+
+  const onDescriptionChange = (value: string) => {
+    setDescription(value)
+  }
+
+  const onPrivacyToggle = (setting: 'profilePrivacy' | 'votePrivacy' | 'likedPacksPrivacy') => {
+    switch (setting) {
+      case 'profilePrivacy':
+        setProfilePrivacy(!profilePrivacy)
+        break
+      case 'votePrivacy':
+        setVotePrivacy(!votePrivacy)
+        break
+      case 'likedPacksPrivacy':
+        setLikedPacksPrivacy(!likedPacksPrivacy)
+        break
+    }
+  }
+
+  const saveUserSettings = async () => {
+    setIsSaving(true)
+    try {
+      const response = await fetch(`/api/user/${userId}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          description,
+          votePrivacy,
+          profilePrivacy,
+          likedPacksPrivacy,
+        }),
+      })
+
+      if (response.ok) {
+        toast({
+          title: "Settings saved",
+          description: "Your profile has been updated successfully.",
+        })
+        onDataRefresh() // Refresh the data after successful save
+      } else {
+        throw new Error('Failed to save settings')
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to save settings. Please try again.",
+        variant: "destructive",
+      })
+    } finally {
+      setIsSaving(false)
+    }
+  }
+
   return (
     <Card className="border shadow-sm">
       <CardContent className="p-6">
@@ -22,7 +96,7 @@ export function EditProfile({ description, votePrivacy, onDescriptionChange, onP
             <Label htmlFor="description" className="text-foreground">Description</Label>
             <Textarea
               id="description"
-              value={description || ''}
+              value={description}
               onChange={(e) => onDescriptionChange(e.target.value)}
               className="mt-1"
             />
@@ -37,7 +111,7 @@ export function EditProfile({ description, votePrivacy, onDescriptionChange, onP
                 </div>
                 <Switch
                   id="profile-privacy"
-                  defaultChecked={false}
+                  checked={profilePrivacy}
                   onCheckedChange={() => onPrivacyToggle('profilePrivacy')}
                 />
               </div>
@@ -48,7 +122,7 @@ export function EditProfile({ description, votePrivacy, onDescriptionChange, onP
                 </div>
                 <Switch
                   id="vote-privacy"
-                  defaultChecked={false}
+                  checked={votePrivacy}
                   onCheckedChange={() => onPrivacyToggle('votePrivacy')}
                 />
               </div>
@@ -59,16 +133,21 @@ export function EditProfile({ description, votePrivacy, onDescriptionChange, onP
                 </div>
                 <Switch
                   id="liked-packs-privacy"
-                  defaultChecked={false}
+                  checked={likedPacksPrivacy}
                   onCheckedChange={() => onPrivacyToggle('likedPacksPrivacy')}
                 />
               </div>
             </div>
           </div>
-          <Button className="w-full bg-brand-blue-100 hover:bg-brand-blue-100/90 text-primary-foreground">Save Changes</Button>
+          <Button 
+            className="w-full bg-brand-blue-100 hover:bg-brand-blue-100/90 text-primary-foreground"
+            onClick={saveUserSettings}
+            disabled={isSaving}
+          >
+            {isSaving ? 'Saving...' : 'Save Changes'}
+          </Button>
         </div>
       </CardContent>
     </Card>
   )
 }
-
