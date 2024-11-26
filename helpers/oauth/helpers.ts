@@ -2,8 +2,7 @@ import { OAuthTokenJWT } from '@/helpers/oauth/types'
 import { IdTokenJWT } from '@/helpers/hooks'
 import { verifyJwt } from '@/helpers/jwt'
 import { cookies } from 'next/headers'
-import { parseJWT } from 'oslo/jwt'
-import { cache } from 'react'
+import { parseJWT } from '@oslojs/jwt'
 
 export function getIdToken(): IdTokenJWT | null {
   const tokenString = cookies().get('ID_TOKEN')?.value
@@ -31,7 +30,7 @@ export function getAuthToken(): Promise<OAuthTokenJWT> {
 export const getAuthTokenOrNull = (): Promise<OAuthTokenJWT | null> => {
   try {
     return getAuthToken()
-  } catch (e: unknown) {
+  } catch (e) {
     return Promise.resolve(null)
   }
 }
