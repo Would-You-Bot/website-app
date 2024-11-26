@@ -31,9 +31,11 @@ class DiscordOAuthClient {
     this.clientSecret = clientSecret
   }
 
-  createAuthorizationURL() {
+  async createAuthorizationURL() {
     const state = generateState()
-    return this.client.createAuthorizationURL({ state, scopes: this.scopes })
+    const authorizationUrl = await this.client.createAuthorizationURL({ state, scopes: this.scopes })
+    authorizationUrl.searchParams.set('prompt', 'none')
+    return authorizationUrl
   }
 
   validateAuthorizationCode(authorizationCode: string) {
