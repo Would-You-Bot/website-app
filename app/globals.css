@@ -124,6 +124,10 @@
   }
 }
 
+[data-radix-popper-content-wrapper] {
+  outline: none !important;
+}
+
 body {
   display: flex;
   flex-direction: column;

@@ -154,7 +154,7 @@ export default function ProfileContent({
   )
 
   return (
-    <main className="w-full mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
+    <main className="w-full mx-auto max-w-8xl px-4 sm:px-6 lg:px-8 py-8">
       <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-6">
         {userData.displayName && (
           <UserCard
