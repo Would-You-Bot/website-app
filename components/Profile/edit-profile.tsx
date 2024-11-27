@@ -140,7 +140,7 @@ export function EditProfile({
             </div>
           </div>
           <Button 
-            className="w-full bg-brand-blue-100 hover:bg-brand-blue-100/90 text-primary-foreground"
+            className="w-full bg-brand-blue-100 hover:bg-brand-blue-100/90 text-white"
             onClick={saveUserSettings}
             disabled={isSaving}
           >
