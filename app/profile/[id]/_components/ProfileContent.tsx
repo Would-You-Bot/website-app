@@ -159,6 +159,7 @@ export default function ProfileContent({
         {userData.displayName && (
           <UserCard
             userData={{
+              userID: userData.userID ?? '',
               bannerUrl: userData.bannerUrl ?? '',
               avatarUrl: userData.avatarUrl ?? '',
               displayName: userData.displayName,
