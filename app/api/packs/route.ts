@@ -26,6 +26,9 @@ export async function GET(request: NextRequest) {
   const questionsPromise = prisma.questionPack
   .findMany({
     where,
+    orderBy: {
+      featured: 'desc'
+    },
     select: {
       type: true,
       id: true,
