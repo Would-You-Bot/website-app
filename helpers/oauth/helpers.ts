@@ -24,15 +24,24 @@ export function getAuthToken(): Promise<OAuthTokenJWT> {
   return verifyJwt(token) as Promise<OAuthTokenJWT>
 }
 
+let cachedAuthToken: OAuthTokenJWT | null | undefined
+
 /**
  * @desc Returns the validated auth token, or null if any error is thrown (e.g. not token found, token is expired, invalid signature,...)
  */
-export const getAuthTokenOrNull = (): Promise<OAuthTokenJWT | null> => {
-  try {
-    return getAuthToken()
-  } catch (e) {
-    return Promise.resolve(null)
+export const getAuthTokenOrNull = async (): Promise<OAuthTokenJWT | null> => {
+  if (cachedAuthToken !== undefined) {
+    return cachedAuthToken
   }
+
+  try {
+    cachedAuthToken = await getAuthToken()
+  } catch (e) {
+    console.error('Error getting auth token:', e)
+    cachedAuthToken = null
+  }
+
+  return cachedAuthToken
 }
 
 export abstract class OAuthException extends Error {}
