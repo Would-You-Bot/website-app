@@ -12,7 +12,9 @@ export async function GET(
   }
 ) {
   const id = validator.escape((await params).id) // Sanitize ID
-  const auth = await getAuthTokenOrNull()
+  const auth = await getAuthTokenOrNull(
+    request.headers.get('Authorization') ?? undefined
+  )
   const userId = auth?.payload?.id
 
   const userData = await prisma.user.findFirst({
@@ -28,19 +30,22 @@ export async function GET(
   // Enforce privacy: only the owner can access their profile if votePrivacy is true
   if (userData.votePrivacy && userId !== id) {
     return NextResponse.json(
-      { message: 'Access denied. This profile is private.' },
-      { status: 403 } // Forbidden
+      {
+        data: {
+          userID: userData.userID,
+          displayName: userData.displayName,
+          globalName: userData.globalName,
+          avatarUrl: userData.avatarUrl
+        }
+      },
+      { status: 200 }
     )
   }
 
   return NextResponse.json(
     {
-      data: {
-        userID: userData.userID,
-        displayName: userData.displayName,
-        globalName: userData.globalName,
-        avatarUrl: userData.avatarUrl
-      }
+      data: userData
+      
     },
     { status: 200 }
   )

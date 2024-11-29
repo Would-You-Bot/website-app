@@ -12,12 +12,14 @@ export const viewport: Viewport = {
 }
 
 const getUserData = async (id: string) => {
+  const token = await getAuthTokenOrNull()
   const user = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/user/${id}`,
     {
       method: 'GET',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': token?.value ?? "should not be here"
       },
       next: { revalidate: 0 }
     }

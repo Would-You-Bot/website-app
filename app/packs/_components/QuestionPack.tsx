@@ -65,7 +65,6 @@ export default function QuestionPack({
       } else {
         setUserLiked(false)
       }
-      console.log(userLiked)
       setLikes(updatedLikes.likes)
     } catch (error) {
       console.error('Error toggling like:', error)
