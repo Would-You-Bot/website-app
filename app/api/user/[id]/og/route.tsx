@@ -66,50 +66,55 @@ export async function GET(
     userData.avatarUrl?.replace('.webp', '.png').replace('128', '512') ??
     'https://discord.com/assets/322c936a8c8be1b803cd94861bdfa868.png'
 
-  return new ImageResponse(
-    (
-      <div
-        style={{ fontFamily: 'Inter' }}
-        tw="relative flex flex-col items-center justify-center w-full h-full"
-      >
-        {/* Background Image for the entire canvas */}
+    return new ImageResponse(
+      (
         <div
-          tw="absolute inset-0 w-full h-full z-0"
-          style={{
-            backgroundImage: 'url(https://wouldyoubot.gg/Background.png)', // Local image reference
-            backgroundSize: 'cover',
-            backgroundPosition: 'center'
-          }}
-        ></div>
-
-        {/* Profile Picture */}
-        <img
-          src={profilePic}
-          alt={`${userData.displayName}'s profile`}
-          width={150}
-          height={150}
-          tw="w-[150px] h-[150px] rounded-full border-4 border-[#0598F4] z-10 mb-6"
-        />
-
-        {/* Text Content */}
-        <h1 tw="text-white font-bold text-[80px] leading-none text-center z-10">
-          {userData.displayName}
-        </h1>
-        <p tw="text-gray-50 font-semibold text-[30px] mt-4 text-center z-10">
-          {userData.description}
-        </p>
-      </div>
-    ),
-    {
-      width: 1200,
-      height: 630,
-      fonts: [
-        {
-          name: 'Inter',
-          data: await loadGoogleFont('Inter'),
-          style: 'normal'
-        }
-      ]
-    }
-  )
-}
+          style={{ fontFamily: 'Inter' }}
+          tw="relative flex items-center justify-center w-full h-full"
+        >
+          {/* Background Image for the entire canvas */}
+          <div
+            tw="absolute inset-0 w-full h-full z-0"
+            style={{
+              backgroundImage: 'url(https://wouldyoubot.gg/Background.png)', // Local image reference
+              backgroundSize: 'cover',
+              backgroundPosition: 'center'
+            }}
+          ></div>
+    
+          {/* Flex Container with Border */}
+          <div
+            tw="flex flex-col items-center justify-center w-[45%] max-w-[800px] p-8 "
+          >
+            {/* Profile Picture */}
+            <img
+              src={profilePic}
+              alt={`${userData.displayName}'s profile`}
+              width={150}
+              height={150}
+              tw="w-[150px] h-[150px] rounded-full border-4 border-[#0598F4] mb-6"
+            />
+    
+            {/* Text Content */}
+            <h1 tw="text-white font-bold text-[60px] leading-tight text-center">
+              {userData.displayName}
+            </h1>
+            <p tw="text-gray-50 font-semibold text-[24px] mt-4 text-center">
+              {userData.description}
+            </p>
+          </div>
+        </div>
+      ),
+      {
+        width: 1200,
+        height: 630,
+        fonts: [
+          {
+            name: 'Inter',
+            data: await loadGoogleFont('Inter'),
+            style: 'normal'
+          }
+        ]
+      }
+    );
+  }
