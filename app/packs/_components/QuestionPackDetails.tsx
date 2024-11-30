@@ -20,6 +20,7 @@ import Image from 'next/image'
 
 const PackDetails = ({ id, type }: { id: string; type: string }) => {
   const [packToShow, setPack] = useState<PackData | null>(null)
+  const [userData, setUserData] = useState({username: 'Private User', avatar: 'https://g-pmronkrgvvx.vusercontent.net/placeholder-user.jpg'})
 
   useEffect(() => {
     async function getPack() {
@@ -27,8 +28,19 @@ const PackDetails = ({ id, type }: { id: string; type: string }) => {
       const pack = await res.json()
       setPack(pack.data)
     }
-    getPack()
+        getPack()
   }, [id])
+
+  useEffect(() => {
+    async function getUser() {
+      const res = await fetch(`/api/packs/${id}`)
+      if(res.ok) {
+        const user = await res.json()
+        setUserData({username: user.data.displayName, avatar: user.data.avatarUrl})
+      }
+    }
+    getUser()
+  }, )
 
   const copyCommand = () => {
     navigator.clipboard.writeText(`/import ${type} ${id}`)
@@ -57,7 +69,7 @@ const PackDetails = ({ id, type }: { id: string; type: string }) => {
               height={32}
               className="rounded-full"
             />
-            <p className="capitalize">Dominik</p>
+            <p className="capitalize">{userData.username}</p>
           </div>
         </div>
         <div className="flex flex-col gap-1">

@@ -31,14 +31,9 @@ export async function GET(
   if (userData.votePrivacy && userId !== id) {
     return NextResponse.json(
       {
-        data: {
-          userID: userData.userID,
-          displayName: userData.displayName,
-          globalName: userData.globalName,
-          avatarUrl: userData.avatarUrl
-        }
+        message: 'This user does not exist!'
       },
-      { status: 200 }
+      { status: 404 }
     )
   }
 
