@@ -20,6 +20,8 @@ interface UserData {
   language?: string
   bannerUrl?: string
   votePrivacy?: boolean
+  profilePrivacy?: boolean
+  likedPackPrivacy?: boolean
   createdAt?: string
   updatedAt?: string
   wouldyourather?: GameStats
@@ -139,12 +141,6 @@ export default function ProfileContent({
     (userData.wouldyourather?.no ?? 0) +
     (userData.neverhaveiever?.no ?? 0) +
     (userData.whatwouldyoudo?.no ?? 0)
-
-  const handlePrivacyToggle = (
-    setting: 'profilePrivacy' | 'votePrivacy' | 'likedPacksPrivacy'
-  ) => {
-    // Handle privacy toggle logic here
-  }
 
   const hasGameStats = !!(
     userData.wouldyourather ||
@@ -267,8 +263,8 @@ export default function ProfileContent({
                   userId={userData.userID || ''}
                   description={userData.description || null}
                   votePrivacy={userData.votePrivacy || false}
-                  profilePrivacy={false}
-                  likedPacksPrivacy={false}
+                  profilePrivacy={userData.profilePrivacy || false}
+                  likedPackPrivacy={userData.likedPackPrivacy || false}
                   onDataRefresh={() => {
                     // Add logic to refresh user data here
                     console.log("Refreshing user data...")

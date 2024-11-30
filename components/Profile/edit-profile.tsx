@@ -14,7 +14,7 @@ interface EditProfileProps {
   description: string | null;
   votePrivacy: boolean;
   profilePrivacy: boolean;
-  likedPacksPrivacy: boolean;
+  likedPackPrivacy: boolean;
   onDataRefresh: () => void;
 }
 
@@ -23,13 +23,13 @@ export function EditProfile({
   description: initialDescription, 
   votePrivacy: initialVotePrivacy,
   profilePrivacy: initialProfilePrivacy,
-  likedPacksPrivacy: initialLikedPacksPrivacy,
+  likedPackPrivacy: initialLikedPackPrivacy,
   onDataRefresh 
 }: EditProfileProps) {
   const [description, setDescription] = useState(initialDescription || '')
   const [votePrivacy, setVotePrivacy] = useState(initialVotePrivacy)
   const [profilePrivacy, setProfilePrivacy] = useState(initialProfilePrivacy)
-  const [likedPacksPrivacy, setLikedPacksPrivacy] = useState(initialLikedPacksPrivacy)
+  const [likedPackPrivacy, setLikedPackPrivacy] = useState(initialLikedPackPrivacy)
   const [isSaving, setIsSaving] = useState(false)
   const { toast } = useToast()
 
@@ -37,7 +37,7 @@ export function EditProfile({
     setDescription(value)
   }
 
-  const onPrivacyToggle = (setting: 'profilePrivacy' | 'votePrivacy' | 'likedPacksPrivacy') => {
+  const onPrivacyToggle = (setting: 'profilePrivacy' | 'votePrivacy' | 'likedPackPrivacy') => {
     switch (setting) {
       case 'profilePrivacy':
         setProfilePrivacy(!profilePrivacy)
@@ -45,8 +45,8 @@ export function EditProfile({
       case 'votePrivacy':
         setVotePrivacy(!votePrivacy)
         break
-      case 'likedPacksPrivacy':
-        setLikedPacksPrivacy(!likedPacksPrivacy)
+      case 'likedPackPrivacy':
+        setLikedPackPrivacy(!likedPackPrivacy)
         break
     }
   }
@@ -63,7 +63,7 @@ export function EditProfile({
           description,
           votePrivacy,
           profilePrivacy,
-          likedPacksPrivacy,
+          likedPackPrivacy,
         }),
       })
 
@@ -133,8 +133,8 @@ export function EditProfile({
                 </div>
                 <Switch
                   id="liked-packs-privacy"
-                  checked={likedPacksPrivacy}
-                  onCheckedChange={() => onPrivacyToggle('likedPacksPrivacy')}
+                  checked={likedPackPrivacy}
+                  onCheckedChange={() => onPrivacyToggle('likedPackPrivacy')}
                 />
               </div>
             </div>

@@ -82,7 +82,9 @@ export async function PATCH(
     },
     data: {
       description: userRequest.description,
-      votePrivacy: userRequest.votePrivacy
+      votePrivacy: userRequest.votePrivacy,
+      profilePrivacy: userRequest.profilePrivacy,
+      likedPackPrivacy: userRequest.likedPackPrivacy
     }
   })
 
