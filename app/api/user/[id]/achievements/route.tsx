@@ -25,7 +25,7 @@ export async function GET(request: NextRequest,{
     )
   }
 
-  if (userData.votePrivacy && userId !== id) {
+  if (userData.profilePrivacy && userId !== id) {
     return NextResponse.json(
       { message: 'User not found!' },
       { status: 404 }

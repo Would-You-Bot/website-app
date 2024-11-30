@@ -35,7 +35,7 @@ export async function GET(
     }
   })
 
-  if (!userData || userData.votePrivacy) {
+  if (!userData || userData.profilePrivacy) {
     return new ImageResponse(
       (
         <div

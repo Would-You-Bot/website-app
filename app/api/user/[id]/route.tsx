@@ -27,8 +27,8 @@ export async function GET(
     return NextResponse.json({ message: 'No user found!' }, { status: 404 })
   }
 
-  // Enforce privacy: only the owner can access their profile if votePrivacy is true
-  if (userData.votePrivacy && userId !== id) {
+  // Enforce privacy: only the owner can access their profile if profilePrivacy is true
+  if (userData.profilePrivacy && userId !== id) {
     return NextResponse.json(
       {
         message: 'This user does not exist!'

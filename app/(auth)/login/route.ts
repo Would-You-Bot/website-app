@@ -124,7 +124,9 @@ async function exchangeAuthorizationCode(code: string) {
         description: "We don't know much about this user yet, but they seem cool!",
         language: 'en_EN',
         bannerUrl: banner ? `https://cdn.discordapp.com/banners/${id}/${banner}.png?size=480` : null,
-        votePrivacy: false
+        votePrivacy: false,
+        profilePrivacy: false,
+        likedPackPrivacy: false
       }
     })
 
