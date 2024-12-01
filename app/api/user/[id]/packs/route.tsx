@@ -30,12 +30,8 @@ export async function GET(
       userID: id
     }
   })
-
-  if (!userData) {
-    return NextResponse.json({ message: 'No user found!' }, { status: 404 })
-  }
   
-  if(userData.profilePrivacy && userData.userID !== userId) {
+  if(!userData || ( userData.profilePrivacy && userData.userID !== userId)) {
     return NextResponse.json({ message: 'User not found!' }, { status: 404 })
   }
   

@@ -25,7 +25,7 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next()
   }
 
-  const token = await getAuthTokenOrNull()
+  const token = await getAuthTokenOrNull(request.headers.get('Authorization') ?? undefined)
 
   if (
     pathname.includes('/packs/create') ||
