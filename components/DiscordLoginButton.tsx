@@ -5,8 +5,6 @@ interface DiscordLoginButtonProps {
   redirect?: string
 }
 
-// TODO: Make params be respected into this bitch
-
 export default function DiscordLoginButton({
   className,
   redirect
