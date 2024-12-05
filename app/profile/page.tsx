@@ -5,9 +5,5 @@ export default async function Profile() {
   const auth = await getAuthTokenOrNull();
   const userId = auth?.payload?.id;
 
-  if (userId) {
-    return redirect(`/profile/${userId}`);
-  }
-  
-  return redirect(`/login`);
+  return redirect(userId ? `/profile/${userId}` : "/login");
 }
