@@ -13,7 +13,7 @@ const FeatureItem: React.FC<{
       whileInView={{ opacity: 1, transform: 'translateX(0)' }}
       viewport={{ once: true }}
       transition={{ duration: 0.65, ease: 'easeInOut' }}
-      className="mx-auto flex flex-col justify-center gap-2 sm:w-2/3 md:w-1/2"
+      className="mx-auto flex flex-col justify-center gap-2 sm:w-2/3 md:w-1/2 rounded-md overflow-x-hidden max-w-[300px]"
     >
       {left}
     </motion.div>
@@ -22,7 +22,7 @@ const FeatureItem: React.FC<{
       whileInView={{ opacity: 1, transform: 'translateX(0)' }}
       viewport={{ once: true }}
       transition={{ duration: 0.65, ease: 'easeInOut' }}
-      className={`mx-auto flex flex-col justify-center gap-2 sm:w-2/3 md:w-1/2 ${
+      className={`mx-auto flex flex-col justify-center gap-2 sm:w-2/3 md:w-1/2 rounded-md overflow-x-hidden max-w-[300px] ${
         reverse ? 'order-last md:order-first' : ''
       }`}
     >
