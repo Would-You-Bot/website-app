@@ -20,6 +20,14 @@ interface UserCardProps {
   }
 }
 
+const languageMap: Record<string, string> = {
+  "en_EN": 'English',
+  "es_ES": 'Spanish',
+  "fr_FR": 'French',
+  "de_DE": 'German',
+  "it_IT": 'Italian',
+}
+
 export function UserCard({ userData }: UserCardProps) {
   const userRole = roles.find((role) => role.id === userData.userID)
   const [bannerSrc, setBannerSrc] = useState(
@@ -88,7 +96,7 @@ export function UserCard({ userData }: UserCardProps) {
               className="w-4 h-4"
               aria-hidden="true"
             />
-            <span>{userData.language}</span>
+            <span>{languageMap[userData.language]}</span>
           </div>
         </div>
       </CardContent>
