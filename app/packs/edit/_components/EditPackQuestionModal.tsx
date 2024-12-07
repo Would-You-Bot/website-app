@@ -14,18 +14,17 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select'
+import { PackData, questionSchema } from '@/utils/zod/schemas'
 import { useLocalStorage } from '@/hooks/use-localstorage'
 import { Control, useController } from 'react-hook-form'
-import { PackData, questionSchema } from '@/utils/zod/schemas'
 import { Textarea } from '@/components/ui/textarea'
 import React, { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { z } from 'zod'
-import { PackType } from '@prisma/client'
 import { packTypes } from '@/lib/constants'
+import { PackType } from '@prisma/client'
+import { z } from 'zod'
 
-
-interface QuestionModalProps {
+interface EditPackQuestionModalProps {
   control: Control<PackData>
   type: PackType
   mode: 'create' | 'update'
@@ -36,14 +35,14 @@ interface QuestionModalProps {
 
 type QuestionType = Exclude<PackType, 'mixed'>
 
-function QuestionModal({
+function EditPackQuestionModal({
   control,
   type,
   mode = 'create',
   isOpen,
   questionToEdit,
   setIsOpen
-}: QuestionModalProps) {
+}: EditPackQuestionModalProps) {
   const {
     field: { onChange, value }
   } = useController({
@@ -280,4 +279,4 @@ function QuestionModal({
   )
 }
 
-export default QuestionModal
+export default EditPackQuestionModal

@@ -30,42 +30,16 @@ import { useLocalStorage } from '@/hooks/use-localstorage'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Textarea } from '@/components/ui/textarea'
 import { toast } from '@/components/ui/use-toast'
-import { packSchema } from '@/utils/zod/schemas'
+import { PackData, packSchema } from '@/utils/zod/schemas'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
 import QuestionModal from './QuestionModal'
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
-import { z } from 'zod'
-
-export type PackType =
-  | 'wouldyourather'
-  | 'neverhaveiever'
-  | 'whatwouldyoudo'
-  | 'truth'
-  | 'dare'
-  | 'topic'
-  | 'mixed'
-
-export type PackLanguage = 'en_EN' | 'de_DE' | 'it_IT' | 'fr_FR' | 'es_ES'
-
-const packTypes = [
-  { value: 'wouldyourather', label: 'Would You Rather', id: 'ab' },
-  { value: 'neverhaveiever', label: 'Never Have I Ever', id: 'cd' },
-  { value: 'whatwouldyoudo', label: 'What Would You Do', id: 'ef' },
-  { value: 'truth', label: 'Truth', id: 'gh' },
-  { value: 'dare', label: 'Dare', id: 'ij' },
-  { value: 'topic', label: 'Topic', id: 'kl' },
-  { value: 'mixed', label: 'Mixed', id: 'mn' }
-]
-const packLanguages = [
-  { value: 'en_EN', label: 'English', id: 'qwert' },
-  { value: 'de_DE', label: 'German', id: 'eweds' },
-  { value: 'es_ES', label: 'Spanish', id: 'yuiop' },
-  { value: 'it_IT', label: 'Italian', id: 'asdfg' },
-  { value: 'fr_FR', label: 'French', id: 'hjklm' }
-]
+import { packLanguages, packTypes } from '@/lib/constants'
+import { PackType } from '@prisma/client'
+import { PackLanguage } from '@/types'
 
 const defaultValues = {
   type: '',
@@ -76,7 +50,6 @@ const defaultValues = {
   questions: []
 }
 
-export type PackData = z.infer<typeof packSchema>
 function PackForm() {
   const [formData, setFormData] = useLocalStorage<PackData>(
     'PACKVALUES',

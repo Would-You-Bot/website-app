@@ -9,7 +9,6 @@ import {
   DialogTrigger
 } from '@/components/ui/dialog'
 import { CopyIcon, ExternalLink, Search } from 'lucide-react'
-import { PackData } from '../create/_components/PackForm'
 import { Skeleton } from '@/components/ui/skeleton'
 import { toast } from '@/components/ui/use-toast'
 import { Button } from '@/components/ui/button'
@@ -17,6 +16,7 @@ import { Input } from '@/components/ui/input'
 import { useState, useEffect } from 'react'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
+import { PackData } from '@/utils/zod/schemas'
 
 const PackDetails = ({ id, type }: { id: string; type: string }) => {
   const [packToShow, setPack] = useState<PackData | null>(null)
@@ -69,7 +69,7 @@ const PackDetails = ({ id, type }: { id: string; type: string }) => {
           <h3 className="text-muted-foreground text-sm">Author</h3>
           <div className="flex items-center gap-1">
             <Image
-              src="/staff/Dominik.webp"
+              src={userData.avatar}
               alt="profile image"
               width={32}
               height={32}

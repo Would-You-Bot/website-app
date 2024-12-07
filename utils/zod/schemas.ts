@@ -103,6 +103,7 @@ export const packSchema = z.object({
     .min(1, 'At least one question is required')
     .max(150, 'You can only have 100 questions in a pack')
 })
+export type PackData = z.infer<typeof packSchema>
 
 export const questionSchema = z.object({
   question: z
