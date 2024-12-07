@@ -31,7 +31,7 @@ export async function GET(
   if (userData.profilePrivacy && userId !== id) {
     return NextResponse.json(
       {
-        message: 'This user does not exist!'
+        message: 'This profile is private!'
       },
       { status: 404 }
     )

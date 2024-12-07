@@ -76,8 +76,20 @@ export default async function ProfilePage({ params: { id } }: Props) {
 
   const userData = await getUserData(id)
 
+  if (userData.message) {
+    return (
+      <section className="flex flex-1 items-center justify-center py-8">
+        <span className="text-lg">{userData.message}</span>
+      </section>
+    )
+  }
+
   if (!userData || !userData.data) {
-    return <div>User not found</div>
+    return (
+      <section className="flex flex-1 items-center justify-center py-8">
+        <span className="text-lg">User not found.</span>
+      </section>
+    )
   }
 
   return (

@@ -116,7 +116,7 @@ export function EditProfile({
             <h3 className="text-lg font-semibold text-foreground">
               Privacy Settings
             </h3>
-            <div className="space-y-4 rounded-lg border p-4 bg-muted">
+            <div className="space-y-4 rounded-lg border p-4 bg-background">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2">
                   <User className="w-4 h-4 text-foreground" />

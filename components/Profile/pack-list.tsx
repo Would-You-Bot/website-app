@@ -33,7 +33,7 @@ export function PackList({ packs, type }: PackListProps) {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center justify-between">
+      <div className="flex gap-2 items-center justify-between">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
           <Input
@@ -44,7 +44,7 @@ export function PackList({ packs, type }: PackListProps) {
           />
         </div>
         {type === 'created' && (
-          <Button className="ml-4 bg-primary hover:bg-primary/90 text-primary-foreground">
+          <Button variant="ghost">
             <Plus className="w-4 h-4 mr-2" />
             Create Pack
           </Button>
@@ -54,11 +54,12 @@ export function PackList({ packs, type }: PackListProps) {
       <div className="flex flex-wrap gap-2">
         {filterTags.map((tag) => (
           <button
+            type="button"
             key={tag.id}
             onClick={() => setActiveFilter(tag.id)}
             className={`px-3 py-1 rounded-full text-sm ${
               activeFilter === tag.id ?
-                'bg-primary text-primary-foreground'
+                'bg-brand-customPrimary text-black'
               : 'bg-muted text-muted-foreground hover:bg-muted/80'
             }`}
           >
@@ -76,9 +77,9 @@ export function PackList({ packs, type }: PackListProps) {
             <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary opacity-0 group-hover:opacity-100 transition-opacity" />
             <div className="relative p-4">
               {pack.id === 1 && type === 'liked' && (
-                <Badge className="absolute top-2 right-2 bg-[#5865F2] text-primary-foreground text-xs px-2 py-0.5 rounded">
+                <span className="flex uppercase text-sm items-center px-2 py-1 rounded-md text-white popular-badge select-none absolute right-2 top-2">
                   POPULAR
-                </Badge>
+                </span>
               )}
               <h3 className="font-semibold text-foreground mb-1">
                 {pack.name}
@@ -91,7 +92,7 @@ export function PackList({ packs, type }: PackListProps) {
               <div className="flex items-center justify-between text-sm text-foreground">
                 <div className="flex items-center gap-4">
                   <span>{pack.questions} questions</span>
-                  <span className="text-secondary">
+                  <span className="text-foreground/60">
                     {pack.type.toLowerCase()}
                   </span>
                 </div>
@@ -99,14 +100,13 @@ export function PackList({ packs, type }: PackListProps) {
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="hover:text-secondary"
                   >
                     <Heart className="h-4 w-4" />
                     <span className="ml-1">{pack.likes}</span>
                   </Button>
                 </div>
               </div>
-              <Button className="w-full mt-4 bg-primary hover:bg-primary/90 text-primary-foreground">
+              <Button className="w-full mt-4 bg-brand-customPrimary hover:bg-brand-customPrimaryLight text-black">
                 {type === 'liked' ? 'Use Pack' : 'Edit Pack'}
                 {type === 'liked' ?
                   <ExternalLink className="w-4 h-4 ml-2" />

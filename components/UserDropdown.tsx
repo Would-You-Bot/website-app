@@ -6,7 +6,7 @@ import {
   DropdownMenuTrigger
 } from '@/components/ui/user-dropdown-menu'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { IdTokenJWT } from '@/helpers/oauth/types'
+import type { IdTokenJWT } from '@/helpers/oauth/types'
 import { LogOut } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -21,7 +21,7 @@ export default function UserDropdown({ idToken, items }: UserDropdownProps) {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="flex items-center gap-2 rounded-[8px] h-full p-2 transition hover:bg-foreground/5">
+      <DropdownMenuTrigger className="flex items-center gap-2 rounded-[8px] h-fit lg:h-full p-2 transition hover:bg-foreground/5">
         <Avatar>
           <AvatarImage
             src={`https://cdn.discordapp.com/avatars/${user?.id}/${user?.avatar}.jpg`}
@@ -35,14 +35,14 @@ export default function UserDropdown({ idToken, items }: UserDropdownProps) {
             />
           </AvatarFallback>
         </Avatar>
-        <span className="text-lg text-foreground max-w-[60px] lg:max-w-[100px] xl:max-w-full truncate">
+        <span className="text-lg text-foreground xl:max-w-full truncate">
           {user?.username}
         </span>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-        {items.map((item, i) => (
+        {items.map((item) => (
           <Link
-            key={i}
+            key={item.label}
             href={item.href}
           >
             <DropdownMenuItem className="flex gap-2">

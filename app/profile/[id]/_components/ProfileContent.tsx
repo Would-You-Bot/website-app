@@ -4,10 +4,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { StatsOverview } from '@/components/Profile/stats-overview'
 import { Achievements } from '@/components/Profile/achievements'
 import { EditProfile } from '@/components/Profile/edit-profile'
+import { useRouter, useSearchParams } from 'next/navigation'
 import { GameStats } from '@/components/Profile/game-stats'
 import { UserCard } from '@/components/Profile/user-card'
 import { PackList } from '@/components/Profile/pack-list'
-import { useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 
 interface UserData {
@@ -24,17 +24,17 @@ interface UserData {
   likedPackPrivacy?: boolean
   createdAt?: string
   updatedAt?: string
-  wouldyourather?: GameStats
-  neverhaveiever?: GameStats
+  wouldyourather?: GameStatsProps
+  neverhaveiever?: GameStatsProps
   higherlower?: HigherLowerStats
-  whatwouldyoudo?: GameStats
+  whatwouldyoudo?: GameStatsProps
   truth?: UsageStats
   dare?: UsageStats
   random?: UsageStats
   topic?: null
 }
 
-interface GameStats {
+interface GameStatsProps {
   yes?: number
   no?: number
   used?: UsageStats
@@ -115,6 +115,7 @@ export default function ProfileContent({
   const [description, setDescription] = useState(userData.description ?? '')
   const searchParams = useSearchParams()
   const currentTab = searchParams.get('tab') || 'statistics'
+  const router = useRouter()
 
   const totalGamesPlayed =
     (userData.wouldyourather?.used?.command ?? 0) +
@@ -173,15 +174,40 @@ export default function ProfileContent({
             className="w-full"
           >
             {(canEdit || !userData.profilePrivacy) && (
-              <TabsList className="grid w-full grid-cols-4 lg:grid-cols-5">
-                <TabsTrigger value="statistics">Statistics</TabsTrigger>
+              <TabsList className="w-full flex flex-row overflow-x-auto overflow-y-hidden">
+                <TabsTrigger
+                  value="statistics"
+                  className="w-full"
+                >
+                  Statistics
+                </TabsTrigger>
                 {(canEdit || !userData.likedPackPrivacy) && (
-                  <TabsTrigger value="liked">Liked Packs</TabsTrigger>
+                  <TabsTrigger
+                    value="liked"
+                    className="w-full"
+                  >
+                    Liked Packs
+                  </TabsTrigger>
                 )}
-                <TabsTrigger value="created">Created Packs</TabsTrigger>
-                <TabsTrigger value="achievements">Achievements</TabsTrigger>
+                <TabsTrigger
+                  value="created"
+                  className="w-full"
+                >
+                  Created Packs
+                </TabsTrigger>
+                <TabsTrigger
+                  value="achievements"
+                  className="w-full"
+                >
+                  Achievements
+                </TabsTrigger>
                 {canEdit && (
-                  <TabsTrigger value="edit">Edit Profile</TabsTrigger>
+                  <TabsTrigger
+                    value="edit"
+                    className="w-full"
+                  >
+                    Edit Profile
+                  </TabsTrigger>
                 )}
               </TabsList>
             )}
@@ -274,6 +300,7 @@ export default function ProfileContent({
                   onDataRefresh={() => {
                     // Add logic to refresh user data here
                     console.log('Refreshing user data...')
+                    router.refresh()
                   }}
                 />
               </TabsContent>

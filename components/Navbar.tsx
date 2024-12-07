@@ -2,7 +2,7 @@
 import { LayoutDashboardIcon, Moon, Sun, UserRound } from 'lucide-react'
 import DiscordLoginButton from '@/components/DiscordLoginButton'
 import { useIdToken } from '@/helpers/hooks/useIdToken'
-import { IdTokenJWT } from '@/helpers/oauth/types'
+import type { IdTokenJWT } from '@/helpers/oauth/types'
 import UserDropdown from './UserDropdown'
 import { useTheme } from 'next-themes'
 import { Crown } from '@/icons/Crown'
@@ -33,7 +33,7 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
   const idToken = useIdToken(idToken_)
 
   const handleIsOpen = () => {
-    if (window.innerWidth < 768) setIsOpen(!isOpen)
+    if (window.innerWidth < 1024) setIsOpen(!isOpen)
   }
 
   return (
@@ -56,9 +56,9 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
           </Link>
         </div>
         <div
-          className={`absolute flex items-center justify-center gap-6 rounded-[10px] border-2 border-foreground/5 bg-background-light/90 backdrop-blur md:static ${isOpen ? 'right-0 top-0 z-10 h-screen w-screen rounded-none' : 'right-7 top-6 h-16 w-16 md:w-min'} transition-all duration-300`}
+          className={`absolute flex items-center justify-center gap-6 rounded-[10px] border-2 border-foreground/5 bg-background-light/90 backdrop-blur lg:static ${isOpen ? 'right-0 top-0 z-10 h-screen w-screen rounded-none' : 'right-7 top-6 h-16 w-16 lg:w-min'} transition-all duration-300`}
         >
-          <div className="hidden w-max gap-6 px-6 lg:px-10 md:flex items-center">
+          <div className="hidden w-max gap-6 px-6 lg:px-10 lg:flex items-center">
             <Link
               href="/commands"
               className="text-lg text-foreground/70 transition-all hover:text-foreground/90"
@@ -88,7 +88,7 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
           <button
             type="button"
             title={`${isOpen ? 'close' : 'open'} menu`}
-            className={`absolute right-[1.05rem] top-[1.35rem] z-50 flex flex-col gap-[5px] md:hidden`}
+            className="absolute right-[1.05rem] top-[1.35rem] z-50 flex flex-col gap-[5px] lg:hidden"
             onClick={handleIsOpen}
           >
             <div
@@ -102,9 +102,10 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
             />
           </button>
           <div
-            className={`mb-auto flex h-full w-full flex-col items-center justify-center gap-8 p-4 text-foreground md:hidden ${isOpen ? 'pointer-events-auto opacity-100 transition-all delay-150 duration-300' : 'pointer-events-none opacity-0'}`}
+            className={`mb-auto flex h-full w-full flex-col items-center justify-center gap-8 p-4 text-foreground lg:hidden ${isOpen ? 'pointer-events-auto opacity-100 transition-all delay-150 duration-300' : 'pointer-events-none opacity-0'}`}
           >
             <button
+              type="button"
               className="flex items-center justify-center text-foreground/70 hover:text-foreground/90"
               onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
             >
@@ -149,8 +150,9 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
             : <DiscordLoginButton className="h-16 rounded-[10px] px-6" />}
           </div>
         </div>
-        <div className="hidden h-16 min-w-fit items-center justify-center md:flex gap-1 p-1 rounded-xl border-2 border-foreground/5 bg-background-light/90 backdrop-blur">
+        <div className="hidden h-16 min-w-fit items-center justify-center lg:flex gap-1 p-1 rounded-xl border-2 border-foreground/5 bg-background-light/90 backdrop-blur">
           <button
+            type="button"
             className="flex h-full w-auto aspect-square rounded-[8px] items-center justify-center text-foreground/70 hover:text-foreground/90 hover:bg-foreground/5 transition"
             onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
           >
