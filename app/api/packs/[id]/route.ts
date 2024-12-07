@@ -30,7 +30,8 @@ export async function GET(
         description: true,
         tags: true,
         likes: true,
-        questions: true
+        questions: true,
+        authorId: true
       }
     })
     .catch(() => {

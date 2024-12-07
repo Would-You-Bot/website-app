@@ -24,14 +24,27 @@ export async function GET(
   })
 
   if (!userData) {
-    return NextResponse.json({ message: 'No user found!' }, { status: 404 })
+    return NextResponse.json(
+      {
+        message: 'No user found!',
+        data: {
+          displayName: 'Private User',
+          avatarUrl: '/Logo.png'
+        }
+      },
+      { status: 404 }
+    )
   }
 
   // Enforce privacy: only the owner can access their profile if profilePrivacy is true
   if (userData.profilePrivacy && userId !== id) {
     return NextResponse.json(
       {
-        message: 'This profile is private!'
+        message: 'No user found!',
+        data: {
+          displayName: 'Private User',
+          avatarUrl: '/Logo.png'
+        }
       },
       { status: 404 }
     )

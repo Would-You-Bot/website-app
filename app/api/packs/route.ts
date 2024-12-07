@@ -1,4 +1,5 @@
-import { PackData, PackType } from '@/app/packs/create/_components/PackForm'
+import type { PackType } from '@prisma/client'
+import type { PackData } from '@/utils/zod/schemas'
 import { getAuthTokenOrNull } from '@/helpers/oauth/helpers'
 import { NextResponse, type NextRequest } from 'next/server'
 import { prisma } from '@/lib/prisma'

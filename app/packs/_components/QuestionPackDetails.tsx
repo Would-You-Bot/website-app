@@ -12,41 +12,41 @@ import { CopyIcon, ExternalLink, Search } from 'lucide-react'
 import { Skeleton } from '@/components/ui/skeleton'
 import { toast } from '@/components/ui/use-toast'
 import { Button } from '@/components/ui/button'
+import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar'
+import { PackData } from '@/utils/zod/schemas'
 import { Input } from '@/components/ui/input'
 import { useState, useEffect } from 'react'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
-import { PackData } from '@/utils/zod/schemas'
 
 const PackDetails = ({ id, type }: { id: string; type: string }) => {
   const [packToShow, setPack] = useState<PackData | null>(null)
   const [userData, setUserData] = useState({
     username: 'Private User',
-    avatar: 'https://g-pmronkrgvvx.vusercontent.net/placeholder-user.jpg'
+    avatar: '/Logo.png'
   })
 
   useEffect(() => {
     async function getPack() {
       const res = await fetch(`/api/packs/${id}`)
-      const pack = await res.json()
-      setPack(pack.data)
+      const packData = await res.json()
+      setPack(packData.data)
+
+      // After getting the pack, fetch user data based on authorId
+      if (packData.data.authorId) {
+        const userRes = await fetch(`/api/user/${packData.data.authorId}`)
+        if (userRes.ok) {
+          const user = await userRes.json()
+
+          setUserData({
+            username: user.data.displayName,
+            avatar: user.data.avatarUrl
+          })
+        }
+      }
     }
     getPack()
   }, [id])
-
-  useEffect(() => {
-    async function getUser() {
-      const res = await fetch(`/api/packs/${id}`)
-      if (res.ok) {
-        const user = await res.json()
-        setUserData({
-          username: user.data.displayName,
-          avatar: user.data.avatarUrl
-        })
-      }
-    }
-    getUser()
-  })
 
   const copyCommand = () => {
     navigator.clipboard.writeText(`/import ${type} ${id}`)
@@ -68,13 +68,21 @@ const PackDetails = ({ id, type }: { id: string; type: string }) => {
         <div className="flex flex-col gap-1">
           <h3 className="text-muted-foreground text-sm">Author</h3>
           <div className="flex items-center gap-1">
-            <Image
-              src={userData.avatar}
-              alt="profile image"
-              width={32}
-              height={32}
-              className="rounded-full"
-            />
+            <Avatar className="h-[32px] w-[32px]">
+              <AvatarImage
+                className='rounded-full'
+                alt={userData.username + "'s avatar"}
+                src={userData.avatar}
+              />
+              <AvatarFallback>
+                <Image
+                  src="/Logo.png'"
+                  alt="Fallback Avatar"
+                  width={90}
+                  height={90}
+                />
+              </AvatarFallback>
+            </Avatar>
             <p className="capitalize">{userData.username}</p>
           </div>
         </div>
@@ -84,7 +92,7 @@ const PackDetails = ({ id, type }: { id: string; type: string }) => {
         </div>
         <div className="flex flex-col gap-1">
           <h3 className="text-sm text-muted-foreground">Type</h3>
-          <p className="capitalize">{packToShow.type}</p>
+          <p>{packToShow.type}</p>
         </div>
       </section>
 
