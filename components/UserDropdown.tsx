@@ -7,13 +7,21 @@ import {
 } from '@/components/ui/user-dropdown-menu'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import type { IdTokenJWT } from '@/helpers/oauth/types'
-import { LogOut } from 'lucide-react'
+import { LogOut, type LucideProps } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 
+type IconType = React.ForwardRefExoticComponent<
+  Omit<LucideProps, 'ref'> & React.RefAttributes<SVGSVGElement>
+>
+
 interface UserDropdownProps {
   idToken: IdTokenJWT | null
-  items: { label: string; href: string; icon: any }[]
+  items: {
+    label: string
+    href: string
+    icon: IconType
+  }[]
 }
 
 export default function UserDropdown({ idToken, items }: UserDropdownProps) {
