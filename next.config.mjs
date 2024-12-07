@@ -48,6 +48,11 @@ const nextConfig = {
         source: '/impressum',
         destination: '/legal-de',
         permanent: true
+      },
+      {
+        source: '/manage/subscription',
+        destination: '/api/subs/manage',
+        permanent: true
       }
     ]
   },

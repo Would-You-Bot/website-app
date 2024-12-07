@@ -1,5 +1,5 @@
 'use client'
-import { LayoutDashboardIcon, Moon, Sun, UserRound } from 'lucide-react'
+import { Moon, Sun } from 'lucide-react'
 import DiscordLoginButton from '@/components/DiscordLoginButton'
 import { useIdToken } from '@/helpers/hooks/useIdToken'
 import type { IdTokenJWT } from '@/helpers/oauth/types'
@@ -14,18 +14,6 @@ interface NavbarProps {
   idToken: IdTokenJWT | null
 }
 
-const menuItems = [
-  {
-    label: 'View Profile',
-    href: '/profile',
-    icon: UserRound
-  },
-  {
-    label: 'Manage Subscription',
-    href: '/api/subs/manage',
-    icon: LayoutDashboardIcon
-  }
-]
 
 const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
   const { setTheme, theme } = useTheme()
@@ -145,7 +133,7 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
             {idToken ?
               <UserDropdown
                 idToken={idToken}
-                items={menuItems}
+                handleIsOpen={handleIsOpen}
               />
             : <DiscordLoginButton className="h-16 rounded-[10px] px-6" />}
           </div>
@@ -163,7 +151,7 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
           {idToken ?
             <UserDropdown
               idToken={idToken}
-              items={menuItems}
+              handleIsOpen={handleIsOpen}
             />
           : <DiscordLoginButton className="h-full rounded-[8px] px-6" />}
         </div>
