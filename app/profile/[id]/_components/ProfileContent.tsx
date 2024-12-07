@@ -2,7 +2,6 @@
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { StatsOverview } from '@/components/Profile/stats-overview'
-import { Achievements } from '@/components/Profile/achievements'
 import { EditProfile } from '@/components/Profile/edit-profile'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { GameStats } from '@/components/Profile/game-stats'
@@ -83,27 +82,6 @@ const createdPacks = [
   }
 ]
 
-const achievements = [
-  {
-    title: 'Game Master',
-    desc: 'Played 1000+ games',
-    progress: 75,
-    icon: '🏆'
-  },
-  {
-    title: 'Truth Seeker',
-    desc: 'Asked 100+ truths',
-    progress: 85,
-    icon: '🔍'
-  },
-  { title: 'Daredevil', desc: 'Completed 50+ dares', progress: 60, icon: '🎭' },
-  {
-    title: 'Decision Maker',
-    desc: 'Made 200+ choices',
-    progress: 45,
-    icon: '🤔'
-  }
-]
 
 export default function ProfileContent({
   userData,
@@ -195,12 +173,6 @@ export default function ProfileContent({
                 >
                   Created Packs
                 </TabsTrigger>
-                <TabsTrigger
-                  value="achievements"
-                  className="w-full"
-                >
-                  Achievements
-                </TabsTrigger>
                 {canEdit && (
                   <TabsTrigger
                     value="edit"
@@ -276,18 +248,13 @@ export default function ProfileContent({
             </TabsContent>
             <TabsContent value="liked">
               <PackList
-                packs={likedPacks}
                 type="liked"
               />
             </TabsContent>
             <TabsContent value="created">
               <PackList
-                packs={createdPacks}
                 type="created"
               />
-            </TabsContent>
-            <TabsContent value="achievements">
-              <Achievements achievements={achievements} />
             </TabsContent>
             {canEdit && (
               <TabsContent value="edit">

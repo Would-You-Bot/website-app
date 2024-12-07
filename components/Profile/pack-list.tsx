@@ -13,11 +13,13 @@ interface Pack {
 }
 
 interface PackListProps {
-  packs: Pack[]
   type: 'liked' | 'created'
 }
 
-export function PackList({ packs, type }: PackListProps) {
+// Get Questions depending on the type from api
+const packs: any = []
+
+export function PackList({ type }: PackListProps) {
   const [searchQuery, setSearchQuery] = useState('')
   const [activeFilter, setActiveFilter] = useState('all')
 
@@ -69,7 +71,7 @@ export function PackList({ packs, type }: PackListProps) {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {packs.map((pack) => (
+        {packs.map((pack: any) => (
           <div
             key={pack.id}
             className="relative rounded-lg border bg-card hover:shadow-lg transition-all duration-200 overflow-hidden"

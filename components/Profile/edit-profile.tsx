@@ -95,7 +95,10 @@ export function EditProfile({
     <Card className="border shadow-sm">
       <CardContent className="p-6">
         <h2 className="text-2xl font-bold text-foreground mb-4">
-          Edit Profile
+          <span className="text-brand-red-100 drop-shadow-red-glow">Edit</span>{' '}
+          <span className="text-brand-blue-100 drop-shadow-blue-glow">
+            Profile
+          </span>
         </h2>
         <div className="space-y-4">
           <div>
