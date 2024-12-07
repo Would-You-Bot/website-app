@@ -9,62 +9,37 @@ import {
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu'
 import {
+  ArrowLeft,
+  EllipsisVertical,
+  Loader2,
+  Pen,
+  Plus,
+  Search,
+  Trash2,
+  XCircle
+} from 'lucide-react'
+import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select'
-import {
-  ArrowLeft,
-  EllipsisVertical,
-  Loader2,
-  Pen,
-  Search,
-  Trash2,
-  XCircle
-} from 'lucide-react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useLocalStorage } from '@/hooks/use-localstorage'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Textarea } from '@/components/ui/textarea'
 import { toast } from '@/components/ui/use-toast'
-import NewQuestionModal from './NewQuestionModal'
-import { packSchema } from '@/utils/zod/schemas'
+import { PackData, packSchema } from '@/utils/zod/schemas'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
+import QuestionModal from './QuestionModal'
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
-import { z } from 'zod'
-
-export type PackType =
-  | 'wouldyourather'
-  | 'neverhaveiever'
-  | 'whatwouldyoudo'
-  | 'truth'
-  | 'dare'
-  | 'topic'
-  | 'mixed'
-
-export type PackLanguage = 'en_EN' | 'de_DE' | 'it_IT' | 'fr_FR' | 'es_ES'
-
-const packTypes = [
-  { value: 'wouldyourather', label: 'Would You Rather', id: 'ab' },
-  { value: 'neverhaveiever', label: 'Never Have I Ever', id: 'cd' },
-  { value: 'whatwouldyoudo', label: 'What Would You Do', id: 'ef' },
-  { value: 'truth', label: 'Truth', id: 'gh' },
-  { value: 'dare', label: 'Dare', id: 'ij' },
-  { value: 'topic', label: 'Topic', id: 'kl' },
-  { value: 'mixed', label: 'Mixed', id: 'mn' }
-]
-const packLanguages = [
-  { value: 'en_EN', label: 'English', id: 'qwert' },
-  { value: 'de_DE', label: 'German', id: 'eweds' },
-  { value: 'es_ES', label: 'Spanish', id: 'yuiop' },
-  { value: 'it_IT', label: 'Italian', id: 'asdfg' },
-  { value: 'fr_FR', label: 'French', id: 'hjklm' }
-]
+import { packLanguages, packTypes } from '@/lib/constants'
+import { PackType } from '@prisma/client'
+import { PackLanguage } from '@/types'
 
 const defaultValues = {
   type: '',
@@ -75,7 +50,6 @@ const defaultValues = {
   questions: []
 }
 
-export type PackData = z.infer<typeof packSchema>
 function PackForm() {
   const [formData, setFormData] = useLocalStorage<PackData>(
     'PACKVALUES',
@@ -96,7 +70,9 @@ function PackForm() {
     resolver: zodResolver(packSchema),
     defaultValues: formData
   })
-
+  const [showQuestionModal, setShowQuestionModal] = useState(false)
+  const [modalMode, setModalMode] = useState<'create' | 'update'>('create')
+  const [indexToEdit, setIndexToEdit] = useState<number | null>(null)
   const [tagInputValue, setTagInputValue] = useState('')
   const router = useRouter()
   const searchParams = useSearchParams()
@@ -108,13 +84,14 @@ function PackForm() {
     language
   } = watch()
 
+  // SWITCH between steps
   function switchStep(step: string) {
     const params = new URLSearchParams(searchParams.toString())
     params.set('step', step)
-    router.push('?' + params.toString())
+    router.push(`?${params.toString()}`)
   }
 
-  // Add tags
+  // ADD a tag to the tags array
   const filterAndAddTag = (tag: string) => {
     const trimmedValue = tag.trim()
     const tagAlreadyExists = selectedTags.includes(trimmedValue)
@@ -173,6 +150,7 @@ function PackForm() {
     }
   }
 
+  // DELETE a specific question
   const deleteQuestion = (Qindex: number) => {
     const updatedQuestions = addedQuestions.filter(
       (_, index) => index !== Qindex
@@ -181,9 +159,23 @@ function PackForm() {
     setFormData({ ...getValues(), questions: updatedQuestions })
   }
 
+  // EDIT a specific question
+  const editQuestion = (Qindex: number) => {
+    setModalMode('update')
+    setShowQuestionModal(true)
+    setIndexToEdit(Qindex)
+  }
+
+  // ADD a specific question
+  const addQuestion = () => {
+    setIndexToEdit(null)
+    setModalMode('create')
+    setShowQuestionModal(true)
+  }
+
   const onSubmit = async (data: PackData) => {
     try {
-      const res = await fetch(`/api/packs`, {
+      const res = await fetch('/api/packs', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -377,7 +369,7 @@ function PackForm() {
                     </Button>
                   </div>
                   <div className="flex flex-col gap-2 justify-center">
-                    <span className="text-sm">Submit Packs</span>
+                    <span className="text-sm">Submit Pack</span>
                     <Button
                       className="rounded-lg w-fit py-2 px-4 bg-brand-blue-100 hover:bg-brand-blue-200 text-white"
                       size="sm"
@@ -388,6 +380,14 @@ function PackForm() {
                       {isSubmitting ? 'Submitting' : 'Submit'}
                     </Button>
                   </div>
+                  <QuestionModal
+                    control={control}
+                    type={type}
+                    mode={modalMode}
+                    isOpen={showQuestionModal}
+                    setIsOpen={setShowQuestionModal}
+                    questionToEdit={indexToEdit}
+                  />
                 </div>
                 {errors.questions && (
                   <p className="px-1 text-xs text-brand-red-100">
@@ -402,21 +402,24 @@ function PackForm() {
                     <div className="relative hidden xs:block">
                       <Search className="size-4 absolute left-2 bottom-3 dark:text-[#666666]" />
                       <Input
-                        placeholder="Search for a Question"
+                        placeholder="Search for a question"
                         className="md:w-[441px] pl-8 focus:ring-0"
                       />
                     </div>
                   </div>
-                  {/* this can be repurposed for editing questions as well */}
-                  <NewQuestionModal
-                    control={control}
-                    type={type}
-                  />
+                  <Button
+                    size={'icon'}
+                    variant={'ghost'}
+                    type="button"
+                    onClick={addQuestion}
+                  >
+                    <Plus className="text-muted-foreground size-4" />
+                  </Button>
                 </div>
                 <ul className="divide-y max-h-[700px] overflow-y-auto">
                   {addedQuestions.map((question, index) => (
                     <li
-                      key={`${question}-${index}`}
+                      key={`${question}-${type}-${index}`}
                       className="flex justify-between p-2 pl-4 items-center gap-2"
                     >
                       <p className="text-sm lg:text-base py-2">
@@ -429,9 +432,11 @@ function PackForm() {
                             size={'icon'}
                             variant={'ghost'}
                             type="button"
+                            onClick={() => editQuestion(index)}
                             className="hover:text-brand-blue-100"
                           >
                             <Pen className="size-4" />
+                            <span className="sr-only">edit this question</span>
                           </Button>
                           <Button
                             size={'icon'}
@@ -441,6 +446,9 @@ function PackForm() {
                             className="hover:text-brand-red-100"
                           >
                             <Trash2 className="size-4" />
+                            <span className="sr-only">
+                              remove this question
+                            </span>
                           </Button>
                         </div>
                         <div className="flex items-center gap-2 sm:hidden">

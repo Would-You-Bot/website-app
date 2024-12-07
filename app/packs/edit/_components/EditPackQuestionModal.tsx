@@ -5,8 +5,7 @@ import {
   DialogDescription,
   DialogFooter,
   DialogHeader,
-  DialogTitle,
-  DialogTrigger
+  DialogTitle
 } from '@/components/ui/dialog'
 import {
   Select,
@@ -15,24 +14,35 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select'
+import { PackData, questionSchema } from '@/utils/zod/schemas'
 import { useLocalStorage } from '@/hooks/use-localstorage'
-import { useController, Control } from 'react-hook-form'
-import { questionSchema } from '@/utils/zod/schemas'
+import { Control, useController } from 'react-hook-form'
 import { Textarea } from '@/components/ui/textarea'
+import React, { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { PackData, PackType } from './PackForm'
-import React, { useState } from 'react'
-import { Plus } from 'lucide-react'
+import { packTypes } from '@/lib/constants'
+import { PackType } from '@prisma/client'
 import { z } from 'zod'
 
-interface NewQuestionModalProps {
+interface EditPackQuestionModalProps {
   control: Control<PackData>
   type: PackType
+  mode: 'create' | 'update'
+  questionToEdit: number | null
+  isOpen?: boolean
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 type QuestionType = Exclude<PackType, 'mixed'>
 
-function NewQuestionModal({ control, type }: NewQuestionModalProps) {
+function EditPackQuestionModal({
+  control,
+  type,
+  mode = 'create',
+  isOpen,
+  questionToEdit,
+  setIsOpen
+}: EditPackQuestionModalProps) {
   const {
     field: { onChange, value }
   } = useController({
@@ -41,15 +51,25 @@ function NewQuestionModal({ control, type }: NewQuestionModalProps) {
     defaultValue: []
   })
 
-  const [questionValue, setQuestionValue] = useState('')
+  const preFilledQuestion =
+    questionToEdit !== null ? value[questionToEdit].question : ''
+
+  const [questionValue, setQuestionValue] = useState(preFilledQuestion)
   const [typeValue, setTypeValue] = useState(type === 'mixed' ? null : type)
   const [typeError, setTypeError] = useState<string | null>(null)
   const [questionError, setQuestionError] = useState<string | null>(null)
-  const [open, setOpen] = useState(false)
   const [formData, setFormData] = useLocalStorage<PackData>(
     'PACKVALUES',
     {} as PackData
   )
+
+  useEffect(() => {
+    if (questionToEdit !== null && mode === 'update') {
+      const existingQuestion = value[questionToEdit]
+      setQuestionValue(existingQuestion.question)
+      setTypeValue(existingQuestion.type)
+    }
+  }, [questionToEdit, mode, value])
 
   const validateQuestion = () => {
     const questionData = {
@@ -88,7 +108,7 @@ function NewQuestionModal({ control, type }: NewQuestionModalProps) {
 
     try {
       z.array(questionSchema)
-        .max(150, 'You can only have 100 questions in a pack')
+        .max(100, 'You can only have 100 questions in a pack')
         .parse(newQuestions)
     } catch (error) {
       if (error instanceof z.ZodError) {
@@ -101,9 +121,41 @@ function NewQuestionModal({ control, type }: NewQuestionModalProps) {
     setQuestionValue('')
 
     if (formData) {
-      // @ts-expect-error ignore this bs
+      // @ts-expect-error new questions can't be null here so ignore
       setFormData({ ...formData, questions: newQuestions })
-      setOpen(false)
+      setIsOpen(false)
+      setQuestionValue('')
+    }
+  }
+
+  const editQuestion = () => {
+    const question = questionValue.trim()
+    setQuestionError(null)
+    setTypeError(null)
+
+    if (!validateQuestion()) {
+      return
+    }
+    if (questionToEdit === null) {
+      return
+    }
+
+    // Ensure typeValue is not null for non-mixed packs
+    const questionType = type === 'mixed' ? typeValue! : type
+
+    const newQuestions = [...value]
+    newQuestions[questionToEdit] = {
+      type: questionType as QuestionType,
+      question: question
+    }
+
+    onChange(newQuestions)
+    setQuestionValue('')
+
+    if (formData) {
+      setFormData({ ...formData, questions: newQuestions })
+      setIsOpen(false)
+      setQuestionValue('')
     }
   }
 
@@ -119,28 +171,36 @@ function NewQuestionModal({ control, type }: NewQuestionModalProps) {
     }
   }
 
+  const getTypeValue = () => {
+    if (mode === 'update' && questionToEdit !== null) {
+      return value[questionToEdit].type
+    }
+    return undefined
+  }
+
   return (
     <Dialog
-      open={open}
-      onOpenChange={setOpen}
+      open={isOpen}
+      onOpenChange={setIsOpen}
     >
-      <DialogTrigger asChild>
-        <Button
-          size={'icon'}
-          variant={'ghost'}
-          type="button"
-        >
-          <Plus className="text-muted-foreground size-4" />
-        </Button>
-      </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="lg:text-2xl xl:text-3xl">
-            Add a <span className="text-brand-red-100">New</span>{' '}
-            <span className="text-brand-blue-100">Question</span>!
+            {mode === 'create' ?
+              <>
+                Add a <span className="text-brand-red-100">New</span>{' '}
+                <span className="text-brand-blue-100">Question</span>
+              </>
+            : <>
+                <span className="text-brand-red-100">Edit</span>
+                <span className="text-brand-blue-100">Question</span>
+              </>
+            }
           </DialogTitle>
           <DialogDescription className="sr-only">
-            Add a new question to your pack
+            {mode === 'create' ?
+              'Add a new question to your pack'
+            : 'Edit your question'}
           </DialogDescription>
         </DialogHeader>
         <div className="grid flex-1 gap-2">
@@ -170,21 +230,23 @@ function NewQuestionModal({ control, type }: NewQuestionModalProps) {
             >
               Type
             </label>
-            <Select onValueChange={handleTypeChange}>
+            <Select
+              value={getTypeValue()}
+              onValueChange={handleTypeChange}
+            >
               <SelectTrigger>
                 <SelectValue placeholder="What type does this question fall under?" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="wouldyourather">Would you rather</SelectItem>
-                <SelectItem value="whatwouldyoudo">
-                  What would you do
-                </SelectItem>
-                <SelectItem value="neverhaveiever">
-                  Never have I ever
-                </SelectItem>
-                <SelectItem value="truth">Truth</SelectItem>
-                <SelectItem value="dare">Dare</SelectItem>
-                <SelectItem value="topic">Topic</SelectItem>
+                {packTypes.map((type) => (
+                  <SelectItem
+                    key={type.id}
+                    value={type.value}
+                    className="text-foreground"
+                  >
+                    {type.label}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
             {typeError && (
@@ -207,9 +269,9 @@ function NewQuestionModal({ control, type }: NewQuestionModalProps) {
             className="rounded-lg w-fit py-2 px-6 bg-brand-blue-100 hover:bg-brand-blue-200 text-white"
             size="sm"
             type="submit"
-            onClick={addQuestion}
+            onClick={mode === 'create' ? addQuestion : editQuestion}
           >
-            Add
+            {mode === 'create' ? 'Add' : 'Save'}
           </Button>
         </DialogFooter>
       </DialogContent>
@@ -217,4 +279,4 @@ function NewQuestionModal({ control, type }: NewQuestionModalProps) {
   )
 }
 
-export default NewQuestionModal
+export default EditPackQuestionModal
