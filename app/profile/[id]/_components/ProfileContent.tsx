@@ -265,8 +265,6 @@ export default function ProfileContent({
                   profilePrivacy={userData.profilePrivacy || false}
                   likedPackPrivacy={userData.likedPackPrivacy || false}
                   onDataRefresh={() => {
-                    // Add logic to refresh user data here
-                    console.log('Refreshing user data...')
                     router.refresh()
                   }}
                 />
