@@ -1,3 +1,9 @@
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger
+} from '@/components/ui/tooltip'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Card, CardContent } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
@@ -21,11 +27,11 @@ interface UserCardProps {
 }
 
 const languageMap: Record<string, string> = {
-  "en_EN": 'English',
-  "es_ES": 'Spanish',
-  "fr_FR": 'French',
-  "de_DE": 'German',
-  "it_IT": 'Italian',
+  en_EN: 'English',
+  es_ES: 'Spanish',
+  fr_FR: 'French',
+  de_DE: 'German',
+  it_IT: 'Italian'
 }
 
 export function UserCard({ userData }: UserCardProps) {
@@ -87,9 +93,26 @@ export function UserCard({ userData }: UserCardProps) {
               className="w-4 h-4"
               aria-hidden="true"
             />
-            <span>
-              Joined {new Date(userData.createdAt).toLocaleDateString()}
-            </span>
+
+            <TooltipProvider delayDuration={0}>
+              <Tooltip>
+                <TooltipTrigger>
+                  <span>
+                    Joined {new Date(userData.createdAt).toLocaleDateString()}{' '}
+                  </span>
+                </TooltipTrigger>
+                <TooltipContent className="bg-background-darker">
+                  <p>
+                    {Math.floor(
+                      (new Date().getTime() -
+                        new Date(userData.createdAt).getTime()) /
+                        (1000 * 60 * 60 * 24)
+                    )}{' '}
+                    days ago
+                  </p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
           </div>
           <div className="flex items-center gap-2">
             <Languages
