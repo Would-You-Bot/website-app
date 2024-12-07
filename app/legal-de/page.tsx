@@ -10,7 +10,7 @@ export default function legalnoticede() {
       <div>
         <h3 className="text-lg font-bold text-foreground">Kontakt</h3>
         <p className="select-none">
-        Dominik Koch
+          Dominik Koch
           <br />
           Parkstraße 5
           <br />

@@ -24,7 +24,7 @@ export function getAuthToken(inputToken?: string): Promise<OAuthTokenJWT> {
 }
 
 /**
- * @desc Returns the validated auth token, or null if any error is thrown 
+ * @desc Returns the validated auth token, or null if any error is thrown
  * (e.g. no token found, token is expired, invalid signature,...)
  * @param inputToken Optional token string that takes precedence over cookie value
  */

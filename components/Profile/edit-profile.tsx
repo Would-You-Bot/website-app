@@ -1,35 +1,37 @@
-"use client"
+'use client'
 
-import { useState } from "react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { Switch } from "@/components/ui/switch"
-import { Label } from "@/components/ui/label"
-import { Textarea } from "@/components/ui/textarea"
 import { User, MessageCircle, Heart } from 'lucide-react'
-import { useToast } from "@/components/ui/use-toast"
+import { Card, CardContent } from '@/components/ui/card'
+import { useToast } from '@/components/ui/use-toast'
+import { Textarea } from '@/components/ui/textarea'
+import { Button } from '@/components/ui/button'
+import { Switch } from '@/components/ui/switch'
+import { Label } from '@/components/ui/label'
+import { useState } from 'react'
 
 interface EditProfileProps {
-  userId: string;
-  description: string | null;
-  votePrivacy: boolean;
-  profilePrivacy: boolean;
-  likedPackPrivacy: boolean;
-  onDataRefresh: () => void;
+  userId: string
+  description: string | null
+  votePrivacy: boolean
+  profilePrivacy: boolean
+  likedPackPrivacy: boolean
+  onDataRefresh: () => void
 }
 
-export function EditProfile({ 
-  userId, 
-  description: initialDescription, 
+export function EditProfile({
+  userId,
+  description: initialDescription,
   votePrivacy: initialVotePrivacy,
   profilePrivacy: initialProfilePrivacy,
   likedPackPrivacy: initialLikedPackPrivacy,
-  onDataRefresh 
+  onDataRefresh
 }: EditProfileProps) {
   const [description, setDescription] = useState(initialDescription || '')
   const [votePrivacy, setVotePrivacy] = useState(initialVotePrivacy)
   const [profilePrivacy, setProfilePrivacy] = useState(initialProfilePrivacy)
-  const [likedPackPrivacy, setLikedPackPrivacy] = useState(initialLikedPackPrivacy)
+  const [likedPackPrivacy, setLikedPackPrivacy] = useState(
+    initialLikedPackPrivacy
+  )
   const [isSaving, setIsSaving] = useState(false)
   const { toast } = useToast()
 
@@ -37,7 +39,9 @@ export function EditProfile({
     setDescription(value)
   }
 
-  const onPrivacyToggle = (setting: 'profilePrivacy' | 'votePrivacy' | 'likedPackPrivacy') => {
+  const onPrivacyToggle = (
+    setting: 'profilePrivacy' | 'votePrivacy' | 'likedPackPrivacy'
+  ) => {
     switch (setting) {
       case 'profilePrivacy':
         setProfilePrivacy(!profilePrivacy)
@@ -57,20 +61,20 @@ export function EditProfile({
       const response = await fetch(`/api/user/${userId}`, {
         method: 'PATCH',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify({
           description,
           votePrivacy,
           profilePrivacy,
-          likedPackPrivacy,
-        }),
+          likedPackPrivacy
+        })
       })
 
       if (response.ok) {
         toast({
-          title: "Settings saved",
-          description: "Your profile has been updated successfully.",
+          title: 'Settings saved',
+          description: 'Your profile has been updated successfully.'
         })
         onDataRefresh() // Refresh the data after successful save
       } else {
@@ -78,9 +82,9 @@ export function EditProfile({
       }
     } catch (error) {
       toast({
-        title: "Error",
-        description: "Failed to save settings. Please try again.",
-        variant: "destructive",
+        title: 'Error',
+        description: 'Failed to save settings. Please try again.',
+        variant: 'destructive'
       })
     } finally {
       setIsSaving(false)
@@ -90,10 +94,17 @@ export function EditProfile({
   return (
     <Card className="border shadow-sm">
       <CardContent className="p-6">
-        <h2 className="text-2xl font-bold text-foreground mb-4">Edit Profile</h2>
+        <h2 className="text-2xl font-bold text-foreground mb-4">
+          Edit Profile
+        </h2>
         <div className="space-y-4">
           <div>
-            <Label htmlFor="description" className="text-foreground">Description</Label>
+            <Label
+              htmlFor="description"
+              className="text-foreground"
+            >
+              Description
+            </Label>
             <Textarea
               id="description"
               value={description}
@@ -102,12 +113,19 @@ export function EditProfile({
             />
           </div>
           <div className="space-y-2">
-            <h3 className="text-lg font-semibold text-foreground">Privacy Settings</h3>
+            <h3 className="text-lg font-semibold text-foreground">
+              Privacy Settings
+            </h3>
             <div className="space-y-4 rounded-lg border p-4 bg-muted">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2">
                   <User className="w-4 h-4 text-foreground" />
-                  <Label htmlFor="profile-privacy" className="text-foreground">Profile Privacy</Label>
+                  <Label
+                    htmlFor="profile-privacy"
+                    className="text-foreground"
+                  >
+                    Profile Privacy
+                  </Label>
                 </div>
                 <Switch
                   id="profile-privacy"
@@ -118,7 +136,12 @@ export function EditProfile({
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2">
                   <MessageCircle className="w-4 h-4 text-foreground" />
-                  <Label htmlFor="vote-privacy" className="text-foreground">Vote Privacy</Label>
+                  <Label
+                    htmlFor="vote-privacy"
+                    className="text-foreground"
+                  >
+                    Vote Privacy
+                  </Label>
                 </div>
                 <Switch
                   id="vote-privacy"
@@ -129,7 +152,12 @@ export function EditProfile({
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2">
                   <Heart className="w-4 h-4 text-foreground" />
-                  <Label htmlFor="liked-packs-privacy" className="text-foreground">Liked Packs Privacy</Label>
+                  <Label
+                    htmlFor="liked-packs-privacy"
+                    className="text-foreground"
+                  >
+                    Liked Packs Privacy
+                  </Label>
                 </div>
                 <Switch
                   id="liked-packs-privacy"
@@ -139,7 +167,7 @@ export function EditProfile({
               </div>
             </div>
           </div>
-          <Button 
+          <Button
             className="w-full bg-brand-blue-100 hover:bg-brand-blue-100/90 text-white"
             onClick={saveUserSettings}
             disabled={isSaving}

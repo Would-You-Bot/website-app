@@ -23,8 +23,7 @@ export interface QuestionPackProps {
 
 export default function UnreviewedPack({ pack }: { pack: QuestionPackProps }) {
   return (
-    <li
-      className="p-[3px]">
+    <li className="p-[3px]">
       <Card className="border-none h-full">
         <CardHeader className="relative">
           <CardTitle>{pack.name}</CardTitle>
@@ -32,16 +31,12 @@ export default function UnreviewedPack({ pack }: { pack: QuestionPackProps }) {
         </CardHeader>
         <CardContent className="grid grid-cols-2">
           <div className="flex flex-col gap-0.5">
-            <h3 className='text-sm text-muted-foreground'>Questions</h3>
-            <p className="">
-              {pack.questions.length}
-            </p>
+            <h3 className="text-sm text-muted-foreground">Questions</h3>
+            <p className="">{pack.questions.length}</p>
           </div>
           <div className="flex flex-col gap-0.5">
-            <h3 className='text-sm text-muted-foreground'>Type</h3>
-            <p className="">
-              {pack.type}
-            </p>
+            <h3 className="text-sm text-muted-foreground">Type</h3>
+            <p className="">{pack.type}</p>
           </div>
         </CardContent>
         <CardFooter>

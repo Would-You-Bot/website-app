@@ -8,9 +8,11 @@ import validator from 'validator'
 export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
 
-  const PAGE_NUMBER = parseInt(validator.escape(searchParams.get('page') || '1'))
+  const PAGE_NUMBER = parseInt(
+    validator.escape(searchParams.get('page') || '1')
+  )
   const TYPE = validator.escape(searchParams.get('type') || '')
-  const PACK_ID =  validator.escape(searchParams.get('id') || '')
+  const PACK_ID = validator.escape(searchParams.get('id') || '')
 
   const PAGE_SIZE = 15
 
@@ -19,12 +21,20 @@ export async function GET(request: NextRequest) {
   const where = {
     pending: false,
     denied: false,
-    ...(TYPE && ['wouldyourather', 'neverhaveiever', 'whatwouldyoudo', 'truth', 'dare', 'topic', 'mixed'].includes(TYPE) && { type: TYPE as PackType }),
+    ...(TYPE &&
+      [
+        'wouldyourather',
+        'neverhaveiever',
+        'whatwouldyoudo',
+        'truth',
+        'dare',
+        'topic',
+        'mixed'
+      ].includes(TYPE) && { type: TYPE as PackType }),
     ...(PACK_ID && { id: PACK_ID })
-  };
+  }
 
-  const questionsPromise = prisma.questionPack
-  .findMany({
+  const questionsPromise = prisma.questionPack.findMany({
     where,
     orderBy: {
       featured: 'desc'
@@ -44,32 +54,37 @@ export async function GET(request: NextRequest) {
     take: PAGE_SIZE
   })
 
-    const totalPagePromise = prisma.questionPack.count({
-      where: {
-        pending: false
-      }
-    })
-
-    const [questions, totalPage] = await Promise.all([
-      questionsPromise,
-      totalPagePromise
-    ])
-
-
-    if (!questions) {
-      return NextResponse.json(
-        { message: 'No questions found!' },
-        { status: 404 }
-      )
+  const totalPagePromise = prisma.questionPack.count({
+    where: {
+      pending: false
     }
+  })
 
-    const questionsWithCounts = questions.map((question) => ({
-      ...question,
-      questions: question.questions.length
-    }))
+  const [questions, totalPage] = await Promise.all([
+    questionsPromise,
+    totalPagePromise
+  ])
+
+  if (!questions) {
+    return NextResponse.json(
+      { message: 'No questions found!' },
+      { status: 404 }
+    )
+  }
+
+  const questionsWithCounts = questions.map((question) => ({
+    ...question,
+    questions: question.questions.length
+  }))
 
   return NextResponse.json(
-    { data: questionsWithCounts, totalPages: Math.floor(totalPage / PAGE_SIZE) === 0 ? 1 : Math.floor(totalPage / PAGE_SIZE) },
+    {
+      data: questionsWithCounts,
+      totalPages:
+        Math.floor(totalPage / PAGE_SIZE) === 0 ?
+          1
+        : Math.floor(totalPage / PAGE_SIZE)
+    },
     { status: 200 }
   )
 }
@@ -91,9 +106,9 @@ export async function POST(request: NextRequest) {
   const tokenData = await getAuthTokenOrNull()
 
   type Questions = {
-      id: string
-      question: string
-      type: Exclude<PackType, 'mixed'>
+    id: string
+    question: string
+    type: Exclude<PackType, 'mixed'>
   }
 
   const {
@@ -109,9 +124,9 @@ export async function POST(request: NextRequest) {
 
   for (const question of preProcessedQuestions) {
     questions.push({
-        id: uuidv4(),
-        type: type === 'mixed' ? question.type : type,
-        question: question.question
+      id: uuidv4(),
+      type: type === 'mixed' ? question.type : type,
+      question: question.question
     })
   }
 
@@ -135,7 +150,7 @@ export async function POST(request: NextRequest) {
         likes: [`${tokenData?.payload.id}`],
         questions,
         pending: true,
-        denied: false,
+        denied: false
       }
     })
     .catch((err: Error) => {
@@ -148,14 +163,17 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       )
     })
-   
-    // @ts-ignore If the pack creation fails, return a 500 status code
-    if(newPack.status === 500) {
-      return NextResponse.json(
-        { message: 'Error creating a database entry for the pack, please contact the support!' },
-        { status: 500 }
-      )
-    }
+
+  // @ts-ignore If the pack creation fails, return a 500 status code
+  if (newPack.status === 500) {
+    return NextResponse.json(
+      {
+        message:
+          'Error creating a database entry for the pack, please contact the support!'
+      },
+      { status: 500 }
+    )
+  }
 
   return NextResponse.json(
     { message: 'New pack creation successfully!', data: newPack },

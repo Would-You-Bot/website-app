@@ -1,33 +1,38 @@
-import { Card, CardContent } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Progress } from "@/components/ui/progress"
 import { ThumbsUp, ThumbsDown, Flag, Trophy, GamepadIcon } from 'lucide-react'
+import { Card, CardContent } from '@/components/ui/card'
+import { Progress } from '@/components/ui/progress'
+import { Badge } from '@/components/ui/badge'
 
 interface GameStatsProps {
   wouldYouRather?: {
-    yes: number;
-    no: number;
-    used: { command: number; replay: number };
-  };
+    yes: number
+    no: number
+    used: { command: number; replay: number }
+  }
   neverHaveIEver?: {
-    yes: number;
-    no: number;
-    used: { command: number; replay: number };
-  };
+    yes: number
+    no: number
+    used: { command: number; replay: number }
+  }
   whatWouldYouDo?: {
-    yes: number;
-    no: number;
-    used: { command: number; replay: number };
-  };
+    yes: number
+    no: number
+    used: { command: number; replay: number }
+  }
   higherLower?: {
-    yes: number;
-    no: number;
-    highscore: number;
-    used: { command: number; replay: number };
-  };
+    yes: number
+    no: number
+    highscore: number
+    used: { command: number; replay: number }
+  }
 }
 
-export function GameStats({ wouldYouRather, neverHaveIEver, whatWouldYouDo, higherLower }: GameStatsProps) {
+export function GameStats({
+  wouldYouRather,
+  neverHaveIEver,
+  whatWouldYouDo,
+  higherLower
+}: GameStatsProps) {
   return (
     <Card className="border shadow-sm">
       <CardContent className="p-6 space-y-6">
@@ -70,11 +75,11 @@ export function GameStats({ wouldYouRather, neverHaveIEver, whatWouldYouDo, high
 }
 
 interface GameStatSectionProps {
-  title: string;
-  yes: number;
-  no: number;
-  used: { command: number; replay: number };
-  Icon: React.ElementType;
+  title: string
+  yes: number
+  no: number
+  used: { command: number; replay: number }
+  Icon: React.ElementType
 }
 
 function GameStatSection({ title, yes, no, used, Icon }: GameStatSectionProps) {
@@ -90,11 +95,17 @@ function GameStatSection({ title, yes, no, used, Icon }: GameStatSectionProps) {
           className="flex-1"
         />
         <div className="flex gap-2 text-sm">
-          <Badge variant="secondary" className="bg-emerald-500 text-primary-foreground">
+          <Badge
+            variant="secondary"
+            className="bg-emerald-500 text-primary-foreground"
+          >
             <Icon className="w-3 h-3 mr-1" />
             {yes}
           </Badge>
-          <Badge variant="secondary" className="bg-red-500 text-primary-foreground">
+          <Badge
+            variant="secondary"
+            className="bg-red-500 text-primary-foreground"
+          >
             <ThumbsDown className="w-3 h-3 mr-1" />
             {no}
           </Badge>
@@ -109,8 +120,8 @@ function GameStatSection({ title, yes, no, used, Icon }: GameStatSectionProps) {
 }
 
 interface HigherLowerStatsProps {
-  highscore: number;
-  used: { command: number; replay: number };
+  highscore: number
+  used: { command: number; replay: number }
 }
 
 function HigherLowerStats({ highscore, used }: HigherLowerStatsProps) {
@@ -123,7 +134,10 @@ function HigherLowerStats({ highscore, used }: HigherLowerStatsProps) {
           <span className="text-foreground">High Score:</span>
           <span className="text-primary font-semibold">{highscore}</span>
         </div>
-        <Badge variant="secondary" className="bg-primary text-primary-foreground">
+        <Badge
+          variant="secondary"
+          className="bg-primary text-primary-foreground"
+        >
           <GamepadIcon className="w-3 h-3 mr-1" />
           {used.command} plays
         </Badge>
@@ -135,4 +149,3 @@ function HigherLowerStats({ highscore, used }: HigherLowerStatsProps) {
     </div>
   )
 }
-

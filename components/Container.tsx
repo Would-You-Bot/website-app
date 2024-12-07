@@ -1,8 +1,16 @@
-import { cn } from "@/lib/utils"
+import { cn } from '@/lib/utils'
 
-function Container({ className, children }:{ className?: string, children: React.ReactNode }) {
+function Container({
+  className,
+  children
+}: {
+  className?: string
+  children: React.ReactNode
+}) {
   return (
-    <div className={cn("w-full max-w-8xl mx-auto px-8", className)}>{children}</div>
+    <div className={cn('w-full max-w-8xl mx-auto px-8', className)}>
+      {children}
+    </div>
   )
 }
 

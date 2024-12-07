@@ -40,7 +40,6 @@ export async function GET(
   return NextResponse.json(
     {
       data: userData
-      
     },
     { status: 200 }
   )

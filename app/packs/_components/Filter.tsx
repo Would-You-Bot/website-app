@@ -90,40 +90,40 @@ function Filter() {
         </Button>
       </div>
       <div className="w-full overflow-x-auto pb-2 thin-scrollbar">
-      <div className="flex space-x-2 whitespace-nowrap">
-        <button
-          type="button"
-          onClick={() => resetFilter()}
-          className={cn(
-            'flex items-center gap-1 px-2 py-1.5 text-muted-foreground text-xs rounded-md bg-background-light cursor-pointer shrink-0',
-            {
-              'bg-brand-customPrimary text-white': !t
-            }
-          )}
-        >
-          <span>
-            <Hash size={14} />
-          </span>
-          <span>All</span>
-        </button>
-        {packTypes.map((type) => (
+        <div className="flex space-x-2 whitespace-nowrap">
           <button
             type="button"
-            key={type.id}
-            onClick={() => selectType(type.slug)}
+            onClick={() => resetFilter()}
             className={cn(
-              'flex items-center gap-1 px-2 py-1.5 text-muted-foreground text-xs rounded-md bg-background-light cursor-pointer',
+              'flex items-center gap-1 px-2 py-1.5 text-muted-foreground text-xs rounded-md bg-background-light cursor-pointer shrink-0',
               {
-                'bg-brand-customPrimary text-white': t && t === type.slug
+                'bg-brand-customPrimary text-white': !t
               }
             )}
           >
             <span>
               <Hash size={14} />
             </span>
-            <span>{type.label}</span>
+            <span>All</span>
           </button>
-        ))}
+          {packTypes.map((type) => (
+            <button
+              type="button"
+              key={type.id}
+              onClick={() => selectType(type.slug)}
+              className={cn(
+                'flex items-center gap-1 px-2 py-1.5 text-muted-foreground text-xs rounded-md bg-background-light cursor-pointer',
+                {
+                  'bg-brand-customPrimary text-white': t && t === type.slug
+                }
+              )}
+            >
+              <span>
+                <Hash size={14} />
+              </span>
+              <span>{type.label}</span>
+            </button>
+          ))}
         </div>
       </div>
     </section>

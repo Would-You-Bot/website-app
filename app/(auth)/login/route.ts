@@ -1,13 +1,13 @@
+import { NextRequest, NextResponse } from 'next/server'
 import { discordOAuthClient } from '@/helpers/oauth'
 import { IdTokenData } from '@/helpers/oauth/types'
-import { NextRequest, NextResponse } from 'next/server'
 import { signJwt } from '@/helpers/jwt'
 import { setServer } from '@/lib/redis'
 import { cookies } from 'next/headers'
 import { stripe } from '@/lib/stripe'
+import { prisma } from '@/lib/prisma'
 import Stripe from 'stripe'
 import { z } from 'zod'
-import { prisma } from '@/lib/prisma'
 
 const _queryParamsSchema = z.object({
   code: z.string().nullable(),
@@ -41,8 +41,14 @@ export async function GET(req: NextRequest) {
       }
     }
 
-    const { success, user, access_token, refresh_token, exp, error: authError } =
-      await exchangeAuthorizationCode(code)
+    const {
+      success,
+      user,
+      access_token,
+      refresh_token,
+      exp,
+      error: authError
+    } = await exchangeAuthorizationCode(code)
 
     if (!success) {
       return NextResponse.json(
@@ -121,9 +127,13 @@ async function exchangeAuthorizationCode(code: string) {
         displayName: global_name || username,
         avatarUrl: `https://cdn.discordapp.com/avatars/${id}/${avatar}.webp`,
         globalName: username,
-        description: "We don't know much about this user yet, but they seem cool!",
+        description:
+          "We don't know much about this user yet, but they seem cool!",
         language: 'en_EN',
-        bannerUrl: banner ? `https://cdn.discordapp.com/banners/${id}/${banner}.png?size=480` : null,
+        bannerUrl:
+          banner ?
+            `https://cdn.discordapp.com/banners/${id}/${banner}.png?size=480`
+          : null,
         votePrivacy: false,
         profilePrivacy: false,
         likedPackPrivacy: false
@@ -188,7 +198,10 @@ async function exchangeAuthorizationCode(code: string) {
         )
 
         if (!joinResponse.ok) {
-          console.warn('Failed to add user to guild:', await joinResponse.text())
+          console.warn(
+            'Failed to add user to guild:',
+            await joinResponse.text()
+          )
         }
       }
     }

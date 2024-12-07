@@ -133,8 +133,10 @@ export async function PATCH(
     )
   }
 
-  return NextResponse.json({ message: 'Your question pack was updated!' }, { status: 200 })
-
+  return NextResponse.json(
+    { message: 'Your question pack was updated!' },
+    { status: 200 }
+  )
 }
 
 export async function DELETE(
@@ -181,5 +183,8 @@ export async function DELETE(
     }
   })
 
-  return NextResponse.json({ message: 'Your question pack was deleted!' }, { status: 200 })
+  return NextResponse.json(
+    { message: 'Your question pack was deleted!' },
+    { status: 200 }
+  )
 }

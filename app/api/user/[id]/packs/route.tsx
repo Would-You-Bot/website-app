@@ -20,32 +20,32 @@ export async function GET(
   const userId = auth?.payload?.id
 
   const PAGE_SIZE = 15
-  const PAGE_NUMBER = parseInt(validator.escape(searchParams.get('page') || '1'))
+  const PAGE_NUMBER = parseInt(
+    validator.escape(searchParams.get('page') || '1')
+  )
 
   const skip = (PAGE_NUMBER - 1) * PAGE_SIZE
-
 
   const userData = await prisma.user.findFirst({
     where: {
       userID: id
     }
   })
-  
-  if(!userData || ( userData.profilePrivacy && userData.userID !== userId)) {
+
+  if (!userData || (userData.profilePrivacy && userData.userID !== userId)) {
     return NextResponse.json({ message: 'User not found!' }, { status: 404 })
   }
-  
+
   const where = {
     ...(userData.userID !== userId && {
       pending: false,
-      denied: false,
+      denied: false
     }),
     ...(type === 'created' && { authorId: userData.userID }),
-    ...(type === 'likes' && { likes: { has: userId } }),
-  };
+    ...(type === 'likes' && { likes: { has: userId } })
+  }
 
-  const questionsPromise = prisma.questionPack
-  .findMany({
+  const questionsPromise = prisma.questionPack.findMany({
     where,
     select: {
       type: true,
@@ -62,30 +62,36 @@ export async function GET(
     take: PAGE_SIZE
   })
 
-    const totalPagePromise = prisma.questionPack.count({
-      where
-    })
+  const totalPagePromise = prisma.questionPack.count({
+    where
+  })
 
-    const [questions, totalPage] = await Promise.all([
-      questionsPromise,
-      totalPagePromise
-    ])
+  const [questions, totalPage] = await Promise.all([
+    questionsPromise,
+    totalPagePromise
+  ])
 
-    if (!questions) {
-      return NextResponse.json(
-        { message: 'No questions found!' },
-        { status: 404 }
-      )
-    }
-
-    const questionsWithCounts = questions.map((question) => ({
-      ...question,
-      questions: question.questions.length,
-      likes: question.likes.length
-    }))
-
+  if (!questions) {
     return NextResponse.json(
-      { data: questionsWithCounts, totalPages: Math.floor(totalPage / PAGE_SIZE) === 0 ? 1 : Math.floor(totalPage / PAGE_SIZE) },
-      { status: 200 }
+      { message: 'No questions found!' },
+      { status: 404 }
     )
+  }
+
+  const questionsWithCounts = questions.map((question) => ({
+    ...question,
+    questions: question.questions.length,
+    likes: question.likes.length
+  }))
+
+  return NextResponse.json(
+    {
+      data: questionsWithCounts,
+      totalPages:
+        Math.floor(totalPage / PAGE_SIZE) === 0 ?
+          1
+        : Math.floor(totalPage / PAGE_SIZE)
+    },
+    { status: 200 }
+  )
 }

@@ -1,7 +1,6 @@
-
 export const questionPacks = [
   {
-    id: "1",
+    id: '1',
     name: 'School Questions',
     description:
       'Over 1000 would you rather questions about school situations.',
@@ -20,10 +19,10 @@ export const questionPacks = [
       'Would you rather skip PE or art class?',
       'Would you rather have school start an hour earlier or end an hour later?'
     ],
-    likes: ["a","b","c","d"]
+    likes: ['a', 'b', 'c', 'd']
   },
   {
-    id: "2",
+    id: '2',
     name: 'Friends Night Out',
     description:
       'Fun never have I ever questions to play on a night out with friends.',
@@ -42,10 +41,10 @@ export const questionPacks = [
       'Never have I ever stolen something from a friend.',
       'Never have I ever lied to my best friend.'
     ],
-    likes: ["a","b","c","d"]
+    likes: ['a', 'b', 'c', 'd']
   },
   {
-    id: "3",
+    id: '3',
     name: 'Family Gatherings',
     description:
       'Over 500 what would you do questions for fun family conversations.',
@@ -64,10 +63,10 @@ export const questionPacks = [
       'What would you do if you woke up in a different time period?',
       'What would you do if you had to switch lives with a family member?'
     ],
-    likes: ["a","b","c","d"]
+    likes: ['a', 'b', 'c', 'd']
   },
   {
-    id: "4",
+    id: '4',
     name: 'School Drama',
     description:
       'Spicy would you rather questions about school drama and relationships.',
@@ -86,10 +85,10 @@ export const questionPacks = [
       'Would you rather be the most popular student or the smartest?',
       'Would you rather miss prom or graduation?'
     ],
-    likes: ["a","b","c","d"]
+    likes: ['a', 'b', 'c', 'd']
   },
   {
-    id: "5",
+    id: '5',
     name: 'Party Time',
     description: 'Crazy never have I ever questions for wild party games.',
     type: 'never have i ever',
@@ -107,10 +106,10 @@ export const questionPacks = [
       'Never have I ever lied about my age.',
       'Never have I ever made a prank call.'
     ],
-    likes: ["a","b","c","d"]
+    likes: ['a', 'b', 'c', 'd']
   },
   {
-    id: "6",
+    id: '6',
     name: 'Dare or Dare',
     description:
       'Intense what would you do questions that push you out of your comfort zone.',
@@ -129,10 +128,10 @@ export const questionPacks = [
       'What would you do if you were dared to speak in a funny accent all day?',
       'What would you do if you were dared to ask your crush out?'
     ],
-    likes: ["a","b","c","d"]
+    likes: ['a', 'b', 'c', 'd']
   },
   {
-    id: "7",
+    id: '7',
     name: 'Sleepover Vibes',
     description: 'Fun would you rather questions perfect for sleepovers.',
     type: 'would you rather',
@@ -150,10 +149,10 @@ export const questionPacks = [
       'Would you rather tell a secret or keep one?',
       'Would you rather play hide and seek or tag in the dark?'
     ],
-    likes: ["a","b","c","d"]
+    likes: ['a', 'b', 'c', 'd']
   },
   {
-    id: "8",
+    id: '8',
     name: 'Workplace Scenarios',
     description:
       'Challenging what would you do questions for office and workplace scenarios.',
@@ -172,10 +171,10 @@ export const questionPacks = [
       'What would you do if a coworker asked you to cover for them last minute?',
       'What would you do if you were given an impossible deadline?'
     ],
-    likes: ["a","b","c","d"]
+    likes: ['a', 'b', 'c', 'd']
   },
   {
-    id: "9",
+    id: '9',
     name: 'Vacation Adventures',
     description:
       'Exciting would you rather questions about vacation and travel.',
@@ -194,10 +193,10 @@ export const questionPacks = [
       'Would you rather take a vacation for relaxation or adventure?',
       'Would you rather travel without a phone or without a camera?'
     ],
-    likes: ["a","b","c","d"]
+    likes: ['a', 'b', 'c', 'd']
   },
   {
-    id: "10",
+    id: '10',
     name: 'High School Life',
     description:
       'Relatable never have I ever questions about high school experiences.',
@@ -216,10 +215,10 @@ export const questionPacks = [
       'Never have I ever pulled an all-nighter to study.',
       'Never have I ever been caught using my phone in class.'
     ],
-    likes: ["a","b","c","d"]
+    likes: ['a', 'b', 'c', 'd']
   },
   {
-    id: "11",
+    id: '11',
     name: 'College Daze',
     description:
       'What would you do questions inspired by wild college scenarios.',
@@ -238,10 +237,10 @@ export const questionPacks = [
       'What would you do if you were invited to a once-in-a-lifetime trip but had finals?',
       'What would you do if you were caught up in campus drama?'
     ],
-    likes: ["a","b","c","d"]
+    likes: ['a', 'b', 'c', 'd']
   },
   {
-    id: "12",
+    id: '12',
     name: 'Sibling Rivalry',
     description:
       'Would you rather questions about sibling fights and fun moments.',
@@ -260,10 +259,10 @@ export const questionPacks = [
       'Would you rather have your sibling borrow your clothes or your gadgets?',
       'Would you rather your sibling be your teacher or your boss?'
     ],
-    likes: ["a","b","c","d"]
+    likes: ['a', 'b', 'c', 'd']
   },
   {
-    id: "13",
+    id: '13',
     name: 'Dating Dilemmas',
     description:
       'Awkward never have I ever questions about dating and relationships.',
@@ -282,10 +281,10 @@ export const questionPacks = [
       'Never have I ever flirted to get something for free.',
       'Never have I ever sent a risky text and regretted it.'
     ],
-    likes: ["a","b","c","d"]
+    likes: ['a', 'b', 'c', 'd']
   },
   {
-    id: "14",
+    id: '14',
     name: 'Road Trip Fun',
     description:
       'Road trip-themed would you rather questions to keep the drive interesting.',
@@ -304,10 +303,10 @@ export const questionPacks = [
       'Would you rather camp overnight or stay in a motel?',
       'Would you rather have car trouble or get lost in a big city?'
     ],
-    likes: ["a","b","c","d"]
+    likes: ['a', 'b', 'c', 'd']
   },
   {
-    id: "15",
+    id: '15',
     name: 'Relationship Goals',
     description:
       'Couple-themed what would you do questions to test your relationship.',
@@ -326,10 +325,10 @@ export const questionPacks = [
       'What would you do if your partner got a job offer far away?',
       "What would you do if you found a suspicious message on your partner's phone?"
     ],
-    likes: ["a","b","c","d"]
+    likes: ['a', 'b', 'c', 'd']
   },
   {
-    id: "16",
+    id: '16',
     name: 'Office Shenanigans',
     description:
       'Never have I ever questions about funny and awkward office moments.',
@@ -348,10 +347,10 @@ export const questionPacks = [
       'Never have I ever fallen asleep during a meeting.',
       'Never have I ever accidentally sent a message to the wrong person.'
     ],
-    likes: ["a","b","c","d"]
+    likes: ['a', 'b', 'c', 'd']
   },
   {
-    id: "17",
+    id: '17',
     name: 'Festival Fun',
     description:
       'Would you rather questions about attending different festivals and concerts.',
@@ -370,10 +369,10 @@ export const questionPacks = [
       'Would you rather travel to a festival abroad or attend a local one?',
       'Would you rather attend a festival in summer or winter?'
     ],
-    likes: ["a","b","c","d"]
+    likes: ['a', 'b', 'c', 'd']
   },
   {
-    id: "18",
+    id: '18',
     name: 'Holiday Hijinks',
     description:
       'What would you do questions about funny and tricky holiday scenarios.',
@@ -392,10 +391,10 @@ export const questionPacks = [
       'What would you do if you were alone on a major holiday?',
       'What would you do if you lost your phone during a holiday trip?'
     ],
-    likes: ["a","b","c","d"]
+    likes: ['a', 'b', 'c', 'd']
   },
   {
-    id: "19",
+    id: '19',
     name: 'Summer Break',
     description:
       'Would you rather questions about the best and worst parts of summer break.',
@@ -414,10 +413,10 @@ export const questionPacks = [
       'Would you rather get sunburned or stung by a jellyfish?',
       'Would you rather go to a music festival or an amusement park?'
     ],
-    likes: ["a","b","c","d"]
+    likes: ['a', 'b', 'c', 'd']
   },
   {
-    id: "20",
+    id: '20',
     name: 'Office Pranks',
     description:
       'Would you rather questions about office pranks and funny scenarios.',
@@ -436,10 +435,10 @@ export const questionPacks = [
       'Would you rather have your phone mysteriously disappear or be overloaded with notifications?',
       'Would you rather be in charge of planning office pranks or be the unsuspecting target?'
     ],
-    likes: ["a","b","c","d"]
+    likes: ['a', 'b', 'c', 'd']
   },
   {
-    id: "21",
+    id: '21',
     name: 'Summer Vacation Scenarios',
     description:
       'What would you do questions inspired by summer vacations and getaways.',
@@ -458,6 +457,6 @@ export const questionPacks = [
       'What would you do if your travel buddy got sick?',
       'What would you do if you had to cancel your trip last minute?'
     ],
-    likes: ["a","b","c","d"]
+    likes: ['a', 'b', 'c', 'd']
   }
 ]

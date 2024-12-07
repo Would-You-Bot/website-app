@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import {
   Pagination,
@@ -49,9 +49,9 @@ function PacksPagination({ totalPages }: { totalPages: number }) {
     } else {
       const leftSiblingIndex = Math.max(2, currentPage - 1)
       const rightSiblingIndex = Math.min(totalPages - 1, currentPage + 1)
-      
+
       // Ellipsis after first page
-      if (currentPage > 3) pageNumbers.push(null) 
+      if (currentPage > 3) pageNumbers.push(null)
 
       // Show a range of pages around the current page
       for (let i = leftSiblingIndex; i <= rightSiblingIndex; i++) {
@@ -60,7 +60,7 @@ function PacksPagination({ totalPages }: { totalPages: number }) {
         }
       }
       // Ellipsis before last page
-      if (currentPage < totalPages - 2) pageNumbers.push(null) 
+      if (currentPage < totalPages - 2) pageNumbers.push(null)
     }
 
     return pageNumbers
@@ -68,7 +68,7 @@ function PacksPagination({ totalPages }: { totalPages: number }) {
 
   return (
     <Pagination>
-      <PaginationContent className='max-md:justify-between max-md:w-full'>
+      <PaginationContent className="max-md:justify-between max-md:w-full">
         <PaginationItem>
           <Button
             className="gap-1"
@@ -82,7 +82,7 @@ function PacksPagination({ totalPages }: { totalPages: number }) {
           </Button>
         </PaginationItem>
 
-        <PaginationItem  className="hidden md:block">
+        <PaginationItem className="hidden md:block">
           <PaginationLink
             href={createQueryString(1)}
             isActive={currentPage === 1}

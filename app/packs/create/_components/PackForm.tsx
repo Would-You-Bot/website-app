@@ -34,8 +34,8 @@ import { packSchema } from '@/utils/zod/schemas'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
-import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useState } from 'react'
 import { z } from 'zod'
 
 export type PackType =
@@ -47,12 +47,7 @@ export type PackType =
   | 'topic'
   | 'mixed'
 
-export type PackLanguage =
-  | 'en_EN'
-  | 'de_DE'
-  | 'it_IT'
-  | 'fr_FR'
-  | 'es_ES'
+export type PackLanguage = 'en_EN' | 'de_DE' | 'it_IT' | 'fr_FR' | 'es_ES'
 
 const packTypes = [
   { value: 'wouldyourather', label: 'Would You Rather', id: 'ab' },
@@ -68,7 +63,7 @@ const packLanguages = [
   { value: 'de_DE', label: 'German', id: 'eweds' },
   { value: 'es_ES', label: 'Spanish', id: 'yuiop' },
   { value: 'it_IT', label: 'Italian', id: 'asdfg' },
-  { value: 'fr_FR', label: 'French', id: 'hjklm' },
+  { value: 'fr_FR', label: 'French', id: 'hjklm' }
 ]
 
 const defaultValues = {
@@ -106,7 +101,12 @@ function PackForm() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const step = searchParams.get('step')
-  const { tags: selectedTags, questions: addedQuestions, type, language } = watch()
+  const {
+    tags: selectedTags,
+    questions: addedQuestions,
+    type,
+    language
+  } = watch()
 
   function switchStep(step: string) {
     const params = new URLSearchParams(searchParams.toString())
@@ -478,6 +478,7 @@ function PackForm() {
                 </ul>
               </div>
             </section>
+
         }
       </form>
     </div>

@@ -172,13 +172,19 @@ export default function ProfileContent({
             defaultValue={currentTab}
             className="w-full"
           >
-            {(canEdit || !userData.profilePrivacy) && <TabsList className="grid w-full grid-cols-4 lg:grid-cols-5">
-              <TabsTrigger value="statistics">Statistics</TabsTrigger>
-              {(canEdit || !userData.likedPackPrivacy) && <TabsTrigger value="liked">Liked Packs</TabsTrigger>}
-              <TabsTrigger value="created">Created Packs</TabsTrigger>
-              <TabsTrigger value="achievements">Achievements</TabsTrigger>
-              {canEdit && <TabsTrigger value="edit">Edit Profile</TabsTrigger>}
-            </TabsList>}
+            {(canEdit || !userData.profilePrivacy) && (
+              <TabsList className="grid w-full grid-cols-4 lg:grid-cols-5">
+                <TabsTrigger value="statistics">Statistics</TabsTrigger>
+                {(canEdit || !userData.likedPackPrivacy) && (
+                  <TabsTrigger value="liked">Liked Packs</TabsTrigger>
+                )}
+                <TabsTrigger value="created">Created Packs</TabsTrigger>
+                <TabsTrigger value="achievements">Achievements</TabsTrigger>
+                {canEdit && (
+                  <TabsTrigger value="edit">Edit Profile</TabsTrigger>
+                )}
+              </TabsList>
+            )}
             <TabsContent value="statistics">
               <div className="space-y-6">
                 <StatsOverview
@@ -199,7 +205,7 @@ export default function ProfileContent({
                             replay: userData.wouldyourather.used?.replay ?? 0
                           }
                         }
-                        : undefined
+                      : undefined
                     }
                     neverHaveIEver={
                       userData.neverhaveiever ?
@@ -211,7 +217,7 @@ export default function ProfileContent({
                             replay: userData.neverhaveiever.used?.replay ?? 0
                           }
                         }
-                        : undefined
+                      : undefined
                     }
                     whatWouldYouDo={
                       userData.whatwouldyoudo ?
@@ -223,7 +229,7 @@ export default function ProfileContent({
                             replay: userData.whatwouldyoudo.used?.replay ?? 0
                           }
                         }
-                        : undefined
+                      : undefined
                     }
                     higherLower={
                       userData.higherlower ?
@@ -236,7 +242,7 @@ export default function ProfileContent({
                           },
                           highscore: userData.higherlower.highscore ?? 0
                         }
-                        : undefined
+                      : undefined
                     }
                   />
                 )}
@@ -267,7 +273,7 @@ export default function ProfileContent({
                   likedPackPrivacy={userData.likedPackPrivacy || false}
                   onDataRefresh={() => {
                     // Add logic to refresh user data here
-                    console.log("Refreshing user data...")
+                    console.log('Refreshing user data...')
                   }}
                 />
               </TabsContent>

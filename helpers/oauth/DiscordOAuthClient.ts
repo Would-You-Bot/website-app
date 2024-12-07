@@ -33,7 +33,10 @@ class DiscordOAuthClient {
 
   async createAuthorizationURL() {
     const state = generateState()
-    const authorizationUrl = await this.client.createAuthorizationURL({ state, scopes: this.scopes })
+    const authorizationUrl = await this.client.createAuthorizationURL({
+      state,
+      scopes: this.scopes
+    })
     authorizationUrl.searchParams.set('prompt', 'none')
     return authorizationUrl
   }

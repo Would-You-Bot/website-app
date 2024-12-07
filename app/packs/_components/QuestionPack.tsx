@@ -39,7 +39,9 @@ export default function QuestionPack({
   questions
 }: { userId: string | null } & QuestionPackProps) {
   const [likes, setLikes] = useState<Number>(initialLikes.length)
-  const [userLiked, setUserLiked] = useState<boolean>(initialLikes.includes(userId || ''))
+  const [userLiked, setUserLiked] = useState<boolean>(
+    initialLikes.includes(userId || '')
+  )
   async function likePack(packId: string) {
     if (!userId) return
 
@@ -60,7 +62,7 @@ export default function QuestionPack({
 
       const updatedLikes = await response.json()
 
-      if(updatedLikes.userLiked) {
+      if (updatedLikes.userLiked) {
         setUserLiked(true)
       } else {
         setUserLiked(false)
@@ -122,9 +124,7 @@ export default function QuestionPack({
                 userLiked && 'text-red-500'
               )}
             >
-              {likes === 1 ?
-                `${likes} Like`
-              : `${likes} Likes`}
+              {likes === 1 ? `${likes} Like` : `${likes} Likes`}
             </span>
           </Button>
 

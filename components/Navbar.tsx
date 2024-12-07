@@ -1,6 +1,6 @@
 'use client'
-import DiscordLoginButton from '@/components/DiscordLoginButton'
 import { LayoutDashboardIcon, Moon, Sun, UserRound } from 'lucide-react'
+import DiscordLoginButton from '@/components/DiscordLoginButton'
 import { useIdToken } from '@/helpers/hooks/useIdToken'
 import { IdTokenJWT } from '@/helpers/oauth/types'
 import UserDropdown from './UserDropdown'
@@ -86,8 +86,8 @@ const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
             </Link>
           </div>
           <button
-            type='button'
-            title={`${ isOpen ? "close" : "open" } menu`}
+            type="button"
+            title={`${isOpen ? 'close' : 'open'} menu`}
             className={`absolute right-[1.05rem] top-[1.35rem] z-50 flex flex-col gap-[5px] md:hidden`}
             onClick={handleIsOpen}
           >

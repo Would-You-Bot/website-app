@@ -48,7 +48,10 @@ export async function PUT(
       }
     })
     if (removeLike.likes) {
-      return NextResponse.json({ likes: removeLike.likes.length, userLiked: false }, { status: 200 })
+      return NextResponse.json(
+        { likes: removeLike.likes.length, userLiked: false },
+        { status: 200 }
+      )
     }
     return NextResponse.json(
       { message: 'Error removing like' },
@@ -64,7 +67,10 @@ export async function PUT(
       }
     })
     if (addLike.likes) {
-      return NextResponse.json({ likes: addLike.likes.length, userLiked: true }, { status: 200 })
+      return NextResponse.json(
+        { likes: addLike.likes.length, userLiked: true },
+        { status: 200 }
+      )
     }
     return NextResponse.json({ message: 'Error adding like' }, { status: 500 })
   }
