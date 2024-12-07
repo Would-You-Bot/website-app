@@ -58,10 +58,6 @@ function EditPackQuestionModal({
   const [typeValue, setTypeValue] = useState(type === 'mixed' ? null : type)
   const [typeError, setTypeError] = useState<string | null>(null)
   const [questionError, setQuestionError] = useState<string | null>(null)
-  const [formData, setFormData] = useLocalStorage<PackData>(
-    'PACKVALUES',
-    {} as PackData
-  )
 
   useEffect(() => {
     if (questionToEdit !== null && mode === 'update') {
@@ -119,13 +115,7 @@ function EditPackQuestionModal({
 
     onChange(newQuestions)
     setQuestionValue('')
-
-    if (formData) {
-      // @ts-expect-error new questions can't be null here so ignore
-      setFormData({ ...formData, questions: newQuestions })
-      setIsOpen(false)
-      setQuestionValue('')
-    }
+    setIsOpen(false)
   }
 
   const editQuestion = () => {
@@ -151,12 +141,7 @@ function EditPackQuestionModal({
 
     onChange(newQuestions)
     setQuestionValue('')
-
-    if (formData) {
-      setFormData({ ...formData, questions: newQuestions })
-      setIsOpen(false)
-      setQuestionValue('')
-    }
+    setIsOpen(false)
   }
 
   const handleTypeChange = (value: QuestionType) => {
@@ -192,7 +177,7 @@ function EditPackQuestionModal({
                 <span className="text-brand-blue-100">Question</span>
               </>
             : <>
-                <span className="text-brand-red-100">Edit</span>
+                <span className="text-brand-red-100">Edit</span>{' '}
                 <span className="text-brand-blue-100">Question</span>
               </>
             }
