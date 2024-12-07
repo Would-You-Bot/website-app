@@ -10,7 +10,7 @@ const packTypes = [
   {
     id: 'qwertyuiop12',
     label: 'Would you rather',
-    slug: 'wyr'
+    slug: 'wouldyourather'
   },
   {
     id: 'asdfghjkl12',
@@ -20,7 +20,7 @@ const packTypes = [
   {
     id: 'zxcvbnm12',
     label: 'Never have I ever',
-    slug: 'nhie'
+    slug: 'neverhaveiever'
   },
   {
     id: 'djwne0i2we',
