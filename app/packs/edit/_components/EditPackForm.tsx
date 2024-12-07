@@ -293,6 +293,8 @@ function EditPackForm({ data, userId, packId }: EditPackFormProps) {
         </section>
 
         {/*  */}
+
+        <section className="space-y-8 lg:min-h-[calc(100vh-160px)]">
         <section className="space-y-8  min-h-[calc(100vh-160px)]">
           <EditPackQuestionModal
             control={control}
@@ -375,17 +377,23 @@ function EditPackForm({ data, userId, packId }: EditPackFormProps) {
                             Type: {question.type}
                           </DropdownMenuLabel>
                           <DropdownMenuSeparator />
-                          <DropdownMenuItem>
-                            <Pen className="size-4" />
-                            Edit
+                          <DropdownMenuItem asChild>
+                            <button
+                              onClick={() => editQuestion(index)}
+                              className="w-full flex-items-center gap-2"
+                            >
+                              <Pen className="size-4" />
+                              <span>Edit</span>
+                            </button>
                           </DropdownMenuItem>
-                          <DropdownMenuItem
-                            className="focus:text-red-400"
-                            onClick={() => deleteQuestion(index)}
-                          >
-                            <Trash2 className="size-4" />
-                            Delete
-                          </DropdownMenuItem>
+                          <DropdownMenuItem className="focus:text-red-400">
+                            <button
+                              onClick={() => deleteQuestion(index)}
+                              className="w-full flex items-center gap-2"
+                            >
+                              <Trash2 className="size-4" />
+                              <span>Delete</span>
+                            </button>
                         </DropdownMenuContent>
                       </DropdownMenu>
                     </div>
@@ -395,7 +403,9 @@ function EditPackForm({ data, userId, packId }: EditPackFormProps) {
             </ul>
           </div>
         </section>
-        <div className="col-span-2">
+
+        {/*  */}
+        <div className="lg:col-span-2">
           <Button className="hover:bg-brand-blue-300 bg-brand-blue-100 w-40 text-white">
             {isSubmitting && <Loader2 size={16} />}
             <span className="ml-2">

@@ -193,7 +193,7 @@ function QuestionModal({
                 <span className="text-brand-blue-100">Question</span>
               </>
             : <>
-                <span className="text-brand-red-100">Edit</span>
+                <span className="text-brand-red-100">Edit</span>{' '}
                 <span className="text-brand-blue-100">Question</span>
               </>
             }

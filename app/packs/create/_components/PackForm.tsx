@@ -27,19 +27,19 @@ import {
 } from '@/components/ui/select'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useLocalStorage } from '@/hooks/use-localstorage'
+import { PackData, packSchema } from '@/utils/zod/schemas'
+import { packLanguages, packTypes } from '@/lib/constants'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Textarea } from '@/components/ui/textarea'
 import { toast } from '@/components/ui/use-toast'
-import { PackData, packSchema } from '@/utils/zod/schemas'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
 import QuestionModal from './QuestionModal'
 import { useForm } from 'react-hook-form'
-import { useState } from 'react'
-import { packLanguages, packTypes } from '@/lib/constants'
 import { PackType } from '@prisma/client'
 import { PackLanguage } from '@/types'
+import { useState } from 'react'
 
 const defaultValues = {
   type: '',
@@ -466,16 +466,23 @@ function PackForm() {
                                 Type: {question.type}
                               </DropdownMenuLabel>
                               <DropdownMenuSeparator />
-                              <DropdownMenuItem>
-                                <Pen className="size-4" />
-                                Edit
+                              <DropdownMenuItem asChild>
+                                <button
+                                  onClick={() => editQuestion(index)}
+                                  className="w-full flex-items-center gap-2"
+                                >
+                                  <Pen className="size-4" />
+                                  <span>Edit</span>
+                                </button>
                               </DropdownMenuItem>
-                              <DropdownMenuItem
-                                className="focus:text-red-400"
-                                onClick={() => deleteQuestion(index)}
-                              >
-                                <Trash2 className="size-4" />
-                                Delete
+                              <DropdownMenuItem className="focus:text-red-400">
+                                <button
+                                  onClick={() => deleteQuestion(index)}
+                                  className="w-full flex items-center gap-2"
+                                >
+                                  <Trash2 className="size-4" />
+                                  <span>Delete</span>
+                                </button>
                               </DropdownMenuItem>
                             </DropdownMenuContent>
                           </DropdownMenu>
