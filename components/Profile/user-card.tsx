@@ -96,7 +96,7 @@ export function UserCard({ userData }: UserCardProps) {
 
             <TooltipProvider delayDuration={0}>
               <Tooltip>
-                <TooltipTrigger>
+                <TooltipTrigger className="cursor-default">
                   <span>
                     Joined {new Date(userData.createdAt).toLocaleDateString()}{' '}
                   </span>
