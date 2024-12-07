@@ -293,7 +293,9 @@ function EditPackForm({ data, userId, packId }: EditPackFormProps) {
         </section>
 
         {/*  */}
+
         <section className="space-y-8 lg:min-h-[calc(100vh-160px)]">
+        <section className="space-y-8  min-h-[calc(100vh-160px)]">
           <EditPackQuestionModal
             control={control}
             type={type}
@@ -392,7 +394,6 @@ function EditPackForm({ data, userId, packId }: EditPackFormProps) {
                               <Trash2 className="size-4" />
                               <span>Delete</span>
                             </button>
-                          </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>
                     </div>
