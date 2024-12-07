@@ -11,9 +11,6 @@ import { LayoutDashboardIcon, LogOut, UserRound, type LucideProps } from 'lucide
 import Image from 'next/image'
 import Link from 'next/link'
 
-type IconType = React.ForwardRefExoticComponent<
-  Omit<LucideProps, 'ref'> & React.RefAttributes<SVGSVGElement>
->
 
 interface UserDropdownProps {
   idToken: IdTokenJWT | null
@@ -60,7 +57,7 @@ export default function UserDropdown({ idToken, handleIsOpen }: UserDropdownProp
             onClick={handleIsOpen}
           >
             <DropdownMenuItem className="flex gap-2">
-              <UserRound className="mt-0.5 h-4 w-4" />
+              <LayoutDashboardIcon className="mt-0.5 h-4 w-4" />
               <span>Manage Subscription</span>
             </DropdownMenuItem>
           </Link>
