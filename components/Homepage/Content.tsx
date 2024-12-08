@@ -145,7 +145,7 @@ export function HomeContent({
             whileInView={{ opacity: 1, transform: 'translateY(0)' }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: 'easeInOut' }}
-            className="flex flex-col items-center"
+            className="flex flex-col items-center gap-6 max-w-[300px] lg:max-w-8xl md:max-w-8xl sm:max-w-8xl"
           >
         <FeatureItem
           reverse
