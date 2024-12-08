@@ -28,11 +28,22 @@ export const metadata: Metadata = {
   description: 'Edit your packs'
 }
 
-async function page({ params: { id } }: { params: { id: string } }) {
+interface PageProps {
+  params: { id: string }
+  searchParams: { [key: string]: string | string[] | undefined }
+}
+
+async function page({ params, searchParams }: PageProps) {
+  const { id } = params
+  const { resubmit } = searchParams
+
   const auth = await getAuthTokenOrNull()
+  
   const userId = auth?.payload?.id
 
   const canEdit = userId === id
+
+  const notResubmitting = resubmit !== 'true'
 
   const PackData = await getPackData(id)
 
@@ -43,8 +54,24 @@ async function page({ params: { id } }: { params: { id: string } }) {
   return (
     <Container className="pt-8 lg:pt-10 space-y-8 min-h-[calc(100vh-112px)]">
       <h1 className="text-4xl font-bold text-center">
-        <span className="text-brand-red-100 drop-shadow-red-glow">Edit</span>{' '}
-        <span className="text-brand-blue-100 drop-shadow-blue-glow">Pack</span>
+        {!notResubmitting ?
+          <>
+            <span className="text-brand-red-100 drop-shadow-red-glow">
+              Edit
+            </span>{' '}
+            <span className="text-brand-blue-100 drop-shadow-blue-glow">
+              Pack
+            </span>
+          </>
+        : <>
+            <span className="text-brand-red-100 drop-shadow-red-glow">
+              Update &
+            </span>{' '}
+            <span className="text-brand-blue-100 drop-shadow-blue-glow">
+              Resubmit
+            </span>
+          </>
+        }
       </h1>
       <EditPackForm
         data={PackData}

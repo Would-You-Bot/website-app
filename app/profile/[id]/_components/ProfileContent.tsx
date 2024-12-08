@@ -96,30 +96,32 @@ export default function ProfileContent({
   )
 
   return (
-    <main className="w-full mx-auto max-w-8xl px-4 sm:px-6 lg:px-8 py-8">
+    <main className="w-full mx-auto max-w-8xl px-4 sm:px-6 lg:px-8 py-8 relative">
       <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-6">
-        {userData.displayName && (
-          <UserCard
-            userData={{
-              userID: userData.userID ?? '',
-              bannerUrl: userData.bannerUrl ?? '',
-              avatarUrl: userData.avatarUrl ?? '',
-              displayName: userData.displayName,
-              globalName: userData.globalName ?? '',
-              description: userData.description ?? null,
-              createdAt: userData.createdAt ?? '',
-              language: userData.language ?? ''
-            }}
-          />
-        )}
+        <aside>
+          {userData.displayName && (
+            <UserCard
+              userData={{
+                userID: userData.userID ?? '',
+                bannerUrl: userData.bannerUrl ?? '',
+                avatarUrl: userData.avatarUrl ?? '',
+                displayName: userData.displayName,
+                globalName: userData.globalName ?? '',
+                description: userData.description ?? null,
+                createdAt: userData.createdAt ?? '',
+                language: userData.language ?? ''
+              }}
+            />
+          )}
+        </aside>
 
-        <div className="space-y-6">
+        <div>
           <Tabs
             defaultValue={currentTab}
             className="w-full"
           >
             {(canEdit || !userData.profilePrivacy) && (
-              <TabsList className="w-full flex flex-row overflow-x-auto overflow-y-hidden">
+              <TabsList className="w-full flex flex-row overflow-x-auto overflow-y-hidden thin-scrollbar">
                 <TabsTrigger
                   value="statistics"
                   className="w-full"

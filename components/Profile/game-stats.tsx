@@ -97,14 +97,14 @@ function GameStatSection({ title, yes, no, used, Icon }: GameStatSectionProps) {
         <div className="flex gap-2 text-sm">
           <Badge
             variant="secondary"
-            className="bg-emerald-500 text-primary-foreground"
+            className="bg-emerald-500 text-white"
           >
             <Icon className="w-3 h-3 mr-1" />
             {yes}
           </Badge>
           <Badge
             variant="secondary"
-            className="bg-red-500 text-primary-foreground"
+            className="bg-red-500 text-white"
           >
             <ThumbsDown className="w-3 h-3 mr-1" />
             {no}
