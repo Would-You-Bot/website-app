@@ -81,7 +81,8 @@ export async function GET(
   const questionsWithCounts = questions.map((question) => ({
     ...question,
     questions: question.questions.length,
-    likes: question.likes.length
+    likes: question.likes.length,
+    userLiked: question.likes.includes(userId || '')
   }))
 
   return NextResponse.json(

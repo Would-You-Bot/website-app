@@ -1,122 +1,114 @@
-import { Search, Heart, ExternalLink, Pencil, Plus } from 'lucide-react'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { useState } from 'react'
+'use client'
 
-interface Pack {
-  id: number
-  name: string
-  questions: number
-  likes: number
+import { useEffect, useState } from 'react'
+import QuestionPack from '@/app/packs/_components/QuestionPack'
+
+export interface PackData {
   type: string
+  id: string
+  featured: boolean
+  name: string
+  language: string
+  description: string
+  tags: string[]
+  likes: string
+  questions: number
+  pending: boolean
+  denied: boolean
+  userLiked: boolean
+}
+
+export interface PackResponse {
+  data: PackData[]
+  totalPages: number
 }
 
 interface PackListProps {
-  type: 'liked' | 'created'
+  type: 'likes' | 'created'
+  id: string
 }
 
-// Get Questions depending on the type from api
-const packs: any = []
+export function PackList({ type, id }: PackListProps) {
+  const [packs, setPacks] = useState<PackResponse['data']>([])
 
-export function PackList({ type }: PackListProps) {
-  const [searchQuery, setSearchQuery] = useState('')
-  const [activeFilter, setActiveFilter] = useState('all')
+  useEffect(() => {
+    async function getPack() {
+      const res = await fetch(`/api/user/${id}/packs?type=${type}`)
+      const packData: PackResponse = await res.json()
+      setPacks(packData.data)
+    }
+    getPack()
+  }, [type, id])
 
-  const filterTags = [
-    { id: 'all', label: 'All' },
-    { id: 'wouldyourather', label: 'Would you rather' },
-    { id: 'whatwouldyoudo', label: 'What would you do' },
-    { id: 'neverhaveiever', label: 'Never have I ever' },
-    { id: 'truth', label: 'Truth' },
-    { id: 'dare', label: 'Dare' },
-    { id: 'topic', label: 'Topic' }
-  ]
+  const sortedPacks = [...packs].sort((a, b) => {
+    if (a.featured && !b.featured) return -1
+    if (!a.featured && b.featured) return 1
+    return 0
+  })
+
+  const groupedPacks = sortedPacks.reduce((acc, pack) => {
+    if (type === 'created') {
+      if (pack.pending) {
+        acc.pending.push(pack)
+      } else if (pack.denied) {
+        acc.denied.push(pack)
+      } else {
+        acc.approved.push(pack)
+      }
+    } else {
+      acc.all.push(pack)
+    }
+    return acc
+  }, { all: [], approved: [], denied: [], pending: [] } as Record<string, PackResponse['data']>)
+
+  const renderPacks = (packs: PackResponse['data'], style: 'default' | 'created' | 'denied') => (
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {packs.map((pack) => (
+        <QuestionPack
+          key={pack.id}
+          userId={id}
+          type={pack.type}
+          id={pack.id}
+          featured={pack.featured}
+          name={pack.name}
+          description={pack.description}
+          likes={String(pack.likes)}
+          userLiked={pack.userLiked}
+          questions={pack.questions}
+          style={style}
+          language={pack.language}
+          tags={pack.tags}
+        />
+      ))}
+    </div>
+  )
 
   return (
     <div className="space-y-4">
-      <div className="flex gap-2 items-center justify-between">
-        <div className="relative flex-1">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          <Input
-            placeholder={`Search ${type === 'liked' ? 'packs' : 'your packs'}...`}
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-10"
-          />
-        </div>
-        {type === 'created' && (
-          <Button variant="ghost">
-            <Plus className="w-4 h-4 mr-2" />
-            Create Pack
-          </Button>
-        )}
-      </div>
+      {type === 'likes' && renderPacks(groupedPacks.all, 'default')}
 
-      <div className="flex flex-wrap gap-2">
-        {filterTags.map((tag) => (
-          <button
-            type="button"
-            key={tag.id}
-            onClick={() => setActiveFilter(tag.id)}
-            className={`px-3 py-1 rounded-full text-sm ${
-              activeFilter === tag.id ?
-                'bg-brand-customPrimary text-black'
-              : 'bg-muted text-muted-foreground hover:bg-muted/80'
-            }`}
-          >
-            # {tag.label}
-          </button>
-        ))}
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {packs.map((pack: any) => (
-          <div
-            key={pack.id}
-            className="relative rounded-lg border bg-card hover:shadow-lg transition-all duration-200 overflow-hidden"
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-primary to-secondary opacity-0 group-hover:opacity-100 transition-opacity" />
-            <div className="relative p-4">
-              {pack.id === 1 && type === 'liked' && (
-                <span className="flex uppercase text-sm items-center px-2 py-1 rounded-md text-white popular-badge select-none absolute right-2 top-2">
-                  POPULAR
-                </span>
-              )}
-              <h3 className="font-semibold text-foreground mb-1">
-                {pack.name}
-              </h3>
-              <p className="text-sm text-muted-foreground mb-4">
-                {type === 'liked' ?
-                  'A collection of exciting questions!'
-                : 'Your custom pack of questions!'}
-              </p>
-              <div className="flex items-center justify-between text-sm text-foreground">
-                <div className="flex items-center gap-4">
-                  <span>{pack.questions} questions</span>
-                  <span className="text-foreground/60">
-                    {pack.type.toLowerCase()}
-                  </span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Button
-                    variant="ghost"
-                    size="sm"
-                  >
-                    <Heart className="h-4 w-4" />
-                    <span className="ml-1">{pack.likes}</span>
-                  </Button>
-                </div>
-              </div>
-              <Button className="w-full mt-4 bg-brand-customPrimary hover:bg-brand-customPrimaryLight text-black">
-                {type === 'liked' ? 'Use Pack' : 'Edit Pack'}
-                {type === 'liked' ?
-                  <ExternalLink className="w-4 h-4 ml-2" />
-                : <Pencil className="w-4 h-4 ml-2" />}
-              </Button>
-            </div>
-          </div>
-        ))}
-      </div>
+      {type === 'created' && (
+        <>
+          {groupedPacks.approved.length > 0 && (
+            <>
+              <h2 className="text-xl font-semibold mt-8 mb-4">Created Packs</h2>
+              {renderPacks(groupedPacks.approved, 'default')}
+            </>
+          )}
+          {groupedPacks.denied.length > 0 && (
+            <>
+              <h2 className="text-xl font-semibold mt-8 mb-4">Denied Packs</h2>
+              {renderPacks(groupedPacks.denied, 'denied')}
+            </>
+          )}
+          {groupedPacks.pending.length > 0 && (
+            <>
+              <h2 className="text-xl font-semibold mt-8 mb-4">Pending Packs</h2>
+              {renderPacks(groupedPacks.pending, 'created')}
+            </>
+          )}
+        </>
+      )}
     </div>
   )
 }

@@ -72,10 +72,13 @@ export async function GET(request: NextRequest) {
       { status: 404 }
     )
   }
+  const tokenData = await getAuthTokenOrNull(request.headers.get('Authorization') ?? undefined)
 
   const questionsWithCounts = questions.map((question) => ({
     ...question,
-    questions: question.questions.length
+    questions: question.questions.length,
+    likes: question.likes.length,
+    userLiked: question.likes.includes(tokenData?.payload.id || '')
   }))
 
   return NextResponse.json(

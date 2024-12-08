@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/card'
 import { QuestionPackDetails } from './QuestionPackDetails'
 import { Button } from '@/components/ui/button'
-import { Flame, Heart } from 'lucide-react'
+import { Flame, Heart, Edit, RefreshCw } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useState } from 'react'
 
@@ -22,8 +22,10 @@ export interface QuestionPackProps {
   language: string
   description: string
   tags: string[]
-  likes: string[]
+  likes: string
+  userLiked: boolean
   questions: number
+  style?: 'default' | 'created' | 'denied'
 }
 
 export default function QuestionPack({
@@ -32,16 +34,15 @@ export default function QuestionPack({
   id,
   featured,
   name,
-  language,
   description,
-  tags,
   likes: initialLikes,
-  questions
+  userLiked: initialUserLiked,
+  questions,
+  style = 'default'
 }: { userId: string | null } & QuestionPackProps) {
-  const [likes, setLikes] = useState<Number>(initialLikes.length)
-  const [userLiked, setUserLiked] = useState<boolean>(
-    initialLikes.includes(userId || '')
-  )
+  const [likes, setLikes] = useState<number>(parseInt(initialLikes, 10))
+  const [userLiked, setUserLiked] = useState<boolean>(initialUserLiked)
+
   async function likePack(packId: string) {
     if (!userId) return
 
@@ -64,17 +65,18 @@ export default function QuestionPack({
 
       if (updatedLikes.userLiked) {
         setUserLiked(true)
+        setLikes((prevLikes) => prevLikes + 1)
       } else {
         setUserLiked(false)
+        setLikes((prevLikes) => prevLikes - 1)
       }
-      setLikes(updatedLikes.likes)
     } catch (error) {
       console.error('Error toggling like:', error)
     }
   }
 
   return (
-    <li
+    <div
       className={cn('p-[3px]', {
         'popular-pack': featured
       })}
@@ -105,35 +107,72 @@ export default function QuestionPack({
         </div>
 
         <CardFooter className="grid grid-cols-2 gap-4 lg:gap-10">
-          <Button
-            onClick={() => likePack(id)}
-            variant="secondary"
-            className="w-full dark:bg-[hsl(0,0%,6%)]"
-          >
-            <Heart
-              className={cn(
-                'mr-2 h-4 w-4 shrink-0',
-                userLiked ?
-                  'text-red-500 fill-red-500'
-                : 'text-brand-customGrayText fill-brand-customGrayText'
-              )}
-            />
-            <span
-              className={cn(
-                'text-muted-foreground',
-                userLiked && 'text-red-500'
-              )}
-            >
-              {likes === 1 ? `${likes} Like` : `${likes} Likes`}
-            </span>
-          </Button>
+          {style === 'default' && (
+            <>
+              <Button
+                onClick={() => likePack(id)}
+                variant="secondary"
+                className="w-full dark:bg-[hsl(0,0%,6%)]"
+              >
+                <Heart
+                  className={cn(
+                    'mr-2 h-4 w-4 shrink-0',
+                    userLiked
+                      ? 'text-red-500 fill-red-500'
+                      : 'text-brand-customGrayText fill-brand-customGrayText'
+                  )}
+                />
+                <span
+                  className={cn(
+                    'text-muted-foreground',
+                    userLiked && 'text-red-500'
+                  )}
+                >
+                  {likes === 1 ? `${likes} Like` : `${likes} Likes`}
+                </span>
+              </Button>
 
-          <QuestionPackDetails
-            id={id}
-            type={type}
-          />
+              <QuestionPackDetails
+                id={id}
+                type={type}
+              />
+            </>
+          )}
+
+          {style === 'created' && (
+            <Button
+              variant="secondary"
+              className="w-full col-span-2 dark:bg-[hsl(0,0%,6%)]"
+              onClick={() => {/* Add edit functionality */}}
+            >
+              <Edit className="mr-2 h-4 w-4 shrink-0" />
+              Edit
+            </Button>
+          )}
+
+          {style === 'denied' && (
+            <>
+              <Button
+                variant="secondary"
+                className="w-full bg-red-500 hover:bg-red-600 text-white dark:bg-red-500 dark:hover:bg-red-600"
+                onClick={() => {/* Add resubmit functionality */}}
+              >
+                <RefreshCw className="mr-2 h-4 w-4 shrink-0" />
+                Resubmit
+              </Button>
+              <Button
+                variant="secondary"
+                className="w-full dark:bg-[hsl(0,0%,6%)]"
+                onClick={() => {/* Add edit functionality */}}
+              >
+                <Edit className="mr-2 h-4 w-4 shrink-0" />
+                Edit
+              </Button>
+            </>
+          )}
         </CardFooter>
       </Card>
-    </li>
+    </div>
   )
 }
+

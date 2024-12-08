@@ -9,12 +9,10 @@ import {
   DialogTrigger
 } from '@/components/ui/dialog'
 import { CopyIcon, ExternalLink, Search } from 'lucide-react'
-import { PackData } from '../create/_components/PackForm'
 import { Skeleton } from '@/components/ui/skeleton'
-import { toast } from '@/components/ui/use-toast'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
 

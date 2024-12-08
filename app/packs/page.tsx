@@ -50,19 +50,22 @@ export interface PackResponse {
     language: string
     description: string
     tags: string[]
-    likes: string[]
+    likes: string
+    userLiked: boolean
     questions: number
   }[]
   totalPages: number
 }
 
 const getQuestionPacks = async (page: string, type: string) => {
+  const token = await getAuthTokenOrNull()
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_API_URL}/api/packs?page=${page}&type=${type}`,
     {
       method: 'GET',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization: token?.value ?? 'should not be here'
       },
       next: { revalidate: 5 }
     }

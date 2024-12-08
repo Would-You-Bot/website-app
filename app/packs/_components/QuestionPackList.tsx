@@ -21,6 +21,7 @@ function QuestionPackList({
           <QuestionPack
             {...question}
             userId={userId}
+            style="default"
           />
         </React.Fragment>
       ))}

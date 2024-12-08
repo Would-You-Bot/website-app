@@ -7,7 +7,6 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { GameStats } from '@/components/Profile/game-stats'
 import { UserCard } from '@/components/Profile/user-card'
 import { PackList } from '@/components/Profile/pack-list'
-import { useState } from 'react'
 
 interface UserData {
   id: string
@@ -52,37 +51,6 @@ interface UsageStats {
   replay?: number
 }
 
-// Pseudo data for liked and created packs
-const likedPacks = [
-  {
-    id: 1,
-    name: 'Classic Would You Rather',
-    questions: 50,
-    likes: 1200,
-    type: 'WOULDYOURATHER'
-  },
-  { id: 2, name: 'Extreme Dares', questions: 30, likes: 800, type: 'DARE' },
-  { id: 3, name: 'Deep Truths', questions: 40, likes: 950, type: 'TRUTH' }
-]
-
-const createdPacks = [
-  {
-    id: 4,
-    name: 'My Custom WYR',
-    questions: 25,
-    likes: 150,
-    type: 'WOULDYOURATHER'
-  },
-  {
-    id: 5,
-    name: 'Friend Group Inside Jokes',
-    questions: 20,
-    likes: 50,
-    type: 'NEVERHAVEIEVER'
-  }
-]
-
-
 export default function ProfileContent({
   userData,
   canEdit
@@ -90,7 +58,6 @@ export default function ProfileContent({
   userData: UserData
   canEdit: boolean
 }) {
-  const [description, setDescription] = useState(userData.description ?? '')
   const searchParams = useSearchParams()
   const currentTab = searchParams.get('tab') || 'statistics'
   const router = useRouter()
@@ -248,11 +215,13 @@ export default function ProfileContent({
             </TabsContent>
             <TabsContent value="liked">
               <PackList
-                type="liked"
+                id={userData.userID || ''}
+                type="likes"
               />
             </TabsContent>
             <TabsContent value="created">
               <PackList
+                id={userData.userID || ''}
                 type="created"
               />
             </TabsContent>
