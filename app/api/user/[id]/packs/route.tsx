@@ -50,7 +50,6 @@ export async function GET(
     select: {
       type: true,
       id: true,
-      featured: true,
       name: true,
       language: true,
       description: true,
@@ -82,6 +81,7 @@ export async function GET(
     ...question,
     questions: question.questions.length,
     likes: question.likes.length,
+    featured: false,
     userLiked: question.likes.includes(userId || '')
   }))
 
