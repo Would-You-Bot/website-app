@@ -125,7 +125,7 @@ export function HomeContent({
           </div>
         </div>
       </section>
-      <section className="mt-20 flex w-full md:max-w-8xl flex-col items-center gap-20 px-8 text-foreground">
+      <section className="mt-20 flex w-full max-w-8xl flex-col items-center gap-20 px-8 text-foreground">
             <motion.div
             initial={{ opacity: 0, transform: 'translateY(15px)' }}
             whileInView={{ opacity: 1, transform: 'translateY(0)' }}
@@ -145,7 +145,7 @@ export function HomeContent({
             whileInView={{ opacity: 1, transform: 'translateY(0)' }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, ease: 'easeInOut' }}
-            className="flex flex-col items-center gap-6  max-w-[300px]"
+            className="flex flex-col items-center"
           >
         <FeatureItem
           reverse
