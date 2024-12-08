@@ -393,7 +393,7 @@ function EditPackForm({ data, userId, packId }: EditPackFormProps) {
                               <Trash2 className="size-4" />
                               <span>Delete</span>
                             </button>
-                           </DropdownMenuItem>
+                          </DropdownMenuItem>
                         </DropdownMenuContent>
                       </DropdownMenu>
                     </div>

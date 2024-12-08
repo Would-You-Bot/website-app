@@ -36,7 +36,11 @@ export async function GET(
     return NextResponse.json({ message: 'User not found!' }, { status: 404 })
   }
 
-  if (type === "likes" && (userData.likedPackPrivacy && userData.userID !== userId)) {
+  if (
+    type === 'likes' &&
+    userData.likedPackPrivacy &&
+    userData.userID !== userId
+  ) {
     return NextResponse.json(
       { message: 'Liked packs are private!' },
       { status: 403 }

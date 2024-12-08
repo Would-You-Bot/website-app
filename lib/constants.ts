@@ -15,4 +15,3 @@ export const packLanguages = [
   { value: 'it_IT', label: 'Italian', id: 'asdfg' },
   { value: 'fr_FR', label: 'French', id: 'hjklm' }
 ]
-

@@ -5,19 +5,26 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger
 } from '@/components/ui/user-dropdown-menu'
+import {
+  LayoutDashboardIcon,
+  LogOut,
+  UserRound,
+  type LucideProps
+} from 'lucide-react'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import type { IdTokenJWT } from '@/helpers/oauth/types'
-import { LayoutDashboardIcon, LogOut, UserRound, type LucideProps } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
-
 
 interface UserDropdownProps {
   idToken: IdTokenJWT | null
   handleIsOpen: any
 }
 
-export default function UserDropdown({ idToken, handleIsOpen }: UserDropdownProps) {
+export default function UserDropdown({
+  idToken,
+  handleIsOpen
+}: UserDropdownProps) {
   const user = idToken?.payload
 
   return (
@@ -41,26 +48,26 @@ export default function UserDropdown({ idToken, handleIsOpen }: UserDropdownProp
         </span>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
-      <Link
-            key="View Profile"
-            href={`/profile/${user?.id}`}
-            onClick={handleIsOpen}
-          >
-            <DropdownMenuItem className="flex gap-2">
-              <UserRound className="mt-0.5 h-4 w-4" />
-              <span>View Profile</span>
-            </DropdownMenuItem>
-          </Link>
-          <Link
-            key="Manage Subscription"
-            href="/manage/subscription"
-            onClick={handleIsOpen}
-          >
-            <DropdownMenuItem className="flex gap-2">
-              <LayoutDashboardIcon className="mt-0.5 h-4 w-4" />
-              <span>Manage Subscription</span>
-            </DropdownMenuItem>
-          </Link>
+        <Link
+          key="View Profile"
+          href={`/profile/${user?.id}`}
+          onClick={handleIsOpen}
+        >
+          <DropdownMenuItem className="flex gap-2">
+            <UserRound className="mt-0.5 h-4 w-4" />
+            <span>View Profile</span>
+          </DropdownMenuItem>
+        </Link>
+        <Link
+          key="Manage Subscription"
+          href="/manage/subscription"
+          onClick={handleIsOpen}
+        >
+          <DropdownMenuItem className="flex gap-2">
+            <LayoutDashboardIcon className="mt-0.5 h-4 w-4" />
+            <span>Manage Subscription</span>
+          </DropdownMenuItem>
+        </Link>
         <DropdownMenuSeparator />
         <a
           href="/logout"

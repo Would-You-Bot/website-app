@@ -49,7 +49,6 @@ export async function GET(
     )
   }
 
-
   if (!question) {
     return NextResponse.json(
       { message: 'No question found with that id!' },
@@ -60,7 +59,14 @@ export async function GET(
   const auth = await getAuthTokenOrNull()
 
   // @ts-expect-error
-  return NextResponse.json({ data: question, likes: question.likes.lenght, userLiked: question.likes.includes(auth?.payload.id || '')  }, { status: 200 })
+  return NextResponse.json(
+    {
+      data: question,
+      likes: question.likes.lenght,
+      userLiked: question.likes.includes(auth?.payload.id || '')
+    },
+    { status: 200 }
+  )
 }
 
 export async function PATCH(

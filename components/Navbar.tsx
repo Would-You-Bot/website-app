@@ -1,9 +1,9 @@
 'use client'
-import { Moon, Sun } from 'lucide-react'
 import DiscordLoginButton from '@/components/DiscordLoginButton'
 import { useIdToken } from '@/helpers/hooks/useIdToken'
 import type { IdTokenJWT } from '@/helpers/oauth/types'
 import UserDropdown from './UserDropdown'
+import { Moon, Sun } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { Crown } from '@/icons/Crown'
 import { useState } from 'react'
@@ -13,7 +13,6 @@ import Link from 'next/link'
 interface NavbarProps {
   idToken: IdTokenJWT | null
 }
-
 
 const Navbar = ({ idToken: idToken_ }: NavbarProps) => {
   const { setTheme, theme } = useTheme()

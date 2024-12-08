@@ -1,7 +1,7 @@
 'use client'
 
-import { useEffect, useState } from 'react'
 import QuestionPack from '@/app/packs/_components/QuestionPack'
+import { useEffect, useState } from 'react'
 
 export interface PackData {
   type: string
@@ -45,22 +45,31 @@ export function PackList({ type, id }: PackListProps) {
     return 0
   })
 
-  const groupedPacks = sortedPacks.reduce((acc, pack) => {
-    if (type === 'created') {
-      if (pack.pending) {
-        acc.pending.push(pack)
-      } else if (pack.denied) {
-        acc.denied.push(pack)
+  const groupedPacks = sortedPacks.reduce(
+    (acc, pack) => {
+      if (type === 'created') {
+        if (pack.pending) {
+          acc.pending.push(pack)
+        } else if (pack.denied) {
+          acc.denied.push(pack)
+        } else {
+          acc.approved.push(pack)
+        }
       } else {
-        acc.approved.push(pack)
+        acc.all.push(pack)
       }
-    } else {
-      acc.all.push(pack)
-    }
-    return acc
-  }, { all: [], approved: [], denied: [], pending: [] } as Record<string, PackResponse['data']>)
+      return acc
+    },
+    { all: [], approved: [], denied: [], pending: [] } as Record<
+      string,
+      PackResponse['data']
+    >
+  )
 
-  const renderPacks = (packs: PackResponse['data'], style: 'default' | 'created' | 'denied') => (
+  const renderPacks = (
+    packs: PackResponse['data'],
+    style: 'default' | 'created' | 'denied'
+  ) => (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
       {packs.map((pack) => (
         <QuestionPack

@@ -1,7 +1,7 @@
-import type { PackType } from '@prisma/client'
-import type { PackData } from '@/utils/zod/schemas'
 import { getAuthTokenOrNull } from '@/helpers/oauth/helpers'
 import { NextResponse, type NextRequest } from 'next/server'
+import type { PackData } from '@/utils/zod/schemas'
+import type { PackType } from '@prisma/client'
 import { prisma } from '@/lib/prisma'
 import { v4 as uuidv4 } from 'uuid'
 import validator from 'validator'
@@ -72,7 +72,9 @@ export async function GET(request: NextRequest) {
       { status: 404 }
     )
   }
-  const tokenData = await getAuthTokenOrNull(request.headers.get('Authorization') ?? undefined)
+  const tokenData = await getAuthTokenOrNull(
+    request.headers.get('Authorization') ?? undefined
+  )
 
   const questionsWithCounts = questions.map((question) => ({
     ...question,

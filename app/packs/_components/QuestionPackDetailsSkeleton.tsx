@@ -12,8 +12,8 @@ import { CopyIcon, ExternalLink, Search } from 'lucide-react'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
-import { useState } from 'react'
 import { cn } from '@/lib/utils'
+import { useState } from 'react'
 import Image from 'next/image'
 
 const PackDetails = ({ id, type }: { id: string; type: string }) => {

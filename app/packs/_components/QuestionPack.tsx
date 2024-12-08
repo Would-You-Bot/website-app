@@ -8,9 +8,9 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card'
+import { Flame, Heart, Edit, RefreshCw } from 'lucide-react'
 import { QuestionPackDetails } from './QuestionPackDetails'
 import { Button } from '@/components/ui/button'
-import { Flame, Heart, Edit, RefreshCw } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { useState } from 'react'
 
@@ -117,9 +117,9 @@ export default function QuestionPack({
                 <Heart
                   className={cn(
                     'mr-2 h-4 w-4 shrink-0',
-                    userLiked
-                      ? 'text-red-500 fill-red-500'
-                      : 'text-brand-customGrayText fill-brand-customGrayText'
+                    userLiked ?
+                      'text-red-500 fill-red-500'
+                    : 'text-brand-customGrayText fill-brand-customGrayText'
                   )}
                 />
                 <span
@@ -143,7 +143,9 @@ export default function QuestionPack({
             <Button
               variant="secondary"
               className="w-full col-span-2 dark:bg-[hsl(0,0%,6%)]"
-              onClick={() => {/* Add edit functionality */}}
+              onClick={() => {
+                /* Add edit functionality */
+              }}
             >
               <Edit className="mr-2 h-4 w-4 shrink-0" />
               Edit
@@ -155,7 +157,9 @@ export default function QuestionPack({
               <Button
                 variant="secondary"
                 className="w-full bg-red-500 hover:bg-red-600 text-white dark:bg-red-500 dark:hover:bg-red-600"
-                onClick={() => {/* Add resubmit functionality */}}
+                onClick={() => {
+                  /* Add resubmit functionality */
+                }}
               >
                 <RefreshCw className="mr-2 h-4 w-4 shrink-0" />
                 Resubmit
@@ -163,7 +167,9 @@ export default function QuestionPack({
               <Button
                 variant="secondary"
                 className="w-full dark:bg-[hsl(0,0%,6%)]"
-                onClick={() => {/* Add edit functionality */}}
+                onClick={() => {
+                  /* Add edit functionality */
+                }}
               >
                 <Edit className="mr-2 h-4 w-4 shrink-0" />
                 Edit
@@ -175,4 +181,3 @@ export default function QuestionPack({
     </div>
   )
 }
-

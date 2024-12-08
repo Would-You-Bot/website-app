@@ -14,16 +14,15 @@ import {
   SelectTrigger,
   SelectValue
 } from '@/components/ui/select'
+import { PackData, questionSchema } from '@/utils/zod/schemas'
 import { useLocalStorage } from '@/hooks/use-localstorage'
 import { Control, useController } from 'react-hook-form'
-import { PackData, questionSchema } from '@/utils/zod/schemas'
 import { Textarea } from '@/components/ui/textarea'
 import React, { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { z } from 'zod'
-import { PackType } from '@prisma/client'
 import { packTypes } from '@/lib/constants'
-
+import { PackType } from '@prisma/client'
+import { z } from 'zod'
 
 interface QuestionModalProps {
   control: Control<PackData>

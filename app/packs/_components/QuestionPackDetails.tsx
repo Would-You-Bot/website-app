@@ -8,11 +8,11 @@ import {
   DialogTitle,
   DialogTrigger
 } from '@/components/ui/dialog'
+import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar'
 import { CopyIcon, ExternalLink, Search } from 'lucide-react'
 import { Skeleton } from '@/components/ui/skeleton'
 import { toast } from '@/components/ui/use-toast'
 import { Button } from '@/components/ui/button'
-import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar'
 import { PackData } from '@/utils/zod/schemas'
 import { Input } from '@/components/ui/input'
 import { useState, useEffect } from 'react'
@@ -70,7 +70,7 @@ const PackDetails = ({ id, type }: { id: string; type: string }) => {
           <div className="flex items-center gap-1">
             <Avatar className="h-[32px] w-[32px]">
               <AvatarImage
-                className='rounded-full'
+                className="rounded-full"
                 alt={userData.username + "'s avatar"}
                 src={userData.avatar}
               />
