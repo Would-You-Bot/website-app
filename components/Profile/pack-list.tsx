@@ -2,6 +2,8 @@
 
 import QuestionPack from '@/app/packs/_components/QuestionPack'
 import { useEffect, useState } from 'react'
+import { Skeleton } from '../ui/skeleton'
+import { SearchX } from 'lucide-react'
 
 export interface PackData {
   type: string
@@ -30,11 +32,14 @@ interface PackListProps {
 
 export function PackList({ type, id }: PackListProps) {
   const [packs, setPacks] = useState<PackResponse['data']>([])
+  const [loading, setLoading] = useState(true)
+
   useEffect(() => {
     async function getPack() {
       const res = await fetch(`/api/user/${id}/packs?type=${type}`)
       const packData: PackResponse = await res.json()
       setPacks(packData.data)
+      setLoading(false)
     }
     getPack()
   }, [type, id])
@@ -70,30 +75,51 @@ export function PackList({ type, id }: PackListProps) {
     packs: PackResponse['data'],
     style: 'default' | 'created' | 'denied'
   ) => (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-      {packs.map((pack) => (
-        <QuestionPack
-          key={pack.id}
-          userId={id}
-          type={pack.type}
-          id={pack.id}
-          featured={pack.featured}
-          name={pack.name}
-          description={pack.description}
-          likes={String(pack.likes)}
-          userLiked={pack.userLiked}
-          questions={pack.questions}
-          style={style}
-          language={pack.language}
-          tags={pack.tags}
-        />
-      ))}
-    </div>
+    <>
+      {packs.length > 0 ?
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+          {packs.map((pack) => (
+            <QuestionPack
+              key={pack.id}
+              userId={id}
+              type={pack.type}
+              id={pack.id}
+              featured={pack.featured}
+              name={pack.name}
+              description={pack.description}
+              likes={String(pack.likes)}
+              userLiked={pack.userLiked}
+              questions={pack.questions}
+              style={style}
+              language={pack.language}
+              tags={pack.tags}
+            />
+          ))}
+        </div>
+      : <EmptyList />}
+    </>
   )
+
+  if (loading)
+    return (
+      <ul className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mt-6">
+        {Array.from({ length: 4 }).map((_, index) => (
+          <Skeleton
+            key={`loader-${index * 2}`}
+            className="h-[256px] bg-foreground/15"
+          />
+        ))}
+      </ul>
+    )
 
   return (
     <div className="space-y-4">
-      {type === 'likes' && renderPacks(groupedPacks.all, 'default')}
+      {type === 'likes' && (
+        <>
+          <h2 className="text-xl font-semibold mt-8 mb-4">Liked Packs</h2>
+          {renderPacks(groupedPacks.all, 'default')}
+        </>
+      )}
 
       {type === 'created' && (
         <>
@@ -120,3 +146,10 @@ export function PackList({ type, id }: PackListProps) {
     </div>
   )
 }
+
+const EmptyList = () => (
+  <div className="flex items-center justify-center h-[250px] lg:h-[400px] border rounded-md">
+    <SearchX className="size-8 text-muted-foreground" />
+    <p className="text-muted-foreground">Nothing to see here</p>
+  </div>
+)

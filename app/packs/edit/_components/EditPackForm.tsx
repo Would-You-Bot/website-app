@@ -30,6 +30,7 @@ import { packLanguages, packTypes } from '@/lib/constants'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Textarea } from '@/components/ui/textarea'
 import { toast } from '@/components/ui/use-toast'
+import { useSearchParams } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Badge } from '@/components/ui/badge'
@@ -46,7 +47,7 @@ interface EditPackFormProps {
 }
 
 function EditPackForm({ data, userId, packId }: EditPackFormProps) {
-  const [previousPackData, setPreviousPackData] = useState<PackData>(data)
+  const [previousPackData] = useState<PackData>(data)
   const router = useRouter()
 
   const {
@@ -74,9 +75,14 @@ function EditPackForm({ data, userId, packId }: EditPackFormProps) {
   const [modalMode, setModalMode] = useState<'create' | 'update'>('create')
   const [indexToEdit, setIndexToEdit] = useState<number | null>(null)
 
+  const searchParams = useSearchParams()
+  const resubmit = searchParams.get('resubmit')
+
   const onSubmit = async (data: PackData) => {
+    const endpoint =
+      resubmit ? `/api/resubmit/${packId}` : `/api/packs/${packId}`
     try {
-      const res = await fetch(`/api/packs/${packId}`, {
+      const res = await fetch(endpoint, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json'
@@ -87,7 +93,7 @@ function EditPackForm({ data, userId, packId }: EditPackFormProps) {
       if (res.ok) {
         toast({
           title: 'Success!',
-          description: 'Successfully updated your question pack!'
+          description: resubmit ? 'Pack resubmitted!' : 'Pack updated!',
         })
         router.push(`/profile/${userId}`)
       } else {
@@ -97,7 +103,7 @@ function EditPackForm({ data, userId, packId }: EditPackFormProps) {
       console.error(error)
       toast({
         title: 'Oops',
-        description: 'Something went wrong while updating your pack!',
+        description: `Something went wrong while ${resubmit ? "resubmitting" : "updating"} your pack!`,
         variant: 'destructive'
       })
     }
@@ -164,6 +170,14 @@ function EditPackForm({ data, userId, packId }: EditPackFormProps) {
     setIndexToEdit(null)
     setModalMode('create')
     setShowQuestionModal(true)
+  }
+
+  const renderSubmitText = () => {
+    if (resubmit) {
+      const textVariants = isSubmitting ? 'Resubmitting' : 'Resubmit'
+      return textVariants
+    }
+    return isSubmitting ? 'Updating...' : 'Update'
   }
 
   return (
@@ -408,9 +422,7 @@ function EditPackForm({ data, userId, packId }: EditPackFormProps) {
         <div className="lg:col-span-2">
           <Button className="hover:bg-brand-blue-300 bg-brand-blue-100 w-40 text-white">
             {isSubmitting && <Loader2 size={16} />}
-            <span className="ml-2">
-              {isSubmitting ? 'Updating...' : 'Update'}
-            </span>
+            <span className="ml-2">{renderSubmitText()}</span>
           </Button>
         </div>
       </form>

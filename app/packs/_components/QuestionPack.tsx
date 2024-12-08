@@ -11,8 +11,10 @@ import {
 import { Flame, Heart, Edit, RefreshCw } from 'lucide-react'
 import { QuestionPackDetails } from './QuestionPackDetails'
 import { Button } from '@/components/ui/button'
+import { useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { useState } from 'react'
+import Link from 'next/link'
 
 export interface QuestionPackProps {
   type: string
@@ -42,6 +44,7 @@ export default function QuestionPack({
 }: { userId: string | null } & QuestionPackProps) {
   const [likes, setLikes] = useState<number>(parseInt(initialLikes, 10))
   const [userLiked, setUserLiked] = useState<boolean>(initialUserLiked)
+  const router = useRouter()
 
   async function likePack(packId: string) {
     if (!userId) return
@@ -142,13 +145,15 @@ export default function QuestionPack({
           {style === 'created' && (
             <Button
               variant="secondary"
-              className="w-full col-span-2 dark:bg-[hsl(0,0%,6%)]"
-              onClick={() => {
-                /* Add edit functionality */
-              }}
+              asChild
             >
-              <Edit className="mr-2 h-4 w-4 shrink-0" />
-              Edit
+              <Link
+                href={`/packs/edit/${id}`}
+                className="w-full col-span-2 dark:bg-[hsl(0,0%,6%)]"
+              >
+                <Edit className="mr-2 h-4 w-4 shrink-0" />
+                Edit
+              </Link>
             </Button>
           )}
 
@@ -157,22 +162,17 @@ export default function QuestionPack({
               <Button
                 variant="secondary"
                 className="w-full bg-red-500 hover:bg-red-600 text-white dark:bg-red-500 dark:hover:bg-red-600"
-                onClick={() => {
-                  /* Add resubmit functionality */
-                }}
+                onClick={() => router.push(`/packs/edit/${id}?resubmit=true`)}
               >
                 <RefreshCw className="mr-2 h-4 w-4 shrink-0" />
                 Resubmit
               </Button>
               <Button
-                variant="secondary"
-                className="w-full dark:bg-[hsl(0,0%,6%)]"
-                onClick={() => {
-                  /* Add edit functionality */
-                }}
+                className="w-full bg-brand-blue-100 hover:bg-brand-blue-200 text-white"
+                onClick={() => router.push(`/packs/edit/${id}`)}
               >
                 <Edit className="mr-2 h-4 w-4 shrink-0" />
-                Edit
+                <span>Edit</span>
               </Button>
             </>
           )}
