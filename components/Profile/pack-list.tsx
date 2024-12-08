@@ -30,7 +30,6 @@ interface PackListProps {
 
 export function PackList({ type, id }: PackListProps) {
   const [packs, setPacks] = useState<PackResponse['data']>([])
-
   useEffect(() => {
     async function getPack() {
       const res = await fetch(`/api/user/${id}/packs?type=${type}`)

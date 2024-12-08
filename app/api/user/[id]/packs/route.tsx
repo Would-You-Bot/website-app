@@ -42,7 +42,7 @@ export async function GET(
       denied: false
     }),
     ...(type === 'created' && { authorId: userData.userID }),
-    ...(type === 'likes' && { likes: { has: userId } })
+    ...(type === 'likes' && { likes: { has: id } })
   }
 
   const questionsPromise = prisma.questionPack.findMany({
@@ -55,7 +55,9 @@ export async function GET(
       description: true,
       tags: true,
       likes: true,
-      questions: true
+      questions: true,
+      pending: true,
+      denied: true
     },
     skip,
     take: PAGE_SIZE
