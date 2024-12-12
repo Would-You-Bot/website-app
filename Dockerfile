@@ -68,6 +68,9 @@ ENV MONGODB_URI=${MONGODB_URI}
 ARG UPSTASH_API_KEY
 ENV UPSTASH_API_KEY=${UPSTASH_API_KEY}
 
+ARG NEXT_PUBLIC_API_URL
+ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
+
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
@@ -160,6 +163,9 @@ ENV API_URL=${API_URL}
 
 ARG API_KEY
 ENV API_KEY=${API_KEY}
+
+ARG NEXT_PUBLIC_API_URL
+ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}
 
 USER nextjs
 
