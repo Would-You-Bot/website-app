@@ -224,6 +224,7 @@ export default function ProfileContent({
             <TabsContent value="created">
               <PackList
                 id={userData.userID || ''}
+                canEdit={canEdit}
                 type="created"
               />
             </TabsContent>

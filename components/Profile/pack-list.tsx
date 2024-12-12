@@ -28,9 +28,10 @@ export interface PackResponse {
 interface PackListProps {
   type: 'likes' | 'created'
   id: string
+  canEdit?: boolean
 }
 
-export function PackList({ type, id }: PackListProps) {
+export function PackList({ type, id, canEdit }: PackListProps) {
   const [packs, setPacks] = useState<PackResponse['data']>([])
   const [loading, setLoading] = useState(true)
 
@@ -73,7 +74,7 @@ export function PackList({ type, id }: PackListProps) {
 
   const renderPacks = (
     packs: PackResponse['data'],
-    style: 'default' | 'created' | 'denied'
+    style: 'default' | 'created' | 'pending' | 'denied'
   ) => (
     <>
       {packs.length > 0 ?
@@ -93,6 +94,7 @@ export function PackList({ type, id }: PackListProps) {
               style={style}
               language={pack.language}
               tags={pack.tags}
+              canEdit={canEdit}
             />
           ))}
         </div>
@@ -126,7 +128,7 @@ export function PackList({ type, id }: PackListProps) {
           {groupedPacks.approved.length > 0 && (
             <>
               <h2 className="text-xl font-semibold mt-8 mb-4">Created Packs</h2>
-              {renderPacks(groupedPacks.approved, 'default')}
+              {renderPacks(groupedPacks.approved, 'created')}
             </>
           )}
           {groupedPacks.denied.length > 0 && (
@@ -138,7 +140,7 @@ export function PackList({ type, id }: PackListProps) {
           {groupedPacks.pending.length > 0 && (
             <>
               <h2 className="text-xl font-semibold mt-8 mb-4">Pending Packs</h2>
-              {renderPacks(groupedPacks.pending, 'created')}
+              {renderPacks(groupedPacks.pending, 'pending')}
             </>
           )}
         </>
