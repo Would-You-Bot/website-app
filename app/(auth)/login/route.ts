@@ -94,6 +94,7 @@ export async function GET(req: NextRequest) {
     
     // Construct the final redirect URL using the current request's origin
     const baseUrl = req.nextUrl.origin
+    console.log("baseUrl: ", baseUrl)
     const finalRedirectUrl = new URL(redirectTo, baseUrl)
     
     return NextResponse.redirect(finalRedirectUrl)
