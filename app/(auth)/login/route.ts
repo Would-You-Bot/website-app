@@ -10,10 +10,6 @@ import Stripe from 'stripe'
 import { z } from 'zod'
 
 // Environment variables validation
-let PAGE_URL = process.env.NEXT_PUBLIC_PAGE_URL
-if (!process.env.NEXT_PUBLIC_PAGE_URL) {
-  PAGE_URL = process.env.NEXT_PUBLIC_API_URL
-}
 
 const _queryParamsSchema = z.object({
   code: z.string().nullable(),
@@ -22,6 +18,10 @@ const _queryParamsSchema = z.object({
 })
 
 export async function GET(req: NextRequest) {
+  let PAGE_URL = process.env.NEXT_PUBLIC_PAGE_URL
+  if (!process.env.NEXT_PUBLIC_PAGE_URL) {
+    PAGE_URL = req.nextUrl.origin
+  }
   try {
     const cookieJar = await cookies()
     const {
@@ -44,7 +44,7 @@ export async function GET(req: NextRequest) {
         // Store the intended redirect URL in a cookie
         const finalRedirect = redirectUrl ?? '/'
         setSecureHttpOnlyCookie('OAUTH_REDIRECT', finalRedirect)
-        
+
         // Create authorization URL with proper redirect URI
         const oauthRedirect = await discordOAuthClient.createAuthorizationURL()
         return NextResponse.redirect(oauthRedirect.href)
@@ -88,13 +88,13 @@ export async function GET(req: NextRequest) {
 
     // Get the stored redirect URL or fall back to homepage
     const redirectTo = cookieJar.get('OAUTH_REDIRECT')?.value ?? '/'
-    
+
     // Clear the redirect cookie since we've used it
     cookieJar.delete('OAUTH_REDIRECT')
-    
+
     // Use NEXT_PUBLIC_PAGE_URL for the final redirect
     const finalRedirectUrl = new URL(redirectTo, PAGE_URL)
-    
+
     return NextResponse.redirect(finalRedirectUrl)
   } catch (error) {
     console.error('OAuth flow error:', error)
