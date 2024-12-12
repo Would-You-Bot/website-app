@@ -1,6 +1,17 @@
 'use client'
 
 import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger
+} from '@/components/ui/alert-dialog'
+import {
   Card,
   CardContent,
   CardDescription,
@@ -8,8 +19,10 @@ import {
   CardHeader,
   CardTitle
 } from '@/components/ui/card'
-import { Flame, Heart, Edit, RefreshCw } from 'lucide-react'
+import { Flame, Heart, Edit, RefreshCw, Trash2 } from 'lucide-react'
+import { getAuthTokenOrNull } from '@/helpers/oauth/helpers'
 import { QuestionPackDetails } from './QuestionPackDetails'
+import { toast } from '@/components/ui/use-toast'
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
@@ -27,7 +40,8 @@ export interface QuestionPackProps {
   likes: string
   userLiked: boolean
   questions: number
-  style?: 'default' | 'created' | 'denied'
+  style?: 'default' | 'created' | 'denied' | 'pending'
+  canEdit?: boolean
 }
 
 export default function QuestionPack({
@@ -40,6 +54,7 @@ export default function QuestionPack({
   likes: initialLikes,
   userLiked: initialUserLiked,
   questions,
+  canEdit = false,
   style = 'default'
 }: { userId: string | null } & QuestionPackProps) {
   const [likes, setLikes] = useState<number>(parseInt(initialLikes, 10))
@@ -78,6 +93,33 @@ export default function QuestionPack({
     }
   }
 
+  const deletePack = async () => {
+    if (!userId) {
+      return
+    }
+
+    try {
+      const response = await fetch(`/api/packs/${id}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer something`
+        }
+      })
+
+      if (!response.ok) {
+        throw new Error(`Error: ${response.statusText}`)
+      }
+      toast({
+        title: 'Deleted',
+        description: 'Pack deleted successfully'
+      })
+
+      router.refresh()
+    } catch (error) {
+      console.error('Error deleting pack:', error)
+    }
+  }
+
   return (
     <div
       className={cn('p-[3px]', {
@@ -109,7 +151,7 @@ export default function QuestionPack({
           </CardContent>
         </div>
 
-        <CardFooter className="grid grid-cols-2 gap-4 lg:gap-10">
+        <CardFooter className="grid grid-cols-2 gap-y-4 gap-x-4 lg:gap-x-10">
           {style === 'default' && (
             <>
               <Button
@@ -142,19 +184,45 @@ export default function QuestionPack({
             </>
           )}
 
-          {style === 'created' && (
-            <Button
-              variant="secondary"
-              asChild
-            >
-              <Link
-                href={`/packs/edit/${id}`}
-                className="w-full col-span-2 dark:bg-[hsl(0,0%,6%)]"
+          {style === 'created' && canEdit && (
+            <>
+              <Button
+                variant="outline"
+                asChild
               >
-                <Edit className="mr-2 h-4 w-4 shrink-0" />
-                Edit
-              </Link>
-            </Button>
+                <Link
+                  href={`/packs/edit/${id}`}
+                  className="w-full"
+                >
+                  <Edit className="mr-2 h-4 w-4 shrink-0" />
+                  Edit
+                </Link>
+              </Button>
+
+              <QuestionPackDetails
+                id={id}
+                type={type}
+              />
+
+              <DeleteConfirmation onConfirm={deletePack} />
+            </>
+          )}
+
+          {style === 'pending' && (
+            <>
+              <Button
+                variant="outline"
+                asChild
+              >
+                <Link
+                  href={`/packs/edit/${id}`}
+                  className="w-full col-span-2"
+                >
+                  <Edit className="mr-2 h-4 w-4 shrink-0" />
+                  Edit
+                </Link>
+              </Button>
+            </>
           )}
 
           {style === 'denied' && (
@@ -179,5 +247,41 @@ export default function QuestionPack({
         </CardFooter>
       </Card>
     </div>
+  )
+}
+
+const DeleteConfirmation = ({ onConfirm }: { onConfirm: () => void }) => {
+  return (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button variant="destructive"
+          className='bg-red-500 hover:bg-red-600 text-white dark:bg-red-500 dark:hover:bg-red-600 col-span-2'
+        >
+          <Trash2 className="mr-2 h-4 w-4 shrink-0" />
+          Delete
+        </Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+          <AlertDialogDescription>
+            This action cannot be undone. This will permanently delete this
+            question pack and remove it&apos;s data from our servers.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction asChild>
+            <Button
+              variant="destructive"
+              onClick={() => onConfirm()}
+              className='bg-red-500 hover:bg-red-600 text-white dark:bg-red-500 dark:hover:bg-red-600'
+            >
+              Continue
+            </Button>
+          </AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   )
 }
