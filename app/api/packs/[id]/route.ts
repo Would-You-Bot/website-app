@@ -88,8 +88,6 @@ export async function PATCH(
   const pack = await prisma.questionPack.findFirst({
     where: {
       id: id,
-      pending: false,
-      denied: false
     },
     select: {
       id: true,

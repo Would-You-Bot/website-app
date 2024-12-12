@@ -15,6 +15,9 @@ const getPackData = async (id: string) => {
       headers: {
         'Content-Type': 'application/json',
         Authorization: token?.value ?? 'should not be here'
+      },
+      next: {
+        revalidate: 0
       }
     }
   )
