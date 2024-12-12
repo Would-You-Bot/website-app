@@ -9,6 +9,12 @@ import { prisma } from '@/lib/prisma'
 import Stripe from 'stripe'
 import { z } from 'zod'
 
+// Environment variables validation
+const DISCORD_REDIRECT_URI = process.env.DISCORD_REDIRECT_URI
+if (!DISCORD_REDIRECT_URI) {
+  throw new Error('DISCORD_REDIRECT_URI environment variable is required')
+}
+
 const _queryParamsSchema = z.object({
   code: z.string().nullable(),
   error: z.string().nullable(),
@@ -35,7 +41,11 @@ export async function GET(req: NextRequest) {
           { status: 400 }
         )
       } else {
-        setSecureHttpOnlyCookie('OAUTH_REDIRECT', redirectUrl ?? '/')
+        // Store the intended redirect URL in a cookie
+        const finalRedirect = redirectUrl ?? '/'
+        setSecureHttpOnlyCookie('OAUTH_REDIRECT', finalRedirect)
+        
+        // Create authorization URL with proper redirect URI
         const oauthRedirect = await discordOAuthClient.createAuthorizationURL()
         return NextResponse.redirect(oauthRedirect.href)
       }
@@ -76,8 +86,17 @@ export async function GET(req: NextRequest) {
         new Date().toUTCString()
     )
 
+    // Get the stored redirect URL or fall back to homepage
     const redirectTo = cookieJar.get('OAUTH_REDIRECT')?.value ?? '/'
-    return NextResponse.redirect(new URL(redirectTo, req.url))
+    
+    // Clear the redirect cookie since we've used it
+    cookieJar.delete('OAUTH_REDIRECT')
+    
+    // Construct the final redirect URL using the current request's origin
+    const baseUrl = req.nextUrl.origin
+    const finalRedirectUrl = new URL(redirectTo, baseUrl)
+    
+    return NextResponse.redirect(finalRedirectUrl)
   } catch (error) {
     console.error('OAuth flow error:', error)
     return NextResponse.json(
@@ -112,8 +131,6 @@ async function exchangeAuthorizationCode(code: string) {
     const user = await userResponse.json()
     const { id, username, avatar, global_name, banner } = user
 
-    // Create a user account in the prisma database
-    // if it doesn't already exist
     await prisma.user.upsert({
       where: { userID: id },
       update: {
