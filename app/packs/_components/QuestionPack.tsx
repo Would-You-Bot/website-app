@@ -254,8 +254,9 @@ const DeleteConfirmation = ({ onConfirm }: { onConfirm: () => void }) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant="destructive"
-          className='bg-red-500 hover:bg-red-600 text-white dark:bg-red-500 dark:hover:bg-red-600 col-span-2'
+        <Button
+          variant="destructive"
+          className="bg-red-500 hover:bg-red-600 text-white dark:bg-red-500 dark:hover:bg-red-600 col-span-2"
         >
           <Trash2 className="mr-2 h-4 w-4 shrink-0" />
           Delete
@@ -275,7 +276,7 @@ const DeleteConfirmation = ({ onConfirm }: { onConfirm: () => void }) => {
             <Button
               variant="destructive"
               onClick={() => onConfirm()}
-              className='bg-red-500 hover:bg-red-600 text-white dark:bg-red-500 dark:hover:bg-red-600'
+              className="bg-red-500 hover:bg-red-600 text-white dark:bg-red-500 dark:hover:bg-red-600"
             >
               Continue
             </Button>

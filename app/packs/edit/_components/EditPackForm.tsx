@@ -93,7 +93,7 @@ function EditPackForm({ data, userId, packId }: EditPackFormProps) {
       if (res.ok) {
         toast({
           title: 'Success!',
-          description: resubmit ? 'Pack resubmitted!' : 'Pack updated!',
+          description: resubmit ? 'Pack resubmitted!' : 'Pack updated!'
         })
         router.push(`/profile/${userId}`)
       } else {
@@ -103,7 +103,7 @@ function EditPackForm({ data, userId, packId }: EditPackFormProps) {
       console.error(error)
       toast({
         title: 'Oops',
-        description: `Something went wrong while ${resubmit ? "resubmitting" : "updating"} your pack!`,
+        description: `Something went wrong while ${resubmit ? 'resubmitting' : 'updating'} your pack!`,
         variant: 'destructive'
       })
     }

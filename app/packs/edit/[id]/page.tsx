@@ -38,7 +38,7 @@ async function page({ params, searchParams }: PageProps) {
   const { resubmit } = searchParams
 
   const auth = await getAuthTokenOrNull()
-  
+
   const userId = auth?.payload?.id
 
   const canEdit = userId === id
