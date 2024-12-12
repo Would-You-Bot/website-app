@@ -10,9 +10,9 @@ import Stripe from 'stripe'
 import { z } from 'zod'
 
 // Environment variables validation
-const DISCORD_REDIRECT_URI = process.env.DISCORD_REDIRECT_URI
-if (!DISCORD_REDIRECT_URI) {
-  throw new Error('DISCORD_REDIRECT_URI environment variable is required')
+const API_URL = process.env.NEXT_PUBLIC_API_URL
+if (!API_URL) {
+  throw new Error('NEXT_PUBLIC_API_URL environment variable is required')
 }
 
 const _queryParamsSchema = z.object({
@@ -92,10 +92,8 @@ export async function GET(req: NextRequest) {
     // Clear the redirect cookie since we've used it
     cookieJar.delete('OAUTH_REDIRECT')
     
-    // Construct the final redirect URL using the current request's origin
-    const baseUrl = req.nextUrl.origin
-    console.log("baseUrl: ", baseUrl)
-    const finalRedirectUrl = new URL(redirectTo, baseUrl)
+    // Use NEXT_PUBLIC_API_URL for the final redirect
+    const finalRedirectUrl = new URL(redirectTo, API_URL)
     
     return NextResponse.redirect(finalRedirectUrl)
   } catch (error) {
