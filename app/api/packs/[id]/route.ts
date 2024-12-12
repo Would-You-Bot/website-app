@@ -13,13 +13,12 @@ export async function GET(
   }
 ) {
   const id = validator.escape((await params).id)
+  const auth = await getAuthTokenOrNull()
 
   const question = await prisma.questionPack
     .findFirst({
       where: {
         id: id,
-        pending: false,
-        denied: false
       },
       select: {
         type: true,
@@ -55,18 +54,23 @@ export async function GET(
       { status: 404 }
     )
   }
-
-  const auth = await getAuthTokenOrNull()
-
   // @ts-expect-error
+  const isAuthor = question.authorId === auth?.payload.id;
+  const pending = isAuthor;
+  const denied = isAuthor;
+  
   return NextResponse.json(
     {
       data: question,
-      likes: question.likes.lenght,
-      userLiked: question.likes.includes(auth?.payload.id || '')
+      pending,
+      denied,
+      // @ts-expect-error
+      likes: question.likes.length,
+      // @ts-expect-error
+      userLiked: question.likes.includes(auth?.payload.id || ''),
     },
     { status: 200 }
-  )
+  );
 }
 
 export async function PATCH(

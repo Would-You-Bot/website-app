@@ -101,9 +101,6 @@ export default function QuestionPack({
     try {
       const response = await fetch(`/api/packs/${id}`, {
         method: 'DELETE',
-        headers: {
-          Authorization: `Bearer something`
-        }
       })
 
       if (!response.ok) {
