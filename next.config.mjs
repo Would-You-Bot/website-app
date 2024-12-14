@@ -20,6 +20,14 @@ const nextConfig = {
             key: 'Strict-Transport-Security',
             value: 'max-age=31536000; includeSubDomains; preload', 
           },
+          {
+            key: 'Content-Security-Policy',
+            value: "frame-ancestors 'self' https://top.gg https://bottom.gg;", // Allow only your site and top.gg to frame your site
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'SAMEORIGIN', // Fallback for older browsers
+          },
         ],
       },
     ];
