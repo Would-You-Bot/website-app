@@ -78,8 +78,6 @@ export async function GET(req: NextRequest) {
       path: '/',
       maxAge: 24 * 60 * 60,
       httpOnly: process.env.NODE_ENV === 'production',
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict'
     })
 
     console.log(
