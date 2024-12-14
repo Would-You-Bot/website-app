@@ -77,7 +77,7 @@ export async function GET(req: NextRequest) {
     cookieJar.set('ID_TOKEN', idToken, {
       path: '/',
       maxAge: 24 * 60 * 60,
-      httpOnly: process.env.NODE_ENV === 'production',
+      sameSite: 'strict'
     })
 
     console.log(
