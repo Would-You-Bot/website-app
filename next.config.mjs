@@ -22,11 +22,11 @@ const nextConfig = {
           },
           {
             key: 'Content-Security-Policy',
-            value: "frame-ancestors 'self' https://top.gg https://bottom.gg;", // Allow only your site and top.gg to frame your site
+            value: "frame-ancestors 'self' https://top.gg https://bottom.gg;",
           },
           {
             key: 'X-Frame-Options',
-            value: 'SAMEORIGIN', // Fallback for older browsers
+            value: 'SAMEORIGIN',
           },
         ],
       },
