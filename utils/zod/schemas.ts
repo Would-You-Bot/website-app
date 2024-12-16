@@ -101,7 +101,7 @@ export const packSchema = z.object({
       })
     )
     .min(1, 'At least one question is required')
-    .max(150, 'You can only have 100 questions in a pack')
+    .max(100, 'You can only have 100 questions in a pack')
 })
 export type PackData = z.infer<typeof packSchema>
 
@@ -109,7 +109,7 @@ export const questionSchema = z.object({
   question: z
     .string()
     .min(10, 'Make sure your question is atleast 10 characters long')
-    .max(100, 'Make sure your question is only 100 characters long'),
+    .max(300, 'Make sure your question is only 100 characters long'),
   type: z.enum(
     [
       'truth',
