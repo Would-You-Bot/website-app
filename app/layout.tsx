@@ -1,12 +1,11 @@
-import { Toaster } from '@/components/ui/toaster'
-import { getIdToken } from '@/helpers/oauth'
-import { ThemeProvider } from 'next-themes'
+import Alert from '@/components/Alert'
 import Footer from '@/components/Footer'
 import Navbar from '@/components/Navbar'
+import { getIdToken } from '@/helpers/oauth'
 import { Inter } from 'next/font/google'
-import Alert from '@/components/Alert'
 import React from 'react'
 import './globals.css'
+import Providers from './providers'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function RootLayout({
@@ -24,12 +23,7 @@ export default function RootLayout({
           data-domain="wouldyoubot.gg"
           src="https://stats.wouldyoubot.gg/js/script.js"
         ></script>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
+        <Providers>
           <Alert
             href="/premium"
             className="bg-brand-customPrimary text-white"
@@ -42,8 +36,7 @@ export default function RootLayout({
             {children}
             <Footer />
           </div>
-          <Toaster />
-        </ThemeProvider>
+        </Providers>
       </body>
     </html>
   )
