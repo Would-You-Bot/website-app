@@ -29,6 +29,11 @@ export async function GET(
   const userData = await prisma.user.findFirst({
     where: {
       userID: id
+    },
+    select: {
+      userID: true,
+      profilePrivacy: true,
+      likedPackPrivacy: true
     }
   })
 
