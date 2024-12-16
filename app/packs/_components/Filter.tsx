@@ -85,7 +85,7 @@ function Filter() {
             className="space-x-2 flex-1"
           >
             <Plus size={16} />
-            <span>Create Packs</span>
+            <span>Create Pack</span>
           </Link>
         </Button>
       </div>
