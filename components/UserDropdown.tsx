@@ -1,3 +1,5 @@
+"use client";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -15,6 +17,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import type { IdTokenJWT } from '@/helpers/oauth/types'
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation';
 
 interface UserDropdownProps {
   idToken: IdTokenJWT | null
@@ -26,6 +29,7 @@ export default function UserDropdown({
   handleIsOpen
 }: UserDropdownProps) {
   const user = idToken?.payload
+  const currentPathname = usePathname()
 
   return (
     <DropdownMenu>
@@ -70,7 +74,7 @@ export default function UserDropdown({
         </Link>
         <DropdownMenuSeparator />
         <a
-          href="/logout"
+          href={`/logout?redirect=${encodeURIComponent(currentPathname)}`}
           className="w-full text-[#F00505]"
         >
           <DropdownMenuItem className="flex w-full items-center gap-2">
