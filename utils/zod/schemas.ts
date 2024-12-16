@@ -109,7 +109,7 @@ export const questionSchema = z.object({
   question: z
     .string()
     .min(10, 'Make sure your question is atleast 10 characters long')
-    .max(300, 'Make sure your question is only 100 characters long'),
+    .max(300, 'Make sure your question is only 300 characters long'),
   type: z.enum(
     [
       'truth',
