@@ -11,7 +11,6 @@ import {
   LayoutDashboardIcon,
   LogOut,
   UserRound,
-  type LucideProps
 } from 'lucide-react'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import type { IdTokenJWT } from '@/helpers/oauth/types'
