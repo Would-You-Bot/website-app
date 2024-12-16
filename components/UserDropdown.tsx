@@ -1,3 +1,5 @@
+"use client";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -10,6 +12,7 @@ import { IdTokenJWT } from '@/helpers/oauth/types'
 import { LogOut } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation';
 
 interface UserDropdownProps {
   idToken: IdTokenJWT | null
@@ -18,6 +21,7 @@ interface UserDropdownProps {
 
 export default function UserDropdown({ idToken, items }: UserDropdownProps) {
   const user = idToken?.payload
+  const currentPathname = usePathname()
 
   return (
     <DropdownMenu>
@@ -53,7 +57,7 @@ export default function UserDropdown({ idToken, items }: UserDropdownProps) {
         ))}
         <DropdownMenuSeparator />
         <a
-          href="/logout"
+          href={`/logout?redirect=${encodeURIComponent(currentPathname)}`}
           className="w-full text-[#F00505]"
         >
           <DropdownMenuItem className="flex w-full items-center gap-2">
