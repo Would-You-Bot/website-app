@@ -152,6 +152,7 @@ function PackForm() {
 
   // DELETE a specific question
   const deleteQuestion = (Qindex: number) => {
+    setIndexToEdit(null)
     const updatedQuestions = addedQuestions.filter(
       (_, index) => index !== Qindex
     )
