@@ -314,13 +314,13 @@ function PackForm() {
                   maxLength={50}
                   disabled={selectedTags.length >= 10}
                 />
-                <div className="flex gap-2 items-center">
+                <div className="flex gap-2 items-center flex-wrap">
                   {selectedTags.map((tag) => (
                     <button
                       type="button"
                       key={tag}
                       onClick={() => deleteTag(tag)}
-                      className="flex items-center gap-1 px-2 py-1 mr-1 text-xs rounded-lg dark:bg-[#1D1D1D] bg-background-light cursor-pointer"
+                      className="flex items-center gap-1 px-2 py-1 mr-1 text-left break-all text-xs rounded-lg dark:bg-[#1D1D1D] bg-background-light cursor-pointer"
                     >
                       <span>
                         <XCircle size={14} />
