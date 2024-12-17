@@ -217,6 +217,8 @@ function QuestionModal({
             onChange={(e) => handleQuestionInput(e.target.value)}
             className="w-full p-2 dark:bg-[#1D1D1D] rounded-md resize-none"
             placeholder="Question Text"
+            minLength={10}
+            maxLength={300}
           />
           {questionError && (
             <p className="px-1 text-xs text-brand-red-100">{questionError}</p>
