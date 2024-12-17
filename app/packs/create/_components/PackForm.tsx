@@ -279,6 +279,8 @@ function PackForm() {
                   id="name"
                   {...register('name')}
                   placeholder="My awesome pack"
+                  minLength={4}
+                  maxLength={100}
                 />
                 {errors.name && (
                   <p className="px-1 text-xs text-brand-red-100">
@@ -294,6 +296,8 @@ function PackForm() {
                   rows={6}
                   {...register('description')}
                   placeholder="My awesome pack description"
+                  minLength={10}
+                  maxLength={500}
                 />
                 {errors.description && (
                   <p className="px-1 text-xs text-brand-red-100">
@@ -310,15 +314,17 @@ function PackForm() {
                   onChange={(e) => setTagInputValue(e.target.value)}
                   placeholder="Add some cool tags"
                   onKeyDown={handleKeyDown}
+                  minLength={4}
+                  maxLength={50}
                   disabled={selectedTags.length >= 10}
                 />
-                <div className="flex gap-2 items-center">
+                <div className="flex gap-2 items-center flex-wrap">
                   {selectedTags.map((tag) => (
                     <button
                       type="button"
                       key={tag}
                       onClick={() => deleteTag(tag)}
-                      className="flex items-center gap-1 px-2 py-1 mr-1 text-xs rounded-lg dark:bg-[#1D1D1D] bg-background-light cursor-pointer"
+                      className="flex items-center gap-1 px-2 py-1 mr-1 text-left break-all text-xs rounded-lg dark:bg-[#1D1D1D] bg-background-light cursor-pointer"
                     >
                       <span>
                         <XCircle size={14} />

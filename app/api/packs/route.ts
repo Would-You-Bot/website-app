@@ -89,7 +89,8 @@ export async function GET(request: NextRequest) {
       totalPages:
         Math.floor(totalPage / PAGE_SIZE) === 0 ?
           1
-        : Math.floor(totalPage / PAGE_SIZE)
+        : Math.floor(totalPage / PAGE_SIZE),
+      success: true
     },
     { status: 200 }
   )
