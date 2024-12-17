@@ -100,7 +100,7 @@ export default function QuestionPack({
 
     try {
       const response = await fetch(`/api/packs/${id}`, {
-        method: 'DELETE',
+        method: 'DELETE'
       })
 
       if (!response.ok) {
@@ -126,8 +126,10 @@ export default function QuestionPack({
       <Card className="border-none h-full flex flex-col justify-between">
         <div>
           <CardHeader className="relative">
-            <CardTitle>{name}</CardTitle>
-            <CardDescription>{description}</CardDescription>
+            <CardTitle className="line-clamp-4">{name}</CardTitle>
+            <CardDescription className="line-clamp-4">
+              {description}
+            </CardDescription>
             {featured && (
               <div className="flex uppercase tracking-wider items-center w-fit gap-1 px-2 py-1 rounded-md text-white popular-badge select-none absolute right-6 top-5">
                 <Flame className="size-4 fill-white" />
