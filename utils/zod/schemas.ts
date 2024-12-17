@@ -3,7 +3,7 @@ import z from 'zod'
 export const userSchema = z.object({
   description: z
     .string()
-    .min(10, 'Make sure your description is atleast 10 characters long')
+    .min(10, 'Make sure your description is at least 10 characters long')
     .max(150, 'Make sure your description is only 150 characters long')
     .optional(),
   profilePrivacy: z.boolean().optional(),
@@ -14,7 +14,7 @@ export const userSchema = z.object({
 export const questionSchema = z.object({
   question: z
     .string()
-    .min(10, 'Make sure your question is atleast 10 characters long')
+    .min(10, 'Make sure your question is at least 10 characters long')
     .max(300, 'Make sure your question is only 300 characters long'),
   type: z.enum(
     [
@@ -35,17 +35,17 @@ export const questionSchema = z.object({
 export const editedPackSchema = z.object({
   name: z
     .string()
-    .min(4, 'Make sure your packs name is atleast 4 characters long')
+    .min(4, 'Make sure your packs name is at least 4 characters long')
     .max(100, 'Make sure your packs name is only 100 characters long'),
   description: z
     .string()
-    .min(10, 'Make sure your packs description is atleast 10 characters long')
+    .min(10, 'Make sure your packs description is at least 10 characters long')
     .max(500, 'Make sure your packs description is only 500 characters long'),
   tags: z
     .array(
       z
         .string()
-        .min(4, 'Make sure your tag is atleast 4 characters long')
+        .min(4, 'Make sure your tag is at least 4 characters long')
         .max(50, 'Make sure your tag is only 50 characters long')
     )
     .min(1, 'At least one tag is required')
@@ -78,11 +78,11 @@ export const packSchema = z.object({
   }),
   name: z
     .string()
-    .min(4, 'Make sure your packs name is atleast 4 characters long')
+    .min(4, 'Make sure your packs name is at least 4 characters long')
     .max(100, 'Make sure your packs name is only 100 characters long'),
   description: z
     .string()
-    .min(10, 'Make sure your packs description is atleast 10 characters long')
+    .min(10, 'Make sure your packs description is at least 10 characters long')
     .max(500, 'Make sure your packs description is only 500 characters long'),
   tags: z.array(z.string()).min(1, 'At least one tag is required').max(10),
   questions: z
