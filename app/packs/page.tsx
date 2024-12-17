@@ -55,6 +55,7 @@ export interface PackResponse {
     questions: number
   }[]
   totalPages: number
+  success: boolean
 }
 
 const getQuestionPacks = async (page: string, type: string) => {
@@ -97,7 +98,7 @@ async function page({
       </h1>
       <div className="space-y-10 lg:space-y-14 mb-10">
         <Filter />
-        {responseData ?
+        {responseData.success && responseData.data.length > 0 ?
           <section className="min-h-96">
             <QuestionPackList
               packList={responseData.data.sort(
