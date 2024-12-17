@@ -279,6 +279,8 @@ function PackForm() {
                   id="name"
                   {...register('name')}
                   placeholder="My awesome pack"
+                  minLength={4}
+                  maxLength={100}
                 />
                 {errors.name && (
                   <p className="px-1 text-xs text-brand-red-100">
@@ -294,6 +296,8 @@ function PackForm() {
                   rows={6}
                   {...register('description')}
                   placeholder="My awesome pack description"
+                  minLength={10}
+                  maxLength={500}
                 />
                 {errors.description && (
                   <p className="px-1 text-xs text-brand-red-100">
