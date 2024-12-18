@@ -82,11 +82,22 @@ async function page({
 }) {
   const type = searchParams.type ? (searchParams.type as string) : 'all'
   const page = searchParams.page ? (searchParams.page as string) : '1'
+  const q = searchParams.q ? (searchParams.q as string) : ''
 
   const auth = await getAuthTokenOrNull()
   const userId = auth?.payload?.id || null
 
   const responseData = await getQuestionPacks(page, type)
+  const filteredPacks =
+    responseData.success && responseData.data.length > 0 ?
+      responseData.data
+        .filter(
+          (pack) =>
+            pack.name.toLowerCase().includes(q.toLowerCase()) ||
+            pack.description.toLowerCase().includes(q.toLowerCase())
+        )
+        .sort((a, b) => Number(b.featured) - Number(a.featured))
+    : []
 
   return (
     <Container className="pt-8 lg:pt-10 space-y-8 min-h-[calc(100vh-112px)]">
@@ -98,12 +109,10 @@ async function page({
       </h1>
       <div className="space-y-10 lg:space-y-14 mb-10">
         <Filter />
-        {responseData.success && responseData.data.length > 0 ?
+        {filteredPacks.length > 0 ?
           <section className="min-h-96">
             <QuestionPackList
-              packList={responseData.data.sort(
-                (a, b) => Number(b.featured) - Number(a.featured)
-              )}
+              packList={filteredPacks}
               userId={userId}
             />
           </section>

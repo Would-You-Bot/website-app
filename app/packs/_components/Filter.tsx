@@ -4,6 +4,7 @@ import { Hash, Plus, Search } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
+import { useState } from 'react'
 import Link from 'next/link'
 
 const packTypes = [
@@ -50,6 +51,12 @@ function Filter() {
     router.push('?' + params.toString(), { scroll: false })
   }
 
+  function setSearch(q: string) {
+    const params = new URLSearchParams(searchParams.toString())
+    params.set('q', q)
+    router.push('?' + params.toString(), { scroll: false })
+  }
+
   function resetFilter() {
     const params = new URLSearchParams(searchParams.toString())
     params.delete('type')
@@ -72,6 +79,7 @@ function Filter() {
             id="search"
             name="search"
             placeholder="Search..."
+            onChange={(e) => setSearch(e.target.value)}
             className="pl-10 pr-4 lg:h-12 dark:bg-[#1D1D1D]"
           />
         </div>
