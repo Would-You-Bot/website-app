@@ -106,6 +106,7 @@ async function page({
                 (a, b) => Number(b.featured) - Number(a.featured)
               )}
               userId={userId}
+              isLoggedIn={!!auth}
             />
           </section>
         : <section className="min-h-96 grid place-content-center">
