@@ -82,7 +82,7 @@ async function page({
 }) {
   const type = searchParams.type ? (searchParams.type as string) : 'all'
   const page = searchParams.page ? (searchParams.page as string) : '1'
-  const query = searchParams.q ? (searchParams.q as string) : ''
+  const query = searchParams.query ? (searchParams.query as string) : ''
 
   const auth = await getAuthTokenOrNull()
   const userId = auth?.payload?.id || null

@@ -53,7 +53,7 @@ function Filter() {
 
   function setSearch(q: string) {
     const params = new URLSearchParams(searchParams.toString())
-    params.set('q', q)
+    params.set('query', q)
     router.push('?' + params.toString(), { scroll: false })
   }
 
