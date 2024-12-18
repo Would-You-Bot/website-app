@@ -8,6 +8,12 @@ import {
   DialogTitle,
   DialogTrigger
 } from '@/components/ui/dialog'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger
+} from '@/components/ui/tooltip'
 import { Drawer, DrawerContent, DrawerTrigger } from '@/components/ui/drawer'
 import { Avatar, AvatarFallback, AvatarImage } from '@radix-ui/react-avatar'
 import { CopyIcon, ExternalLink, Search, XIcon } from 'lucide-react'
@@ -101,41 +107,38 @@ const PackDetails = ({ id, type }: { id: string; type: string }) => {
         </div>
         <div className="flex flex-col gap-1">
           <h3 className="text-sm text-muted-foreground">Type</h3>
-          <p className='text-sm'>{packToShow.type}</p>
+          <p className="text-sm">{packToShow.type}</p>
         </div>
       </section>
 
       <section className="grid flex-1 gap-2 my-1">
-        <label
-          htmlFor="command"
-          className="text-sm capitalize"
-        >
-          use the pack
-        </label>
-        <div className="w-full relative">
-          <Input
-            id="command"
-            defaultValue={`/import ${type} ${id}`}
-            readOnly
-            className="focus:bg-brand-blue-100/10 focus:text-brand-blue-100 pr-10 text-sm text-muted-foreground"
-          />
-          <Button
-            type="submit"
-            size="sm"
-            variant="ghost"
-            onClick={copyCommand}
-            className="p-2 h-fit text-brand-blue-100 hover:text-brand-blue-200 absolute right-2 top-1"
-          >
-            <span className="sr-only">Copy command</span>
-            <CopyIcon className="h-4 w-4" />
-          </Button>
-        </div>
+        <label className="text-sm capitalize">use the pack</label>
+        <TooltipProvider delayDuration={0}>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <div
+                className="w-full relative cursor-pointer group"
+                onClick={copyCommand}
+              >
+                <Input
+                  id="command"
+                  defaultValue={`/import ${type} ${id}`}
+                  readOnly
+                  className="group-hover:bg-brand-blue-100/10 group-hover:text-brand-blue-100 focus:bg-brand-blue-100/10 focus:text-brand-blue-100 pr-10 text-sm text-muted-foreground cursor-pointer"
+                />
+                <p className="p-2 h-fit text-brand-blue-100 absolute right-2 top-1">
+                  <span className="sr-only">Copy command</span>
+                  <CopyIcon className="h-4 w-4" />
+                </p>
+              </div>
+            </TooltipTrigger>
+            <TooltipContent>Copy Command</TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       </section>
 
       <section className="max-md:mt-6">
-        <p className="my-2 text-sm capitalize">
-          look inside
-        </p>
+        <p className="my-2 text-sm capitalize">look inside</p>
         <div className="border rounded-xl overflow-hidden">
           <div className="dark:bg-[#1D1D1D] bg-background-light flex items-center px-4 py-2 gap-4 border-b">
             <div className="relative w-full md:w-3/4">
