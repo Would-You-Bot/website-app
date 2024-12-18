@@ -6,10 +6,12 @@ import React from 'react'
 
 function QuestionPackList({
   packList,
-  userId
+  userId,
+  isLoggedIn
 }: {
   packList: QuestionPackProps[]
   userId: string | null
+  isLoggedIn: boolean
 }) {
   const searchParams = useSearchParams()
   const type = searchParams.get('type')
@@ -22,6 +24,7 @@ function QuestionPackList({
             {...question}
             userId={userId}
             style="default"
+            isLoggedIn={isLoggedIn}
           />
         </React.Fragment>
       ))}

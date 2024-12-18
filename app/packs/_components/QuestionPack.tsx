@@ -20,15 +20,15 @@ import {
   CardTitle
 } from '@/components/ui/card'
 import { Flame, Heart, Edit, RefreshCw, Trash2 } from 'lucide-react'
-import { getAuthTokenOrNull } from '@/helpers/oauth/helpers'
 import { QuestionPackDetails } from './QuestionPackDetails'
 import { toast } from '@/components/ui/use-toast'
 import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation'
+import { packMap } from '@/types'
 import { cn } from '@/lib/utils'
 import { useState } from 'react'
 import Link from 'next/link'
-import { packMap } from '@/types'
+import clsx from 'clsx'
 
 export interface QuestionPackProps {
   type: string
@@ -56,8 +56,9 @@ export default function QuestionPack({
   userLiked: initialUserLiked,
   questions,
   canEdit = false,
-  style = 'default'
-}: { userId: string | null } & QuestionPackProps) {
+  style = 'default',
+  isLoggedIn
+}: { userId: string | null; isLoggedIn: boolean } & QuestionPackProps) {
   const [likes, setLikes] = useState<number>(parseInt(initialLikes, 10))
   const [userLiked, setUserLiked] = useState<boolean>(initialUserLiked)
   const router = useRouter()
@@ -157,7 +158,10 @@ export default function QuestionPack({
               <Button
                 onClick={() => likePack(id)}
                 variant="secondary"
-                className="w-full dark:bg-[hsl(0,0%,6%)]"
+                disabled={!isLoggedIn}
+                className={clsx('w-full dark:bg-[hsl(0,0%,6%)]', {
+                  'opacity-50 cursor-not-allowed': !isLoggedIn
+                })}
               >
                 <Heart
                   className={cn(
