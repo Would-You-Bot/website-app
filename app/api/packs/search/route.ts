@@ -88,7 +88,7 @@ export async function GET(request: NextRequest) {
     const packsWithMetadata = packs.map(pack => ({
       ...pack,
       questionCount: pack.questions.length,
-      likeCount: pack.likes.length,
+      likes: pack.likes.length,
       userLiked: userId ? pack.likes.includes(userId) : false,
       questions: pack.questions.length,
     }));
