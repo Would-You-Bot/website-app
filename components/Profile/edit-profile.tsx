@@ -136,6 +136,9 @@ export function EditProfile({
                   onCheckedChange={() => onPrivacyToggle('profilePrivacy')}
                 />
               </div>
+              <p className="text-sm text-gray-500 mt-1">
+                Control who can view your profile and statistics
+              </p>
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2">
                   <MessageCircle className="w-4 h-4 text-foreground" />
@@ -152,6 +155,9 @@ export function EditProfile({
                   onCheckedChange={() => onPrivacyToggle('votePrivacy')}
                 />
               </div>
+              <p className="text-sm text-gray-500 mt-1">
+              Hide yourself from the public leaderboard and voting
+              </p>
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-2">
                   <Heart className="w-4 h-4 text-foreground" />
@@ -168,8 +174,12 @@ export function EditProfile({
                   onCheckedChange={() => onPrivacyToggle('likedPackPrivacy')}
                 />
               </div>
+              <p className="text-sm text-gray-500 mt-1">
+                Keep your liked packs collection private
+              </p>
             </div>
           </div>
+
           <Button
             className="w-full bg-brand-blue-100 hover:bg-brand-blue-100/90 text-white"
             onClick={saveUserSettings}

@@ -97,14 +97,14 @@ function GameStatSection({ title, yes, no, used, Icon }: GameStatSectionProps) {
         <div className="flex gap-2 text-sm">
           <Badge
             variant="secondary"
-            className="bg-emerald-500 text-white"
+            className="bg-emerald-500 text-white pointer-events-none"
           >
             <Icon className="w-3 h-3 mr-1" />
             {yes}
           </Badge>
           <Badge
             variant="secondary"
-            className="bg-red-500 text-white"
+            className="bg-red-500 text-white pointer-events-none"
           >
             <ThumbsDown className="w-3 h-3 mr-1" />
             {no}
@@ -136,7 +136,7 @@ function HigherLowerStats({ highscore, used }: HigherLowerStatsProps) {
         </div>
         <Badge
           variant="secondary"
-          className="bg-primary text-primary-foreground"
+          className="bg-primary text-primary-foreground pointer-events-none"
         >
           <GamepadIcon className="w-3 h-3 mr-1" />
           {used.command} plays
