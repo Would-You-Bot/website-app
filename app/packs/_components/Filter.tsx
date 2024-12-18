@@ -89,7 +89,7 @@ function Filter() {
           </Link>
         </Button>
       </div>
-      <div className="w-full overflow-x-auto pb-2 thin-scrollbar">
+      <div className="w-full overflow-x-auto py-2 thin-scrollbar">
         <div className="flex space-x-2 whitespace-nowrap">
           <button
             type="button"
