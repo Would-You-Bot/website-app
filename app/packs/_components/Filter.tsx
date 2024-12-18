@@ -9,17 +9,17 @@ import Link from 'next/link'
 const packTypes = [
   {
     id: 'qwertyuiop12',
-    label: 'Would you rather',
+    label: 'Would You Rather',
     slug: 'wouldyourather'
   },
   {
     id: 'asdfghjkl12',
-    label: 'What would you do',
+    label: 'What Would You Do',
     slug: 'whatwouldyoudo'
   },
   {
     id: 'zxcvbnm12',
-    label: 'Never have I ever',
+    label: 'Never Have I Ever',
     slug: 'neverhaveiever'
   },
   {
@@ -36,6 +36,11 @@ const packTypes = [
     id: 'jdfoenD69d',
     label: 'Topic',
     slug: 'topic'
+  },
+  {
+    id: 'djei3jD9e2',
+    label: 'Mixed',
+    slug: 'mixed'
   }
 ]
 

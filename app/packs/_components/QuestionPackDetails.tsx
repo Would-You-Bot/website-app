@@ -26,6 +26,8 @@ import { Input } from '@/components/ui/input'
 import { useState, useEffect } from 'react'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
+import { packMap } from '@/types'
+
 
 const PackDetails = ({ id, type }: { id: string; type: string }) => {
   const [packToShow, setPackToShow] = useState<PackData | null>(null)
@@ -107,7 +109,7 @@ const PackDetails = ({ id, type }: { id: string; type: string }) => {
         </div>
         <div className="flex flex-col gap-1">
           <h3 className="text-sm text-muted-foreground">Type</h3>
-          <p className="text-sm">{packToShow.type}</p>
+          <p className="text-sm">{packMap[packToShow.type]}</p>
         </div>
       </section>
 
