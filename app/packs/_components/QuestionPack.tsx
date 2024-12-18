@@ -28,6 +28,7 @@ import { useRouter } from 'next/navigation'
 import { cn } from '@/lib/utils'
 import { useState } from 'react'
 import Link from 'next/link'
+import { packMap } from '@/types'
 
 export interface QuestionPackProps {
   type: string
@@ -145,7 +146,7 @@ export default function QuestionPack({
             </div>
             <div className="flex flex-col gap-0.5">
               <h3 className="text-sm text-muted-foreground">Type</h3>
-              <p>{type}</p>
+              <p>{packMap[type]}</p>
             </div>
           </CardContent>
         </div>

@@ -58,7 +58,7 @@ export async function GET(
       denied: false
     }),
     ...(type === 'created' && { authorId: userData.userID }),
-    ...(type === 'likes' && { likes: { has: id } })
+    ...(type === 'likes' && { likes: { has: id }, pending: false, denied: false })
   }
 
   const questionsPromise = prisma.questionPack.findMany({
