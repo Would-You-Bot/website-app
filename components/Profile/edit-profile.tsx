@@ -119,64 +119,72 @@ export function EditProfile({
             <h3 className="text-lg font-semibold text-foreground">
               Privacy Settings
             </h3>
-            <div className="space-y-4 rounded-lg border p-4 bg-background">
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <User className="w-4 h-4 text-foreground" />
-                  <Label
-                    htmlFor="profile-privacy"
-                    className="text-foreground"
-                  >
-                    Profile Privacy
-                  </Label>
+            <div className="space-y-6 rounded-lg border p-4 bg-background">
+              <div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-2">
+                    <User className="w-4 h-4 text-foreground" />
+                    <Label
+                      htmlFor="profile-privacy"
+                      className="text-foreground"
+                    >
+                      Profile Privacy
+                    </Label>
+                  </div>
+                  <Switch
+                    id="profile-privacy"
+                    checked={profilePrivacy}
+                    onCheckedChange={() => onPrivacyToggle('profilePrivacy')}
+                  />
                 </div>
-                <Switch
-                  id="profile-privacy"
-                  checked={profilePrivacy}
-                  onCheckedChange={() => onPrivacyToggle('profilePrivacy')}
-                />
+                <p className="text-sm text-gray-500 mt-1">
+                  Control who can view your profile and statistics
+                </p>
               </div>
-              <p className="text-sm text-gray-500 mt-1">
-                Control who can view your profile and statistics
-              </p>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <MessageCircle className="w-4 h-4 text-foreground" />
-                  <Label
-                    htmlFor="vote-privacy"
-                    className="text-foreground"
-                  >
-                    Vote Privacy
-                  </Label>
+
+              <div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-2">
+                    <MessageCircle className="w-4 h-4 text-foreground" />
+                    <Label
+                      htmlFor="vote-privacy"
+                      className="text-foreground"
+                    >
+                      Vote Privacy
+                    </Label>
+                  </div>
+                  <Switch
+                    id="vote-privacy"
+                    checked={votePrivacy}
+                    onCheckedChange={() => onPrivacyToggle('votePrivacy')}
+                  />
                 </div>
-                <Switch
-                  id="vote-privacy"
-                  checked={votePrivacy}
-                  onCheckedChange={() => onPrivacyToggle('votePrivacy')}
-                />
+                <p className="text-sm text-gray-500 mt-1">
+                  Hide yourself from the public leaderboard and voting
+                </p>
               </div>
-              <p className="text-sm text-gray-500 mt-1">
-              Hide yourself from the public leaderboard and voting
-              </p>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <Heart className="w-4 h-4 text-foreground" />
-                  <Label
-                    htmlFor="liked-packs-privacy"
-                    className="text-foreground"
-                  >
-                    Liked Packs Privacy
-                  </Label>
+
+              <div>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-2">
+                    <Heart className="w-4 h-4 text-foreground" />
+                    <Label
+                      htmlFor="liked-packs-privacy"
+                      className="text-foreground"
+                    >
+                      Liked Packs Privacy
+                    </Label>
+                  </div>
+                  <Switch
+                    id="liked-packs-privacy"
+                    checked={likedPackPrivacy}
+                    onCheckedChange={() => onPrivacyToggle('likedPackPrivacy')}
+                  />
                 </div>
-                <Switch
-                  id="liked-packs-privacy"
-                  checked={likedPackPrivacy}
-                  onCheckedChange={() => onPrivacyToggle('likedPackPrivacy')}
-                />
+                <p className="text-sm text-gray-500 mt-1">
+                  Keep your liked packs collection private
+                </p>
               </div>
-              <p className="text-sm text-gray-500 mt-1">
-                Keep your liked packs collection private
-              </p>
             </div>
           </div>
 

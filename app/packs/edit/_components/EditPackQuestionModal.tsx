@@ -64,8 +64,11 @@ function EditPackQuestionModal({
       const existingQuestion = value[questionToEdit]
       setQuestionValue(existingQuestion.question)
       setTypeValue(existingQuestion.type)
+    } else {
+      setQuestionValue('')
+      setTypeValue(type === 'mixed' ? null : type)
     }
-  }, [questionToEdit, mode, value])
+  }, [questionToEdit, mode, value, type])
 
   const validateQuestion = () => {
     const questionData = {
@@ -202,6 +205,8 @@ function EditPackQuestionModal({
             onChange={(e) => handleQuestionInput(e.target.value)}
             className="w-full p-2 dark:bg-[#1D1D1D] rounded-md resize-none"
             placeholder="Question Text"
+            minLength={10}
+            maxLength={300}
           />
           {questionError && (
             <p className="px-1 text-xs text-brand-red-100">{questionError}</p>

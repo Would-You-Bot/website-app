@@ -134,6 +134,7 @@ function EditPackForm({ data, userId, packId }: EditPackFormProps) {
   }
 
   const deleteQuestion = (Qindex: number) => {
+    setIndexToEdit(null)
     const updatedQuestions = addedQuestions.filter(
       (_, index) => index !== Qindex
     )
@@ -187,128 +188,132 @@ function EditPackForm({ data, userId, packId }: EditPackFormProps) {
         className="grid gap-10 lg:grid-cols-2"
       >
         <section className="grid gap-6 max-w-screen-md">
-          {/* type select */}
-          <div className="space-y-3">
-            <label htmlFor="type">Pack Type</label>
-            <Select
-              value={type}
-              onValueChange={handleTypeChange}
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="Select a pack type" />
-              </SelectTrigger>
-              <SelectContent>
-                {packTypes.map((type) => (
-                  <SelectItem
-                    key={type.id}
-                    value={type.value}
-                    className="text-foreground"
-                  >
-                    {type.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            {errors.type && (
-              <p className="px-1 text-xs text-brand-red-100">
-                {errors.type.message}
-              </p>
-            )}
-          </div>
-          {/* language select */}
-          <div className="space-y-3">
-            <label htmlFor="language">Language</label>
-            <Select
-              value={language}
-              onValueChange={handleLanguageChange}
-            >
-              <SelectTrigger>
-                <SelectValue placeholder="Choose your language" />
-              </SelectTrigger>
-              <SelectContent>
-                {packLanguages.map((language) => (
-                  <SelectItem
-                    key={language.id}
-                    value={language.value}
-                    className="text-foreground"
-                  >
-                    {language.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-            {errors.language && (
-              <p className="px-1 text-xs text-brand-red-100">
-                {errors.language.message}
-              </p>
-            )}
-          </div>
-          {/* name field */}
-          <div className="space-y-3">
-            <label htmlFor="name">Pack name</label>
-            <Input
-              id="name"
-              {...register('name')}
-              placeholder="My awesome pack"
-            />
-            {errors.name && (
-              <p className="px-1 text-xs text-brand-red-100">
-                {errors.name.message}
-              </p>
-            )}
-          </div>
-          {/* description field */}
-          <div className="space-y-3">
-            <label htmlFor="description">Pack description</label>
-            <Textarea
-              id="description"
-              rows={6}
-              {...register('description')}
-              placeholder="My awesome pack description"
-            />
-            {errors.description && (
-              <p className="px-1 text-xs text-brand-red-100">
-                {errors.description.message}
-              </p>
-            )}
-          </div>
-          {/* tags field */}
-          <div className="space-y-3">
-            <label htmlFor="tags">Tags</label>
-            <Input
-              id="tags"
-              value={tagInputValue}
-              onChange={(e) => setTagInputValue(e.target.value)}
-              placeholder="Add some cool tags"
-              onKeyDown={handleKeyDown}
-              disabled={selectedTags.length >= 10}
-            />
-            <div className="flex gap-2 items-center">
-              {selectedTags.map((tag) => (
-                <button
-                  type="button"
-                  key={tag}
-                  onClick={() => deleteTag(tag)}
-                  className="flex items-center gap-1 px-2 py-1 mr-1 text-xs rounded-lg dark:bg-[#1D1D1D] bg-background-light cursor-pointer"
-                >
-                  <span>
-                    <XCircle size={14} />
-                  </span>
-                  {tag}
-                </button>
-              ))}
+          <div className="space-y-8">
+            {/* type select */}
+            <div className="space-y-3">
+              <label htmlFor="type">Pack Type</label>
+              <Select
+                value={type}
+                onValueChange={handleTypeChange}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select a pack type" />
+                </SelectTrigger>
+                <SelectContent>
+                  {packTypes.map((type) => (
+                    <SelectItem
+                      key={type.id}
+                      value={type.value}
+                      className="text-foreground"
+                    >
+                      {type.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              {errors.type && (
+                <p className="px-1 text-xs text-brand-red-100">
+                  {errors.type.message}
+                </p>
+              )}
             </div>
-            {errors.tags && (
-              <p className="px-1 text-xs text-brand-red-100">
-                {errors.tags.message}
-              </p>
-            )}
+            {/* language select */}
+            <div className="space-y-3">
+              <label htmlFor="language">Language</label>
+              <Select
+                value={language}
+                onValueChange={handleLanguageChange}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Choose your language" />
+                </SelectTrigger>
+                <SelectContent>
+                  {packLanguages.map((language) => (
+                    <SelectItem
+                      key={language.id}
+                      value={language.value}
+                      className="text-foreground"
+                    >
+                      {language.label}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              {errors.language && (
+                <p className="px-1 text-xs text-brand-red-100">
+                  {errors.language.message}
+                </p>
+              )}
+            </div>
+            {/* name field */}
+            <div className="space-y-3">
+              <label htmlFor="name">Pack name</label>
+              <Input
+                id="name"
+                {...register('name')}
+                placeholder="My awesome pack"
+              />
+              {errors.name && (
+                <p className="px-1 text-xs text-brand-red-100">
+                  {errors.name.message}
+                </p>
+              )}
+            </div>
+            {/* description field */}
+            <div className="space-y-3">
+              <label htmlFor="description">Pack description</label>
+              <Textarea
+                id="description"
+                rows={6}
+                {...register('description')}
+                placeholder="My awesome pack description"
+              />
+              {errors.description && (
+                <p className="px-1 text-xs text-brand-red-100">
+                  {errors.description.message}
+                </p>
+              )}
+            </div>
+            {/* tags field */}
+            <div className="space-y-3">
+              <label htmlFor="tags">Tags</label>
+              <Input
+                id="tags"
+                value={tagInputValue}
+                onChange={(e) => setTagInputValue(e.target.value)}
+                placeholder="Add some cool tags"
+                onKeyDown={handleKeyDown}
+                minLength={4}
+                maxLength={50}
+                disabled={selectedTags.length >= 10}
+              />
+              <div className="flex gap-2 items-center flex-wrap">
+                {selectedTags.map((tag) => (
+                  <button
+                    type="button"
+                    key={tag}
+                    onClick={() => deleteTag(tag)}
+                    className="flex items-center gap-1 px-2 py-1 mr-1 text-xs rounded-lg dark:bg-[#1D1D1D] bg-background-light cursor-pointer"
+                  >
+                    <span>
+                      <XCircle size={14} />
+                    </span>
+                    {tag}
+                  </button>
+                ))}
+              </div>
+              {errors.tags && (
+                <p className="px-1 text-xs text-brand-red-100">
+                  {errors.tags.message}
+                </p>
+              )}
+            </div>
           </div>
         </section>
 
         {/*  */}
 
-        <section className="space-y-8  min-h-[calc(100vh-160px)]">
+        <section className="space-y-8">
           <EditPackQuestionModal
             control={control}
             type={type}
@@ -377,7 +382,7 @@ function EditPackForm({ data, userId, packId }: EditPackFormProps) {
                     </div>
                     <div className="flex items-center gap-2 sm:hidden">
                       <DropdownMenu>
-                        <DropdownMenuTrigger>
+                        <DropdownMenuTrigger asChild>
                           <Button
                             size={'icon'}
                             variant={'ghost'}

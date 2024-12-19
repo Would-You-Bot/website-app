@@ -56,7 +56,7 @@ async function page({ params, searchParams }: PageProps) {
 
   return (
     <Container className="pt-8 lg:pt-10 space-y-8 min-h-[calc(100vh-112px)]">
-      <h1 className="text-4xl font-bold text-center">
+      <h1 className="text-4xl font-bold">
         {!notResubmitting ?
           <>
             <span className="text-brand-red-100 drop-shadow-red-glow">
