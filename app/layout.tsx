@@ -1,11 +1,11 @@
-import Alert from '@/components/Alert'
+import { getIdToken } from '@/helpers/oauth'
 import Footer from '@/components/Footer'
 import Navbar from '@/components/Navbar'
-import { getIdToken } from '@/helpers/oauth'
 import { Inter } from 'next/font/google'
+import Alert from '@/components/Alert'
+import Providers from './providers'
 import React from 'react'
 import './globals.css'
-import Providers from './providers'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function RootLayout({

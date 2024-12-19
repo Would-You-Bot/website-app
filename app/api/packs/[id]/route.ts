@@ -18,7 +18,7 @@ export async function GET(
   const question = await prisma.questionPack
     .findFirst({
       where: {
-        id: id,
+        id: id
       },
       select: {
         type: true,
@@ -55,10 +55,10 @@ export async function GET(
     )
   }
   // @ts-expect-error
-  const isAuthor = question.authorId === auth?.payload.id;
-  const pending = isAuthor;
-  const denied = isAuthor;
-  
+  const isAuthor = question.authorId === auth?.payload.id
+  const pending = isAuthor
+  const denied = isAuthor
+
   return NextResponse.json(
     {
       data: question,
@@ -67,10 +67,10 @@ export async function GET(
       // @ts-expect-error
       likes: question.likes.length,
       // @ts-expect-error
-      userLiked: question.likes.includes(auth?.payload.id || ''),
+      userLiked: question.likes.includes(auth?.payload.id || '')
     },
     { status: 200 }
-  );
+  )
 }
 
 export async function PATCH(
@@ -87,7 +87,7 @@ export async function PATCH(
 
   const pack = await prisma.questionPack.findFirst({
     where: {
-      id: id,
+      id: id
     },
     select: {
       id: true,
