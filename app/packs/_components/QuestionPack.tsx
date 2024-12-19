@@ -152,7 +152,7 @@ export default function QuestionPack({
           </CardContent>
         </div>
 
-        <CardFooter className="grid grid-cols-2 gap-y-4 gap-x-4 lg:gap-x-10">
+        <CardFooter className="grid grid-cols-2 gap-y-4 gap-x-4">
           {style === 'default' && (
             <>
               <Button
