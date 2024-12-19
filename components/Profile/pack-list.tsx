@@ -95,6 +95,7 @@ export function PackList({ type, id, canEdit }: PackListProps) {
               language={pack.language}
               tags={pack.tags}
               canEdit={canEdit}
+              isLoggedIn={true}
             />
           ))}
         </div>
