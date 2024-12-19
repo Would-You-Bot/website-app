@@ -1,0 +1,49 @@
+name: Format Code
+on:
+  pull_request:
+    branches:
+      - main
+      - production
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  format:
+    runs-on: ubuntu-latest
+    name: Format Files
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          
+      - uses: pnpm/action-setup@v2
+        with:
+          version: latest
+          
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "18.x"
+          cache: "pnpm"
+          
+      - run: pnpm i --no-frozen-lockfile
+      
+      - name: Prettier
+        run: pnpm run format
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        id: format-files
+        with:
+          commit_message: "chore(style): format files"
+          skip_checkout: true
+          branch: ${{ github.head_ref }}
+          create_branch: false
+          
+      # Create PR with formatted files if changes were detected
+      - name: Push changes to PR branch
+        if: steps.format-files.outputs.changes_detected == 'true'
+        run: |
+          git push origin ${{ github.head_ref }}
