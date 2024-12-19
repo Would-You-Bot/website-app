@@ -51,19 +51,13 @@ function Filter() {
 
   function selectType(type: string) {
     const params = new URLSearchParams(searchParams.toString())
-    params.set('type', type)
+    type === 'all' ? params.delete('type') : params.set('type', type)
     router.push('?' + params.toString(), { scroll: false })
   }
 
-  function setSearch(q: string) {
+  function setSearch(query: string) {
     const params = new URLSearchParams(searchParams.toString())
-    params.set('query', q)
-    router.push('?' + params.toString(), { scroll: false })
-  }
-
-  function resetFilter() {
-    const params = new URLSearchParams(searchParams.toString())
-    params.delete('type')
+    query.length > 0 ? params.set('query', query) : params.delete('query')
     router.push('?' + params.toString(), { scroll: false })
   }
 
@@ -105,7 +99,7 @@ function Filter() {
         <div className="flex space-x-2 whitespace-nowrap">
           <button
             type="button"
-            onClick={() => resetFilter()}
+            onClick={() => selectType('all')}
             className={cn(
               'flex items-center gap-1 px-2 py-1.5 text-muted-foreground text-xs rounded-md bg-background-light cursor-pointer shrink-0',
               {
