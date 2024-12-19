@@ -283,9 +283,11 @@ function EditPackForm({ data, userId, packId }: EditPackFormProps) {
                 onChange={(e) => setTagInputValue(e.target.value)}
                 placeholder="Add some cool tags"
                 onKeyDown={handleKeyDown}
+                minLength={4}
+                maxLength={50}
                 disabled={selectedTags.length >= 10}
               />
-              <div className="flex gap-2 items-center">
+              <div className="flex gap-2 items-center flex-wrap">
                 {selectedTags.map((tag) => (
                   <button
                     type="button"
