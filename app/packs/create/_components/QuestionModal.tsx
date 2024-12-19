@@ -68,8 +68,11 @@ function QuestionModal({
       const existingQuestion = value[questionToEdit]
       setQuestionValue(existingQuestion.question)
       setTypeValue(existingQuestion.type)
+    } else {
+      setQuestionValue('')
+      setTypeValue(type === 'mixed' ? null : type)
     }
-  }, [questionToEdit, mode, value])
+  }, [questionToEdit, mode, value, type])
 
   const validateQuestion = () => {
     const questionData = {
