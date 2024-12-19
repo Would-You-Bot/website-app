@@ -380,7 +380,7 @@ function EditPackForm({ data, userId, packId }: EditPackFormProps) {
                     </div>
                     <div className="flex items-center gap-2 sm:hidden">
                       <DropdownMenu>
-                        <DropdownMenuTrigger>
+                        <DropdownMenuTrigger asChild>
                           <Button
                             size={'icon'}
                             variant={'ghost'}
