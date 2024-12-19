@@ -134,6 +134,7 @@ function EditPackForm({ data, userId, packId }: EditPackFormProps) {
   }
 
   const deleteQuestion = (Qindex: number) => {
+    setIndexToEdit(null)
     const updatedQuestions = addedQuestions.filter(
       (_, index) => index !== Qindex
     )
