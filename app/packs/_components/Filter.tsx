@@ -1,10 +1,12 @@
 'use client'
+import { CornerDownLeft, Hash, Plus, Search } from 'lucide-react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { Hash, Plus, Search } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
+import { useState } from 'react'
 import Link from 'next/link'
+import clsx from 'clsx'
 
 const packTypes = [
   {
@@ -47,7 +49,9 @@ const packTypes = [
 function Filter() {
   const router = useRouter()
   const searchParams = useSearchParams()
+  const [searchQuery, setSearchQuery] = useState('')
   const t = searchParams.get('type')
+  const q = searchParams.get('query')
 
   function selectType(type: string) {
     const params = new URLSearchParams(searchParams.toString())
@@ -55,31 +59,51 @@ function Filter() {
     router.push('?' + params.toString(), { scroll: false })
   }
 
-  function setSearch(query: string) {
+  function doSearch() {
     const params = new URLSearchParams(searchParams.toString())
-    query.length > 0 ? params.set('query', query) : params.delete('query')
+    searchQuery.length > 0 ?
+      params.set('query', searchQuery)
+    : params.delete('query')
     router.push('?' + params.toString(), { scroll: false })
   }
 
   return (
     <section className="flex flex-col gap-3">
       <div className="flex flex-col gap-4 lg:gap-6 lg:flex-row">
-        <div className="relative w-full">
+        <div className="w-full relative cursor-pointer">
           <label
             htmlFor="search"
             className="sr-only"
           >
             Search for a pack
           </label>
-          <Search className="size-4 absolute left-4 bottom-3 lg:bottom-4 dark:text-[#666666]" />
+          <Search className="size-4 absolute left-4 bottom-4 dark:text-[#666666]" />
           <Input
-            type="search"
             id="search"
             name="search"
             placeholder="Search..."
-            onChange={(e) => setSearch(e.target.value)}
-            className="pl-10 pr-4 lg:h-12 dark:bg-[#1D1D1D]"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && doSearch()}
+            className="pl-10 pr-4 h-12 dark:bg-[#1D1D1D]"
           />
+          <Button
+            variant={'ghost'}
+            className={clsx(
+              'absolute right-2 top-1 text-muted-foreground opacity-100 transition-opacity',
+              {
+                'opacity-0 pointer-events-none': !(
+                  (!!q && q.length > 0) ||
+                  searchQuery.length > 0
+                )
+              }
+            )}
+            onClick={doSearch}
+          >
+            <span className="sr-only">Search Pack</span>
+            <CornerDownLeft className="h-4 w-4 mr-2" />
+            <span>Enter</span>
+          </Button>
         </div>
         <Button
           asChild

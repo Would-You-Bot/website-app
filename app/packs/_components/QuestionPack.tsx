@@ -133,7 +133,7 @@ export default function QuestionPack({
               {description}
             </CardDescription>
             {featured && (
-              <div className="flex uppercase tracking-wider items-center w-fit gap-1 px-2 py-1 rounded-md text-white popular-badge select-none absolute right-6 top-5">
+              <div className="flex uppercase tracking-wider items-center w-fit gap-1 px-2 py-1 rounded-md text-white popular-badge select-none absolute -top-5 right-6">
                 <Flame className="size-4 fill-white" />
                 <span className="text-[11px] hidden lg:block">Popular</span>
               </div>
